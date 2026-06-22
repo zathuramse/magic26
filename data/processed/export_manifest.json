@@ -12,9 +12,12 @@
     "magic26_round8_tradeability_summary_20210101_20260622.csv",
     "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260622.csv",
     "magic26_round9_close_exit_summary_20210101_20260622.csv",
-    "magic26_round9_close_exit_yearly_20210101_20260622.csv"
+    "magic26_round9_close_exit_yearly_20210101_20260622.csv",
+    "magic26_round14_bootstrap_summary_20210101_20260622.csv",
+    "magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
+    "magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv"
   ],
   "candidate_rows": 329,
   "latest_signal_date": "2026-06-10",
-  "generated_at": "2026-06-22T15:50:31"
+  "generated_at": "2026-06-22T19:57:45"
 }

@@ -20,7 +20,16 @@
     "t1_open_excess_60d": null,
     "risk_signal_day_gt9": true,
     "risk_next_gap_gt3": true,
-    "risk_liquidity_lt100m": true
+    "risk_liquidity_lt100m": true,
+    "is_main_spec": false,
+    "is_weak_momentum": false,
+    "is_floor15_observation": false,
+    "is_high_open_risk": true,
+    "is_low_liquidity_risk": true,
+    "momentum_bucket_zh": "高動能30-40%",
+    "strategy_role_zh": "寬基準觀察",
+    "research_priority_zh": "規格觀察",
+    "research_tags": "非主規格;高開風險;低流動"
   },
   {
     "date": "2026-06-10",
@@ -43,6 +52,15 @@
     "t1_open_excess_60d": null,
     "risk_signal_day_gt9": true,
     "risk_next_gap_gt3": true,
-    "risk_liquidity_lt100m": true
+    "risk_liquidity_lt100m": true,
+    "is_main_spec": false,
+    "is_weak_momentum": false,
+    "is_floor15_observation": false,
+    "is_high_open_risk": true,
+    "is_low_liquidity_risk": true,
+    "momentum_bucket_zh": "高動能30-40%",
+    "strategy_role_zh": "寬基準觀察",
+    "research_priority_zh": "規格觀察",
+    "research_tags": "非主規格;高開風險;低流動"
   }
 ]

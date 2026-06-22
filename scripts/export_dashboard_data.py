@@ -26,6 +26,9 @@ PROCESSED_NAMES = [
     "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260622.csv",
     "magic26_round9_close_exit_summary_20210101_20260622.csv",
     "magic26_round9_close_exit_yearly_20210101_20260622.csv",
+    "magic26_round14_bootstrap_summary_20210101_20260622.csv",
+    "magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
+    "magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv",
 ]
 
 RAW_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260622.csv"
@@ -68,6 +71,83 @@ def candidate_mask(df: pd.DataFrame) -> dict[str, pd.Series]:
     }
 
 
+def research_labels(candidates: pd.DataFrame) -> pd.DataFrame:
+    """Add Round-14 research labels without changing candidate membership.
+
+    Main decision from Round 14:
+    - Keep Candidate A original spec as main.
+    - Mark ret20 < 15% as weak momentum / lower priority.
+    - Mark 15% <= ret20 < 40% inside Candidate A as floor15 observation.
+    """
+    if candidates.empty:
+        return candidates
+    out = candidates.copy()
+    is_a = out["candidate"].eq("A_repo50_c4_40_fixed20")
+    ret = pd.to_numeric(out["ret_20d"], errors="coerce")
+    gap = pd.to_numeric(out.get("next_open_gap"), errors="coerce")
+    avg_amount = pd.to_numeric(out.get("avg_amount_20d"), errors="coerce")
+    weak = is_a & ret.lt(0.15)
+    floor15 = is_a & ret.ge(0.15) & ret.lt(0.40)
+    high_open = gap.ge(0.03).fillna(False)
+    low_liq = avg_amount.lt(100_000_000).fillna(False)
+    out["is_main_spec"] = is_a
+    out["is_weak_momentum"] = weak
+    out["is_floor15_observation"] = floor15
+    out["is_high_open_risk"] = high_open
+    out["is_low_liquidity_risk"] = low_liq
+
+    def bucket(v: Any) -> str:
+        if pd.isna(v):
+            return "NA"
+        v = float(v)
+        if v < 0.15:
+            return "弱動能<15%"
+        if v < 0.25:
+            return "中段15-25%"
+        if v < 0.30:
+            return "中高25-30%"
+        return "高動能30-40%"
+
+    out["momentum_bucket_zh"] = ret.map(bucket)
+    roles = []
+    priorities = []
+    tags = []
+    for _, r in out.iterrows():
+        row_tags: list[str] = []
+        cand = r["candidate"]
+        if cand == "A_repo50_c4_40_fixed20":
+            role = "主規格CandidateA"
+            row_tags.append("主規格")
+            if bool(r["is_weak_momentum"]):
+                row_tags.append("弱動能")
+                priority = "低優先-需人工確認"
+            else:
+                row_tags.append("floor15觀察")
+                priority = "優先研究" if not bool(r["is_high_open_risk"]) and not bool(r["is_low_liquidity_risk"]) else "中優先-有交易風險"
+        elif cand == "B_magic_c4_40_fixed20":
+            role = "寬基準觀察"
+            row_tags.append("非主規格")
+            priority = "規格觀察"
+        elif cand == "C_c4_25_fixed20":
+            role = "高濃度觀察"
+            row_tags.append("高濃度")
+            priority = "規格觀察"
+        else:
+            role = "其他觀察"
+            priority = "規格觀察"
+        if bool(r["is_high_open_risk"]):
+            row_tags.append("高開風險")
+        if bool(r["is_low_liquidity_risk"]):
+            row_tags.append("低流動")
+        roles.append(role)
+        priorities.append(priority)
+        tags.append(";".join(row_tags))
+    out["strategy_role_zh"] = roles
+    out["research_priority_zh"] = priorities
+    out["research_tags"] = tags
+    return out
+
+
 def load_candidates(out_dir: Path) -> pd.DataFrame:
     all_candidates: list[pd.DataFrame] = []
     for mode, filename in [("raw", RAW_CHECKED), ("adjusted", ADJ_CHECKED)]:
@@ -82,6 +162,7 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
             part["candidate"] = name
             all_candidates.append(part)
     candidates = pd.concat(all_candidates, ignore_index=True) if all_candidates else pd.DataFrame()
+    candidates = research_labels(candidates)
     keep_cols = [
         "date",
         "stock_id",
@@ -104,6 +185,15 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
         "risk_signal_day_gt9",
         "risk_next_gap_gt3",
         "risk_liquidity_lt100m",
+        "is_main_spec",
+        "is_weak_momentum",
+        "is_floor15_observation",
+        "is_high_open_risk",
+        "is_low_liquidity_risk",
+        "momentum_bucket_zh",
+        "strategy_role_zh",
+        "research_priority_zh",
+        "research_tags",
     ]
     keep_cols = [c for c in keep_cols if c in candidates.columns]
     return candidates[keep_cols].sort_values(["date", "candidate", "stock_id"], ascending=[False, True, True])
@@ -122,6 +212,11 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
         "recent_2026_rows": int(len(recent)),
         "main_spec": "A_repo50_c4_40_fixed20",
         "main_spec_zh": "Candidate A：regime_all3 + C1/C2/C3 + repo_vol5>=50% + 20D漲幅<40% + 最大量>5日前 + 固定20D出場",
+        "round14_decision": {
+            "main_spec_action": "維持原主規格，不改成floor15",
+            "weak_momentum_label": "ret20<15% 標記為弱動能/低優先，需人工確認，不直接排除",
+            "floor15_observation": "15%<=ret20<40% 保留為觀察規格，不取代Candidate A",
+        },
         "candidates": [],
     }
     if not candidates.empty:
@@ -136,6 +231,10 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
                     "adjusted_rows": int((part["price_mode"] == "adjusted").sum()),
                     "median_t1_open_excess_20d": None if excess.empty else float(excess.median()),
                     "win_t1_open_excess_20d": None if excess.empty else float((excess > 0).mean()),
+                    "weak_momentum_rows": int(part.get("is_weak_momentum", pd.Series(dtype=bool)).sum()),
+                    "floor15_observation_rows": int(part.get("is_floor15_observation", pd.Series(dtype=bool)).sum()),
+                    "high_open_risk_rows": int(part.get("is_high_open_risk", pd.Series(dtype=bool)).sum()),
+                    "low_liquidity_risk_rows": int(part.get("is_low_liquidity_risk", pd.Series(dtype=bool)).sum()),
                 }
             )
     return summary

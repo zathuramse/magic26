@@ -12,6 +12,8 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parents[1]
 CANONICAL_URL = "https://magic26.pages.dev/"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
+LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
+ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260622.csv"
 
 
 def run(cmd: list[str], *, timeout: int = 300) -> str:
@@ -57,6 +59,17 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError(f"Unexpected main_spec: {summary.get('main_spec')}")
     if expected_data_through and summary.get("data_through") != expected_data_through:
         raise RuntimeError(f"Unexpected data_through: {summary.get('data_through')}")
+    if "round14_decision" not in summary:
+        raise RuntimeError("Production summary missing round14_decision")
+    latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
+    if latest:
+        required = {"research_tags", "research_priority_zh", "momentum_bucket_zh"}
+        missing = required - set(latest[0])
+        if missing:
+            raise RuntimeError(f"Production latest candidates missing fields: {sorted(missing)}")
+    boot = fetch(ROUND14_BOOTSTRAP_URL).decode("utf-8", errors="replace")
+    if "prob_delta_median_excess_gt0" not in boot:
+        raise RuntimeError("Production Round14 bootstrap CSV missing expected column")
     print(
         "PRODUCTION OK",
         json.dumps(
