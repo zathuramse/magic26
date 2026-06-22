@@ -37,6 +37,17 @@ fixed 20D close exit for research evaluation
 - `docs/reports/` — round-by-round research reports.
 - `scripts/` — reproducible research scripts used to generate the outputs.
 
+## Update / deploy
+
+```bash
+npm run export        # rebuild public/data from research-brain outputs
+npm run check         # local package verifier
+npm run deploy        # deploy Cloudflare Pages and verify production
+npm run deploy:check  # verify production without deploying
+```
+
+See `docs/UPDATE_SOP.md` for the full manual update flow.
+
 ## Local preview
 
 ```bash

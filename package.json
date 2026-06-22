@@ -1,7 +1,9 @@
 {
   "scripts": {
+    "export": "python scripts/export_dashboard_data.py",
     "check": "python scripts/verify_magic26_package.py",
-    "deploy": "wrangler pages deploy public --project-name magic26"
+    "deploy": "python scripts/deploy_cloudflare.py --data-through 2026-06-22",
+    "deploy:check": "python scripts/deploy_cloudflare.py --skip-deploy --data-through 2026-06-22"
   },
   "devDependencies": {
     "wrangler": "^4.103.0"

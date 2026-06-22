@@ -1,0 +1,20 @@
+{
+  "source_dir": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26",
+  "data_through": "2026-06-22",
+  "copied_csv": [
+    "magic26_round4_summary_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
+    "magic26_round4_summary_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
+    "magic26_round7_param_grid_summary_20210101_20260622.csv",
+    "magic26_round7_param_grid_top_20210101_20260622.csv",
+    "magic26_round7_param_grid_yearly_20210101_20260622.csv",
+    "magic26_round8_tradeability_summary_20210101_20260622.csv",
+    "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260622.csv",
+    "magic26_round9_close_exit_summary_20210101_20260622.csv",
+    "magic26_round9_close_exit_yearly_20210101_20260622.csv"
+  ],
+  "candidate_rows": 329,
+  "latest_signal_date": "2026-06-10",
+  "generated_at": "2026-06-22T15:50:31"
+}
