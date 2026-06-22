@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T20:30:14",
+  "generated_at": "2026-06-22T21:51:07",
   "data_through": "2026-06-22",
   "latest_signal_date": "2026-06-10",
   "total_candidate_rows": 329,
@@ -52,5 +52,13 @@
       "high_open_risk_rows": 6,
       "low_liquidity_risk_rows": 15
     }
-  ]
+  ],
+  "watch_state": {
+    "rows": 4,
+    "state_counts": {
+      "中性等待": 1,
+      "等待降溫": 3
+    },
+    "decision": "Watch State 是二次觀察/再啟動條件，不是買進訊號"
+  }
 }

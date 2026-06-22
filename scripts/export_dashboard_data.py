@@ -29,7 +29,10 @@ PROCESSED_NAMES = [
     "magic26_round14_bootstrap_summary_20210101_20260622.csv",
     "magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
     "magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv",
+    "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv",
 ]
+
+WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv"
 
 RAW_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260622.csv"
 ADJ_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260622.csv"
@@ -199,6 +202,38 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
     return candidates[keep_cols].sort_values(["date", "candidate", "stock_id"], ascending=[False, True, True])
 
 
+def build_watch_states(out_dir: Path) -> list[dict[str, Any]]:
+    path = out_dir / WATCH_STATE_FILE
+    if not path.exists():
+        return []
+    df = pd.read_csv(path)
+    if df.empty:
+        return []
+    keep_cols = [
+        "stock_id", "stock_name", "industry_category", "theme_bucket", "rearm_state",
+        "suggested_action", "rule_reason", "trigger_condition_next", "date",
+        "latest_date", "post_signal_ret", "pullback_from_post_signal_high",
+        "ma20_gap", "ma60_gap", "rsi14", "volume_ratio20", "close_vs_prev20_high",
+        "latest_close", "signal_close", "prev20_high", "manual_decision",
+    ]
+    keep_cols = [c for c in keep_cols if c in df.columns]
+    out = df[keep_cols].copy()
+    if "stock_id" in out.columns:
+        out["stock_id"] = out["stock_id"].astype(str).str.replace(r"\.0$", "", regex=True)
+    return out.to_dict(orient="records")
+
+def watch_state_summary(watch_states: list[dict[str, Any]]) -> dict[str, Any]:
+    counts: dict[str, int] = {}
+    for row in watch_states:
+        state = str(row.get("rearm_state") or "未分類")
+        counts[state] = counts.get(state, 0) + 1
+    return {
+        "rows": len(watch_states),
+        "state_counts": counts,
+        "decision": "Watch State 是二次觀察/再啟動條件，不是買進訊號",
+    }
+
+
 def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]:
     latest_date = candidates["date"].max() if not candidates.empty else None
     latest = candidates[candidates["date"] == latest_date].copy() if latest_date is not None else candidates.copy()
@@ -269,16 +304,20 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     latest = json_ready[json_ready["date"] == latest_date].copy() if latest_date else json_ready.copy()
     recent = json_ready[json_ready["date"] >= "2026-01-01"].copy() if not json_ready.empty else json_ready.copy()
 
+    watch_states = build_watch_states(out_dir)
     summary = build_summary(candidates, data_through)
+    summary["watch_state"] = watch_state_summary(watch_states)
     write_json(public_data / "summary.json", summary)
     write_json(public_data / "latest_candidates.json", latest.to_dict(orient="records"))
     write_json(public_data / "recent_candidates.json", recent.to_dict(orient="records"))
+    write_json(public_data / "watch_states.json", watch_states)
 
     manifest = {
         "source_dir": str(source_dir),
         "data_through": data_through,
         "copied_csv": copied,
         "candidate_rows": int(len(candidates)),
+        "watch_state_rows": int(len(watch_states)),
         "latest_signal_date": summary["latest_signal_date"],
         "generated_at": summary["generated_at"],
     }

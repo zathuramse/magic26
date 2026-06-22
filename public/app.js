@@ -10,22 +10,26 @@ const specTone = { A_repo50_c4_40_fixed20: 'main', B_magic_c4_40_fixed20: 'base'
 let summaryData = null;
 let latestRows = [];
 let recentRows = [];
+let watchRows = [];
 let selectedDetailKey = null;
 
 async function load(){
-  const [summary, latest, recent] = await Promise.all([
+  const [summary, latest, recent, watch] = await Promise.all([
     fetch('./data/summary.json').then(r=>r.json()),
     fetch('./data/latest_candidates.json').then(r=>r.json()),
-    fetch('./data/recent_candidates.json').then(r=>r.json())
+    fetch('./data/recent_candidates.json').then(r=>r.json()),
+    fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
   latestRows = latest;
   recentRows = recent;
+  watchRows = watch || [];
   document.getElementById('status').textContent = `目前 ${new Date().toLocaleString('zh-TW')}｜最新資料 ${summary.data_through}`;
   renderCards(summary);
   renderCandidateSummary(summary);
   setupFilters();
   renderMainAList();
+  renderWatchState();
   renderStockCards();
 }
 
@@ -141,6 +145,38 @@ function externalLinksHtml(r){
     <a target="_blank" rel="noopener" href="https://www.tradingview.com/chart/?symbol=TWSE%3A${id}">TradingView</a>
     <a target="_blank" rel="noopener" href="https://www.wantgoo.com/stock/${id}">Wantgoo</a>
   </div>`;
+}
+
+function stateClass(state){
+  if(String(state).includes('降溫')) return 'cool';
+  if(String(state).includes('回測')) return 'retest';
+  if(String(state).includes('突破')) return 'breakout';
+  if(String(state).includes('降級')) return 'down';
+  return 'neutral';
+}
+function watchStateHtml(r){
+  return `<div class="watch-card ${stateClass(r.rearm_state)}">
+    <div class="watch-head"><strong>${r.stock_id} ${r.stock_name || ''}</strong><span>${r.rearm_state || '未分類'}</span></div>
+    <div class="watch-theme">${r.theme_bucket || '—'}</div>
+    <div class="watch-metrics">
+      <div><label>訊號後</label><b>${fmtPct(r.post_signal_ret)}</b></div>
+      <div><label>距高點</label><b>${fmtPct(r.pullback_from_post_signal_high)}</b></div>
+      <div><label>MA20</label><b>${fmtPct(r.ma20_gap)}</b></div>
+      <div><label>RSI</label><b>${fmtNum(r.rsi14,1)}</b></div>
+    </div>
+    <p>${r.rule_reason || ''}</p>
+    <em>${r.suggested_action || '觀察'}</em>
+  </div>`;
+}
+function renderWatchState(){
+  const target = document.getElementById('watchStateList');
+  if(!target) return;
+  const rows = (watchRows || []).slice().sort((a,b)=>{
+    const order = {'回測觀察區':0,'再啟動突破候選':1,'中性等待':2,'等待降溫':3,'降級-跌破結構':4};
+    return (order[a.rearm_state] ?? 9) - (order[b.rearm_state] ?? 9) || Number(b.post_signal_ret||0)-Number(a.post_signal_ret||0);
+  });
+  document.getElementById('watchStateHint').textContent = summaryData?.watch_state ? `共 ${summaryData.watch_state.rows} 檔｜${summaryData.watch_state.decision}` : 'B類候選生命週期狀態';
+  target.innerHTML = rows.length ? rows.map(watchStateHtml).join('') : '<div class="empty">尚無 Watch State 資料。</div>';
 }
 
 function renderMainAList(){
