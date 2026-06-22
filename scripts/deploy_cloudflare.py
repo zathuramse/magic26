@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -71,6 +72,13 @@ def verify_production(expected_data_through: str | None = None) -> None:
     )
 
 
+def npx_cmd() -> str:
+    path = shutil.which("npx") or shutil.which("npx.cmd")
+    if not path:
+        raise SystemExit("npx/npx.cmd not found on PATH")
+    return path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Deploy Magic26 Cloudflare Pages dashboard and verify production.")
     parser.add_argument("--project-name", default="magic26")
@@ -80,8 +88,9 @@ def main() -> None:
 
     run([sys.executable, "scripts/verify_magic26_package.py"])
     if not args.skip_deploy:
-        run(["npx", "--yes", "wrangler", "pages", "deploy", "public", "--project-name", args.project_name], timeout=600)
-        run(["npx", "--yes", "wrangler", "pages", "deployment", "list", "--project-name", args.project_name], timeout=180)
+        npx = npx_cmd()
+        run([npx, "--yes", "wrangler", "pages", "deploy", "public", "--project-name", args.project_name], timeout=600)
+        run([npx, "--yes", "wrangler", "pages", "deployment", "list", "--project-name", args.project_name], timeout=180)
     verify_production(args.data_through)
 
 
