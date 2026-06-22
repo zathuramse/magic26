@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 研究候選清單</title>
-  <link rel="stylesheet" href="./styles.css?v=20260622c" />
+  <link rel="stylesheet" href="./styles.css?v=20260622d" />
 </head>
 <body>
   <header class="topbar">
@@ -61,6 +61,8 @@
           <select id="riskFilter">
             <option value="all">全部風險</option>
             <option value="clean">可研究</option>
+            <option value="weak">弱動能</option>
+            <option value="floor15">floor15觀察</option>
             <option value="chase">追高風險</option>
             <option value="liquidity">流動性不足</option>
             <option value="nonmain">非主規格</option>
@@ -103,7 +105,7 @@
       </div>
       <div class="panel">
         <h2>研究結論</h2>
-        <p>目前不建議自動交易。回測顯示它屬於高波動動能型候選：MFE 大，但 MAE 也大；簡單 MA/SL 提早出場會砍掉大贏家。</p>
+        <p>主規格仍維持 Candidate A；Round 14 不支持改成 floor15。`ret20&lt;15%` 只標記為弱動能 / 低優先，不直接排除。</p>
         <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
       </div>
     </section>
@@ -114,9 +116,11 @@
       <a href="./data/magic26_round7_param_grid_top_20210101_20260622.csv">第七輪參數網格 Top</a>
       <a href="./data/magic26_round8_tradeability_summary_20210101_20260622.csv">第八輪交易化摘要</a>
       <a href="./data/magic26_round9_close_exit_summary_20210101_20260622.csv">第九輪出場摘要</a>
+      <a href="./data/magic26_round14_bootstrap_summary_20210101_20260622.csv">第十四輪 bootstrap</a>
+      <a href="./data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv">弱動能 path review</a>
     </section>
   </main>
 
-  <script src="./app.js?v=20260622c"></script>
+  <script src="./app.js?v=20260622d"></script>
 </body>
 </html>

@@ -12,3 +12,5 @@ main{max-width:1280px;margin:0 auto;padding:28px 24px 56px}.grid{display:grid;ga
 @media(max-width:1080px){.cards,.candidate-summary,.stock-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.topbar{display:block;padding:18px}.status{margin-top:14px;display:inline-block;white-space:normal}.cards,.candidate-summary,.stock-grid,.two{grid-template-columns:1fr}.section-head{display:block}.controls{margin-top:12px;flex-direction:column}select,input{width:100%}main{padding:18px 14px 40px}.stock-head strong{font-size:24px}.detail-grid{grid-template-columns:1fr}}
 .external-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.external-links a{color:var(--cyan);text-decoration:none;border:1px solid rgba(32,224,255,.35);border-radius:999px;padding:8px 10px;background:#071522;font-size:13px}
+
+.pill.weak{color:var(--amber);border-color:rgba(255,209,102,.46);background:rgba(255,209,102,.11)}.pill.floor{color:var(--cyan);border-color:rgba(32,224,255,.46);background:rgba(32,224,255,.10)}

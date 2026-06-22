@@ -76,8 +76,11 @@ function activeRows(){ return document.getElementById('rangeFilter').value === '
 function isTrue(v){ return v === true || v === 'True' || v === 'true' || v === 1 || v === '1'; }
 function isChase(r){ return isTrue(r.risk_signal_day_gt9) || Number(r.next_open_gap) >= .05; }
 function isLowLiquidity(r){ return isTrue(r.risk_liquidity_lt100m); }
+function isWeakMomentum(r){ return isTrue(r.is_weak_momentum) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) < .15); }
+function isFloor15(r){ return isTrue(r.is_floor15_observation) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) >= .15 && Number(r.ret_20d) < .40); }
 function classify(r){
   if(r.candidate !== 'A_repo50_c4_40_fixed20') return '非主規格觀察';
+  if(isWeakMomentum(r)) return '弱動能觀察';
   if(isLowLiquidity(r)) return '流動性不足';
   if(isChase(r)) return '追高風險';
   return '可研究';
@@ -92,6 +95,7 @@ function priorityScore(r){
   return Math.round(score);
 }
 function priorityLabel(r){
+  if(r.research_priority_zh) return r.research_priority_zh;
   const s = priorityScore(r);
   if(s >= 82) return '優先研究';
   if(s >= 62) return '次級觀察';
@@ -99,7 +103,9 @@ function priorityLabel(r){
 }
 function matchRisk(r, risk){
   if(risk === 'all') return true;
-  if(risk === 'clean') return !isChase(r) && !isLowLiquidity(r) && r.candidate === 'A_repo50_c4_40_fixed20';
+  if(risk === 'clean') return !isChase(r) && !isLowLiquidity(r) && !isWeakMomentum(r) && r.candidate === 'A_repo50_c4_40_fixed20';
+  if(risk === 'weak') return isWeakMomentum(r);
+  if(risk === 'floor15') return isFloor15(r);
   if(risk === 'chase') return isChase(r);
   if(risk === 'liquidity') return isLowLiquidity(r);
   if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
@@ -115,6 +121,8 @@ function compareRows(sort){
 }
 function riskTags(r){
   const tags=[];
+  if(isWeakMomentum(r)) tags.push('<span class="pill weak">弱動能</span>');
+  if(isFloor15(r)) tags.push('<span class="pill floor">floor15觀察</span>');
   if(isChase(r)) tags.push('<span class="pill risk">追高</span>');
   if(Number(r.next_open_gap) >= .05) tags.push('<span class="pill risk">高開>5%</span>');
   else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">高開>3%</span>');
@@ -163,7 +171,7 @@ function stockCardHtml(r, compact=false){
     <div class="stock-sub"><span>${r.date}</span><span>${labelMap[r.candidate] || r.candidate}</span><span>${r.industry_category || '—'}</span><span>${r.price_mode}</span></div>
     <div class="metric-row">
       <div><label>20D</label><b>${fmtPct(r.ret_20d)}</b></div>
-      <div><label>repo量</label><b>${fmtPct(r.top5_volume_ratio_120)}</b></div>
+      <div><label>動能</label><b>${r.momentum_bucket_zh || '—'}</b></div>
       <div><label>金額</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
     </div>
     <div class="stock-tags">${riskTags(r)}</div>
@@ -180,6 +188,7 @@ function showDetail(r){
     ['最大量距今', `${fmtNum(r.days_since_max_volume,0)}日`], ['repo量比', fmtPct(r.top5_volume_ratio_120)],
     ['訊號日漲幅', fmtPct(r.signal_day_ret_1d)], ['隔日開盤', fmtPct(r.next_open_gap)],
     ['20D excess', fmtPct(r.t1_open_excess_20d)], ['60D excess', fmtPct(r.t1_open_excess_60d)], ['研究分數', priorityScore(r)], ['分類', classify(r)],
+    ['動能桶', r.momentum_bucket_zh], ['策略角色', r.strategy_role_zh], ['研究優先', r.research_priority_zh || priorityLabel(r)], ['研究標籤', r.research_tags],
   ];
   document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
   renderStockCards();
