@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 研究候選清單</title>
-  <link rel="stylesheet" href="./styles.css?v=20260622b" />
+  <link rel="stylesheet" href="./styles.css?v=20260622c" />
 </head>
 <body>
   <header class="topbar">
@@ -36,6 +36,17 @@
     </section>
 
     <section class="panel">
+      <div class="section-head compact">
+        <div>
+          <h2>主規格 A 近期優先清單</h2>
+          <p>依研究優先分數排序：主規格、非追高、流動性足、repo 量比高者優先。</p>
+        </div>
+        <button class="ghost" id="jumpMainA">切到 2026 近期 + A</button>
+      </div>
+      <div id="mainAList" class="stock-grid compact-grid"></div>
+    </section>
+
+    <section class="panel">
       <div class="section-head">
         <div>
           <h2>候選卡片</h2>
@@ -54,10 +65,17 @@
             <option value="liquidity">流動性不足</option>
             <option value="nonmain">非主規格</option>
           </select>
+          <select id="sortFilter">
+            <option value="priority">研究優先</option>
+            <option value="date">日期新到舊</option>
+            <option value="repo">repo量比高</option>
+            <option value="amount">金額高</option>
+          </select>
           <input id="search" placeholder="搜尋代號 / 名稱 / 產業" />
         </div>
       </div>
       <div id="stockCards" class="stock-grid"></div>
+
     </section>
 
     <section class="panel detail-panel" id="detailPanel">
@@ -99,6 +117,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260622b"></script>
+  <script src="./app.js?v=20260622c"></script>
 </body>
 </html>

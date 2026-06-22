@@ -6,15 +6,10 @@ const labelMap = {
   B_magic_c4_40_fixed20: 'B 寬基準',
   C_c4_25_fixed20: 'C 高濃度'
 };
-const specTone = {
-  A_repo50_c4_40_fixed20: 'main',
-  B_magic_c4_40_fixed20: 'base',
-  C_c4_25_fixed20: 'tight'
-};
+const specTone = { A_repo50_c4_40_fixed20: 'main', B_magic_c4_40_fixed20: 'base', C_c4_25_fixed20: 'tight' };
 let summaryData = null;
 let latestRows = [];
 let recentRows = [];
-let selectedCandidate = 'all';
 let selectedDetailKey = null;
 
 async function load(){
@@ -30,8 +25,10 @@ async function load(){
   renderCards(summary);
   renderCandidateSummary(summary);
   setupFilters();
+  renderMainAList();
   renderStockCards();
 }
+
 function renderCards(s){
   const main = (s.candidates || []).find(c=>c.candidate === s.main_spec) || {};
   const cards = [
@@ -42,6 +39,7 @@ function renderCards(s){
   ];
   document.getElementById('cards').innerHTML = cards.map(c=>`<div class="card"><div class="label">${c[0]}</div><div class="value">${c[1]}</div><div class="hint">${c[2]}</div></div>`).join('');
 }
+
 function renderCandidateSummary(s){
   document.getElementById('candidateSummary').innerHTML = (s.candidates || []).map(c => `
     <button class="spec-card ${specTone[c.candidate] || ''}" data-candidate="${c.candidate}">
@@ -56,24 +54,64 @@ function renderCandidateSummary(s){
   `).join('');
   document.querySelectorAll('.spec-card').forEach(btn => btn.addEventListener('click', () => setCandidate(btn.dataset.candidate)));
 }
+
 function setupFilters(){
   const sel = document.getElementById('candidateFilter');
   [...new Set([...latestRows, ...recentRows].map(r=>r.candidate))].sort().forEach(c=>{
     const opt=document.createElement('option'); opt.value=c; opt.textContent=labelMap[c] || c; sel.appendChild(opt);
   });
-  ['candidateFilter','rangeFilter','riskFilter'].forEach(id=>document.getElementById(id).addEventListener('change', renderStockCards));
+  ['candidateFilter','rangeFilter','riskFilter','sortFilter'].forEach(id=>document.getElementById(id).addEventListener('change', renderStockCards));
   document.getElementById('search').addEventListener('input', renderStockCards);
   document.getElementById('clearDetail').addEventListener('click', clearDetail);
+  document.getElementById('jumpMainA').addEventListener('click', () => { document.getElementById('rangeFilter').value='recent'; setCandidate('A_repo50_c4_40_fixed20'); });
   document.querySelectorAll('#quickFilters button').forEach(btn => btn.addEventListener('click', () => setCandidate(btn.dataset.candidate)));
 }
+
 function setCandidate(value){
-  selectedCandidate = value;
   document.getElementById('candidateFilter').value = value;
   document.querySelectorAll('#quickFilters button').forEach(btn => btn.classList.toggle('active', btn.dataset.candidate === value));
   renderStockCards();
 }
-function activeRows(){
-  return document.getElementById('rangeFilter').value === 'recent' ? recentRows : latestRows;
+function activeRows(){ return document.getElementById('rangeFilter').value === 'recent' ? recentRows : latestRows; }
+function isTrue(v){ return v === true || v === 'True' || v === 'true' || v === 1 || v === '1'; }
+function isChase(r){ return isTrue(r.risk_signal_day_gt9) || Number(r.next_open_gap) >= .05; }
+function isLowLiquidity(r){ return isTrue(r.risk_liquidity_lt100m); }
+function classify(r){
+  if(r.candidate !== 'A_repo50_c4_40_fixed20') return '非主規格觀察';
+  if(isLowLiquidity(r)) return '流動性不足';
+  if(isChase(r)) return '追高風險';
+  return '可研究';
+}
+function priorityScore(r){
+  let score = 0;
+  if(r.candidate === 'A_repo50_c4_40_fixed20') score += 45;
+  if(!isChase(r)) score += 18;
+  if(!isLowLiquidity(r)) score += 15;
+  score += Math.min(14, Math.max(0, Number(r.top5_volume_ratio_120 || 0) * 14));
+  score += Math.min(8, Math.max(0, Number(r.avg_amount_20d || 0) / 1_000_000_000 * 2));
+  return Math.round(score);
+}
+function priorityLabel(r){
+  const s = priorityScore(r);
+  if(s >= 82) return '優先研究';
+  if(s >= 62) return '次級觀察';
+  return '風險觀察';
+}
+function matchRisk(r, risk){
+  if(risk === 'all') return true;
+  if(risk === 'clean') return !isChase(r) && !isLowLiquidity(r) && r.candidate === 'A_repo50_c4_40_fixed20';
+  if(risk === 'chase') return isChase(r);
+  if(risk === 'liquidity') return isLowLiquidity(r);
+  if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
+  return true;
+}
+function compareRows(sort){
+  return (a,b) => {
+    if(sort === 'date') return String(b.date).localeCompare(String(a.date)) || priorityScore(b)-priorityScore(a);
+    if(sort === 'repo') return Number(b.top5_volume_ratio_120||0) - Number(a.top5_volume_ratio_120||0);
+    if(sort === 'amount') return Number(b.avg_amount_20d||0) - Number(a.avg_amount_20d||0);
+    return priorityScore(b)-priorityScore(a) || String(b.date).localeCompare(String(a.date)) || String(a.stock_id).localeCompare(String(b.stock_id));
+  };
 }
 function riskTags(r){
   const tags=[];
@@ -85,51 +123,48 @@ function riskTags(r){
   if(!tags.length) tags.push('<span class="pill good-bg">可研究</span>');
   return tags.join(' ');
 }
-function isTrue(v){ return v === true || v === 'True' || v === 'true' || v === 1 || v === '1'; }
-function isChase(r){ return isTrue(r.risk_signal_day_gt9) || Number(r.next_open_gap) >= .05; }
-function isLowLiquidity(r){ return isTrue(r.risk_liquidity_lt100m); }
-function matchRisk(r, risk){
-  if(risk === 'all') return true;
-  if(risk === 'clean') return !isChase(r) && !isLowLiquidity(r) && r.candidate === 'A_repo50_c4_40_fixed20';
-  if(risk === 'chase') return isChase(r);
-  if(risk === 'liquidity') return isLowLiquidity(r);
-  if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
-  return true;
-}
 function rowKey(r){ return `${r.date}|${r.stock_id}|${r.price_mode}|${r.candidate}`; }
-function classify(r){
-  if(r.candidate !== 'A_repo50_c4_40_fixed20') return '非主規格觀察';
-  if(isLowLiquidity(r)) return '流動性不足';
-  if(isChase(r)) return '追高風險';
-  return '可研究';
+function externalLinksHtml(r){
+  const id = String(r.stock_id).replace(/\.0$/, '');
+  return `<div class="external-links">
+    <a target="_blank" rel="noopener" href="https://tw.stock.yahoo.com/quote/${id}.TW">Yahoo TW</a>
+    <a target="_blank" rel="noopener" href="https://tw.stock.yahoo.com/quote/${id}.TWO">Yahoo TWO</a>
+    <a target="_blank" rel="noopener" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=${id}">Goodinfo</a>
+    <a target="_blank" rel="noopener" href="https://www.tradingview.com/chart/?symbol=TWSE%3A${id}">TradingView</a>
+    <a target="_blank" rel="noopener" href="https://www.wantgoo.com/stock/${id}">Wantgoo</a>
+  </div>`;
 }
+
+function renderMainAList(){
+  const rows = recentRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20').sort(compareRows('priority')).slice(0, 6);
+  document.getElementById('mainAList').innerHTML = rows.map(r => stockCardHtml(r, true)).join('') || '<div class="empty">近期沒有主規格 A 候選。</div>';
+  document.querySelectorAll('#mainAList .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => rowKey(r) === card.dataset.key))));
+}
+
 function renderStockCards(){
   const cand = document.getElementById('candidateFilter').value;
   const risk = document.getElementById('riskFilter').value;
+  const sort = document.getElementById('sortFilter').value;
   const q = document.getElementById('search').value.trim().toLowerCase();
   let rows = activeRows().filter(r => cand === 'all' || r.candidate === cand).filter(r => matchRisk(r, risk));
   if(q) rows = rows.filter(r => `${r.stock_id} ${r.stock_name} ${r.industry_category}`.toLowerCase().includes(q));
-  rows = rows.slice().sort((a,b) => {
-    const aMain = a.candidate === 'A_repo50_c4_40_fixed20' ? 0 : 1;
-    const bMain = b.candidate === 'A_repo50_c4_40_fixed20' ? 0 : 1;
-    return aMain - bMain || String(a.stock_id).localeCompare(String(b.stock_id));
-  });
+  rows = rows.slice().sort(compareRows(sort));
   document.getElementById('viewHint').textContent = `${document.getElementById('rangeFilter').selectedOptions[0].textContent}｜顯示 ${rows.length} 筆`;
   document.getElementById('stockCards').innerHTML = rows.length ? rows.map(r => stockCardHtml(r)).join('') : '<div class="empty">沒有符合條件的候選。</div>';
-  document.querySelectorAll('.stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => rowKey(r) === card.dataset.key))));
+  document.querySelectorAll('#stockCards .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => rowKey(r) === card.dataset.key))));
 }
-function stockCardHtml(r){
+function stockCardHtml(r, compact=false){
   const key = rowKey(r);
-  return `<button class="stock-card ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
+  return `<button class="stock-card ${compact ? 'compact-card' : ''} ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
     <div class="stock-head">
       <div><strong>${r.stock_id}</strong><span>${r.stock_name || ''}</span></div>
-      <em>${classify(r)}</em>
+      <em>${priorityLabel(r)} ${priorityScore(r)}</em>
     </div>
-    <div class="stock-sub"><span>${r.date}</span><span>${r.industry_category || '—'}</span><span>${r.price_mode}</span></div>
+    <div class="stock-sub"><span>${r.date}</span><span>${labelMap[r.candidate] || r.candidate}</span><span>${r.industry_category || '—'}</span><span>${r.price_mode}</span></div>
     <div class="metric-row">
       <div><label>20D</label><b>${fmtPct(r.ret_20d)}</b></div>
       <div><label>repo量</label><b>${fmtPct(r.top5_volume_ratio_120)}</b></div>
-      <div><label>excess</label><b class="${Number(r.t1_open_excess_20d)>=0?'good':'bad'}">${fmtPct(r.t1_open_excess_20d)}</b></div>
+      <div><label>金額</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
     </div>
     <div class="stock-tags">${riskTags(r)}</div>
   </button>`;
@@ -138,16 +173,17 @@ function showDetail(r){
   if(!r) return;
   selectedDetailKey = rowKey(r);
   document.getElementById('detailTitle').textContent = `${r.stock_id} ${r.stock_name || ''}`;
-  document.getElementById('detailSubtitle').textContent = `${labelMap[r.candidate] || r.candidate}｜${r.date}｜${classify(r)}`;
+  document.getElementById('detailSubtitle').textContent = `${labelMap[r.candidate] || r.candidate}｜${r.date}｜${classify(r)}｜${priorityLabel(r)} ${priorityScore(r)}`;
   const items = [
     ['產業', r.industry_category], ['價格模式', r.price_mode], ['收盤價', fmtNum(r.close,2)], ['20D金額', fmtMoney(r.avg_amount_20d)],
     ['區間位置', fmtPct(r.range_pos)], ['gap1', fmtPct(r.gap1)], ['gap2', fmtPct(r.gap2)], ['20D漲幅', fmtPct(r.ret_20d)],
     ['最大量距今', `${fmtNum(r.days_since_max_volume,0)}日`], ['repo量比', fmtPct(r.top5_volume_ratio_120)],
     ['訊號日漲幅', fmtPct(r.signal_day_ret_1d)], ['隔日開盤', fmtPct(r.next_open_gap)],
-    ['20D excess', fmtPct(r.t1_open_excess_20d)], ['60D excess', fmtPct(r.t1_open_excess_60d)],
+    ['20D excess', fmtPct(r.t1_open_excess_20d)], ['60D excess', fmtPct(r.t1_open_excess_60d)], ['研究分數', priorityScore(r)], ['分類', classify(r)],
   ];
-  document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>`;
+  document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
   renderStockCards();
+  renderMainAList();
   document.getElementById('detailPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 function clearDetail(){
@@ -156,5 +192,6 @@ function clearDetail(){
   document.getElementById('detailSubtitle').textContent = '點選卡片後顯示完整欄位。';
   document.getElementById('detailBody').innerHTML = '<div class="detail-empty">尚未選取候選。</div>';
   renderStockCards();
+  renderMainAList();
 }
 load().catch(err=>{document.getElementById('status').textContent='載入失敗'; console.error(err);});
