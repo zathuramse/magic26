@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magic26 研究候選清單</title>
+  <link rel="stylesheet" href="./styles.css?v=20260622a" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Magic26 Research Dashboard</p>
+      <h1>魔26 候選清單</h1>
+      <p class="subtitle">拉取式研究看板：只做候選整理，不是交易建議。</p>
+    </div>
+    <div class="status" id="status">載入中…</div>
+  </header>
+
+  <main>
+    <section class="grid cards" id="cards"></section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>最新候選</h2>
+          <p>Candidate A 是目前主觀察規格；B 為寬基準；C 為低追價高濃度觀察。</p>
+        </div>
+        <div class="controls">
+          <select id="candidateFilter"><option value="all">全部規格</option></select>
+          <input id="search" placeholder="搜尋代號 / 名稱 / 產業" />
+        </div>
+      </div>
+      <div id="tableWrap" class="table-wrap"></div>
+    </section>
+
+    <section class="grid two">
+      <div class="panel">
+        <h2>主規格</h2>
+        <ul class="spec-list">
+          <li>regime_all3=True</li>
+          <li>C1+C2+C3</li>
+          <li>repo_vol5 ≥ 50%</li>
+          <li>0 &lt; 20D return &lt; 40%</li>
+          <li>days_since_max_volume &gt; 5</li>
+          <li>t+1 open 進場；固定 20D 收盤觀察</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>研究結論</h2>
+        <p>目前不建議自動交易。回測顯示它屬於高波動動能型候選：MFE 大，但 MAE 也大；簡單 MA/SL 提早出場會砍掉大贏家。</p>
+        <p>下一步應把這裡作為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
+      </div>
+    </section>
+
+    <section class="panel links">
+      <h2>資料下載</h2>
+      <a href="./data/magic26_candidates_history.csv">候選歷史 CSV</a>
+      <a href="./data/magic26_round7_param_grid_top_20210101_20260622.csv">第七輪參數網格 Top</a>
+      <a href="./data/magic26_round8_tradeability_summary_20210101_20260622.csv">第八輪交易化摘要</a>
+      <a href="./data/magic26_round9_close_exit_summary_20210101_20260622.csv">第九輪出場摘要</a>
+    </section>
+  </main>
+
+  <script src="./app.js?v=20260622a"></script>
+</body>
+</html>

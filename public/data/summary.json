@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-06-22T14:56:14",
+  "data_through": "2026-06-22",
+  "latest_signal_date": "2026-06-10",
+  "total_candidate_rows": 329,
+  "latest_candidate_rows": 2,
+  "recent_2026_rows": 153,
+  "main_spec": "A_repo50_c4_40_fixed20",
+  "main_spec_zh": "Candidate A：regime_all3 + C1/C2/C3 + repo_vol5>=50% + 20D漲幅<40% + 最大量>5日前 + 固定20D出場",
+  "candidates": [
+    {
+      "candidate": "A_repo50_c4_40_fixed20",
+      "rows": 102,
+      "latest_date": "2026-06-05",
+      "raw_rows": 53,
+      "adjusted_rows": 49,
+      "median_t1_open_excess_20d": 0.1095542729059448,
+      "win_t1_open_excess_20d": 0.6770833333333334
+    },
+    {
+      "candidate": "B_magic_c4_40_fixed20",
+      "rows": 147,
+      "latest_date": "2026-06-10",
+      "raw_rows": 75,
+      "adjusted_rows": 72,
+      "median_t1_open_excess_20d": 0.0886193862734387,
+      "win_t1_open_excess_20d": 0.6131386861313869
+    },
+    {
+      "candidate": "C_c4_25_fixed20",
+      "rows": 80,
+      "latest_date": "2026-06-05",
+      "raw_rows": 41,
+      "adjusted_rows": 39,
+      "median_t1_open_excess_20d": 0.1255380185437486,
+      "win_t1_open_excess_20d": 0.6578947368421053
+    }
+  ]
+}
