@@ -2,6 +2,9 @@
 
 Magic26 is a reproducible Taiwan stock-screen research package and pull-only dashboard.
 
+- Live dashboard: https://magic26.pages.dev/
+- GitHub: https://github.com/zathuramse/magic26
+
 ## What this is
 
 - Research reconstruction of the Magic26/XQ screening logic.
