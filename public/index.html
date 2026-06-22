@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 研究候選清單</title>
-  <link rel="stylesheet" href="./styles.css?v=20260622a" />
+  <link rel="stylesheet" href="./styles.css?v=20260622b" />
 </head>
 <body>
   <header class="topbar">
@@ -22,15 +22,53 @@
     <section class="panel">
       <div class="section-head">
         <div>
-          <h2>最新候選</h2>
-          <p>Candidate A 是目前主觀察規格；B 為寬基準；C 為低追價高濃度觀察。</p>
+          <h2>規格摘要</h2>
+          <p>A 是主觀察；B 是寬基準；C 是高濃度觀察。先看 A，再用 B/C 找脈絡。</p>
+        </div>
+        <div class="segmented" id="quickFilters">
+          <button class="active" data-candidate="all">全部</button>
+          <button data-candidate="A_repo50_c4_40_fixed20">只看 A</button>
+          <button data-candidate="B_magic_c4_40_fixed20">B</button>
+          <button data-candidate="C_c4_25_fixed20">C</button>
+        </div>
+      </div>
+      <div class="candidate-summary" id="candidateSummary"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>候選卡片</h2>
+          <p id="viewHint">預設顯示最新訊號日；如果最新日沒有 A，仍可切換近期候選檢查主規格。</p>
         </div>
         <div class="controls">
+          <select id="rangeFilter">
+            <option value="latest">最新訊號日</option>
+            <option value="recent">2026 近期</option>
+          </select>
           <select id="candidateFilter"><option value="all">全部規格</option></select>
+          <select id="riskFilter">
+            <option value="all">全部風險</option>
+            <option value="clean">可研究</option>
+            <option value="chase">追高風險</option>
+            <option value="liquidity">流動性不足</option>
+            <option value="nonmain">非主規格</option>
+          </select>
           <input id="search" placeholder="搜尋代號 / 名稱 / 產業" />
         </div>
       </div>
-      <div id="tableWrap" class="table-wrap"></div>
+      <div id="stockCards" class="stock-grid"></div>
+    </section>
+
+    <section class="panel detail-panel" id="detailPanel">
+      <div class="section-head compact">
+        <div>
+          <h2 id="detailTitle">候選細節</h2>
+          <p id="detailSubtitle">點選卡片後顯示完整欄位。</p>
+        </div>
+        <button id="clearDetail" class="ghost">清除</button>
+      </div>
+      <div id="detailBody" class="detail-empty">尚未選取候選。</div>
     </section>
 
     <section class="grid two">
@@ -48,7 +86,7 @@
       <div class="panel">
         <h2>研究結論</h2>
         <p>目前不建議自動交易。回測顯示它屬於高波動動能型候選：MFE 大，但 MAE 也大；簡單 MA/SL 提早出場會砍掉大贏家。</p>
-        <p>下一步應把這裡作為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
+        <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
       </div>
     </section>
 
@@ -61,6 +99,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260622a"></script>
+  <script src="./app.js?v=20260622b"></script>
 </body>
 </html>
