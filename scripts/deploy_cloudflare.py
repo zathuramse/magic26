@@ -82,8 +82,8 @@ def verify_production(expected_data_through: str | None = None) -> None:
     if "prob_delta_median_excess_gt0" not in boot:
         raise RuntimeError("Production Round14 bootstrap CSV missing expected column")
     volgap = fetch(ROUND19_VOLGAP_URL).decode("utf-8", errors="replace")
-    if "top1_to_top10_volume_ratio" not in volgap:
-        raise RuntimeError("Production Round19 volume-gap CSV missing expected column")
+    if "volume_gap_top10" not in volgap:
+        raise RuntimeError("Production Round19 volume-gap CSV missing expected group")
     print(
         "PRODUCTION OK",
         json.dumps(
