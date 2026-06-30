@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 研究候選清單</title>
-  <link rel="stylesheet" href="./styles.css?v=20260622e" />
+  <link rel="stylesheet" href="./styles.css?v=20260630a" />
 </head>
 <body>
   <header class="topbar">
@@ -67,6 +67,7 @@
           <select id="rangeFilter">
             <option value="latest">最新訊號日</option>
             <option value="recent">2026 近期</option>
+            <option value="all">全部歷史</option>
           </select>
           <select id="candidateFilter"><option value="all">全部規格</option></select>
           <select id="riskFilter">
@@ -76,6 +77,9 @@
             <option value="floor15">floor15觀察</option>
             <option value="chase">追高風險</option>
             <option value="liquidity">流動性不足</option>
+            <option value="ret60hot">60日漲幅&gt;150%</option>
+            <option value="volgap">大量斷層觀察</option>
+            <option value="longma">長均空頭</option>
             <option value="nonmain">非主規格</option>
           </select>
           <select id="sortFilter">
@@ -117,6 +121,7 @@
       <div class="panel">
         <h2>研究結論</h2>
         <p>主規格仍維持 Candidate A；Round 14 不支持改成 floor15。`ret20&lt;15%` 只標記為弱動能 / 低優先，不直接排除。</p>
+        <p>Round 19 新增 60日漲幅、第一大量斷層、日/周長均空頭，全部先標為「研究中 risk badge」，不改主規格、不自動排除。</p>
         <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
       </div>
     </section>
@@ -130,9 +135,12 @@
       <a href="./data/magic26_round14_bootstrap_summary_20210101_20260622.csv">第十四輪 bootstrap</a>
       <a href="./data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv">弱動能 path review</a>
       <a href="./data/magic26_round17_b_retest_rearm_watch_20210101_20260622.csv">Watch State CSV</a>
+      <a href="./data/magic26_round19_ret60_cap_summary_20210101_20260622.csv">Round 19｜60日漲幅上限</a>
+      <a href="./data/magic26_round19_volume_gap_summary_20210101_20260622.csv">Round 19｜大量斷層</a>
+      <a href="./data/magic26_round19_risk_badge_summary_20210101_20260622.csv">Round 19｜長均空頭</a>
     </section>
   </main>
 
-  <script src="./app.js?v=20260622e"></script>
+  <script src="./app.js?v=20260630b"></script>
 </body>
 </html>

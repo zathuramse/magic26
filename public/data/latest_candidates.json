@@ -1,7 +1,7 @@
 [
   {
     "date": "2026-06-10",
-    "stock_id": 4556,
+    "stock_id": "4556",
     "stock_name": "旭然",
     "industry_category": "其他",
     "price_mode": "raw",
@@ -29,11 +29,23 @@
     "momentum_bucket_zh": "高動能30-40%",
     "strategy_role_zh": "寬基準觀察",
     "research_priority_zh": "規格觀察",
-    "research_tags": "非主規格;高開風險;低流動"
+    "research_tags": "非主規格;高開風險;低流動",
+    "source_type": "reconstructed",
+    "ret_60d_signal": null,
+    "ret60_cap150_pass": null,
+    "top1_to_top3_volume_ratio": null,
+    "top1_to_top5_volume_ratio": null,
+    "top1_to_top10_volume_ratio": null,
+    "volume_gap_risk_zh": "待補",
+    "risk_daily_long_ma_bear": null,
+    "risk_weekly_long_ma_bear": null,
+    "risk_any_long_ma_bear": null,
+    "risk_long_ma_score": 0,
+    "risk_badge_zh": "研究中"
   },
   {
     "date": "2026-06-10",
-    "stock_id": 4556,
+    "stock_id": "4556",
     "stock_name": "旭然",
     "industry_category": "其他",
     "price_mode": "adjusted",
@@ -61,6 +73,18 @@
     "momentum_bucket_zh": "高動能30-40%",
     "strategy_role_zh": "寬基準觀察",
     "research_priority_zh": "規格觀察",
-    "research_tags": "非主規格;高開風險;低流動"
+    "research_tags": "非主規格;高開風險;低流動",
+    "source_type": "reconstructed",
+    "ret_60d_signal": null,
+    "ret60_cap150_pass": null,
+    "top1_to_top3_volume_ratio": null,
+    "top1_to_top5_volume_ratio": null,
+    "top1_to_top10_volume_ratio": null,
+    "volume_gap_risk_zh": "待補",
+    "risk_daily_long_ma_bear": null,
+    "risk_weekly_long_ma_bear": null,
+    "risk_any_long_ma_bear": null,
+    "risk_long_ma_score": 0,
+    "risk_badge_zh": "研究中"
   }
 ]

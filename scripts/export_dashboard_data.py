@@ -30,6 +30,10 @@ PROCESSED_NAMES = [
     "magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
     "magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv",
     "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv",
+    "magic26_round19_author_absorption_detail_20210101_20260622.csv",
+    "magic26_round19_ret60_cap_summary_20210101_20260622.csv",
+    "magic26_round19_volume_gap_summary_20210101_20260622.csv",
+    "magic26_round19_risk_badge_summary_20210101_20260622.csv",
 ]
 
 WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv"
@@ -151,6 +155,78 @@ def research_labels(candidates: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.DataFrame:
+    """Merge Round 19 source-derived research badges into candidate rows.
+
+    These are research labels only. They must not alter Candidate A/B/C membership.
+    Round 19 was computed on the main Candidate-A detail set; joining by
+    date/stock/price mode also lets duplicate B/C rows show the same stock-date
+    context when applicable.
+    """
+    out = candidates.copy()
+    out["source_type"] = "reconstructed"
+    path = out_dir / "magic26_round19_author_absorption_detail_20210101_20260622.csv"
+    default_cols = [
+        "ret_60d_signal", "ret60_cap150_pass", "volume_gap_risk_zh",
+        "top1_to_top3_volume_ratio", "top1_to_top5_volume_ratio", "top1_to_top10_volume_ratio",
+        "risk_daily_long_ma_bear", "risk_weekly_long_ma_bear", "risk_any_long_ma_bear",
+        "risk_long_ma_score", "risk_badge_zh",
+    ]
+    if not path.exists() or out.empty:
+        for col in default_cols:
+            if col not in out.columns:
+                out[col] = None
+        return out
+
+    detail = pd.read_csv(path)
+    detail["date"] = pd.to_datetime(detail["date"])
+    detail["stock_id"] = detail["stock_id"].astype(str)
+    out["stock_id"] = out["stock_id"].astype(str)
+    keep = [
+        "date", "stock_id", "price_mode", "ret_60d_signal",
+        "top1_to_top3_volume_ratio", "top1_to_top5_volume_ratio", "top1_to_top10_volume_ratio",
+        "risk_daily_long_ma_bear", "risk_weekly_long_ma_bear", "risk_any_long_ma_bear",
+        "risk_long_ma_score",
+    ]
+    detail = detail[[c for c in keep if c in detail.columns]].drop_duplicates(["date", "stock_id", "price_mode"])
+    out = out.merge(detail, on=["date", "stock_id", "price_mode"], how="left")
+
+    ret60 = pd.to_numeric(out.get("ret_60d_signal"), errors="coerce")
+    vol10 = pd.to_numeric(out.get("top1_to_top10_volume_ratio"), errors="coerce")
+    score = pd.to_numeric(out.get("risk_long_ma_score"), errors="coerce").fillna(0)
+    out["ret60_cap150_pass"] = ret60.le(1.5).where(ret60.notna(), None)
+
+    def vol_label(v: Any) -> str:
+        if pd.isna(v):
+            return "待補"
+        if float(v) >= 3:
+            return "大量斷層高"
+        if float(v) >= 2:
+            return "大量斷層觀察"
+        return "量能結構正常"
+
+    out["volume_gap_risk_zh"] = vol10.map(vol_label)
+
+    def truthy(v: Any) -> bool:
+        return v is True or str(v).lower() == "true"
+
+    def risk_badge(row: pd.Series) -> str:
+        tags: list[str] = ["研究中"]
+        if pd.notna(row.get("ret_60d_signal")) and float(row["ret_60d_signal"]) > 1.5:
+            tags.append("60日漲幅>150%")
+        if row.get("volume_gap_risk_zh") in {"大量斷層觀察", "大量斷層高"}:
+            tags.append(str(row["volume_gap_risk_zh"]))
+        if truthy(row.get("risk_daily_long_ma_bear")):
+            tags.append("日長均空頭")
+        if truthy(row.get("risk_weekly_long_ma_bear")):
+            tags.append("周長均空頭")
+        return ";".join(tags)
+
+    out["risk_badge_zh"] = out.apply(risk_badge, axis=1)
+    out["risk_long_ma_score"] = score.astype(int)
+    return out
+
+
 def load_candidates(out_dir: Path) -> pd.DataFrame:
     all_candidates: list[pd.DataFrame] = []
     for mode, filename in [("raw", RAW_CHECKED), ("adjusted", ADJ_CHECKED)]:
@@ -166,6 +242,7 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
             all_candidates.append(part)
     candidates = pd.concat(all_candidates, ignore_index=True) if all_candidates else pd.DataFrame()
     candidates = research_labels(candidates)
+    candidates = add_round19_author_badges(candidates, out_dir)
     keep_cols = [
         "date",
         "stock_id",
@@ -197,6 +274,18 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
         "strategy_role_zh",
         "research_priority_zh",
         "research_tags",
+        "source_type",
+        "ret_60d_signal",
+        "ret60_cap150_pass",
+        "top1_to_top3_volume_ratio",
+        "top1_to_top5_volume_ratio",
+        "top1_to_top10_volume_ratio",
+        "volume_gap_risk_zh",
+        "risk_daily_long_ma_bear",
+        "risk_weekly_long_ma_bear",
+        "risk_any_long_ma_bear",
+        "risk_long_ma_score",
+        "risk_badge_zh",
     ]
     keep_cols = [c for c in keep_cols if c in candidates.columns]
     return candidates[keep_cols].sort_values(["date", "candidate", "stock_id"], ascending=[False, True, True])
@@ -252,6 +341,13 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
             "weak_momentum_label": "ret20<15% 標記為弱動能/低優先，需人工確認，不直接排除",
             "floor15_observation": "15%<=ret20<40% 保留為觀察規格，不取代Candidate A",
         },
+        "round19_decision": {
+            "status": "研究中 risk badge；不改主規格、不自動排除",
+            "ret60_cap150": "60日漲幅<=150% 可列風報比濾網候選，需再用60日績效驗證",
+            "volume_gap": "top1/top10大量斷層先做風險標籤；top3/top5/top10不可粗暴視為同一訊號",
+            "long_ma_bear": "日/周長均空頭作為負分欄位；樣本少，不作硬排除",
+            "source_type": "目前候選資料標記為 reconstructed，後續需區分 live_scan/backtest_export/reconstructed",
+        },
         "candidates": [],
     }
     if not candidates.empty:
@@ -270,6 +366,9 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
                     "floor15_observation_rows": int(part.get("is_floor15_observation", pd.Series(dtype=bool)).sum()),
                     "high_open_risk_rows": int(part.get("is_high_open_risk", pd.Series(dtype=bool)).sum()),
                     "low_liquidity_risk_rows": int(part.get("is_low_liquidity_risk", pd.Series(dtype=bool)).sum()),
+                    "ret60_over150_rows": int(pd.to_numeric(part.get("ret_60d_signal"), errors="coerce").gt(1.5).sum()),
+                    "volume_gap_watch_rows": int(part.get("volume_gap_risk_zh", pd.Series(dtype=str)).astype(str).str.contains("大量斷層").sum()),
+                    "long_ma_bear_rows": int(part.get("risk_any_long_ma_bear", pd.Series(dtype=bool)).map(lambda v: v is True or str(v).lower() == "true").sum()),
                 }
             )
     return summary
@@ -310,6 +409,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     write_json(public_data / "summary.json", summary)
     write_json(public_data / "latest_candidates.json", latest.to_dict(orient="records"))
     write_json(public_data / "recent_candidates.json", recent.to_dict(orient="records"))
+    write_json(public_data / "all_candidates.json", json_ready.to_dict(orient="records"))
     write_json(public_data / "watch_states.json", watch_states)
 
     manifest = {

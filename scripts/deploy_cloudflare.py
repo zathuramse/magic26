@@ -13,7 +13,9 @@ PROJECT = Path(__file__).resolve().parents[1]
 CANONICAL_URL = "https://magic26.pages.dev/"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
 LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
+ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
 ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260622.csv"
+ROUND19_VOLGAP_URL = "https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260622.csv"
 
 
 def run(cmd: list[str], *, timeout: int = 300) -> str:
@@ -61,15 +63,27 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError(f"Unexpected data_through: {summary.get('data_through')}")
     if "round14_decision" not in summary:
         raise RuntimeError("Production summary missing round14_decision")
+    if "round19_decision" not in summary:
+        raise RuntimeError("Production summary missing round19_decision")
     latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
     if latest:
-        required = {"research_tags", "research_priority_zh", "momentum_bucket_zh"}
+        required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh"}
         missing = required - set(latest[0])
         if missing:
             raise RuntimeError(f"Production latest candidates missing fields: {sorted(missing)}")
+    all_candidates = json.loads(fetch(ALL_CANDIDATES_URL).decode("utf-8"))
+    if not all_candidates:
+        raise RuntimeError("Production all_candidates.json is empty")
+    if not any(float(row.get("ret_60d_signal") or 0) > 1.5 for row in all_candidates):
+        raise RuntimeError("Production all candidates missing ret60 hot rows")
+    if not any("大量斷層" in str(row.get("volume_gap_risk_zh")) for row in all_candidates):
+        raise RuntimeError("Production all candidates missing volume-gap research rows")
     boot = fetch(ROUND14_BOOTSTRAP_URL).decode("utf-8", errors="replace")
     if "prob_delta_median_excess_gt0" not in boot:
         raise RuntimeError("Production Round14 bootstrap CSV missing expected column")
+    volgap = fetch(ROUND19_VOLGAP_URL).decode("utf-8", errors="replace")
+    if "top1_to_top10_volume_ratio" not in volgap:
+        raise RuntimeError("Production Round19 volume-gap CSV missing expected column")
     print(
         "PRODUCTION OK",
         json.dumps(

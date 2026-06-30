@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T21:51:07",
+  "generated_at": "2026-07-01T07:46:12",
   "data_through": "2026-06-22",
   "latest_signal_date": "2026-06-10",
   "total_candidate_rows": 329,
@@ -11,6 +11,13 @@
     "main_spec_action": "維持原主規格，不改成floor15",
     "weak_momentum_label": "ret20<15% 標記為弱動能/低優先，需人工確認，不直接排除",
     "floor15_observation": "15%<=ret20<40% 保留為觀察規格，不取代Candidate A"
+  },
+  "round19_decision": {
+    "status": "研究中 risk badge；不改主規格、不自動排除",
+    "ret60_cap150": "60日漲幅<=150% 可列風報比濾網候選，需再用60日績效驗證",
+    "volume_gap": "top1/top10大量斷層先做風險標籤；top3/top5/top10不可粗暴視為同一訊號",
+    "long_ma_bear": "日/周長均空頭作為負分欄位；樣本少，不作硬排除",
+    "source_type": "目前候選資料標記為 reconstructed，後續需區分 live_scan/backtest_export/reconstructed"
   },
   "candidates": [
     {
@@ -24,7 +31,10 @@
       "weak_momentum_rows": 17,
       "floor15_observation_rows": 85,
       "high_open_risk_rows": 15,
-      "low_liquidity_risk_rows": 11
+      "low_liquidity_risk_rows": 11,
+      "ret60_over150_rows": 1,
+      "volume_gap_watch_rows": 28,
+      "long_ma_bear_rows": 3
     },
     {
       "candidate": "B_magic_c4_40_fixed20",
@@ -37,7 +47,10 @@
       "weak_momentum_rows": 0,
       "floor15_observation_rows": 0,
       "high_open_risk_rows": 25,
-      "low_liquidity_risk_rows": 25
+      "low_liquidity_risk_rows": 25,
+      "ret60_over150_rows": 1,
+      "volume_gap_watch_rows": 28,
+      "long_ma_bear_rows": 3
     },
     {
       "candidate": "C_c4_25_fixed20",
@@ -50,7 +63,10 @@
       "weak_momentum_rows": 0,
       "floor15_observation_rows": 0,
       "high_open_risk_rows": 6,
-      "low_liquidity_risk_rows": 15
+      "low_liquidity_risk_rows": 15,
+      "ret60_over150_rows": 0,
+      "volume_gap_watch_rows": 14,
+      "long_ma_bear_rows": 1
     }
   ],
   "watch_state": {

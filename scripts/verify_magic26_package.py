@@ -14,6 +14,7 @@ required = [
     root / "public/data/summary.json",
     root / "public/data/latest_candidates.json",
     root / "public/data/recent_candidates.json",
+    root / "public/data/all_candidates.json",
     root / "public/data/watch_states.json",
     root / "public/data/magic26_candidates_history.csv",
     root / "public/data/magic26_round14_bootstrap_summary_20210101_20260622.csv",
@@ -35,7 +36,7 @@ if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
     print("bad main_spec", summary.get("main_spec"))
     sys.exit(1)
 
-for json_path in [root / "public/data/summary.json", root / "public/data/latest_candidates.json", root / "public/data/recent_candidates.json", root / "public/data/watch_states.json"]:
+for json_path in [root / "public/data/summary.json", root / "public/data/latest_candidates.json", root / "public/data/recent_candidates.json", root / "public/data/all_candidates.json", root / "public/data/watch_states.json"]:
     text = json_path.read_text(encoding="utf-8")
     if "NaN" in text or "Infinity" in text:
         print("invalid non-strict JSON token in", json_path)
@@ -64,6 +65,14 @@ required_columns = {
     "strategy_role_zh",
     "research_priority_zh",
     "research_tags",
+    "source_type",
+    "ret_60d_signal",
+    "ret60_cap150_pass",
+    "top1_to_top10_volume_ratio",
+    "volume_gap_risk_zh",
+    "risk_any_long_ma_bear",
+    "risk_long_ma_score",
+    "risk_badge_zh",
 }
 missing_columns = sorted(required_columns - set(candidates.columns))
 if missing_columns:
@@ -74,6 +83,18 @@ if candidates["research_tags"].astype(str).str.contains("弱動能").sum() == 0:
     sys.exit(1)
 if candidates["research_tags"].astype(str).str.contains("floor15觀察").sum() == 0:
     print("no floor15 observation tagged rows found")
+    sys.exit(1)
+if "round19_decision" not in summary:
+    print("missing round19_decision in summary.json")
+    sys.exit(1)
+if set(candidates["source_type"].dropna().unique()) != {"reconstructed"}:
+    print("unexpected source_type values", sorted(candidates["source_type"].dropna().unique()))
+    sys.exit(1)
+if candidates["risk_badge_zh"].astype(str).str.contains("研究中").sum() == 0:
+    print("no round19 research badges found")
+    sys.exit(1)
+if candidates["volume_gap_risk_zh"].astype(str).str.contains("大量斷層").sum() == 0:
+    print("no volume-gap watch rows found")
     sys.exit(1)
 
 for p in root.rglob("*"):

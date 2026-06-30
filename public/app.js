@@ -10,19 +10,22 @@ const specTone = { A_repo50_c4_40_fixed20: 'main', B_magic_c4_40_fixed20: 'base'
 let summaryData = null;
 let latestRows = [];
 let recentRows = [];
+let allRows = [];
 let watchRows = [];
 let selectedDetailKey = null;
 
 async function load(){
-  const [summary, latest, recent, watch] = await Promise.all([
+  const [summary, latest, recent, all, watch] = await Promise.all([
     fetch('./data/summary.json').then(r=>r.json()),
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
+    fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
   latestRows = latest;
   recentRows = recent;
+  allRows = all && all.length ? all : [...latest, ...recent];
   watchRows = watch || [];
   document.getElementById('status').textContent = `目前 ${new Date().toLocaleString('zh-TW')}｜最新資料 ${summary.data_through}`;
   renderCards(summary);
@@ -61,7 +64,7 @@ function renderCandidateSummary(s){
 
 function setupFilters(){
   const sel = document.getElementById('candidateFilter');
-  [...new Set([...latestRows, ...recentRows].map(r=>r.candidate))].sort().forEach(c=>{
+  [...new Set([...latestRows, ...recentRows, ...allRows].map(r=>r.candidate))].sort().forEach(c=>{
     const opt=document.createElement('option'); opt.value=c; opt.textContent=labelMap[c] || c; sel.appendChild(opt);
   });
   ['candidateFilter','rangeFilter','riskFilter','sortFilter'].forEach(id=>document.getElementById(id).addEventListener('change', renderStockCards));
@@ -76,12 +79,20 @@ function setCandidate(value){
   document.querySelectorAll('#quickFilters button').forEach(btn => btn.classList.toggle('active', btn.dataset.candidate === value));
   renderStockCards();
 }
-function activeRows(){ return document.getElementById('rangeFilter').value === 'recent' ? recentRows : latestRows; }
+function activeRows(){
+  const range = document.getElementById('rangeFilter').value;
+  if(range === 'all') return allRows;
+  return range === 'recent' ? recentRows : latestRows;
+}
 function isTrue(v){ return v === true || v === 'True' || v === 'true' || v === 1 || v === '1'; }
 function isChase(r){ return isTrue(r.risk_signal_day_gt9) || Number(r.next_open_gap) >= .05; }
 function isLowLiquidity(r){ return isTrue(r.risk_liquidity_lt100m); }
 function isWeakMomentum(r){ return isTrue(r.is_weak_momentum) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) < .15); }
 function isFloor15(r){ return isTrue(r.is_floor15_observation) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) >= .15 && Number(r.ret_20d) < .40); }
+function isRet60Hot(r){ return Number(r.ret_60d_signal) > 1.5; }
+function isVolumeGapWatch(r){ return String(r.volume_gap_risk_zh || '').includes('大量斷層'); }
+function isLongMaBear(r){ return isTrue(r.risk_any_long_ma_bear) || Number(r.risk_long_ma_score || 0) < 0; }
+function round19TagsText(r){ return String(r.risk_badge_zh || '').split(';').filter(Boolean).join(' / '); }
 function classify(r){
   if(r.candidate !== 'A_repo50_c4_40_fixed20') return '非主規格觀察';
   if(isWeakMomentum(r)) return '弱動能觀察';
@@ -112,6 +123,9 @@ function matchRisk(r, risk){
   if(risk === 'floor15') return isFloor15(r);
   if(risk === 'chase') return isChase(r);
   if(risk === 'liquidity') return isLowLiquidity(r);
+  if(risk === 'ret60hot') return isRet60Hot(r);
+  if(risk === 'volgap') return isVolumeGapWatch(r);
+  if(risk === 'longma') return isLongMaBear(r);
   if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
   return true;
 }
@@ -131,6 +145,10 @@ function riskTags(r){
   if(Number(r.next_open_gap) >= .05) tags.push('<span class="pill risk">高開>5%</span>');
   else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">高開>3%</span>');
   if(isLowLiquidity(r)) tags.push('<span class="pill bad">低流動</span>');
+  if(isRet60Hot(r)) tags.push('<span class="pill research">60日>150%</span>');
+  if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">${r.volume_gap_risk_zh}</span>`);
+  if(isLongMaBear(r)) tags.push('<span class="pill bad">長均空頭</span>');
+  if(r.risk_badge_zh) tags.push('<span class="pill muted">研究中</span>');
   if(r.candidate !== 'A_repo50_c4_40_fixed20') tags.push('<span class="pill muted">非主規格</span>');
   if(!tags.length) tags.push('<span class="pill good-bg">可研究</span>');
   return tags.join(' ');
@@ -225,6 +243,9 @@ function showDetail(r){
     ['訊號日漲幅', fmtPct(r.signal_day_ret_1d)], ['隔日開盤', fmtPct(r.next_open_gap)],
     ['20D excess', fmtPct(r.t1_open_excess_20d)], ['60D excess', fmtPct(r.t1_open_excess_60d)], ['研究分數', priorityScore(r)], ['分類', classify(r)],
     ['動能桶', r.momentum_bucket_zh], ['策略角色', r.strategy_role_zh], ['研究優先', r.research_priority_zh || priorityLabel(r)], ['研究標籤', r.research_tags],
+    ['資料來源', r.source_type || '—'], ['60日漲幅', fmtPct(r.ret_60d_signal)], ['60日上限', isRet60Hot(r) ? '超過150%' : (r.ret_60d_signal == null ? '待補' : '通過')], ['Round19標籤', round19TagsText(r) || '—'],
+    ['top1/top3量', fmtNum(r.top1_to_top3_volume_ratio,2)], ['top1/top5量', fmtNum(r.top1_to_top5_volume_ratio,2)], ['top1/top10量', fmtNum(r.top1_to_top10_volume_ratio,2)], ['量能斷層', r.volume_gap_risk_zh || '—'],
+    ['日長均空頭', isTrue(r.risk_daily_long_ma_bear) ? '是' : '否'], ['周長均空頭', isTrue(r.risk_weekly_long_ma_bear) ? '是' : '否'], ['長均分數', r.risk_long_ma_score ?? '—'],
   ];
   document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
   renderStockCards();
