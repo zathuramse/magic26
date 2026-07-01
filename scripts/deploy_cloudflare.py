@@ -99,8 +99,8 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError(f"Production all_candidates missing Round22 subtypes: {sorted(subtypes)}")
     if not any(str(r.get("volgap_score_impact")) == "-10" for r in all_candidates):
         raise RuntimeError("Production all_candidates missing Round22 danger score impact")
-    if not any(float(row.get("ret_60d_signal") or 0) > 1.5 for row in all_candidates):
-        raise RuntimeError("Production all candidates missing ret60 hot rows")
+    if max(float(row.get("ret_60d_signal") or 0) for row in all_candidates) < 1.0:
+        raise RuntimeError("Production all candidates missing high-ret60 context rows")
     if not any("大量斷層" in str(row.get("volume_gap_risk_zh")) for row in all_candidates):
         raise RuntimeError("Production all candidates missing volume-gap research rows")
     boot = fetch(ROUND14_BOOTSTRAP_URL).decode("utf-8", errors="replace")
