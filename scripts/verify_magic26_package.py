@@ -143,11 +143,23 @@ app = (root / "public/app.js").read_text(encoding="utf-8")
 if "Round 22 已產品化" not in html or "volgapRescue" not in html or "volgapDanger" not in html:
     print("round22 UI filters/text missing from index.html")
     sys.exit(1)
+if "Magic26 研究看板" not in html or "Magic26 候選標的" not in html or "手動更新的研究看板" not in html:
+    print("round25 first-screen plain-language header missing from index.html")
+    sys.exit(1)
+if "規則分組" not in html or "先看 A 組重點候選" not in html or "只看 A 組" not in html:
+    print("round25 plain-language spec summary missing from index.html")
+    sys.exit(1)
+if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉取式研究看板" in html:
+    print("round25 old first-screen header copy still present in index.html")
+    sys.exit(1)
 if "斷層分類總覽" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "主規格 A 斷層分組優先清單" not in html or "app.js?v=20260701c" not in html or "styles.css?v=20260701a" not in html:
+if "主規格 A 斷層分組優先清單" not in html or "app.js?v=20260701d" not in html or "styles.css?v=20260701a" not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
+    sys.exit(1)
+if "A 組：重點觀察" not in app or "最新資料日期" not in app or "A 組 20 日超額表現" not in app:
+    print("round25 first-screen app copy missing from app.js")
     sys.exit(1)
 if "斷層分類" not in app or "volgap_score_impact" not in app:
     print("round22 detail/score logic missing from app.js")

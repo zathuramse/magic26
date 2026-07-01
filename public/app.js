@@ -2,9 +2,9 @@ const fmtPct = v => (v === null || v === undefined || Number.isNaN(Number(v))) ?
 const fmtMoney = v => (v === null || v === undefined || Number.isNaN(Number(v))) ? '—' : `${(Number(v)/1e8).toFixed(1)}億`;
 const fmtNum = (v, d=2) => (v === null || v === undefined || Number.isNaN(Number(v))) ? '—' : Number(v).toFixed(d);
 const labelMap = {
-  A_repo50_c4_40_fixed20: 'A 主觀察',
-  B_magic_c4_40_fixed20: 'B 寬基準',
-  C_c4_25_fixed20: 'C 高濃度'
+  A_repo50_c4_40_fixed20: 'A 組：重點觀察',
+  B_magic_c4_40_fixed20: 'B 組：寬範圍觀察',
+  C_c4_25_fixed20: 'C 組：高集中觀察'
 };
 const specTone = { A_repo50_c4_40_fixed20: 'main', B_magic_c4_40_fixed20: 'base', C_c4_25_fixed20: 'tight' };
 let summaryData = null;
@@ -40,10 +40,10 @@ async function load(){
 function renderCards(s){
   const main = (s.candidates || []).find(c=>c.candidate === s.main_spec) || {};
   const cards = [
-    ['最新訊號日', s.latest_signal_date || '—', '最新候選日期'],
-    ['最新候選數', s.latest_candidate_rows, '同日 raw/adjusted 規格列數'],
-    ['主規格筆數', main.rows ?? '—', 'Candidate A 歷史候選列'],
-    ['A 20D excess', fmtPct(main.median_t1_open_excess_20d), `勝率 ${fmtPct(main.win_t1_open_excess_20d)}`]
+    ['最新資料日期', s.latest_signal_date || '—', '最新出現候選的日期'],
+    ['最新候選數', s.latest_candidate_rows, '同日原始 / 調整後資料筆數'],
+    ['主要規則筆數', main.rows ?? '—', 'A 組歷史候選筆數'],
+    ['A 組 20 日超額表現', fmtPct(main.median_t1_open_excess_20d), `勝率 ${fmtPct(main.win_t1_open_excess_20d)}`]
   ];
   document.getElementById('cards').innerHTML = cards.map(c=>`<div class="card"><div class="label">${c[0]}</div><div class="value">${c[1]}</div><div class="hint">${c[2]}</div></div>`).join('');
 }
@@ -54,8 +54,8 @@ function renderCandidateSummary(s){
       <div class="spec-top"><span>${labelMap[c.candidate] || c.candidate}</span><strong>${c.rows}</strong></div>
       <div class="spec-metrics">
         <span>最新 ${c.latest_date}</span>
-        <span>raw ${c.raw_rows} / adj ${c.adjusted_rows}</span>
-        <span>20D excess ${fmtPct(c.median_t1_open_excess_20d)}</span>
+        <span>原始 ${c.raw_rows} / 調整後 ${c.adjusted_rows}</span>
+        <span>20 日超額表現 ${fmtPct(c.median_t1_open_excess_20d)}</span>
         <span>勝率 ${fmtPct(c.win_t1_open_excess_20d)}</span>
       </div>
     </button>

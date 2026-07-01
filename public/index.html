@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Magic26 研究候選清單</title>
+  <title>Magic26 候選標的</title>
   <link rel="stylesheet" href="./styles.css?v=20260701a" />
 </head>
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">Magic26 Research Dashboard</p>
-      <h1>魔26 候選清單</h1>
-      <p class="subtitle">拉取式研究看板：只做候選整理，不是交易建議。</p>
+      <p class="eyebrow">Magic26 研究看板</p>
+      <h1>Magic26 候選標的</h1>
+      <p class="subtitle">手動更新的研究看板，只整理候選標的，不是買賣訊號。</p>
     </div>
     <div class="status" id="status">載入中…</div>
   </header>
@@ -22,14 +22,14 @@
     <section class="panel">
       <div class="section-head">
         <div>
-          <h2>規格摘要</h2>
-          <p>A 是主觀察；B 是寬基準；C 是高濃度觀察。先看 A，再用 B/C 找脈絡。</p>
+          <h2>規則分組</h2>
+          <p>先看 A 組重點候選；B 組用來看較寬的背景；C 組用來看條件更集中的候選。</p>
         </div>
         <div class="segmented" id="quickFilters">
           <button class="active" data-candidate="all">全部</button>
-          <button data-candidate="A_repo50_c4_40_fixed20">只看 A</button>
-          <button data-candidate="B_magic_c4_40_fixed20">B</button>
-          <button data-candidate="C_c4_25_fixed20">C</button>
+          <button data-candidate="A_repo50_c4_40_fixed20">只看 A 組</button>
+          <button data-candidate="B_magic_c4_40_fixed20">B 組</button>
+          <button data-candidate="C_c4_25_fixed20">C 組</button>
         </div>
       </div>
       <div class="candidate-summary" id="candidateSummary"></div>
@@ -164,6 +164,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260701c"></script>
+  <script src="./app.js?v=20260701d"></script>
 </body>
 </html>
