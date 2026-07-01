@@ -14,6 +14,12 @@ let allRows = [];
 let watchRows = [];
 let selectedDetailKey = null;
 let currentKlineKey = null;
+let currentKlineRow = null;
+let currentKlinePayloadRows = [];
+let currentKlineSignalDate = null;
+let currentKlineChart = null;
+let currentKlineResizeObserver = null;
+let currentKlineOptions = {range:'6M', ma:true, volume:true, signal:true};
 
 async function load(){
   const [summary, latest, recent, all, watch] = await Promise.all([
@@ -357,41 +363,93 @@ function klineUrl(r){
   const mode = r.price_mode === 'adjusted' ? 'adj' : 'raw';
   return `./data/kline/${mode}_${r.stock_id}.json`;
 }
+function klineModeLabel(mode){ return mode === 'adjusted' ? '還原價' : '原始價'; }
 function klinePanelHtml(r){
+  const mode = r.price_mode === 'adjusted' ? 'adjusted' : 'raw';
   return `<section class="kline-panel" id="klinePanel" data-kline-key="${rowKey(r)}">
     <div class="kline-head"><div><h3>K 線圖</h3><p>互動圖表：十字線、成交量、MA5 / MA20 / MA60、候選日標記。資料到看板截止日。</p></div><span id="klineStatus">載入中…</span></div>
+    <div class="kline-toolbar" id="klineToolbar">
+      <div class="kline-tool-group" aria-label="價格版本">
+        <button type="button" data-kline-mode="raw" class="${mode === 'raw' ? 'active' : ''}">原始價</button>
+        <button type="button" data-kline-mode="adjusted" class="${mode === 'adjusted' ? 'active' : ''}">還原價</button>
+      </div>
+      <div class="kline-tool-group" aria-label="時間區間">
+        ${['3M','6M','1Y','ALL'].map(x => `<button type="button" data-kline-range="${x}" class="${currentKlineOptions.range === x ? 'active' : ''}">${x === 'ALL' ? '全部' : x}</button>`).join('')}
+      </div>
+      <label><input type="checkbox" data-kline-toggle="ma" ${currentKlineOptions.ma ? 'checked' : ''}> MA</label>
+      <label><input type="checkbox" data-kline-toggle="volume" ${currentKlineOptions.volume ? 'checked' : ''}> 成交量</label>
+      <label><input type="checkbox" data-kline-toggle="signal" ${currentKlineOptions.signal ? 'checked' : ''}> 候選日</label>
+    </div>
     <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
     <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
   </section>`;
 }
+function bindKlineToolbar(){
+  const panel = document.getElementById('klinePanel');
+  if(!panel) return;
+  panel.querySelectorAll('[data-kline-range]').forEach(btn => btn.addEventListener('click', () => {
+    currentKlineOptions.range = btn.dataset.klineRange;
+    panel.querySelectorAll('[data-kline-range]').forEach(b => b.classList.toggle('active', b === btn));
+    renderCurrentKlineFromState();
+  }));
+  panel.querySelectorAll('[data-kline-toggle]').forEach(input => input.addEventListener('change', () => {
+    currentKlineOptions[input.dataset.klineToggle] = input.checked;
+    renderCurrentKlineFromState();
+  }));
+  panel.querySelectorAll('[data-kline-mode]').forEach(btn => btn.addEventListener('click', () => {
+    if(!currentKlineRow) return;
+    const mode = btn.dataset.klineMode;
+    panel.querySelectorAll('[data-kline-mode]').forEach(b => b.classList.toggle('active', b === btn));
+    renderKline({...currentKlineRow, price_mode: mode});
+  }));
+}
 async function renderKline(r){
-  const key = rowKey(r);
+  const key = `${r.stock_id}-${r.price_mode}`;
   currentKlineKey = key;
+  currentKlineRow = r;
   const status = document.getElementById('klineStatus');
   const target = document.getElementById('klineChart');
   if(!status || !target) return;
+  bindKlineToolbar();
   try{
+    status.textContent = `${klineModeLabel(r.price_mode)}｜載入中…`;
     const res = await fetch(klineUrl(r));
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const payload = await res.json();
     if(currentKlineKey !== key) return;
     const rows = (payload.rows || []).filter(x => x.open && x.high && x.low && x.close);
     if(rows.length < 10) throw new Error('rows too few');
+    currentKlinePayloadRows = rows;
+    currentKlineSignalDate = r.date;
     const last = rows[rows.length - 1];
-    status.textContent = `${priceModeLabel(r.price_mode)}｜${rows[0].date}～${last.date}｜收 ${fmtNum(last.close,2)}`;
-    if(window.LightweightCharts){
-      renderInteractiveKline(target, rows, r.date);
-    }else{
-      target.innerHTML = klineSvg(rows, r.date);
-    }
+    status.textContent = `${klineModeLabel(r.price_mode)}｜${rows[0].date}～${last.date}｜收 ${fmtNum(last.close,2)}`;
+    renderCurrentKlineFromState();
   }catch(err){
     if(currentKlineKey !== key) return;
     status.textContent = 'K 線資料讀取失敗';
+    destroyKlineChart();
     target.innerHTML = '<div class="kline-empty">這檔暫時沒有可用 K 線資料。</div>';
     console.warn('kline failed', err);
   }
 }
-
+function destroyKlineChart(){
+  if(currentKlineResizeObserver){ currentKlineResizeObserver.disconnect(); currentKlineResizeObserver = null; }
+  if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
+}
+function rowsForRange(rows, range){
+  const n = { '3M':66, '6M':132, '1Y':260 }[range];
+  return n ? rows.slice(-n) : rows;
+}
+function renderCurrentKlineFromState(){
+  const target = document.getElementById('klineChart');
+  if(!target || !currentKlinePayloadRows.length) return;
+  const rows = rowsForRange(currentKlinePayloadRows, currentKlineOptions.range);
+  if(window.LightweightCharts){
+    renderInteractiveKline(target, rows, currentKlineSignalDate, currentKlineOptions);
+  }else{
+    target.innerHTML = klineSvg(rows, currentKlineSignalDate);
+  }
+}
 function maSeries(rows, period){
   const out = [];
   let sum = 0;
@@ -402,33 +460,38 @@ function maSeries(rows, period){
   });
   return out;
 }
-function renderInteractiveKline(target, rows, signalDate){
+function renderInteractiveKline(target, rows, signalDate, opts={}){
+  destroyKlineChart();
   target.innerHTML = '';
   const legend = document.getElementById('klineLegend');
   const chart = LightweightCharts.createChart(target, {
     width: target.clientWidth || 860,
-    height: target.clientHeight || 360,
+    height: target.clientHeight || 380,
     layout: { background: { color: 'transparent' }, textColor: '#8fb0c8' },
     grid: { vertLines: { color: 'rgba(143,176,200,.12)' }, horzLines: { color: 'rgba(143,176,200,.14)' } },
-    rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: .28 } },
+    rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: opts.volume ? .28 : .08 } },
     timeScale: { borderColor: 'rgba(143,176,200,.22)', timeVisible: false },
     crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
     localization: { locale: 'zh-TW' },
   });
+  currentKlineChart = chart;
   const candle = chart.addCandlestickSeries({
     upColor:'#ff6b6b', downColor:'#6dff9f', borderUpColor:'#ff6b6b', borderDownColor:'#6dff9f', wickUpColor:'#ff9b9b', wickDownColor:'#9affbc'
   });
-  const data = rows.map(r => ({time:r.date, open:Number(r.open), high:Number(r.high), low:Number(r.low), close:Number(r.close)}));
-  candle.setData(data);
-  const volume = chart.addHistogramSeries({ priceFormat:{type:'volume'}, priceScaleId:'', color:'rgba(143,176,200,.35)' });
-  volume.priceScale().applyOptions({ scaleMargins:{ top:.78, bottom:0 } });
-  volume.setData(rows.map(r => ({time:r.date, value:Number(r.volume || 0), color:Number(r.close) >= Number(r.open) ? 'rgba(255,107,107,.32)' : 'rgba(109,255,159,.28)'})));
-  const ma5 = chart.addLineSeries({color:'#ffd166', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
-  const ma20 = chart.addLineSeries({color:'#20e0ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
-  const ma60 = chart.addLineSeries({color:'#d9b8ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+  candle.setData(rows.map(r => ({time:r.date, open:Number(r.open), high:Number(r.high), low:Number(r.low), close:Number(r.close)})));
+  if(opts.volume){
+    const volume = chart.addHistogramSeries({ priceFormat:{type:'volume'}, priceScaleId:'', color:'rgba(143,176,200,.35)' });
+    volume.priceScale().applyOptions({ scaleMargins:{ top:.78, bottom:0 } });
+    volume.setData(rows.map(r => ({time:r.date, value:Number(r.volume || 0), color:Number(r.close) >= Number(r.open) ? 'rgba(255,107,107,.32)' : 'rgba(109,255,159,.28)'})));
+  }
   const ma5Data = maSeries(rows,5), ma20Data = maSeries(rows,20), ma60Data = maSeries(rows,60);
-  ma5.setData(ma5Data); ma20.setData(ma20Data); ma60.setData(ma60Data);
-  candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
+  if(opts.ma){
+    const ma5 = chart.addLineSeries({color:'#ffd166', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+    const ma20 = chart.addLineSeries({color:'#20e0ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+    const ma60 = chart.addLineSeries({color:'#d9b8ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+    ma5.setData(ma5Data); ma20.setData(ma20Data); ma60.setData(ma60Data);
+  }
+  if(opts.signal && rows.some(r => r.date === signalDate)) candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
   const byDate = new Map(rows.map(r => [r.date, r]));
   const maMap = new Map();
   for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
@@ -436,7 +499,9 @@ function renderInteractiveKline(target, rows, signalDate){
   for(const item of ma60Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma60:item.value});
   function legendText(bar){
     const m = maMap.get(bar.date) || {};
-    return `${bar.date}｜開 ${fmtNum(bar.open,2)} 高 ${fmtNum(bar.high,2)} 低 ${fmtNum(bar.low,2)} 收 ${fmtNum(bar.close,2)}｜量 ${(Number(bar.volume||0)/1000).toFixed(0)}張｜MA5 ${fmtNum(m.ma5,2)}｜MA20 ${fmtNum(m.ma20,2)}｜MA60 ${fmtNum(m.ma60,2)}`;
+    const maText = opts.ma ? `｜MA5 ${fmtNum(m.ma5,2)}｜MA20 ${fmtNum(m.ma20,2)}｜MA60 ${fmtNum(m.ma60,2)}` : '';
+    const volumeText = opts.volume ? `｜量 ${(Number(bar.volume||0)/1000).toFixed(0)}張` : '';
+    return `${bar.date}｜開 ${fmtNum(bar.open,2)} 高 ${fmtNum(bar.high,2)} 低 ${fmtNum(bar.low,2)} 收 ${fmtNum(bar.close,2)}${volumeText}${maText}`;
   }
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
   chart.subscribeCrosshairMove(param => {
@@ -450,10 +515,11 @@ function renderInteractiveKline(target, rows, signalDate){
     const width = Math.floor(entries[0].contentRect.width);
     if(width > 0) chart.applyOptions({width});
   });
+  currentKlineResizeObserver = ro;
   ro.observe(target);
   target.dataset.chartEngine = 'lightweight-charts';
+  target.dataset.chartRange = currentKlineOptions.range;
 }
-
 function klineSvg(rows, signalDate){
   const w = 860, h = 320, pad = {l:48,r:16,t:18,b:54};
   const chartH = 210, volTop = 244, volH = 48;

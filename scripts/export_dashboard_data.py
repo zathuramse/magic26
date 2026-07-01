@@ -361,7 +361,7 @@ def export_kline_files(candidates: pd.DataFrame, source_dir: Path, public_data: 
             continue
         df = df.copy()
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
-        df = df[df["date"].notna() & df["date"].le(cutoff)].sort_values("date").tail(140)
+        df = df[df["date"].notna() & df["date"].le(cutoff)].sort_values("date").tail(520)
         if df.empty:
             continue
         rows = []
