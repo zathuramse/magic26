@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 候選標的</title>
-  <link rel="stylesheet" href="./styles.css?v=20260701b" />
+  <link rel="stylesheet" href="./styles.css?v=20260701c" />
 </head>
 <body>
   <header class="topbar">
@@ -123,44 +123,59 @@
 
     <section class="grid two">
       <div class="panel">
-        <h2>主規格</h2>
+        <h2>主要規則</h2>
         <ul class="spec-list">
-          <li>regime_all3=True</li>
-          <li>C1+C2+C3</li>
-          <li>repo_vol5 ≥ 50%</li>
-          <li>0 &lt; 20D return &lt; 40%</li>
-          <li>days_since_max_volume &gt; 5</li>
-          <li>t+1 open 進場；固定 20D 收盤觀察</li>
+          <li>三個市場狀態條件都要成立</li>
+          <li>同時通過 C1 / C2 / C3 三組條件</li>
+          <li>前 5 大成交量占比至少 50%</li>
+          <li>20 日漲幅介於 0% 到 40%</li>
+          <li>最大量出現後至少間隔 5 天</li>
+          <li>用隔日開盤作觀察起點，固定追蹤 20 個交易日</li>
         </ul>
       </div>
       <div class="panel">
         <h2>研究結論</h2>
-        <p>主規格仍維持 Candidate A；Round 14 不支持改成 floor15。`ret20&lt;15%` 只標記為弱動能 / 低優先，不直接排除。</p>
-        <p>Round 19 新增 60日漲幅、第一大量斷層、日/周長均空頭，全部先標為「研究中 risk badge」，不改主規格、不自動排除。</p>
-        <p>Round 20 用 60D 驗證後，top1/top10&lt;2 是目前最有用的研究優先加分；大量斷層仍只做負分，不做 veto。</p>
-        <p>Round 21 檢查誤殺案例後，只有很窄的「可救斷層」條件；Round 22 已產品化為正常 / 可救斷層 / 危險斷層，主規格仍不變。</p>
-        <p>Round 23 加入斷層分類總覽卡，可快速切換全歷史分類檢查，仍只作研究路由。</p>
-        <p>Round 24 將主規格 A 近期清單改成斷層分組，優先看正常 / 可救，再人工檢查危險 / 待補。</p>
-        <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
+        <p>主要規則仍維持 A 組。20 日漲幅低於 15% 先標為動能偏弱，不直接排除。</p>
+        <p>60 日漲幅過熱、量能落差、長期均線偏空都先作為風險提示；它們會影響研究優先順序，不會自動刪除候選。</p>
+        <p>量能集中度目前用來分流：正常與可再觀察先看，高風險與資料不足要人工確認。</p>
+        <p>這裡定位為人工研究入口，仍需搭配逐檔圖形、產業脈絡與流動性檢查。</p>
       </div>
     </section>
 
     <section class="panel links">
       <h2>資料下載</h2>
-      <a href="./data/magic26_candidates_history.csv">候選歷史 CSV</a>
-      <a href="./data/magic26_round7_param_grid_top_20210101_20260622.csv">第七輪參數網格 Top</a>
-      <a href="./data/magic26_round8_tradeability_summary_20210101_20260622.csv">第八輪交易化摘要</a>
-      <a href="./data/magic26_round9_close_exit_summary_20210101_20260622.csv">第九輪出場摘要</a>
-      <a href="./data/magic26_round14_bootstrap_summary_20210101_20260622.csv">第十四輪 bootstrap</a>
-      <a href="./data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv">弱動能 path review</a>
-      <a href="./data/magic26_round17_b_retest_rearm_watch_20210101_20260622.csv">Watch State CSV</a>
-      <a href="./data/magic26_round19_ret60_cap_summary_20210101_20260622.csv">Round 19｜60日漲幅上限</a>
-      <a href="./data/magic26_round19_volume_gap_summary_20210101_20260622.csv">Round 19｜大量斷層</a>
-      <a href="./data/magic26_round19_risk_badge_summary_20210101_20260622.csv">Round 19｜長均空頭</a>
-      <a href="./data/magic26_round20_60d_validation_summary_20210101_20260622.csv">Round 20｜60D驗證摘要</a>
-      <a href="./data/magic26_round20_60d_flagged_cases_20210101_20260622.csv">Round 20｜flagged cases</a>
-      <a href="./data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv">Round 21｜斷層可救摘要</a>
-      <a href="./data/magic26_round21_volgap_rescue_cases_20210101_20260622.csv">Round 21｜斷層案例</a>
+      <p>保留完整研究檔案；分類只為方便查找，不代表買賣訊號。</p>
+      <div class="download-groups">
+        <section>
+          <h3>候選資料</h3>
+          <a href="./data/magic26_candidates_history.csv">候選歷史</a>
+          <a href="./data/magic26_round17_b_retest_rearm_watch_20210101_20260622.csv">B 組二次觀察清單</a>
+        </section>
+        <section>
+          <h3>參數研究</h3>
+          <a href="./data/magic26_round7_param_grid_top_20210101_20260622.csv">參數組合排名</a>
+          <a href="./data/magic26_round14_bootstrap_summary_20210101_20260622.csv">穩定性檢查</a>
+          <a href="./data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv">弱動能路徑檢查</a>
+        </section>
+        <section>
+          <h3>交易化檢查</h3>
+          <a href="./data/magic26_round8_tradeability_summary_20210101_20260622.csv">交易可行性摘要</a>
+          <a href="./data/magic26_round9_close_exit_summary_20210101_20260622.csv">20 日收盤觀察摘要</a>
+          <a href="./data/magic26_round20_60d_validation_summary_20210101_20260622.csv">60 日後續驗證摘要</a>
+          <a href="./data/magic26_round20_60d_flagged_cases_20210101_20260622.csv">60 日後續驗證案例</a>
+        </section>
+        <section>
+          <h3>風險檢查</h3>
+          <a href="./data/magic26_round19_ret60_cap_summary_20210101_20260622.csv">60 日漲幅過熱檢查</a>
+          <a href="./data/magic26_round19_volume_gap_summary_20210101_20260622.csv">量能落差檢查</a>
+          <a href="./data/magic26_round19_risk_badge_summary_20210101_20260622.csv">長期均線與風險標籤</a>
+        </section>
+        <section>
+          <h3>量能落差研究</h3>
+          <a href="./data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv">可再觀察條件摘要</a>
+          <a href="./data/magic26_round21_volgap_rescue_cases_20210101_20260622.csv">可再觀察案例</a>
+        </section>
+      </div>
     </section>
   </main>
 

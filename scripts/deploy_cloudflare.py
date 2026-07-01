@@ -64,7 +64,7 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML missing Round25 volume-gap plain-language UI")
     if "A 組量能落差優先清單" not in html:
         raise RuntimeError("Production HTML missing Round25 grouped main-A list copy")
-    if "app.js?v=20260701g" not in html or "styles.css?v=20260701b" not in html:
+    if "app.js?v=20260701g" not in html or "styles.css?v=20260701c" not in html:
         raise RuntimeError("Production HTML missing Round25 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":

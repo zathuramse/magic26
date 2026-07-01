@@ -140,7 +140,7 @@ if impact.min() > -10 or impact.max() != 0:
     sys.exit(1)
 html = (root / "public/index.html").read_text(encoding="utf-8")
 app = (root / "public/app.js").read_text(encoding="utf-8")
-if "Round 22 已產品化" not in html or "volgapRescue" not in html or "volgapDanger" not in html:
+if "volgapRescue" not in html or "volgapDanger" not in html:
     print("round22 UI filters/text missing from index.html")
     sys.exit(1)
 if "Magic26 研究看板" not in html or "Magic26 候選標的" not in html or "手動更新的研究看板" not in html:
@@ -155,8 +155,17 @@ if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉�
 if "量能落差分類" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "A 組量能落差優先清單" not in html or "app.js?v=20260701g" not in html or "styles.css?v=20260701b" not in html:
+if "A 組量能落差優先清單" not in html or "app.js?v=20260701g" not in html or "styles.css?v=20260701c" not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
+    sys.exit(1)
+if "主要規則" not in html or "三個市場狀態條件都要成立" not in html or "研究結論" not in html:
+    print("round25 batch5 plain-language rule/conclusion copy missing from index.html")
+    sys.exit(1)
+if "資料下載" not in html or "download-groups" not in html or "候選資料" not in html or "參數研究" not in html or "交易化檢查" not in html or "風險檢查" not in html or "量能落差研究" not in html:
+    print("round25 batch5 grouped download UI missing from index.html")
+    sys.exit(1)
+if "regime_all3=True" in html or "repo_vol5" in html or "t+1 open" in html or "第七輪參數網格 Top" in html or "Round 20｜flagged cases" in html or "Watch State CSV" in html:
+    print("round25 batch5 old bottom technical copy still present in index.html")
     sys.exit(1)
 if "主規格 A 斷層分組優先清單" in html or "斷層正常" in html:
     print("round25 batch2 old volume-gap section/filter copy still present in index.html")
@@ -197,6 +206,9 @@ if "main-a-groups" not in css or "main-a-head" not in css:
     sys.exit(1)
 if "detail-sections" not in css or "detail-section" not in css:
     print("round25 batch4 detail section styles missing from styles.css")
+    sys.exit(1)
+if "download-groups" not in css:
+    print("round25 batch5 download group styles missing from styles.css")
     sys.exit(1)
 
 for p in root.rglob("*"):
