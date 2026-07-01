@@ -445,6 +445,7 @@ function klinePanelHtml(r){
       <button type="button" class="kline-action" data-kline-action="reset">重置</button>
       <button type="button" class="kline-action" data-kline-action="fullscreen">放大</button>
     </div>
+    <div class="kline-cursor-info" id="klineCursorInfo" data-date="">移到圖上看 O / H / L / C / 漲跌幅 / 成交量</div>
     <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
     <div class="kline-chart-wrap">
       <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
@@ -535,9 +536,11 @@ function destroyKlineChart(){
   const tooltip = document.getElementById('klineTooltip');
   const priceLabel = document.getElementById('klinePriceLabel');
   const timeLabel = document.getElementById('klineTimeLabel');
+  const cursorInfo = document.getElementById('klineCursorInfo');
   if(tooltip){ tooltip.hidden = true; tooltip.innerHTML = ''; }
   if(priceLabel){ priceLabel.hidden = true; priceLabel.textContent = ''; }
   if(timeLabel){ timeLabel.hidden = true; timeLabel.textContent = ''; }
+  if(cursorInfo){ cursorInfo.textContent = '移到圖上看 O / H / L / C / 漲跌幅 / 成交量'; cursorInfo.dataset.date = ''; }
   if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
 }
 function rowsForRange(rows, range){
@@ -621,10 +624,36 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   const tooltip = document.getElementById('klineTooltip');
   const priceLabel = document.getElementById('klinePriceLabel');
   const timeLabel = document.getElementById('klineTimeLabel');
+  const cursorInfo = document.getElementById('klineCursorInfo');
   const maMap = new Map();
   for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
   for(const item of ma20Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma20:item.value});
   for(const item of ma60Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma60:item.value});
+
+  function cursorInfoText(bar){
+    const idx = rows.findIndex(r => r.date === bar.date);
+    const prevClose = idx > 0 ? Number(rows[idx-1].close) : Number(bar.open);
+    const close = Number(bar.close);
+    const change = close - prevClose;
+    const pct = prevClose ? change / prevClose : 0;
+    const up = change >= 0;
+    const volumeText = `${(Number(bar.volume||0)/1000).toFixed(0)}張`;
+    return {
+      text:`${bar.date}｜O ${fmtNum(bar.open,2)}｜H ${fmtNum(bar.high,2)}｜L ${fmtNum(bar.low,2)}｜C ${fmtNum(bar.close,2)}｜漲跌 ${up ? '+' : ''}${fmtNum(change,2)} / ${up ? '+' : ''}${fmtPct(pct)}｜量 ${volumeText}`,
+      change, pct
+    };
+  }
+  function updateCursorInfo(bar){
+    if(!cursorInfo || !bar) return;
+    const info = cursorInfoText(bar);
+    cursorInfo.textContent = info.text;
+    cursorInfo.dataset.date = bar.date;
+    cursorInfo.dataset.close = String(bar.close);
+    cursorInfo.dataset.change = String(info.change);
+    cursorInfo.dataset.pct = String(info.pct);
+    cursorInfo.classList.toggle('up', info.change >= 0);
+    cursorInfo.classList.toggle('down', info.change < 0);
+  }
   function legendText(bar){
     const m = maMap.get(bar.date) || {};
     const maText = opts.ma ? `｜MA5 ${fmtNum(m.ma5,2)}｜MA20 ${fmtNum(m.ma20,2)}｜MA60 ${fmtNum(m.ma60,2)}` : '';
@@ -660,6 +689,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   }
   function showTooltipAt(bar, point, price){
     if(legend) legend.textContent = legendText(bar);
+    updateCursorInfo(bar);
     showAxisLabels(bar, point, price);
     if(!tooltip || !point) return;
     tooltip.innerHTML = tooltipHtml(bar);
@@ -680,10 +710,12 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   };
   target.onmouseleave = hideTooltip;
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
+  updateCursorInfo(rows[rows.length-1]);
   chart.subscribeCrosshairMove(param => {
     const time = typeof param.time === 'string' ? param.time : null;
     const bar = time ? byDate.get(time) : null;
     if(legend) legend.textContent = bar ? legendText(bar) : legendText(rows[rows.length-1]);
+    updateCursorInfo(bar || rows[rows.length-1]);
     if(!bar || !param.point || param.point.x < 0 || param.point.y < 0 || param.point.x > target.clientWidth || param.point.y > target.clientHeight){
       hideTooltip();
       return;
