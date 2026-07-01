@@ -19,7 +19,7 @@ let currentKlinePayloadRows = [];
 let currentKlineSignalDate = null;
 let currentKlineChart = null;
 let currentKlineResizeObserver = null;
-const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal', type:'candles'};
+const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal', type:'candles', measure:false};
 let currentKlineOptions = loadKlineOptions();
 
 function loadKlineOptions(){
@@ -55,6 +55,28 @@ function setKlineType(type){
   saveKlineOptions();
   document.querySelectorAll('[data-kline-type]').forEach(b => b.classList.toggle('active', b.dataset.klineType === type));
   renderCurrentKlineFromState();
+}
+
+
+function setKlineMeasure(active){
+  currentKlineOptions.measure = !!active;
+  saveKlineOptions();
+  const panel = document.getElementById('klinePanel');
+  panel?.querySelector('[data-kline-action="measure"]')?.classList.toggle('active', currentKlineOptions.measure);
+  const info = document.getElementById('klineMeasureInfo');
+  if(info){
+    info.dataset.active = String(currentKlineOptions.measure);
+    info.textContent = currentKlineOptions.measure ? '測量：點第一根作為起點，再點第二根作為終點' : '測量：關閉';
+  }
+}
+function resetKlineMeasure(){
+  window.__magic26KlineMeasureStart = null;
+  window.__magic26KlineMeasureEnd = null;
+  const info = document.getElementById('klineMeasureInfo');
+  if(info){
+    info.dataset.start = ''; info.dataset.end = ''; info.dataset.days = ''; info.dataset.pct = '';
+    info.textContent = currentKlineOptions.measure ? '測量：點第一根作為起點，再點第二根作為終點' : '測量：關閉';
+  }
 }
 
 function bindGlobalKlineShortcuts(){
@@ -442,9 +464,12 @@ function klinePanelHtml(r){
         <button type="button" data-kline-type="line" class="${currentKlineOptions.type === 'line' ? 'active' : ''}">Line</button>
         <button type="button" data-kline-type="area" class="${currentKlineOptions.type === 'area' ? 'active' : ''}">Area</button>
       </div>
+      <button type="button" class="kline-action" data-kline-action="measure">測量</button>
+      <button type="button" class="kline-action" data-kline-action="reset-measure">清除測量</button>
       <button type="button" class="kline-action" data-kline-action="reset">重置</button>
       <button type="button" class="kline-action" data-kline-action="fullscreen">放大</button>
     </div>
+    <div class="kline-measure-info" id="klineMeasureInfo" data-active="false">測量：關閉</div>
     <div class="kline-cursor-info" id="klineCursorInfo" data-date="">移到圖上看 O / H / L / C / 漲跌幅 / 成交量</div>
     <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
     <div class="kline-chart-wrap">
@@ -466,6 +491,9 @@ function bindKlineToolbar(){
   }));
   panel.querySelectorAll('[data-kline-scale]').forEach(btn => btn.addEventListener('click', () => setKlineScale(btn.dataset.klineScale)));
   panel.querySelectorAll('[data-kline-type]').forEach(btn => btn.addEventListener('click', () => setKlineType(btn.dataset.klineType)));
+  panel.querySelector('[data-kline-action="measure"]')?.addEventListener('click', () => { setKlineMeasure(!currentKlineOptions.measure); resetKlineMeasure(); });
+  panel.querySelector('[data-kline-action="reset-measure"]')?.addEventListener('click', () => resetKlineMeasure());
+  panel.querySelector('[data-kline-action="measure"]')?.classList.toggle('active', currentKlineOptions.measure);
   panel.querySelector('[data-kline-action="reset"]')?.addEventListener('click', () => resetCurrentKlineView());
   panel.querySelector('[data-kline-action="fullscreen"]')?.addEventListener('click', () => toggleKlineFullscreen());
   panel.querySelectorAll('[data-kline-mode]').forEach(btn => btn.addEventListener('click', () => {
@@ -537,10 +565,12 @@ function destroyKlineChart(){
   const priceLabel = document.getElementById('klinePriceLabel');
   const timeLabel = document.getElementById('klineTimeLabel');
   const cursorInfo = document.getElementById('klineCursorInfo');
+  const measureInfo = document.getElementById('klineMeasureInfo');
   if(tooltip){ tooltip.hidden = true; tooltip.innerHTML = ''; }
   if(priceLabel){ priceLabel.hidden = true; priceLabel.textContent = ''; }
   if(timeLabel){ timeLabel.hidden = true; timeLabel.textContent = ''; }
   if(cursorInfo){ cursorInfo.textContent = '移到圖上看 O / H / L / C / 漲跌幅 / 成交量'; cursorInfo.dataset.date = ''; }
+  if(measureInfo){ measureInfo.textContent = currentKlineOptions.measure ? '測量：點第一根作為起點，再點第二根作為終點' : '測量：關閉'; measureInfo.dataset.active = String(currentKlineOptions.measure); }
   if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
 }
 function rowsForRange(rows, range){
@@ -625,6 +655,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   const priceLabel = document.getElementById('klinePriceLabel');
   const timeLabel = document.getElementById('klineTimeLabel');
   const cursorInfo = document.getElementById('klineCursorInfo');
+  const measureInfo = document.getElementById('klineMeasureInfo');
   const maMap = new Map();
   for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
   for(const item of ma20Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma20:item.value});
@@ -653,6 +684,41 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     cursorInfo.dataset.pct = String(info.pct);
     cursorInfo.classList.toggle('up', info.change >= 0);
     cursorInfo.classList.toggle('down', info.change < 0);
+  }
+
+  function measureText(start, end){
+    const si = rows.findIndex(r => r.date === start.date);
+    const ei = rows.findIndex(r => r.date === end.date);
+    const lo = Math.min(si, ei), hi = Math.max(si, ei);
+    const slice = rows.slice(lo, hi + 1);
+    const startClose = Number(start.close);
+    const endClose = Number(end.close);
+    const diff = endClose - startClose;
+    const pct = startClose ? diff / startClose : 0;
+    const high = Math.max(...slice.map(r => Number(r.high)));
+    const low = Math.min(...slice.map(r => Number(r.low)));
+    const bars = Math.abs(ei - si) + 1;
+    return {text:`測量：${start.date} → ${end.date}｜${bars}根｜漲跌 ${diff >= 0 ? '+' : ''}${fmtNum(diff,2)} / ${diff >= 0 ? '+' : ''}${fmtPct(pct)}｜區間高 ${fmtNum(high,2)}｜區間低 ${fmtNum(low,2)}`, bars, diff, pct, high, low};
+  }
+  function updateMeasure(bar){
+    if(!currentKlineOptions.measure || !measureInfo || !bar) return;
+    if(!window.__magic26KlineMeasureStart || window.__magic26KlineMeasureEnd){
+      window.__magic26KlineMeasureStart = bar;
+      window.__magic26KlineMeasureEnd = null;
+      measureInfo.textContent = `測量起點：${bar.date}｜收 ${fmtNum(bar.close,2)}｜再點第二根`;
+      measureInfo.dataset.start = bar.date; measureInfo.dataset.end = ''; measureInfo.dataset.days = ''; measureInfo.dataset.pct = '';
+      measureInfo.classList.remove('up','down');
+      return;
+    }
+    window.__magic26KlineMeasureEnd = bar;
+    const m = measureText(window.__magic26KlineMeasureStart, bar);
+    measureInfo.textContent = m.text;
+    measureInfo.dataset.start = window.__magic26KlineMeasureStart.date;
+    measureInfo.dataset.end = bar.date;
+    measureInfo.dataset.days = String(m.bars);
+    measureInfo.dataset.pct = String(m.pct);
+    measureInfo.classList.toggle('up', m.diff >= 0);
+    measureInfo.classList.toggle('down', m.diff < 0);
   }
   function legendText(bar){
     const m = maMap.get(bar.date) || {};
@@ -700,6 +766,14 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     tooltip.dataset.date = bar.date;
     tooltip.dataset.close = String(bar.close);
   }
+  target.onclick = ev => {
+    if(!currentKlineOptions.measure) return;
+    const rect = target.getBoundingClientRect();
+    const x = Math.max(0, Math.min(target.clientWidth - 1, ev.clientX - rect.left));
+    const plotW = Math.max(1, target.clientWidth - 70);
+    const idx = Math.max(0, Math.min(rows.length - 1, Math.round((x / plotW) * (rows.length - 1))));
+    updateMeasure(rows[idx]);
+  };
   target.onmousemove = ev => {
     const rect = target.getBoundingClientRect();
     const x = Math.max(0, Math.min(target.clientWidth - 1, ev.clientX - rect.left));
@@ -711,6 +785,8 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   target.onmouseleave = hideTooltip;
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
   updateCursorInfo(rows[rows.length-1]);
+  setKlineMeasure(currentKlineOptions.measure);
+  resetKlineMeasure();
   chart.subscribeCrosshairMove(param => {
     const time = typeof param.time === 'string' ? param.time : null;
     const bar = time ? byDate.get(time) : null;
