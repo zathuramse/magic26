@@ -19,9 +19,53 @@ let currentKlinePayloadRows = [];
 let currentKlineSignalDate = null;
 let currentKlineChart = null;
 let currentKlineResizeObserver = null;
-let currentKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal'};
+const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal'};
+let currentKlineOptions = loadKlineOptions();
+
+function loadKlineOptions(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('magic26:kline-options') || '{}');
+    return {...defaultKlineOptions, ...saved};
+  }catch(_){
+    return {...defaultKlineOptions};
+  }
+}
+function saveKlineOptions(){
+  try{ localStorage.setItem('magic26:kline-options', JSON.stringify(currentKlineOptions)); }catch(_){ /* ignore */ }
+}
+function resetCurrentKlineView(){
+  currentKlineChart?.timeScale().fitContent();
+  currentKlineChart?.priceScale('right').applyOptions({autoScale:true});
+}
+function setKlineRange(range){
+  currentKlineOptions.range = range;
+  saveKlineOptions();
+  document.querySelectorAll('[data-kline-range]').forEach(b => b.classList.toggle('active', b.dataset.klineRange === range));
+  renderCurrentKlineFromState();
+}
+function setKlineScale(scale){
+  currentKlineOptions.scale = scale;
+  saveKlineOptions();
+  document.querySelectorAll('[data-kline-scale]').forEach(b => b.classList.toggle('active', b.dataset.klineScale === scale));
+  applyKlineScaleMode();
+}
+function bindGlobalKlineShortcuts(){
+  if(window.__magic26KlineShortcutsBound) return;
+  window.__magic26KlineShortcutsBound = true;
+  document.addEventListener('keydown', ev => {
+    const tag = (ev.target?.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
+    if(!document.getElementById('klinePanel')) return;
+    const key = ev.key.toLowerCase();
+    if(key === 'escape' && document.getElementById('klinePanel')?.classList.contains('fullscreen')){ ev.preventDefault(); toggleKlineFullscreen(false); return; }
+    if(key === 'r'){ ev.preventDefault(); resetCurrentKlineView(); return; }
+    const rangeMap = {'1':'3M','2':'6M','3':'1Y','4':'ALL'};
+    if(rangeMap[key]){ ev.preventDefault(); setKlineRange(rangeMap[key]); }
+  });
+}
 
 async function load(){
+  bindGlobalKlineShortcuts();
   const [summary, latest, recent, all, watch] = await Promise.all([
     fetch('./data/summary.json').then(r=>r.json()),
     fetch('./data/latest_candidates.json').then(r=>r.json()),
@@ -399,24 +443,14 @@ function klinePanelHtml(r){
 function bindKlineToolbar(){
   const panel = document.getElementById('klinePanel');
   if(!panel) return;
-  panel.querySelectorAll('[data-kline-range]').forEach(btn => btn.addEventListener('click', () => {
-    currentKlineOptions.range = btn.dataset.klineRange;
-    panel.querySelectorAll('[data-kline-range]').forEach(b => b.classList.toggle('active', b === btn));
-    renderCurrentKlineFromState();
-  }));
+  panel.querySelectorAll('[data-kline-range]').forEach(btn => btn.addEventListener('click', () => setKlineRange(btn.dataset.klineRange)));
   panel.querySelectorAll('[data-kline-toggle]').forEach(input => input.addEventListener('change', () => {
     currentKlineOptions[input.dataset.klineToggle] = input.checked;
+    saveKlineOptions();
     renderCurrentKlineFromState();
   }));
-  panel.querySelectorAll('[data-kline-scale]').forEach(btn => btn.addEventListener('click', () => {
-    currentKlineOptions.scale = btn.dataset.klineScale;
-    panel.querySelectorAll('[data-kline-scale]').forEach(b => b.classList.toggle('active', b === btn));
-    applyKlineScaleMode();
-  }));
-  panel.querySelector('[data-kline-action="reset"]')?.addEventListener('click', () => {
-    currentKlineChart?.timeScale().fitContent();
-    currentKlineChart?.priceScale('right').applyOptions({autoScale:true});
-  });
+  panel.querySelectorAll('[data-kline-scale]').forEach(btn => btn.addEventListener('click', () => setKlineScale(btn.dataset.klineScale)));
+  panel.querySelector('[data-kline-action="reset"]')?.addEventListener('click', () => resetCurrentKlineView());
   panel.querySelector('[data-kline-action="fullscreen"]')?.addEventListener('click', () => toggleKlineFullscreen());
   panel.querySelectorAll('[data-kline-mode]').forEach(btn => btn.addEventListener('click', () => {
     if(!currentKlineRow) return;
@@ -437,10 +471,10 @@ function applyKlineScaleMode(){
   const chart = document.getElementById('klineChart');
   if(chart) chart.dataset.scaleMode = currentKlineOptions.scale;
 }
-function toggleKlineFullscreen(){
+function toggleKlineFullscreen(force){
   const panel = document.getElementById('klinePanel');
   if(!panel) return;
-  const active = !panel.classList.contains('fullscreen');
+  const active = typeof force === 'boolean' ? force : !panel.classList.contains('fullscreen');
   panel.classList.toggle('fullscreen', active);
   document.body.classList.toggle('kline-fullscreen-open', active);
   const btn = panel.querySelector('[data-kline-action="fullscreen"]');
@@ -634,6 +668,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   });
   currentKlineResizeObserver = ro;
   ro.observe(target);
+  target.ondblclick = () => resetCurrentKlineView();
   target.dataset.chartEngine = 'lightweight-charts';
   target.dataset.chartRange = currentKlineOptions.range;
   target.dataset.scaleMode = currentKlineOptions.scale;
