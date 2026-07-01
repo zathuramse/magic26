@@ -10,8 +10,8 @@ ROOT = Path("C:/Users/abckf/research-brain")
 OUT = ROOT / "sources/strategy-checks/magic26/out"
 
 INPUTS = {
-    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
-    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
+    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
+    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
 }
 
 REPO_THRESHOLDS = [0.40, 0.50, 0.60]
@@ -90,10 +90,10 @@ def main() -> None:
         + np.minimum(summary["signals"], 80) / 80 * 0.02
     )
 
-    summary_path = OUT / "magic26_round7_param_grid_summary_20210101_20260622.csv"
-    yearly_path = OUT / "magic26_round7_param_grid_yearly_20210101_20260622.csv"
-    top_path = OUT / "magic26_round7_param_grid_top_20210101_20260622.csv"
-    manifest_path = OUT / "magic26_round7_param_grid_manifest_20210101_20260622.json"
+    summary_path = OUT / "magic26_round7_param_grid_summary_20210101_20260701.csv"
+    yearly_path = OUT / "magic26_round7_param_grid_yearly_20210101_20260701.csv"
+    top_path = OUT / "magic26_round7_param_grid_top_20210101_20260701.csv"
+    manifest_path = OUT / "magic26_round7_param_grid_manifest_20210101_20260701.json"
 
     summary.to_csv(summary_path, index=False, encoding="utf-8-sig")
     yearly.to_csv(yearly_path, index=False, encoding="utf-8-sig")

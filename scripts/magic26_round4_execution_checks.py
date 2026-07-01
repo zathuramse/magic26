@@ -4,7 +4,7 @@
 
 Reads signal rows emitted by magic26_signal_pilot.py and adds:
 - benchmark-relative forward return vs TAIEX close-to-close;
-- t+1 close entry forward return (already emitted by pilot after 2026-06-22 update);
+- t+1 close entry forward return (already emitted by pilot after 2026-07-01 update);
 - simple execution/risk flags available from daily data.
 
 Research-only; not a trading system.
@@ -93,7 +93,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--signals", required=True)
     parser.add_argument("--start-date", default="2021-01-01")
-    parser.add_argument("--end-date", default="2026-06-22")
+    parser.add_argument("--end-date", default="2026-07-01")
     parser.add_argument("--run-label", required=True)
     parser.add_argument("--signals-to-check", default="c1_c2,c1_c2_c3,magic26_v0,magic26_v0_quality")
     args = parser.parse_args()

@@ -17,14 +17,14 @@ required = [
     root / "public/data/all_candidates.json",
     root / "public/data/watch_states.json",
     root / "public/data/magic26_candidates_history.csv",
-    root / "public/data/magic26_round14_bootstrap_summary_20210101_20260622.csv",
-    root / "public/data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
-    root / "public/data/magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv",
-    root / "public/data/magic26_round17_b_retest_rearm_watch_20210101_20260622.csv",
-    root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv",
-    root / "public/data/magic26_round20_60d_flagged_cases_20210101_20260622.csv",
-    root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv",
-    root / "public/data/magic26_round21_volgap_rescue_cases_20210101_20260622.csv",
+    root / "public/data/magic26_round14_bootstrap_summary_20210101_20260701.csv",
+    root / "public/data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv",
+    root / "public/data/magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv",
+    root / "public/data/magic26_round17_b_retest_rearm_watch_20210101_20260701.csv",
+    root / "public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv",
+    root / "public/data/magic26_round20_60d_flagged_cases_20210101_20260701.csv",
+    root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv",
+    root / "public/data/magic26_round21_volgap_rescue_cases_20210101_20260701.csv",
     root / "scripts/export_dashboard_data.py",
     root / "scripts/deploy_cloudflare.py",
 ]
@@ -108,14 +108,14 @@ if "round23_decision" not in summary:
 if "round24_decision" not in summary:
     print("missing round24_decision in summary.json")
     sys.exit(1)
-round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv")
+round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv")
 if not round20["label"].astype(str).str.contains("top1/top10 < 2", regex=False).any():
     print("round20 summary missing top1/top10 validation row")
     sys.exit(1)
 if not round20["label"].astype(str).str.contains("ret60 <= 150%", regex=False).any():
     print("round20 summary missing ret60 cap row")
     sys.exit(1)
-round21 = pd.read_csv(root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv")
+round21 = pd.read_csv(root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv")
 if not round21["label"].astype(str).str.contains("rescue candidate", regex=False).any():
     print("round21 summary missing rescue candidate row")
     sys.exit(1)
@@ -155,7 +155,7 @@ if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉�
 if "成交量有沒有怪怪的" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "A 組先看清單" not in html or "app.js?v=20260701h" not in html or "styles.css?v=20260701d" not in html:
+if "A 組先看清單" not in html or "app.js?v=20260701i" not in html or "styles.css?v=20260701e" not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
     sys.exit(1)
 if "A 組怎麼挑" not in html or "大盤背景不能太差" not in html or "怎麼使用" not in html:

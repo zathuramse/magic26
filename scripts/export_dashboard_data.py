@@ -15,35 +15,35 @@ DEFAULT_RESEARCH_ROOT = PROJECT.parent
 DEFAULT_MAGIC26_SOURCE = DEFAULT_RESEARCH_ROOT / "sources/strategy-checks/magic26"
 
 PROCESSED_NAMES = [
-    "magic26_round4_summary_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
-    "magic26_round4_summary_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
-    "magic26_round4_regime_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
-    "magic26_round4_regime_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
-    "magic26_round7_param_grid_summary_20210101_20260622.csv",
-    "magic26_round7_param_grid_top_20210101_20260622.csv",
-    "magic26_round7_param_grid_yearly_20210101_20260622.csv",
-    "magic26_round8_tradeability_summary_20210101_20260622.csv",
-    "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260622.csv",
-    "magic26_round9_close_exit_summary_20210101_20260622.csv",
-    "magic26_round9_close_exit_yearly_20210101_20260622.csv",
-    "magic26_round14_bootstrap_summary_20210101_20260622.csv",
-    "magic26_round14_excluded_weak_momentum_path_review_20210101_20260622.csv",
-    "magic26_round14_baseline_vs_floor15_yearly_20210101_20260622.csv",
-    "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv",
-    "magic26_round19_author_absorption_detail_20210101_20260622.csv",
-    "magic26_round19_ret60_cap_summary_20210101_20260622.csv",
-    "magic26_round19_volume_gap_summary_20210101_20260622.csv",
-    "magic26_round19_risk_badge_summary_20210101_20260622.csv",
-    "magic26_round20_60d_validation_summary_20210101_20260622.csv",
-    "magic26_round20_60d_flagged_cases_20210101_20260622.csv",
-    "magic26_round21_volgap_rescue_summary_20210101_20260622.csv",
-    "magic26_round21_volgap_rescue_cases_20210101_20260622.csv",
+    "magic26_round4_summary_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
+    "magic26_round4_summary_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
+    "magic26_round7_param_grid_summary_20210101_20260701.csv",
+    "magic26_round7_param_grid_top_20210101_20260701.csv",
+    "magic26_round7_param_grid_yearly_20210101_20260701.csv",
+    "magic26_round8_tradeability_summary_20210101_20260701.csv",
+    "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260701.csv",
+    "magic26_round9_close_exit_summary_20210101_20260701.csv",
+    "magic26_round9_close_exit_yearly_20210101_20260701.csv",
+    "magic26_round14_bootstrap_summary_20210101_20260701.csv",
+    "magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv",
+    "magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv",
+    "magic26_round17_b_retest_rearm_watch_20210101_20260701.csv",
+    "magic26_round19_author_absorption_detail_20210101_20260701.csv",
+    "magic26_round19_ret60_cap_summary_20210101_20260701.csv",
+    "magic26_round19_volume_gap_summary_20210101_20260701.csv",
+    "magic26_round19_risk_badge_summary_20210101_20260701.csv",
+    "magic26_round20_60d_validation_summary_20210101_20260701.csv",
+    "magic26_round20_60d_flagged_cases_20210101_20260701.csv",
+    "magic26_round21_volgap_rescue_summary_20210101_20260701.csv",
+    "magic26_round21_volgap_rescue_cases_20210101_20260701.csv",
 ]
 
-WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv"
+WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260701.csv"
 
-RAW_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260622.csv"
-ADJ_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260622.csv"
+RAW_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv"
+ADJ_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv"
 
 
 def clean_json(value: Any) -> Any:
@@ -169,7 +169,7 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
     """
     out = candidates.copy()
     out["source_type"] = "reconstructed"
-    path = out_dir / "magic26_round19_author_absorption_detail_20210101_20260622.csv"
+    path = out_dir / "magic26_round19_author_absorption_detail_20210101_20260701.csv"
     default_cols = [
         "ret_60d_signal", "ret60_cap150_pass", "volume_gap_risk_zh",
         "top1_to_top3_volume_ratio", "top1_to_top5_volume_ratio", "top1_to_top10_volume_ratio",
@@ -441,7 +441,10 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     for name in PROCESSED_NAMES:
         src = out_dir / name
         if not src.exists():
-            raise FileNotFoundError(f"Missing processed output: {src}")
+            # Round17 is generated after an initial export builds the candidate history
+            # used by Round15/16. Final verification still checks the completed bundle.
+            print(f"WARN missing processed output, skipped: {src}")
+            continue
         for dest_dir in [public_data, processed]:
             shutil.copy2(src, dest_dir / name)
         copied.append(name)
@@ -482,7 +485,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export Magic26 dashboard data bundle.")
     parser.add_argument("--source-dir", default=str(DEFAULT_MAGIC26_SOURCE), help="Magic26 research source directory")
-    parser.add_argument("--data-through", default="2026-06-22", help="Latest data date displayed in dashboard")
+    parser.add_argument("--data-through", default="2026-06-30", help="Latest complete data date displayed in dashboard")
     args = parser.parse_args()
     manifest = export(Path(args.source_dir), args.data_through)
     print(json.dumps(manifest, ensure_ascii=False, indent=2))

@@ -12,8 +12,8 @@ OUT = BASE / "out"
 CACHE = BASE / "cache"
 
 INPUTS = {
-    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260622.csv",
-    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260622.csv",
+    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
+    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
 }
 
 CANDIDATES = {
@@ -52,7 +52,7 @@ def candidate_mask(df: pd.DataFrame, spec: dict) -> pd.Series:
 
 
 def load_price(mode: str, stock_id: str) -> pd.DataFrame | None:
-    path = CACHE / f"{mode}_{stock_id}_20210101_20260622.parquet"
+    path = CACHE / f"{mode}_{stock_id}_20210101_20260701.parquet"
     if not path.exists():
         return None
     p = pd.read_parquet(path)
@@ -202,10 +202,10 @@ def main() -> None:
     summary = pd.DataFrame(summary_rows)
     failures = pd.DataFrame(failure_rows).sort_values(["price_mode", "candidate", "failures"], ascending=[True, True, False]) if failure_rows else pd.DataFrame()
 
-    detail_path = OUT / "magic26_round8_tradeability_detail_20210101_20260622.csv"
-    summary_path = OUT / "magic26_round8_tradeability_summary_20210101_20260622.csv"
-    failures_path = OUT / "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260622.csv"
-    manifest_path = OUT / "magic26_round8_tradeability_manifest_20210101_20260622.json"
+    detail_path = OUT / "magic26_round8_tradeability_detail_20210101_20260701.csv"
+    summary_path = OUT / "magic26_round8_tradeability_summary_20210101_20260701.csv"
+    failures_path = OUT / "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260701.csv"
+    manifest_path = OUT / "magic26_round8_tradeability_manifest_20210101_20260701.json"
 
     detail.to_csv(detail_path, index=False, encoding="utf-8-sig")
     summary.to_csv(summary_path, index=False, encoding="utf-8-sig")
