@@ -24,56 +24,8 @@
     <section class="panel">
       <div class="section-head">
         <div>
-          <h2>先看哪一組</h2>
-          <p>A 組是目前最主要的清單；B 組條件比較寬，用來補看漏網；C 組條件比較嚴，用來看更集中的候選。</p>
-        </div>
-        <div class="segmented" id="quickFilters">
-          <button class="active" data-candidate="all">全部</button>
-          <button data-candidate="A_repo50_c4_40_fixed20">只看 A 組</button>
-          <button data-candidate="B_magic_c4_40_fixed20">B 組：放寬</button>
-          <button data-candidate="C_c4_25_fixed20">C 組：較嚴</button>
-        </div>
-      </div>
-      <div class="candidate-summary" id="candidateSummary"></div>
-    </section>
-
-    <section class="panel">
-      <div class="section-head compact">
-        <div>
-          <h2>成交量有沒有怪怪的</h2>
-          <p>看成交量是不是集中在少數幾天。越集中越容易是假熱度，所以只用來調整查看順序，不代表買賣。</p>
-        </div>
-      </div>
-      <div id="volgapSummary" class="subtype-summary"></div>
-    </section>
-
-    <section class="panel">
-      <div class="section-head compact">
-        <div>
-          <h2>A 組先看清單</h2>
-          <p>把今年的 A 組依成交量風險分開。先看「正常」與「有落差但可看」；「先避開」要等看圖確認。</p>
-        </div>
-        <button class="ghost" id="jumpMainA">看今年 A 組</button>
-      </div>
-      <div id="mainAList" class="main-a-groups"></div>
-    </section>
-
-
-    <section class="panel">
-      <div class="section-head compact">
-        <div>
-          <h2>B 組追蹤</h2>
-          <p id="watchStateHint">這區放「題材可能還在，但現在不適合追」的股票：等拉回、等突破，或降級不看。</p>
-        </div>
-      </div>
-      <div id="watchStateList" class="watch-grid"></div>
-    </section>
-
-    <section class="panel">
-      <div class="section-head">
-        <div>
-          <h2>股票卡片</h2>
-          <p id="viewHint">預設只看最近一次有候選的那天；如果那天沒有 A 組，可以切到今年清單。</p>
+          <h2>今日主清單</h2>
+          <p id="viewHint">預設顯示最近出訊號的股票；同股同日已合併成一張卡，點卡片可看完整來源。</p>
         </div>
         <div class="controls">
           <select id="rangeFilter">
@@ -112,11 +64,60 @@
 
     </section>
 
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>快速分流</h2>
+          <p>先看 A 組；B 組是補看漏網，C 組是條件更嚴的參考。這裡只是切換清單，不增加新訊號。</p>
+        </div>
+        <div class="segmented" id="quickFilters">
+          <button class="active" data-candidate="all">全部</button>
+          <button data-candidate="A_repo50_c4_40_fixed20">只看 A 組</button>
+          <button data-candidate="B_magic_c4_40_fixed20">B 組：放寬</button>
+          <button data-candidate="C_c4_25_fixed20">C 組：較嚴</button>
+        </div>
+      </div>
+      <div class="candidate-summary" id="candidateSummary"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head compact">
+        <div>
+          <h2>次要篩選：量能狀態</h2>
+          <p>用來調整查看順序；真正要看的是上面的今日主清單。</p>
+        </div>
+      </div>
+      <div id="volgapSummary" class="subtype-summary"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head compact">
+        <div>
+          <h2>次要清單：今年 A 組</h2>
+          <p>這是今年 A 組的分流參考；今日要先看誰以上面的主清單為準。</p>
+        </div>
+        <button class="ghost" id="jumpMainA">看今年 A 組</button>
+      </div>
+      <div id="mainAList" class="main-a-groups"></div>
+    </section>
+
+
+    <section class="panel">
+      <div class="section-head compact">
+        <div>
+          <h2>次要追蹤：B 組</h2>
+          <p id="watchStateHint">這區只放補看與追蹤，不是今日主訊號。</p>
+        </div>
+      </div>
+      <div id="watchStateList" class="watch-grid"></div>
+    </section>
+
     <section class="panel detail-panel" id="detailPanel">
       <div class="section-head compact">
         <div>
           <h2 id="detailTitle">股票細節</h2>
-          <p id="detailSubtitle">點一張股票卡片，這裡會顯示為什麼它被排進來。</p>
+          <p id="detailSubtitle">點一張今日主清單卡片，這裡會顯示訊號日期、理由、風險與合併來源。</p>
         </div>
         <button id="clearDetail" class="ghost">清除</button>
       </div>
@@ -180,6 +181,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
-  <script src="./app.js?v=20260701u"></script>
+  <script src="./app.js?v=20260701v"></script>
 </body>
 </html>

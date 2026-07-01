@@ -104,9 +104,9 @@ async function load(){
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/latest_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
-    fetch('./data/recent_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
-    fetch('./data/all_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
@@ -468,7 +468,7 @@ function renderStockCards(){
   let rows = activeRows().filter(r => hasCandidate(r, cand)).filter(r => matchRisk(r, risk));
   if(q) rows = rows.filter(r => `${r.stock_id} ${r.stock_name} ${r.industry_category}`.toLowerCase().includes(q));
   rows = rows.slice().sort(compareRows(sort));
-  document.getElementById('viewHint').textContent = `${document.getElementById('rangeFilter').selectedOptions[0].textContent}｜現在顯示 ${rows.length} 檔（同股同日已合併）`;
+  document.getElementById('viewHint').textContent = `今日主清單｜${document.getElementById('rangeFilter').selectedOptions[0].textContent}｜${rows.length} 檔（同股同日已合併）`;
   document.getElementById('stockCards').innerHTML = rows.length ? rows.map(r => stockCardHtml(r)).join('') : '<div class="empty">沒有符合條件的候選。</div>';
   document.querySelectorAll('#stockCards .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => groupKey(r) === card.dataset.key))));
 }
@@ -940,8 +940,8 @@ function showDetail(r){
 }
 function clearDetail(){
   selectedDetailKey = null;
-  document.getElementById('detailTitle').textContent = '候選細節';
-  document.getElementById('detailSubtitle').textContent = '點選卡片後顯示完整欄位。';
+  document.getElementById('detailTitle').textContent = '股票細節';
+  document.getElementById('detailSubtitle').textContent = '點選今日主清單卡片後顯示完整欄位。';
   document.getElementById('detailBody').innerHTML = '<div class="detail-empty">尚未選取候選。</div>';
   renderStockCards();
   renderMainAList();
