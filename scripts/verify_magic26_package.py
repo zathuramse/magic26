@@ -164,7 +164,10 @@ if "主要規則" not in html or "三個市場狀態條件都要成立" not in h
 if "資料下載" not in html or "download-groups" not in html or "候選資料" not in html or "參數研究" not in html or "交易化檢查" not in html or "風險檢查" not in html or "量能落差研究" not in html:
     print("round25 batch5 grouped download UI missing from index.html")
     sys.exit(1)
-if "regime_all3=True" in html or "repo_vol5" in html or "t+1 open" in html or "第七輪參數網格 Top" in html or "Round 20｜flagged cases" in html or "Watch State CSV" in html:
+if "動能偏弱" not in html or "15%底線觀察" not in html or "前5大成交量占比高" not in html or "非主要規則" not in html:
+    print("round25 batch6 plain-language control labels missing from index.html")
+    sys.exit(1)
+if "regime_all3=True" in html or "repo_vol5" in html or "t+1 open" in html or "第七輪參數網格 Top" in html or "Round 20｜flagged cases" in html or "Watch State CSV" in html or "repo量比高" in html:
     print("round25 batch5 old bottom technical copy still present in index.html")
     sys.exit(1)
 if "主規格 A 斷層分組優先清單" in html or "斷層正常" in html:
