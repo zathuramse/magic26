@@ -19,13 +19,13 @@ let currentKlinePayloadRows = [];
 let currentKlineSignalDate = null;
 let currentKlineChart = null;
 let currentKlineResizeObserver = null;
-const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal', type:'candles', measure:false};
+const defaultKlineOptions = {range:'1Y', ma:true, volume:true, signal:true, scale:'normal', type:'candles', measure:false};
 let currentKlineOptions = loadKlineOptions();
 
 function loadKlineOptions(){
   try{
     const saved = JSON.parse(localStorage.getItem('magic26:kline-options') || '{}');
-    return {...defaultKlineOptions, ...saved};
+    return {...defaultKlineOptions, ...saved, range: (saved.range === 'ALL' ? 'ALL' : '1Y')};
   }catch(_){
     return {...defaultKlineOptions};
   }
@@ -89,7 +89,7 @@ function bindGlobalKlineShortcuts(){
     const key = ev.key.toLowerCase();
     if(key === 'escape' && document.getElementById('klinePanel')?.classList.contains('fullscreen')){ ev.preventDefault(); toggleKlineFullscreen(false); return; }
     if(key === 'r'){ ev.preventDefault(); resetCurrentKlineView(); return; }
-    const rangeMap = {'1':'3M','2':'6M','3':'1Y','4':'ALL'};
+    const rangeMap = {'1':'1Y','2':'ALL'};
     if(rangeMap[key]){ ev.preventDefault(); setKlineRange(rangeMap[key]); }
   });
 }
@@ -448,7 +448,7 @@ function klinePanelHtml(r){
         <button type="button" data-kline-mode="adjusted" class="${mode === 'adjusted' ? 'active' : ''}">還原價</button>
       </div>
       <div class="kline-tool-group" aria-label="時間區間">
-        ${['3M','6M','1Y','ALL'].map(x => `<button type="button" data-kline-range="${x}" class="${currentKlineOptions.range === x ? 'active' : ''}">${x === 'ALL' ? '全部' : x}</button>`).join('')}
+        ${['1Y','ALL'].map(x => `<button type="button" data-kline-range="${x}" class="${currentKlineOptions.range === x ? 'active' : ''}">${x === 'ALL' ? '全部' : x}</button>`).join('')}
       </div>
       <label><input type="checkbox" data-kline-toggle="ma" ${currentKlineOptions.ma ? 'checked' : ''}> MA</label>
       <label><input type="checkbox" data-kline-toggle="volume" ${currentKlineOptions.volume ? 'checked' : ''}> 成交量</label>
@@ -574,7 +574,7 @@ function destroyKlineChart(){
   if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
 }
 function rowsForRange(rows, range){
-  const n = { '3M':66, '6M':132, '1Y':260 }[range];
+  const n = { '1Y':260 }[range];
   return n ? rows.slice(-n) : rows;
 }
 function renderCurrentKlineFromState(){
