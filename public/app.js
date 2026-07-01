@@ -70,7 +70,22 @@ const subtypeFilters = {
   '危險斷層': 'volgapDanger',
   '待補': 'volgapMissing'
 };
+const subtypeLabels = {
+  '正常': '正常',
+  '可救斷層': '可再觀察',
+  '大量斷層觀察': '需留意',
+  '危險斷層': '高風險',
+  '待補': '資料不足'
+};
+const subtypeHints = {
+  '正常': '未出現明顯量能落差',
+  '可救斷層': '原研究名：可救斷層；有量能落差，但仍可再觀察',
+  '大量斷層觀察': '原研究名：大量斷層觀察；成交量集中度偏高，需人工檢查',
+  '危險斷層': '原研究名：危險斷層；量能落差較嚴重，優先檢查風險',
+  '待補': '資料不足，暫不判斷量能落差'
+};
 const subtypeOrder = ['正常', '可救斷層', '大量斷層觀察', '危險斷層', '待補'];
+function subtypeLabel(subtype){ return subtypeLabels[subtype] || subtype || '資料不足'; }
 function countSubtype(rows, subtype){ return rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).length; }
 function subtypeTone(subtype){
   if(subtype === '正常') return 'ok';
@@ -93,8 +108,8 @@ function renderVolgapSummary(){
     const recent = countSubtype(recentRows, subtype);
     const latest = countSubtype(latestRows, subtype);
     const mainA = allRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20' && String(r.volgap_subtype_zh || '待補') === subtype).length;
-    return `<button class="subtype-card ${subtypeTone(subtype)}" data-risk="${subtypeFilters[subtype]}">
-      <div class="subtype-head"><span>${subtype}</span><strong>${all}</strong></div>
+    return `<button class="subtype-card ${subtypeTone(subtype)}" data-risk="${subtypeFilters[subtype]}" title="${subtypeHints[subtype] || ''}">
+      <div class="subtype-head"><span>${subtypeLabel(subtype)}</span><strong>${all}</strong></div>
       <div class="subtype-metrics"><span>近期 ${recent}</span><span>最新 ${latest}</span><span>A ${mainA}</span></div>
     </button>`;
   }).join('');
@@ -196,9 +211,9 @@ function riskTags(r){
   else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">高開>3%</span>');
   if(isLowLiquidity(r)) tags.push('<span class="pill bad">低流動</span>');
   if(isRet60Hot(r)) tags.push('<span class="pill research">60日>150%</span>');
-  if(isVolgapDanger(r)) tags.push('<span class="pill bad">危險斷層</span>');
-  else if(isVolgapRescue(r)) tags.push('<span class="pill research">可救斷層</span>');
-  else if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">${r.volgap_subtype_zh || r.volume_gap_risk_zh}</span>`);
+  if(isVolgapDanger(r)) tags.push('<span class="pill bad">量能高風險</span>');
+  else if(isVolgapRescue(r)) tags.push('<span class="pill research">量能可再觀察</span>');
+  else if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">量能${subtypeLabel(r.volgap_subtype_zh) || '需留意'}</span>`);
   if(isLongMaBear(r)) tags.push('<span class="pill bad">長均空頭</span>');
   if(r.risk_badge_zh) tags.push('<span class="pill muted">研究中</span>');
   if(r.candidate !== 'A_repo50_c4_40_fixed20') tags.push('<span class="pill muted">非主規格</span>');
@@ -259,7 +274,7 @@ function renderMainAList(){
     const count = rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).length;
     return `<section class="main-a-group ${subtypeTone(subtype)}">
       <button class="main-a-head" data-risk="${subtypeFilters[subtype]}">
-        <span>A｜${subtype}</span><strong>${count}</strong><em>看此分類</em>
+        <span>A 組｜${subtypeLabel(subtype)}</span><strong>${count}</strong><em>看此分類</em>
       </button>
       <div class="main-a-cards">${part.length ? part.map(r => stockCardHtml(r, true)).join('') : '<div class="empty mini">近期無候選</div>'}</div>
     </section>`;

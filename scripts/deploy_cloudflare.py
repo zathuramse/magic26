@@ -60,11 +60,11 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML does not contain Round25 plain-language header")
     if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉取式研究看板" in html:
         raise RuntimeError("Production HTML still contains old Round25 first-screen copy")
-    if "斷層分類總覽" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
-        raise RuntimeError("Production HTML missing Round23 subtype summary/filter UI")
-    if "主規格 A 斷層分組優先清單" not in html:
-        raise RuntimeError("Production HTML missing Round24 grouped main-A list")
-    if "app.js?v=20260701d" not in html or "styles.css?v=20260701a" not in html:
+    if "量能落差分類" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
+        raise RuntimeError("Production HTML missing Round25 volume-gap plain-language UI")
+    if "A 組量能落差優先清單" not in html:
+        raise RuntimeError("Production HTML missing Round25 grouped main-A list copy")
+    if "app.js?v=20260701e" not in html or "styles.css?v=20260701a" not in html:
         raise RuntimeError("Production HTML missing Round25 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
