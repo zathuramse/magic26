@@ -104,9 +104,9 @@ async function load(){
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/latest_signal_groups.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/recent_signal_groups.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/all_signal_groups.json').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json?v=20260701u').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
