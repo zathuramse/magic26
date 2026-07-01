@@ -17,6 +17,7 @@ ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
 ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260622.csv"
 ROUND19_VOLGAP_URL = "https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260622.csv"
 ROUND20_SUMMARY_URL = "https://magic26.pages.dev/data/magic26_round20_60d_validation_summary_20210101_20260622.csv"
+ROUND21_SUMMARY_URL = "https://magic26.pages.dev/data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv"
 
 
 def run(cmd: list[str], *, timeout: int = 300) -> str:
@@ -68,6 +69,8 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production summary missing round19_decision")
     if "round20_decision" not in summary:
         raise RuntimeError("Production summary missing round20_decision")
+    if "round21_decision" not in summary:
+        raise RuntimeError("Production summary missing round21_decision")
     latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
     if latest:
         required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh"}
@@ -90,6 +93,9 @@ def verify_production(expected_data_through: str | None = None) -> None:
     round20 = fetch(ROUND20_SUMMARY_URL).decode("utf-8", errors="replace")
     if "top1/top10 < 2" not in round20 or "ret60 <= 150%" not in round20:
         raise RuntimeError("Production Round20 summary missing expected validation rows")
+    round21 = fetch(ROUND21_SUMMARY_URL).decode("utf-8", errors="replace")
+    if "rescue candidate" not in round21 or "danger candidate" not in round21:
+        raise RuntimeError("Production Round21 summary missing expected rescue/danger rows")
     print(
         "PRODUCTION OK",
         json.dumps(

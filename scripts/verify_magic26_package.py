@@ -23,6 +23,8 @@ required = [
     root / "public/data/magic26_round17_b_retest_rearm_watch_20210101_20260622.csv",
     root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv",
     root / "public/data/magic26_round20_60d_flagged_cases_20210101_20260622.csv",
+    root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv",
+    root / "public/data/magic26_round21_volgap_rescue_cases_20210101_20260622.csv",
     root / "scripts/export_dashboard_data.py",
     root / "scripts/deploy_cloudflare.py",
 ]
@@ -92,12 +94,22 @@ if "round19_decision" not in summary:
 if "round20_decision" not in summary:
     print("missing round20_decision in summary.json")
     sys.exit(1)
+if "round21_decision" not in summary:
+    print("missing round21_decision in summary.json")
+    sys.exit(1)
 round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv")
 if not round20["label"].astype(str).str.contains("top1/top10 < 2", regex=False).any():
     print("round20 summary missing top1/top10 validation row")
     sys.exit(1)
 if not round20["label"].astype(str).str.contains("ret60 <= 150%", regex=False).any():
     print("round20 summary missing ret60 cap row")
+    sys.exit(1)
+round21 = pd.read_csv(root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260622.csv")
+if not round21["label"].astype(str).str.contains("rescue candidate", regex=False).any():
+    print("round21 summary missing rescue candidate row")
+    sys.exit(1)
+if not round21["label"].astype(str).str.contains("danger candidate", regex=False).any():
+    print("round21 summary missing danger candidate row")
     sys.exit(1)
 if set(candidates["source_type"].dropna().unique()) != {"reconstructed"}:
     print("unexpected source_type values", sorted(candidates["source_type"].dropna().unique()))

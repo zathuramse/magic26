@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T08:01:22",
+  "generated_at": "2026-07-01T08:28:26",
   "data_through": "2026-06-22",
   "latest_signal_date": "2026-06-10",
   "total_candidate_rows": 329,
@@ -25,6 +25,13 @@
     "volume_gap_top10": "top1/top10<2 的 60D 右尾率較佳，可作研究優先加分；top1/top10>=2 作大量斷層負分，但不作 veto",
     "long_ma_bear": "長均空頭樣本太少，僅保留負分 badge",
     "next_step": "逐檔檢查 top1/top10>=2 但 60D 仍大漲的反例，找可救脈絡"
+  },
+  "round21_decision": {
+    "status": "volgap false-kill review；主規格不變",
+    "top10_gap": "top1/top10>=2 維持負分，不硬 veto",
+    "rescue_candidate": "top1/top10<2.2 + top1/top3<1.5 + ret60_signal<=80% 可標大量斷層可救觀察；不是加分，只是避免誤殺",
+    "danger_candidate": "top1/top10>=2.5 或 ret60_signal>80% 標危險斷層，排序應明顯下調",
+    "next_step": "產品化 volgap_subtype_zh：正常 / 可救斷層 / 危險斷層 / 待補"
   },
   "candidates": [
     {
