@@ -19,7 +19,7 @@ let currentKlinePayloadRows = [];
 let currentKlineSignalDate = null;
 let currentKlineChart = null;
 let currentKlineResizeObserver = null;
-let currentKlineOptions = {range:'6M', ma:true, volume:true, signal:true};
+let currentKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal'};
 
 async function load(){
   const [summary, latest, recent, all, watch] = await Promise.all([
@@ -379,6 +379,13 @@ function klinePanelHtml(r){
       <label><input type="checkbox" data-kline-toggle="ma" ${currentKlineOptions.ma ? 'checked' : ''}> MA</label>
       <label><input type="checkbox" data-kline-toggle="volume" ${currentKlineOptions.volume ? 'checked' : ''}> 成交量</label>
       <label><input type="checkbox" data-kline-toggle="signal" ${currentKlineOptions.signal ? 'checked' : ''}> 候選日</label>
+      <div class="kline-tool-group" aria-label="價格軸模式">
+        <button type="button" data-kline-scale="normal" class="${currentKlineOptions.scale === 'normal' ? 'active' : ''}">一般</button>
+        <button type="button" data-kline-scale="percentage" class="${currentKlineOptions.scale === 'percentage' ? 'active' : ''}">百分比</button>
+        <button type="button" data-kline-scale="log" class="${currentKlineOptions.scale === 'log' ? 'active' : ''}">對數</button>
+      </div>
+      <button type="button" class="kline-action" data-kline-action="reset">重置</button>
+      <button type="button" class="kline-action" data-kline-action="fullscreen">放大</button>
     </div>
     <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
     <div class="kline-chart-wrap">
@@ -401,6 +408,16 @@ function bindKlineToolbar(){
     currentKlineOptions[input.dataset.klineToggle] = input.checked;
     renderCurrentKlineFromState();
   }));
+  panel.querySelectorAll('[data-kline-scale]').forEach(btn => btn.addEventListener('click', () => {
+    currentKlineOptions.scale = btn.dataset.klineScale;
+    panel.querySelectorAll('[data-kline-scale]').forEach(b => b.classList.toggle('active', b === btn));
+    applyKlineScaleMode();
+  }));
+  panel.querySelector('[data-kline-action="reset"]')?.addEventListener('click', () => {
+    currentKlineChart?.timeScale().fitContent();
+    currentKlineChart?.priceScale('right').applyOptions({autoScale:true});
+  });
+  panel.querySelector('[data-kline-action="fullscreen"]')?.addEventListener('click', () => toggleKlineFullscreen());
   panel.querySelectorAll('[data-kline-mode]').forEach(btn => btn.addEventListener('click', () => {
     if(!currentKlineRow) return;
     const mode = btn.dataset.klineMode;
@@ -408,6 +425,33 @@ function bindKlineToolbar(){
     renderKline({...currentKlineRow, price_mode: mode});
   }));
 }
+
+function klineScaleMode(){
+  if(currentKlineOptions.scale === 'percentage') return LightweightCharts.PriceScaleMode.Percentage;
+  if(currentKlineOptions.scale === 'log') return LightweightCharts.PriceScaleMode.Logarithmic;
+  return LightweightCharts.PriceScaleMode.Normal;
+}
+function applyKlineScaleMode(){
+  if(!currentKlineChart || !window.LightweightCharts) return;
+  currentKlineChart.priceScale('right').applyOptions({mode:klineScaleMode(), autoScale:true});
+  const chart = document.getElementById('klineChart');
+  if(chart) chart.dataset.scaleMode = currentKlineOptions.scale;
+}
+function toggleKlineFullscreen(){
+  const panel = document.getElementById('klinePanel');
+  if(!panel) return;
+  const active = !panel.classList.contains('fullscreen');
+  panel.classList.toggle('fullscreen', active);
+  document.body.classList.toggle('kline-fullscreen-open', active);
+  const btn = panel.querySelector('[data-kline-action="fullscreen"]');
+  if(btn) btn.textContent = active ? '還原' : '放大';
+  setTimeout(() => {
+    const target = document.getElementById('klineChart');
+    if(currentKlineChart && target) currentKlineChart.applyOptions({width:target.clientWidth, height:target.clientHeight});
+    currentKlineChart?.timeScale().fitContent();
+  }, 80);
+}
+
 async function renderKline(r){
   const key = `${r.stock_id}-${r.price_mode}`;
   currentKlineKey = key;
@@ -480,7 +524,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     height: target.clientHeight || 380,
     layout: { background: { color: 'transparent' }, textColor: '#8fb0c8' },
     grid: { vertLines: { color: 'rgba(143,176,200,.12)' }, horzLines: { color: 'rgba(143,176,200,.14)' } },
-    rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: opts.volume ? .28 : .08 } },
+    rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: opts.volume ? .28 : .08 }, mode:klineScaleMode() },
     timeScale: { borderColor: 'rgba(143,176,200,.22)', timeVisible: false },
     crosshair: {
       mode: LightweightCharts.CrosshairMode.Normal,
@@ -492,6 +536,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     localization: { locale: 'zh-TW' },
   });
   currentKlineChart = chart;
+  target.dataset.scaleMode = currentKlineOptions.scale;
   const candle = chart.addCandlestickSeries({
     upColor:'#ff6b6b', downColor:'#6dff9f', borderUpColor:'#ff6b6b', borderDownColor:'#6dff9f', wickUpColor:'#ff9b9b', wickDownColor:'#9affbc'
   });
@@ -591,6 +636,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   ro.observe(target);
   target.dataset.chartEngine = 'lightweight-charts';
   target.dataset.chartRange = currentKlineOptions.range;
+  target.dataset.scaleMode = currentKlineOptions.scale;
 }
 function klineSvg(rows, signalDate){
   const w = 860, h = 320, pad = {l:48,r:16,t:18,b:54};
