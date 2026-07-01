@@ -19,7 +19,7 @@ let currentKlinePayloadRows = [];
 let currentKlineSignalDate = null;
 let currentKlineChart = null;
 let currentKlineResizeObserver = null;
-const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal'};
+const defaultKlineOptions = {range:'6M', ma:true, volume:true, signal:true, scale:'normal', type:'candles'};
 let currentKlineOptions = loadKlineOptions();
 
 function loadKlineOptions(){
@@ -49,6 +49,14 @@ function setKlineScale(scale){
   document.querySelectorAll('[data-kline-scale]').forEach(b => b.classList.toggle('active', b.dataset.klineScale === scale));
   applyKlineScaleMode();
 }
+
+function setKlineType(type){
+  currentKlineOptions.type = type;
+  saveKlineOptions();
+  document.querySelectorAll('[data-kline-type]').forEach(b => b.classList.toggle('active', b.dataset.klineType === type));
+  renderCurrentKlineFromState();
+}
+
 function bindGlobalKlineShortcuts(){
   if(window.__magic26KlineShortcutsBound) return;
   window.__magic26KlineShortcutsBound = true;
@@ -428,6 +436,12 @@ function klinePanelHtml(r){
         <button type="button" data-kline-scale="percentage" class="${currentKlineOptions.scale === 'percentage' ? 'active' : ''}">百分比</button>
         <button type="button" data-kline-scale="log" class="${currentKlineOptions.scale === 'log' ? 'active' : ''}">對數</button>
       </div>
+      <div class="kline-tool-group" aria-label="圖表型態">
+        <button type="button" data-kline-type="candles" class="${currentKlineOptions.type === 'candles' ? 'active' : ''}">Candles</button>
+        <button type="button" data-kline-type="bars" class="${currentKlineOptions.type === 'bars' ? 'active' : ''}">Bars</button>
+        <button type="button" data-kline-type="line" class="${currentKlineOptions.type === 'line' ? 'active' : ''}">Line</button>
+        <button type="button" data-kline-type="area" class="${currentKlineOptions.type === 'area' ? 'active' : ''}">Area</button>
+      </div>
       <button type="button" class="kline-action" data-kline-action="reset">重置</button>
       <button type="button" class="kline-action" data-kline-action="fullscreen">放大</button>
     </div>
@@ -450,6 +464,7 @@ function bindKlineToolbar(){
     renderCurrentKlineFromState();
   }));
   panel.querySelectorAll('[data-kline-scale]').forEach(btn => btn.addEventListener('click', () => setKlineScale(btn.dataset.klineScale)));
+  panel.querySelectorAll('[data-kline-type]').forEach(btn => btn.addEventListener('click', () => setKlineType(btn.dataset.klineType)));
   panel.querySelector('[data-kline-action="reset"]')?.addEventListener('click', () => resetCurrentKlineView());
   panel.querySelector('[data-kline-action="fullscreen"]')?.addEventListener('click', () => toggleKlineFullscreen());
   panel.querySelectorAll('[data-kline-mode]').forEach(btn => btn.addEventListener('click', () => {
@@ -571,10 +586,24 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   });
   currentKlineChart = chart;
   target.dataset.scaleMode = currentKlineOptions.scale;
-  const candle = chart.addCandlestickSeries({
-    upColor:'#ff6b6b', downColor:'#6dff9f', borderUpColor:'#ff6b6b', borderDownColor:'#6dff9f', wickUpColor:'#ff9b9b', wickDownColor:'#9affbc'
-  });
-  candle.setData(rows.map(r => ({time:r.date, open:Number(r.open), high:Number(r.high), low:Number(r.low), close:Number(r.close)})));
+  const ohlcData = rows.map(r => ({time:r.date, open:Number(r.open), high:Number(r.high), low:Number(r.low), close:Number(r.close)}));
+  const lineData = rows.map(r => ({time:r.date, value:Number(r.close)}));
+  let mainSeries;
+  if(currentKlineOptions.type === 'bars'){
+    mainSeries = chart.addBarSeries({upColor:'#ff6b6b', downColor:'#6dff9f'});
+    mainSeries.setData(ohlcData);
+  }else if(currentKlineOptions.type === 'line'){
+    mainSeries = chart.addLineSeries({color:'#20e0ff', lineWidth:2});
+    mainSeries.setData(lineData);
+  }else if(currentKlineOptions.type === 'area'){
+    mainSeries = chart.addAreaSeries({lineColor:'#20e0ff', topColor:'rgba(32,224,255,.28)', bottomColor:'rgba(32,224,255,.02)', lineWidth:2});
+    mainSeries.setData(lineData);
+  }else{
+    mainSeries = chart.addCandlestickSeries({
+      upColor:'#ff6b6b', downColor:'#6dff9f', borderUpColor:'#ff6b6b', borderDownColor:'#6dff9f', wickUpColor:'#ff9b9b', wickDownColor:'#9affbc'
+    });
+    mainSeries.setData(ohlcData);
+  }
   if(opts.volume){
     const volume = chart.addHistogramSeries({ priceFormat:{type:'volume'}, priceScaleId:'', color:'rgba(143,176,200,.35)' });
     volume.priceScale().applyOptions({ scaleMargins:{ top:.78, bottom:0 } });
@@ -587,7 +616,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const ma60 = chart.addLineSeries({color:'#d9b8ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
     ma5.setData(ma5Data); ma20.setData(ma20Data); ma60.setData(ma60Data);
   }
-  if(opts.signal && rows.some(r => r.date === signalDate)) candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
+  if(opts.signal && rows.some(r => r.date === signalDate)) mainSeries.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
   const byDate = new Map(rows.map(r => [r.date, r]));
   const tooltip = document.getElementById('klineTooltip');
   const priceLabel = document.getElementById('klinePriceLabel');
@@ -647,7 +676,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const y = Math.max(0, Math.min(target.clientHeight - 1, ev.clientY - rect.top));
     const plotW = Math.max(1, target.clientWidth - 70);
     const idx = Math.max(0, Math.min(rows.length - 1, Math.round((x / plotW) * (rows.length - 1))));
-    showTooltipAt(rows[idx], {x, y}, candle.coordinateToPrice(y));
+    showTooltipAt(rows[idx], {x, y}, mainSeries.coordinateToPrice(y));
   };
   target.onmouseleave = hideTooltip;
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
@@ -659,7 +688,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
       hideTooltip();
       return;
     }
-    showTooltipAt(bar, param.point, candle.coordinateToPrice(param.point.y));
+    showTooltipAt(bar, param.point, mainSeries.coordinateToPrice(param.point.y));
   });
   chart.timeScale().fitContent();
   const ro = new ResizeObserver(entries => {
@@ -672,6 +701,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   target.dataset.chartEngine = 'lightweight-charts';
   target.dataset.chartRange = currentKlineOptions.range;
   target.dataset.scaleMode = currentKlineOptions.scale;
+  target.dataset.chartType = currentKlineOptions.type;
 }
 function klineSvg(rows, signalDate){
   const w = 860, h = 320, pad = {l:48,r:16,t:18,b:54};
