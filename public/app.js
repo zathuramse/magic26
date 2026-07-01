@@ -359,7 +359,8 @@ function klineUrl(r){
 }
 function klinePanelHtml(r){
   return `<section class="kline-panel" id="klinePanel" data-kline-key="${rowKey(r)}">
-    <div class="kline-head"><div><h3>K 線圖</h3><p>近 140 個交易日，資料到看板截止日；只是看圖，不是買賣訊號。</p></div><span id="klineStatus">載入中…</span></div>
+    <div class="kline-head"><div><h3>K 線圖</h3><p>互動圖表：十字線、成交量、MA5 / MA20 / MA60、候選日標記。資料到看板截止日。</p></div><span id="klineStatus">載入中…</span></div>
+    <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
     <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
   </section>`;
 }
@@ -376,9 +377,13 @@ async function renderKline(r){
     if(currentKlineKey !== key) return;
     const rows = (payload.rows || []).filter(x => x.open && x.high && x.low && x.close);
     if(rows.length < 10) throw new Error('rows too few');
-    target.innerHTML = klineSvg(rows, r.date);
     const last = rows[rows.length - 1];
     status.textContent = `${priceModeLabel(r.price_mode)}｜${rows[0].date}～${last.date}｜收 ${fmtNum(last.close,2)}`;
+    if(window.LightweightCharts){
+      renderInteractiveKline(target, rows, r.date);
+    }else{
+      target.innerHTML = klineSvg(rows, r.date);
+    }
   }catch(err){
     if(currentKlineKey !== key) return;
     status.textContent = 'K 線資料讀取失敗';
@@ -386,6 +391,69 @@ async function renderKline(r){
     console.warn('kline failed', err);
   }
 }
+
+function maSeries(rows, period){
+  const out = [];
+  let sum = 0;
+  rows.forEach((r, i) => {
+    sum += Number(r.close);
+    if(i >= period) sum -= Number(rows[i-period].close);
+    if(i >= period - 1) out.push({time:r.date, value:sum / period});
+  });
+  return out;
+}
+function renderInteractiveKline(target, rows, signalDate){
+  target.innerHTML = '';
+  const legend = document.getElementById('klineLegend');
+  const chart = LightweightCharts.createChart(target, {
+    width: target.clientWidth || 860,
+    height: target.clientHeight || 360,
+    layout: { background: { color: 'transparent' }, textColor: '#8fb0c8' },
+    grid: { vertLines: { color: 'rgba(143,176,200,.12)' }, horzLines: { color: 'rgba(143,176,200,.14)' } },
+    rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: .28 } },
+    timeScale: { borderColor: 'rgba(143,176,200,.22)', timeVisible: false },
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+    localization: { locale: 'zh-TW' },
+  });
+  const candle = chart.addCandlestickSeries({
+    upColor:'#ff6b6b', downColor:'#6dff9f', borderUpColor:'#ff6b6b', borderDownColor:'#6dff9f', wickUpColor:'#ff9b9b', wickDownColor:'#9affbc'
+  });
+  const data = rows.map(r => ({time:r.date, open:Number(r.open), high:Number(r.high), low:Number(r.low), close:Number(r.close)}));
+  candle.setData(data);
+  const volume = chart.addHistogramSeries({ priceFormat:{type:'volume'}, priceScaleId:'', color:'rgba(143,176,200,.35)' });
+  volume.priceScale().applyOptions({ scaleMargins:{ top:.78, bottom:0 } });
+  volume.setData(rows.map(r => ({time:r.date, value:Number(r.volume || 0), color:Number(r.close) >= Number(r.open) ? 'rgba(255,107,107,.32)' : 'rgba(109,255,159,.28)'})));
+  const ma5 = chart.addLineSeries({color:'#ffd166', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+  const ma20 = chart.addLineSeries({color:'#20e0ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+  const ma60 = chart.addLineSeries({color:'#d9b8ff', lineWidth:1, priceLineVisible:false, lastValueVisible:false});
+  const ma5Data = maSeries(rows,5), ma20Data = maSeries(rows,20), ma60Data = maSeries(rows,60);
+  ma5.setData(ma5Data); ma20.setData(ma20Data); ma60.setData(ma60Data);
+  candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
+  const byDate = new Map(rows.map(r => [r.date, r]));
+  const maMap = new Map();
+  for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
+  for(const item of ma20Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma20:item.value});
+  for(const item of ma60Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma60:item.value});
+  function legendText(bar){
+    const m = maMap.get(bar.date) || {};
+    return `${bar.date}｜開 ${fmtNum(bar.open,2)} 高 ${fmtNum(bar.high,2)} 低 ${fmtNum(bar.low,2)} 收 ${fmtNum(bar.close,2)}｜量 ${(Number(bar.volume||0)/1000).toFixed(0)}張｜MA5 ${fmtNum(m.ma5,2)}｜MA20 ${fmtNum(m.ma20,2)}｜MA60 ${fmtNum(m.ma60,2)}`;
+  }
+  if(legend) legend.textContent = legendText(rows[rows.length-1]);
+  chart.subscribeCrosshairMove(param => {
+    if(!legend) return;
+    const time = typeof param.time === 'string' ? param.time : null;
+    const bar = time ? byDate.get(time) : null;
+    legend.textContent = bar ? legendText(bar) : legendText(rows[rows.length-1]);
+  });
+  chart.timeScale().fitContent();
+  const ro = new ResizeObserver(entries => {
+    const width = Math.floor(entries[0].contentRect.width);
+    if(width > 0) chart.applyOptions({width});
+  });
+  ro.observe(target);
+  target.dataset.chartEngine = 'lightweight-charts';
+}
+
 function klineSvg(rows, signalDate){
   const w = 860, h = 320, pad = {l:48,r:16,t:18,b:54};
   const chartH = 210, volTop = 244, volH = 48;
