@@ -27,6 +27,9 @@
     "magic26_round21_volgap_rescue_cases_20210101_20260701.csv"
   ],
   "candidate_rows": 312,
+  "latest_signal_groups": 1,
+  "recent_signal_groups": 34,
+  "all_signal_groups": 75,
   "watch_state_rows": 4,
   "kline_files": [
     "kline/adj_1519.json",
@@ -162,5 +165,5 @@
     "kline/raw_8478.json"
   ],
   "latest_signal_date": "2026-06-26",
-  "generated_at": "2026-07-01T16:23:22"
+  "generated_at": "2026-07-01T23:16:48"
 }

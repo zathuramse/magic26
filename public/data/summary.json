@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T16:23:22",
+  "generated_at": "2026-07-01T23:16:48",
   "data_through": "2026-06-30",
   "latest_signal_date": "2026-06-26",
   "total_candidate_rows": 312,
@@ -113,5 +113,8 @@
       "等待降溫": 1
     },
     "decision": "Watch State 是二次觀察/再啟動條件，不是買進訊號"
-  }
+  },
+  "latest_signal_groups": 1,
+  "recent_signal_groups": 34,
+  "all_signal_groups": 75
 }

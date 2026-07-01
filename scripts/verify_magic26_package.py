@@ -15,6 +15,9 @@ required = [
     root / "public/data/latest_candidates.json",
     root / "public/data/recent_candidates.json",
     root / "public/data/all_candidates.json",
+    root / "public/data/latest_signal_groups.json",
+    root / "public/data/recent_signal_groups.json",
+    root / "public/data/all_signal_groups.json",
     root / "public/data/watch_states.json",
     root / "public/data/kline/raw_6213.json",
     root / "public/data/kline/adj_6213.json",
@@ -42,13 +45,42 @@ if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
     print("bad main_spec", summary.get("main_spec"))
     sys.exit(1)
 
-for json_path in [root / "public/data/summary.json", root / "public/data/latest_candidates.json", root / "public/data/recent_candidates.json", root / "public/data/all_candidates.json", root / "public/data/watch_states.json"]:
+for json_path in [
+    root / "public/data/summary.json",
+    root / "public/data/latest_candidates.json",
+    root / "public/data/recent_candidates.json",
+    root / "public/data/all_candidates.json",
+    root / "public/data/latest_signal_groups.json",
+    root / "public/data/recent_signal_groups.json",
+    root / "public/data/all_signal_groups.json",
+    root / "public/data/watch_states.json",
+]:
     text = json_path.read_text(encoding="utf-8")
     if "NaN" in text or "Infinity" in text:
         print("invalid non-strict JSON token in", json_path)
         sys.exit(1)
     json.loads(text)
 
+
+latest_groups = json.loads((root / "public/data/latest_signal_groups.json").read_text(encoding="utf-8"))
+all_groups = json.loads((root / "public/data/all_signal_groups.json").read_text(encoding="utf-8"))
+if summary.get("latest_signal_groups") != len(latest_groups) or len(latest_groups) != 1:
+    print("bad latest signal group count", summary.get("latest_signal_groups"), len(latest_groups))
+    sys.exit(1)
+if latest_groups[0].get("stock_id") != "6213" or latest_groups[0].get("alias_count") != 4:
+    print("latest 6213 group not merged as expected", latest_groups[0].get("stock_id"), latest_groups[0].get("alias_count"))
+    sys.exit(1)
+required_group_fields = {"signal_group_id", "signal_date", "data_through", "generated_at", "hit_candidates", "price_modes", "alias_rows", "primary_reason", "risk_reason", "priority_reason"}
+missing_group_fields = sorted(required_group_fields - set(latest_groups[0]))
+if missing_group_fields:
+    print("latest signal group missing fields", missing_group_fields)
+    sys.exit(1)
+if len({(g.get("stock_id"), g.get("signal_date")) for g in all_groups}) != len(all_groups):
+    print("duplicate stock/date groups remain in all_signal_groups")
+    sys.exit(1)
+if summary.get("all_signal_groups") != len(all_groups):
+    print("bad all signal group count", summary.get("all_signal_groups"), len(all_groups))
+    sys.exit(1)
 if "round14_decision" not in summary:
     print("missing round14_decision in summary.json")
     sys.exit(1)
@@ -157,7 +189,7 @@ if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉�
 if "成交量有沒有怪怪的" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "A 組先看清單" not in html or "app.js?v=20260701t" not in html or "styles.css?v=20260701p" not in html:
+if "A 組先看清單" not in html or "app.js?v=20260701u" not in html or "styles.css?v=20260701p" not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
     sys.exit(1)
 if "A 組怎麼挑" not in html or "大盤背景不能太差" not in html or "怎麼使用" not in html:
@@ -181,10 +213,10 @@ if "subtypeLabels" not in app or "有落差但可看" not in app or "量太集�
 if "A 組：先看這組" not in app or "最近有候選" not in app or "A 組平均勝出大盤" not in app:
     print("round25 first-screen app copy missing from app.js")
     sys.exit(1)
-if "displayPriorityLabel" not in app or "近20天漲幅" not in app or "漲幅區間" not in app or "近20天日均成交" not in app:
+if "displayPriorityLabel" not in app or "出訊號：" not in app or "signal_group_id" not in app or "版本 ${r.alias_count" not in app:
     print("round25 batch3 candidate-card metric copy missing from app.js")
     sys.exit(1)
-if "原始股價" not in app or "還原股價" not in app or "還要人工看圖" not in app or "流動性不足" not in app:
+if "原始股價" not in app or "還原股價" not in app or "同股同日已合併" not in app or "流動性不足" not in app:
     print("round25 batch3 candidate-card tag/status copy missing from app.js")
     sys.exit(1)
 if "lightweight-charts.standalone.production.js" not in html:
@@ -236,7 +268,7 @@ if "renderInteractiveKline" not in app or "MA5" not in app or "setMarkers" not i
 if "klinePanelHtml" not in app or "K 線圖" not in app or "renderKline" not in app:
     print("kline detail chart missing from app.js")
     sys.exit(1)
-if "detailSectionHtml" not in app or "基本資料" not in app or "價格與表現" not in app or "量能集中度" not in app or "風險檢查" not in app or "研究狀態" not in app:
+if "detailSectionHtml" not in app or "訊號摘要" not in app or "基本資料" not in app or "價格與表現" not in app or "量能集中度" not in app or "風險檢查" not in app or "研究狀態" not in app:
     print("round25 batch4 detail sections missing from app.js")
     sys.exit(1)
 if "短均線強度1" not in app or "20天後勝大盤" not in app or "前5大量占比" not in app or "白話分類" not in app:
@@ -248,7 +280,7 @@ if "白話分類" not in app or "volgap_score_impact" not in app:
 if "renderVolgapSummary" not in app or "subtype-card" not in app:
     print("round23 summary rendering missing from app.js")
     sys.exit(1)
-if "main-a-group" not in app or "applyCandidateFilter({range:'recent', candidate:'A_repo50_c4_40_fixed20'" not in app:
+if "main-a-group" not in app or "applyCandidateFilter({range:'recent', candidate:'A_repo50_c4_40_fixed20'" not in app or "hasCandidate(r, 'A_repo50_c4_40_fixed20')" not in app:
     print("round24 main-A grouped rendering missing from app.js")
     sys.exit(1)
 css = (root / "public/styles.css").read_text(encoding="utf-8")
@@ -258,7 +290,7 @@ if "subtype-summary" not in css or "subtype-card" not in css:
 if "main-a-groups" not in css or "main-a-head" not in css:
     print("round24 main-A group styles missing from styles.css")
     sys.exit(1)
-if "detail-sections" not in css or "detail-section" not in css:
+if "detail-sections" not in css or "detail-section" not in css or "signal-reason" not in css or "alias-list" not in css:
     print("round25 batch4 detail section styles missing from styles.css")
     sys.exit(1)
 if "kline-measure-info" not in css or "kline-cursor-info" not in css or "kline-action" not in css or "fullscreen" not in css or "kline-axis-label" not in css or "kline-tooltip" not in css or "kline-chart-wrap" not in css or "kline-toolbar" not in css or "kline-legend" not in css or "kline-panel" not in css or "kline-chart" not in css:

@@ -484,6 +484,139 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
     return summary
 
 
+
+def _truthy(v: Any) -> bool:
+    return v is True or str(v).lower() in {"true", "1", "yes"}
+
+
+def _candidate_rank(candidate: str) -> int:
+    order = {
+        "A_repo50_c4_40_fixed20": 0,
+        "B_magic_c4_40_fixed20": 1,
+        "C_c4_25_fixed20": 2,
+    }
+    return order.get(str(candidate), 9)
+
+
+def _price_mode_rank(mode: str) -> int:
+    return 0 if str(mode) == "raw" else 1
+
+
+def _fmt_pct(v: Any) -> str:
+    try:
+        if pd.isna(v):
+            return "—"
+        return f"{float(v) * 100:.1f}%"
+    except Exception:
+        return "—"
+
+
+def _fmt_money(v: Any) -> str:
+    try:
+        if pd.isna(v):
+            return "—"
+        return f"{float(v) / 1e8:.1f}億"
+    except Exception:
+        return "—"
+
+
+def _plain_group_label(candidate: str) -> str:
+    return {
+        "A_repo50_c4_40_fixed20": "A組主清單",
+        "B_magic_c4_40_fixed20": "B組補看",
+        "C_c4_25_fixed20": "C組較嚴",
+    }.get(str(candidate), str(candidate) or "未分類")
+
+
+def _priority_label(row: dict[str, Any]) -> str:
+    text = str(row.get("research_priority_zh") or "")
+    mapping = [
+        ("優先研究", "先看"),
+        ("中優先-有交易風險", "可看，但先查風險"),
+        ("低優先-需人工確認", "先放後面"),
+        ("規格觀察", "參考用"),
+    ]
+    for old, new in mapping:
+        if old in text:
+            return new
+    if row.get("candidate") != "A_repo50_c4_40_fixed20":
+        return "參考用"
+    return "先看"
+
+
+def _risk_reason(row: dict[str, Any]) -> str:
+    risks: list[str] = []
+    if _truthy(row.get("is_high_open_risk")) or float(row.get("next_open_gap") or 0) >= 0.03:
+        risks.append(f"隔日開盤高 {_fmt_pct(row.get('next_open_gap'))}，可能有追高風險")
+    if _truthy(row.get("is_low_liquidity_risk")):
+        risks.append("流動性不足")
+    subtype = str(row.get("volgap_subtype_zh") or "")
+    if subtype == "危險斷層":
+        risks.append("成交量太集中，先避開")
+    elif subtype == "大量斷層觀察":
+        risks.append("成交量集中在少數幾天，要小心")
+    elif subtype == "可救斷層":
+        risks.append("成交量有落差，但仍可人工看圖")
+    if _truthy(row.get("risk_any_long_ma_bear")):
+        risks.append("長期均線偏空")
+    if float(row.get("ret_60d_signal") or 0) > 1.5:
+        risks.append("前面60天已漲很多")
+    return "；".join(risks) if risks else "主要風險不明顯，仍需看圖確認"
+
+
+def _primary_reason(row: dict[str, Any]) -> str:
+    group = _plain_group_label(str(row.get("candidate") or ""))
+    ret = _fmt_pct(row.get("ret_20d"))
+    amount = _fmt_money(row.get("avg_amount_20d"))
+    return f"{group}命中；近20天漲幅 {ret}，近20日均成交 {amount}"
+
+
+def build_signal_groups(rows: pd.DataFrame, data_through: str, generated_at: str | None) -> list[dict[str, Any]]:
+    """Group raw candidate rows into user-facing signal events.
+
+    One dashboard card should represent one stock on one signal date. Strategy
+    groups and raw/adjusted price rows are retained as aliases instead of being
+    flattened into duplicate cards.
+    """
+    if rows.empty:
+        return []
+    df = rows.copy()
+    df["date"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m-%d")
+    groups: list[dict[str, Any]] = []
+    for (date, stock_id), part in df.groupby(["date", "stock_id"], sort=False):
+        records = part.to_dict(orient="records")
+        records = sorted(records, key=lambda r: (_candidate_rank(str(r.get("candidate"))), _price_mode_rank(str(r.get("price_mode")))))
+        canonical = dict(records[0])
+        hit_candidates = sorted({str(r.get("candidate")) for r in records}, key=_candidate_rank)
+        price_modes = sorted({str(r.get("price_mode")) for r in records}, key=_price_mode_rank)
+        group_id = f"{stock_id}_{date}"
+        canonical.update({
+            "signal_group_id": group_id,
+            "signal_date": date,
+            "data_through": data_through,
+            "generated_at": generated_at,
+            "spec_version": "A_repo50_c4_40_fixed20",
+            "canonical_candidate": canonical.get("candidate"),
+            "canonical_price_mode": canonical.get("price_mode"),
+            "hit_candidates": hit_candidates,
+            "hit_candidate_labels": [_plain_group_label(c) for c in hit_candidates],
+            "price_modes": price_modes,
+            "price_mode_labels": ["原始價" if m == "raw" else "還原價" for m in price_modes],
+            "alias_count": len(records),
+            "alias_rows": records,
+            "primary_reason": _primary_reason(canonical),
+            "risk_reason": _risk_reason(canonical),
+            "priority_reason": _priority_label(canonical),
+            "volume_reason": f"近20日均成交 {_fmt_money(canonical.get('avg_amount_20d'))}",
+            "trace_reasons": [
+                {"kind": "main", "text": _primary_reason(canonical)},
+                {"kind": "risk", "text": _risk_reason(canonical)},
+                {"kind": "versions", "text": f"同日共 {len(records)} 筆版本：{', '.join(_plain_group_label(c) for c in hit_candidates)}；{', '.join('原始價' if m == 'raw' else '還原價' for m in price_modes)}"},
+            ],
+        })
+        groups.append(canonical)
+    return sorted(groups, key=lambda r: (str(r.get("date")), -_candidate_rank(str(r.get("candidate"))), str(r.get("stock_id"))), reverse=True)
+
 def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     out_dir = source_dir / "out"
     if not out_dir.exists():
@@ -520,10 +653,19 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     watch_states = build_watch_states(out_dir)
     summary = build_summary(candidates, data_through)
     summary["watch_state"] = watch_state_summary(watch_states)
+    latest_groups = build_signal_groups(latest, data_through, summary.get("generated_at"))
+    recent_groups = build_signal_groups(recent, data_through, summary.get("generated_at"))
+    all_groups = build_signal_groups(json_ready, data_through, summary.get("generated_at"))
+    summary["latest_signal_groups"] = len(latest_groups)
+    summary["recent_signal_groups"] = len(recent_groups)
+    summary["all_signal_groups"] = len(all_groups)
     write_json(public_data / "summary.json", summary)
     write_json(public_data / "latest_candidates.json", latest.to_dict(orient="records"))
     write_json(public_data / "recent_candidates.json", recent.to_dict(orient="records"))
     write_json(public_data / "all_candidates.json", json_ready.to_dict(orient="records"))
+    write_json(public_data / "latest_signal_groups.json", latest_groups)
+    write_json(public_data / "recent_signal_groups.json", recent_groups)
+    write_json(public_data / "all_signal_groups.json", all_groups)
     write_json(public_data / "watch_states.json", watch_states)
 
     manifest = {
@@ -531,6 +673,9 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
         "data_through": data_through,
         "copied_csv": copied,
         "candidate_rows": int(len(candidates)),
+        "latest_signal_groups": len(latest_groups),
+        "recent_signal_groups": len(recent_groups),
+        "all_signal_groups": len(all_groups),
         "watch_state_rows": int(len(watch_states)),
         "kline_files": kline_files,
         "latest_signal_date": summary["latest_signal_date"],

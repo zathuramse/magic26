@@ -11,6 +11,9 @@ let summaryData = null;
 let latestRows = [];
 let recentRows = [];
 let allRows = [];
+let latestGroups = [];
+let recentGroups = [];
+let allGroups = [];
 let watchRows = [];
 let selectedDetailKey = null;
 let currentKlineKey = null;
@@ -96,17 +99,23 @@ function bindGlobalKlineShortcuts(){
 
 async function load(){
   bindGlobalKlineShortcuts();
-  const [summary, latest, recent, all, watch] = await Promise.all([
+  const [summary, latest, recent, all, latestSig, recentSig, allSig, watch] = await Promise.all([
     fetch('./data/summary.json').then(r=>r.json()),
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
   latestRows = latest;
   recentRows = recent;
   allRows = all && all.length ? all : [...latest, ...recent];
+  latestGroups = latestSig && latestSig.length ? latestSig : groupRows(latestRows);
+  recentGroups = recentSig && recentSig.length ? recentSig : groupRows(recentRows);
+  allGroups = allSig && allSig.length ? allSig : groupRows(allRows);
   watchRows = watch || [];
   renderFreshness(summary);
   renderCards(summary);
@@ -145,7 +154,7 @@ function renderCards(s){
   const main = (s.candidates || []).find(c=>c.candidate === s.main_spec) || {};
   const cards = [
     ['最近有候選', s.latest_signal_date || '—', '這不是更新日，是最近一次有股票符合條件'],
-    ['那天有幾筆', s.latest_candidate_rows, '同一股票可能有原始價 / 還原價兩筆'],
+    ['那天有幾檔', s.latest_signal_groups ?? s.latest_candidate_rows, '同股同日已合併；原始 / 還原與 A/B 版本收在卡片裡'],
     ['A 組歷史筆數', main.rows ?? '—', 'A 組是目前主要先看的清單'],
     ['A 組平均勝出大盤', fmtPct(main.median_t1_open_excess_20d), `20 天後勝率 ${fmtPct(main.win_t1_open_excess_20d)}`]
   ];
@@ -225,7 +234,7 @@ function renderVolgapSummary(){
 
 function setupFilters(){
   const sel = document.getElementById('candidateFilter');
-  [...new Set([...latestRows, ...recentRows, ...allRows].map(r=>r.candidate))].sort().forEach(c=>{
+  [...new Set([...latestGroups, ...recentGroups, ...allGroups].flatMap(r=>r.hit_candidates || [r.candidate]))].sort((a,b)=>candidateRank(a)-candidateRank(b)).forEach(c=>{
     const opt=document.createElement('option'); opt.value=c; opt.textContent=labelMap[c] || c; sel.appendChild(opt);
   });
   ['candidateFilter','rangeFilter','riskFilter','sortFilter'].forEach(id=>document.getElementById(id).addEventListener('change', renderStockCards));
@@ -240,10 +249,57 @@ function setCandidate(value){
   document.querySelectorAll('#quickFilters button').forEach(btn => btn.classList.toggle('active', btn.dataset.candidate === value));
   renderStockCards();
 }
+function groupRows(rows){
+  const by = new Map();
+  (rows || []).forEach(r => {
+    const key = `${r.date}|${r.stock_id}`;
+    if(!by.has(key)) by.set(key, []);
+    by.get(key).push(r);
+  });
+  return [...by.values()].map(part => {
+    const sorted = part.slice().sort((a,b)=>candidateRank(a.candidate)-candidateRank(b.candidate) || priceModeRank(a.price_mode)-priceModeRank(b.price_mode));
+    const r = {...sorted[0]};
+    const hit = [...new Set(sorted.map(x=>x.candidate))].sort((a,b)=>candidateRank(a)-candidateRank(b));
+    const modes = [...new Set(sorted.map(x=>x.price_mode))].sort((a,b)=>priceModeRank(a)-priceModeRank(b));
+    r.signal_group_id = `${r.stock_id}_${r.date}`;
+    r.signal_date = r.date;
+    r.hit_candidates = hit;
+    r.hit_candidate_labels = hit.map(c=>shortCandidateLabel(c));
+    r.price_modes = modes;
+    r.price_mode_labels = modes.map(m=>m === 'adjusted' ? '還原價' : '原始價');
+    r.alias_count = sorted.length;
+    r.alias_rows = sorted;
+    r.primary_reason = primaryReason(r);
+    r.risk_reason = riskReasonText(r);
+    r.priority_reason = displayPriorityLabel(r);
+    return r;
+  });
+}
+function candidateRank(c){ return c === 'A_repo50_c4_40_fixed20' ? 0 : c === 'B_magic_c4_40_fixed20' ? 1 : c === 'C_c4_25_fixed20' ? 2 : 9; }
+function priceModeRank(m){ return m === 'raw' ? 0 : 1; }
+function shortCandidateLabel(c){ return c === 'A_repo50_c4_40_fixed20' ? 'A組主清單' : c === 'B_magic_c4_40_fixed20' ? 'B組補看' : c === 'C_c4_25_fixed20' ? 'C組較嚴' : (labelMap[c] || c || '未分類'); }
+function groupKey(r){ return r.signal_group_id || `${r.stock_id}_${r.date}`; }
+function groupHitText(r){ return (r.hit_candidate_labels || (r.hit_candidates || [r.candidate]).map(shortCandidateLabel)).join(' / '); }
+function groupModeText(r){ return (r.price_mode_labels || (r.price_modes || [r.price_mode]).map(m => m === 'adjusted' ? '還原價' : '原始價')).join(' / '); }
+function hasCandidate(r, cand){ return cand === 'all' || (r.hit_candidates || [r.candidate]).includes(cand) || r.candidate === cand; }
+function primaryReason(r){ return r.primary_reason || `${shortCandidateLabel(r.candidate)}命中；近20天漲幅 ${fmtPct(r.ret_20d)}，近20日均成交 ${fmtMoney(r.avg_amount_20d)}`; }
+function riskReasonText(r){
+  if(r.risk_reason) return r.risk_reason;
+  const risks=[];
+  if(isChase(r)) risks.push(`隔日開盤 ${fmtPct(r.next_open_gap)}，可能有追高風險`);
+  if(isLowLiquidity(r)) risks.push('流動性不足');
+  if(isVolgapDanger(r)) risks.push('成交量太集中，先避開');
+  else if(isVolgapRescue(r)) risks.push('成交量有落差，但仍可看圖');
+  else if(isVolumeGapWatch(r)) risks.push('成交量集中在少數幾天，要小心');
+  if(isLongMaBear(r)) risks.push('長期均線偏空');
+  if(isRet60Hot(r)) risks.push('前面60天已漲很多');
+  return risks.length ? risks.join('；') : '主要風險不明顯，仍需看圖確認';
+}
+
 function activeRows(){
   const range = document.getElementById('rangeFilter').value;
-  if(range === 'all') return allRows;
-  return range === 'recent' ? recentRows : latestRows;
+  if(range === 'all') return allGroups;
+  return range === 'recent' ? recentGroups : latestGroups;
 }
 function isTrue(v){ return v === true || v === 'True' || v === 'true' || v === 1 || v === '1'; }
 function isChase(r){ return isTrue(r.risk_signal_day_gt9) || Number(r.next_open_gap) >= .05; }
@@ -384,9 +440,9 @@ function renderWatchState(){
 
 function renderMainAList(){
   const target = document.getElementById('mainAList');
-  const rows = recentRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20').sort(compareRows('priority'));
+  const rows = recentGroups.filter(r => hasCandidate(r, 'A_repo50_c4_40_fixed20')).sort(compareRows('priority'));
   if(!rows.length){ target.innerHTML = '<div class="empty">近期沒有主規格 A 候選。</div>'; return; }
-  const byKey = new Map(rows.map(r => [rowKey(r), r]));
+  const byKey = new Map(rows.map(r => [groupKey(r), r]));
   target.innerHTML = subtypeOrder.map(subtype => {
     const part = rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).slice(0, 3);
     const count = rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).length;
@@ -409,27 +465,29 @@ function renderStockCards(){
   const risk = document.getElementById('riskFilter').value;
   const sort = document.getElementById('sortFilter').value;
   const q = document.getElementById('search').value.trim().toLowerCase();
-  let rows = activeRows().filter(r => cand === 'all' || r.candidate === cand).filter(r => matchRisk(r, risk));
+  let rows = activeRows().filter(r => hasCandidate(r, cand)).filter(r => matchRisk(r, risk));
   if(q) rows = rows.filter(r => `${r.stock_id} ${r.stock_name} ${r.industry_category}`.toLowerCase().includes(q));
   rows = rows.slice().sort(compareRows(sort));
-  document.getElementById('viewHint').textContent = `${document.getElementById('rangeFilter').selectedOptions[0].textContent}｜現在顯示 ${rows.length} 筆`;
+  document.getElementById('viewHint').textContent = `${document.getElementById('rangeFilter').selectedOptions[0].textContent}｜現在顯示 ${rows.length} 檔（同股同日已合併）`;
   document.getElementById('stockCards').innerHTML = rows.length ? rows.map(r => stockCardHtml(r)).join('') : '<div class="empty">沒有符合條件的候選。</div>';
-  document.querySelectorAll('#stockCards .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => rowKey(r) === card.dataset.key))));
+  document.querySelectorAll('#stockCards .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => groupKey(r) === card.dataset.key))));
 }
 function stockCardHtml(r, compact=false){
-  const key = rowKey(r);
-  return `<button class="stock-card ${compact ? 'compact-card' : ''} ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
+  const key = groupKey(r);
+  return `<button class="stock-card signal-card ${compact ? 'compact-card' : ''} ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
     <div class="stock-head">
       <div><strong>${r.stock_id}</strong><span>${r.stock_name || ''}</span></div>
-      <em>${displayPriorityLabel(r)}｜${priorityScore(r)}分</em>
+      <em>${r.priority_reason || displayPriorityLabel(r)}｜${priorityScore(r)}分</em>
     </div>
-    <div class="stock-sub"><span>${r.date}</span><span>${labelMap[r.candidate] || r.candidate}</span><span>${r.industry_category || '—'}</span><span>${priceModeLabel(r.price_mode)}</span></div>
+    <div class="signal-line"><b>出訊號：${r.signal_date || r.date}</b><span>${groupHitText(r)}</span></div>
+    <div class="signal-reason"><label>理由</label><span>${primaryReason(r)}</span></div>
+    <div class="signal-reason risk"><label>風險</label><span>${riskReasonText(r)}</span></div>
+    <div class="stock-sub"><span>${r.industry_category || '—'}</span><span>${groupModeText(r)}</span><span>版本 ${r.alias_count || 1} 筆已合併</span></div>
     <div class="metric-row">
       <div><label>近20天漲幅</label><b>${fmtPct(r.ret_20d)}</b></div>
-      <div><label>漲幅區間</label><b>${r.momentum_bucket_zh || '—'}</b></div>
-      <div><label>近20天日均成交</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
+      <div><label>日均成交</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
+      <div><label>隔日開盤</label><b>${fmtPct(r.next_open_gap)}</b></div>
     </div>
-    <div class="stock-tags">${riskTags(r)}</div>
   </button>`;
 }
 
@@ -844,10 +902,15 @@ function detailSectionHtml(title, items){
 }
 function showDetail(r){
   if(!r) return;
-  selectedDetailKey = rowKey(r);
+  selectedDetailKey = groupKey(r);
   document.getElementById('detailTitle').textContent = `${r.stock_id} ${r.stock_name || ''}`;
-  document.getElementById('detailSubtitle').textContent = `${labelMap[r.candidate] || r.candidate}｜${r.date}｜${classify(r)}｜${displayPriorityLabel(r)} ${priorityScore(r)}`;
+  document.getElementById('detailSubtitle').textContent = `出訊號 ${r.signal_date || r.date}｜${groupHitText(r)}｜${r.priority_reason || displayPriorityLabel(r)} ${priorityScore(r)}`;
+  const aliasRows = r.alias_rows || [r];
   const sections = [
+    ['訊號摘要', [
+      ['出訊號日期', r.signal_date || r.date], ['資料算到', r.data_through || summaryData?.data_through || '—'], ['產生時間', r.generated_at || summaryData?.generated_at || '—'], ['合併版本', `${r.alias_count || aliasRows.length} 筆`],
+      ['命中分組', groupHitText(r)], ['價格版本', groupModeText(r)], ['主要理由', primaryReason(r)], ['主要風險', riskReasonText(r)]
+    ]],
     ['基本資料', [
       ['產業', r.industry_category], ['股價版本', priceModeLabel(r.price_mode), `原始值：${r.price_mode || '—'}`], ['收盤價', fmtNum(r.close,2)], ['資料來源', r.source_type || '—']
     ]],
@@ -868,7 +931,8 @@ function showDetail(r){
       ['查看分數', priorityScore(r)], ['目前判斷', classify(r)], ['漲幅區間', r.momentum_bucket_zh], ['原始分組', r.strategy_role_zh], ['查看順序', displayPriorityLabel(r)], ['原始標籤', r.research_tags]
     ]]
   ];
-  document.getElementById('detailBody').innerHTML = `${klinePanelHtml(r)}<div class="detail-sections">${sections.map(([title, items]) => detailSectionHtml(title, items)).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
+  const aliasHtml = `<section class="detail-section"><h3>合併來源</h3><div class="alias-list">${aliasRows.map(a=>`<span>${shortCandidateLabel(a.candidate)}｜${priceModeLabel(a.price_mode)}｜${a.date}</span>`).join('')}</div></section>`;
+  document.getElementById('detailBody').innerHTML = `${klinePanelHtml(r)}<div class="detail-sections">${sections.map(([title, items]) => detailSectionHtml(title, items)).join('')}${aliasHtml}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
   renderKline(r);
   renderStockCards();
   renderMainAList();
