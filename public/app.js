@@ -384,6 +384,8 @@ function klinePanelHtml(r){
     <div class="kline-chart-wrap">
       <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
       <div class="kline-tooltip" id="klineTooltip" hidden></div>
+      <div class="kline-axis-label price" id="klinePriceLabel" hidden></div>
+      <div class="kline-axis-label time" id="klineTimeLabel" hidden></div>
     </div>
   </section>`;
 }
@@ -438,7 +440,11 @@ async function renderKline(r){
 function destroyKlineChart(){
   if(currentKlineResizeObserver){ currentKlineResizeObserver.disconnect(); currentKlineResizeObserver = null; }
   const tooltip = document.getElementById('klineTooltip');
+  const priceLabel = document.getElementById('klinePriceLabel');
+  const timeLabel = document.getElementById('klineTimeLabel');
   if(tooltip){ tooltip.hidden = true; tooltip.innerHTML = ''; }
+  if(priceLabel){ priceLabel.hidden = true; priceLabel.textContent = ''; }
+  if(timeLabel){ timeLabel.hidden = true; timeLabel.textContent = ''; }
   if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
 }
 function rowsForRange(rows, range){
@@ -476,7 +482,13 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     grid: { vertLines: { color: 'rgba(143,176,200,.12)' }, horzLines: { color: 'rgba(143,176,200,.14)' } },
     rightPriceScale: { borderColor: 'rgba(143,176,200,.22)', scaleMargins: { top: .08, bottom: opts.volume ? .28 : .08 } },
     timeScale: { borderColor: 'rgba(143,176,200,.22)', timeVisible: false },
-    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Normal,
+      vertLine: { color:'rgba(32,224,255,.55)', width:1, style: LightweightCharts.LineStyle.Dashed, labelVisible:false },
+      horzLine: { color:'rgba(32,224,255,.55)', width:1, style: LightweightCharts.LineStyle.Dashed, labelVisible:false },
+    },
+    handleScroll: { mouseWheel:true, pressedMouseMove:true, horzTouchDrag:true, vertTouchDrag:false },
+    handleScale: { axisPressedMouseMove:true, mouseWheel:true, pinch:true },
     localization: { locale: 'zh-TW' },
   });
   currentKlineChart = chart;
@@ -499,6 +511,8 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   if(opts.signal && rows.some(r => r.date === signalDate)) candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
   const byDate = new Map(rows.map(r => [r.date, r]));
   const tooltip = document.getElementById('klineTooltip');
+  const priceLabel = document.getElementById('klinePriceLabel');
+  const timeLabel = document.getElementById('klineTimeLabel');
   const maMap = new Map();
   for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
   for(const item of ma20Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma20:item.value});
@@ -517,9 +531,28 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const volHtml = opts.volume ? `<div><span>量</span><b>${(Number(bar.volume||0)/1000).toFixed(0)} 張</b></div>` : '';
     return `<strong>${bar.date}</strong><div><span>開</span><b>${fmtNum(bar.open,2)}</b></div><div><span>高</span><b>${fmtNum(bar.high,2)}</b></div><div><span>低</span><b>${fmtNum(bar.low,2)}</b></div><div><span>收</span><b>${fmtNum(bar.close,2)}</b></div><div><span>漲跌</span><b class="${changeCls}">${change >= 0 ? '+' : ''}${fmtNum(change,2)}</b></div>${volHtml}${maHtml}`;
   }
-  function hideTooltip(){ if(tooltip) tooltip.hidden = true; }
-  function showTooltipAt(bar, point){
+  function hideTooltip(){
+    if(tooltip) tooltip.hidden = true;
+    if(priceLabel) priceLabel.hidden = true;
+    if(timeLabel) timeLabel.hidden = true;
+  }
+  function showAxisLabels(bar, point, price){
+    if(priceLabel && point){
+      priceLabel.textContent = fmtNum(price ?? bar.close, 2);
+      priceLabel.hidden = false;
+      priceLabel.style.top = `${Math.max(0, Math.min(target.clientHeight - priceLabel.offsetHeight, point.y - priceLabel.offsetHeight/2))}px`;
+      priceLabel.dataset.price = String(price ?? bar.close);
+    }
+    if(timeLabel && point){
+      timeLabel.textContent = bar.date;
+      timeLabel.hidden = false;
+      timeLabel.style.left = `${Math.max(6, Math.min(target.clientWidth - timeLabel.offsetWidth - 6, point.x - timeLabel.offsetWidth/2))}px`;
+      timeLabel.dataset.date = bar.date;
+    }
+  }
+  function showTooltipAt(bar, point, price){
     if(legend) legend.textContent = legendText(bar);
+    showAxisLabels(bar, point, price);
     if(!tooltip || !point) return;
     tooltip.innerHTML = tooltipHtml(bar);
     tooltip.hidden = false;
@@ -535,7 +568,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const y = Math.max(0, Math.min(target.clientHeight - 1, ev.clientY - rect.top));
     const plotW = Math.max(1, target.clientWidth - 70);
     const idx = Math.max(0, Math.min(rows.length - 1, Math.round((x / plotW) * (rows.length - 1))));
-    showTooltipAt(rows[idx], {x, y});
+    showTooltipAt(rows[idx], {x, y}, candle.coordinateToPrice(y));
   };
   target.onmouseleave = hideTooltip;
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
@@ -543,18 +576,11 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const time = typeof param.time === 'string' ? param.time : null;
     const bar = time ? byDate.get(time) : null;
     if(legend) legend.textContent = bar ? legendText(bar) : legendText(rows[rows.length-1]);
-    if(!tooltip) return;
     if(!bar || !param.point || param.point.x < 0 || param.point.y < 0 || param.point.x > target.clientWidth || param.point.y > target.clientHeight){
       hideTooltip();
       return;
     }
-    tooltip.innerHTML = tooltipHtml(bar);
-    tooltip.hidden = false;
-    const leftSide = param.point.x > target.clientWidth - 230;
-    tooltip.style.left = `${Math.max(8, leftSide ? param.point.x - 214 : param.point.x + 14)}px`;
-    tooltip.style.top = `${Math.max(8, Math.min(target.clientHeight - tooltip.offsetHeight - 8, param.point.y + 12))}px`;
-    tooltip.dataset.date = bar.date;
-    tooltip.dataset.close = String(bar.close);
+    showTooltipAt(bar, param.point, candle.coordinateToPrice(param.point.y));
   });
   chart.timeScale().fitContent();
   const ro = new ResizeObserver(entries => {

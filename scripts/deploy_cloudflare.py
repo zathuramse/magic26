@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[1]
-CANONICAL_URL = "https://magic26.pages.dev/?v=20260701m"
+CANONICAL_URL = "https://magic26.pages.dev/?v=20260701n"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
 LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
 ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
@@ -63,13 +63,13 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML still contains old Round25 first-screen copy")
     if "成交量有沒有怪怪的" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
         raise RuntimeError("Production HTML missing Round25 volume-gap plain-language UI")
-    if "lightweight-charts.standalone.production.js" not in html or "app.js?v=20260701m" not in html or "styles.css?v=20260701i" not in html:
+    if "lightweight-charts.standalone.production.js" not in html or "app.js?v=20260701n" not in html or "styles.css?v=20260701j" not in html:
         raise RuntimeError("Production HTML missing TradingView-style chart loader")
-    if "K 線圖" not in html and "app.js?v=20260701m" not in html:
+    if "K 線圖" not in html and "app.js?v=20260701n" not in html:
         raise RuntimeError("Production HTML/cache missing kline-capable app")
     if "A 組先看清單" not in html:
         raise RuntimeError("Production HTML missing Round25 grouped main-A list copy")
-    if "app.js?v=20260701m" not in html or "styles.css?v=20260701i" not in html:
+    if "app.js?v=20260701n" not in html or "styles.css?v=20260701j" not in html:
         raise RuntimeError("Production HTML missing Round25 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
