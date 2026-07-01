@@ -176,6 +176,20 @@ function priorityLabel(r){
   if(s >= 62) return '次級觀察';
   return '風險觀察';
 }
+function displayPriorityLabel(r){
+  return String(priorityLabel(r) || '')
+    .replace('優先研究', '優先查看')
+    .replace('中優先-有交易風險', '中優先：有風險需確認')
+    .replace('低優先-需人工確認', '低優先：需人工確認')
+    .replace('規格觀察', '分組觀察')
+    .replace('次級觀察', '次級查看')
+    .replace('風險觀察', '風險需確認');
+}
+function priceModeLabel(mode){
+  if(mode === 'raw') return '原始資料';
+  if(mode === 'adjusted') return '調整後資料';
+  return mode || '—';
+}
 function matchRisk(r, risk){
   if(risk === 'all') return true;
   if(risk === 'clean') return !isChase(r) && !isLowLiquidity(r) && !isWeakMomentum(r) && r.candidate === 'A_repo50_c4_40_fixed20';
@@ -204,20 +218,20 @@ function compareRows(sort){
 }
 function riskTags(r){
   const tags=[];
-  if(isWeakMomentum(r)) tags.push('<span class="pill weak">弱動能</span>');
-  if(isFloor15(r)) tags.push('<span class="pill floor">floor15觀察</span>');
+  if(isWeakMomentum(r)) tags.push('<span class="pill weak">動能偏弱</span>');
+  if(isFloor15(r)) tags.push('<span class="pill floor" title="原研究名：floor15觀察；實際口徑待確認">15%底線觀察</span>');
   if(isChase(r)) tags.push('<span class="pill risk">追高</span>');
-  if(Number(r.next_open_gap) >= .05) tags.push('<span class="pill risk">高開>5%</span>');
-  else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">高開>3%</span>');
-  if(isLowLiquidity(r)) tags.push('<span class="pill bad">低流動</span>');
-  if(isRet60Hot(r)) tags.push('<span class="pill research">60日>150%</span>');
+  if(Number(r.next_open_gap) >= .05) tags.push('<span class="pill risk">開盤高於5%</span>');
+  else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">開盤高於3%</span>');
+  if(isLowLiquidity(r)) tags.push('<span class="pill bad">流動性不足</span>');
+  if(isRet60Hot(r)) tags.push('<span class="pill research">60日漲幅過熱</span>');
   if(isVolgapDanger(r)) tags.push('<span class="pill bad">量能高風險</span>');
   else if(isVolgapRescue(r)) tags.push('<span class="pill research">量能可再觀察</span>');
   else if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">量能${subtypeLabel(r.volgap_subtype_zh) || '需留意'}</span>`);
-  if(isLongMaBear(r)) tags.push('<span class="pill bad">長均空頭</span>');
-  if(r.risk_badge_zh) tags.push('<span class="pill muted">研究中</span>');
-  if(r.candidate !== 'A_repo50_c4_40_fixed20') tags.push('<span class="pill muted">非主規格</span>');
-  if(!tags.length) tags.push('<span class="pill good-bg">可研究</span>');
+  if(isLongMaBear(r)) tags.push('<span class="pill bad">長期均線偏空</span>');
+  if(r.risk_badge_zh) tags.push('<span class="pill muted">待人工確認</span>');
+  if(r.candidate !== 'A_repo50_c4_40_fixed20') tags.push('<span class="pill muted">非主要規則</span>');
+  if(!tags.length) tags.push('<span class="pill good-bg">可優先查看</span>');
   return tags.join(' ');
 }
 function rowKey(r){ return `${r.date}|${r.stock_id}|${r.price_mode}|${r.candidate}`; }
@@ -303,13 +317,13 @@ function stockCardHtml(r, compact=false){
   return `<button class="stock-card ${compact ? 'compact-card' : ''} ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
     <div class="stock-head">
       <div><strong>${r.stock_id}</strong><span>${r.stock_name || ''}</span></div>
-      <em>${priorityLabel(r)} ${priorityScore(r)}</em>
+      <em>優先程度：${displayPriorityLabel(r)} ${priorityScore(r)}</em>
     </div>
-    <div class="stock-sub"><span>${r.date}</span><span>${labelMap[r.candidate] || r.candidate}</span><span>${r.industry_category || '—'}</span><span>${r.price_mode}</span></div>
+    <div class="stock-sub"><span>${r.date}</span><span>${labelMap[r.candidate] || r.candidate}</span><span>${r.industry_category || '—'}</span><span>${priceModeLabel(r.price_mode)}</span></div>
     <div class="metric-row">
-      <div><label>20D</label><b>${fmtPct(r.ret_20d)}</b></div>
-      <div><label>動能</label><b>${r.momentum_bucket_zh || '—'}</b></div>
-      <div><label>金額</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
+      <div><label>20 日表現</label><b>${fmtPct(r.ret_20d)}</b></div>
+      <div><label>動能分組</label><b>${r.momentum_bucket_zh || '—'}</b></div>
+      <div><label>20 日均額</label><b>${fmtMoney(r.avg_amount_20d)}</b></div>
     </div>
     <div class="stock-tags">${riskTags(r)}</div>
   </button>`;

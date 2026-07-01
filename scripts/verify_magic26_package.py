@@ -155,7 +155,7 @@ if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉�
 if "量能落差分類" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "A 組量能落差優先清單" not in html or "app.js?v=20260701e" not in html or "styles.css?v=20260701a" not in html:
+if "A 組量能落差優先清單" not in html or "app.js?v=20260701f" not in html or "styles.css?v=20260701a" not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
     sys.exit(1)
 if "主規格 A 斷層分組優先清單" in html or "斷層正常" in html:
@@ -166,6 +166,12 @@ if "subtypeLabels" not in app or "可再觀察" not in app or "量能高風險" 
     sys.exit(1)
 if "A 組：重點觀察" not in app or "最新資料日期" not in app or "A 組 20 日超額表現" not in app:
     print("round25 first-screen app copy missing from app.js")
+    sys.exit(1)
+if "displayPriorityLabel" not in app or "20 日表現" not in app or "動能分組" not in app or "20 日均額" not in app:
+    print("round25 batch3 candidate-card metric copy missing from app.js")
+    sys.exit(1)
+if "原始資料" not in app or "調整後資料" not in app or "待人工確認" not in app or "流動性不足" not in app:
+    print("round25 batch3 candidate-card tag/status copy missing from app.js")
     sys.exit(1)
 if "斷層分類" not in app or "volgap_score_impact" not in app:
     print("round22 detail/score logic missing from app.js")
