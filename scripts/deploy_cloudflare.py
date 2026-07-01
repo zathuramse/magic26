@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[1]
-CANONICAL_URL = "https://magic26.pages.dev/"
+CANONICAL_URL = "https://magic26.pages.dev/?v=20260701i"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
 LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
 ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
