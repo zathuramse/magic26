@@ -390,6 +390,11 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
             "score": "可救斷層 -2；大量斷層觀察 -5；危險斷層 -10；只影響研究排序，不排除候選",
             "ui": "卡片、篩選、細節欄位顯示 subtype；可救斷層不是加分，只是避免誤殺",
         },
+        "round23_decision": {
+            "status": "volgap summary panel；主規格不變",
+            "ui": "新增斷層分類總覽卡，顯示全歷史/近期/最新/A類數量，點擊即套用全歷史分類篩選",
+            "scope": "純 UI 研究入口；不新增交易訊號、不改候選資格",
+        },
         "candidates": [],
     }
     if not candidates.empty:

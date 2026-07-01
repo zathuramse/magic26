@@ -38,6 +38,16 @@
     <section class="panel">
       <div class="section-head compact">
         <div>
+          <h2>斷層分類總覽</h2>
+          <p>Round 23：正常 / 可救 / 觀察 / 危險 / 待補，一鍵套用篩選；分類只做研究路由，不改主規格。</p>
+        </div>
+      </div>
+      <div id="volgapSummary" class="subtype-summary"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head compact">
+        <div>
           <h2>主規格 A 近期優先清單</h2>
           <p>依研究優先分數排序：主規格、非追高、流動性足、repo 量比高者優先。</p>
         </div>
@@ -78,9 +88,12 @@
             <option value="chase">追高風險</option>
             <option value="liquidity">流動性不足</option>
             <option value="ret60hot">60日漲幅&gt;150%</option>
-            <option value="volgap">大量斷層觀察</option>
+            <option value="volgapNormal">斷層正常</option>
             <option value="volgapRescue">可救斷層</option>
+            <option value="volgapWatch">大量斷層觀察</option>
             <option value="volgapDanger">危險斷層</option>
+            <option value="volgapMissing">斷層待補</option>
+            <option value="volgap">全部斷層風險</option>
             <option value="longma">長均空頭</option>
             <option value="nonmain">非主規格</option>
           </select>
@@ -126,6 +139,7 @@
         <p>Round 19 新增 60日漲幅、第一大量斷層、日/周長均空頭，全部先標為「研究中 risk badge」，不改主規格、不自動排除。</p>
         <p>Round 20 用 60D 驗證後，top1/top10&lt;2 是目前最有用的研究優先加分；大量斷層仍只做負分，不做 veto。</p>
         <p>Round 21 檢查誤殺案例後，只有很窄的「可救斷層」條件；Round 22 已產品化為正常 / 可救斷層 / 危險斷層，主規格仍不變。</p>
+        <p>Round 23 加入斷層分類總覽卡，可快速切換全歷史分類檢查，仍只作研究路由。</p>
         <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
       </div>
     </section>
@@ -149,6 +163,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260701a"></script>
+  <script src="./app.js?v=20260701b"></script>
 </body>
 </html>

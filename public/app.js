@@ -31,6 +31,7 @@ async function load(){
   renderCards(summary);
   renderCandidateSummary(summary);
   setupFilters();
+  renderVolgapSummary();
   renderMainAList();
   renderWatchState();
   renderStockCards();
@@ -60,6 +61,43 @@ function renderCandidateSummary(s){
     </button>
   `).join('');
   document.querySelectorAll('.spec-card').forEach(btn => btn.addEventListener('click', () => setCandidate(btn.dataset.candidate)));
+}
+
+const subtypeFilters = {
+  '正常': 'volgapNormal',
+  '可救斷層': 'volgapRescue',
+  '大量斷層觀察': 'volgapWatch',
+  '危險斷層': 'volgapDanger',
+  '待補': 'volgapMissing'
+};
+const subtypeOrder = ['正常', '可救斷層', '大量斷層觀察', '危險斷層', '待補'];
+function countSubtype(rows, subtype){ return rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).length; }
+function subtypeTone(subtype){
+  if(subtype === '正常') return 'ok';
+  if(subtype === '可救斷層') return 'rescue';
+  if(subtype === '危險斷層') return 'danger';
+  if(subtype === '待補') return 'missing';
+  return 'watch';
+}
+function renderVolgapSummary(){
+  const target = document.getElementById('volgapSummary');
+  if(!target) return;
+  target.innerHTML = subtypeOrder.map(subtype => {
+    const all = countSubtype(allRows, subtype);
+    const recent = countSubtype(recentRows, subtype);
+    const latest = countSubtype(latestRows, subtype);
+    const mainA = allRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20' && String(r.volgap_subtype_zh || '待補') === subtype).length;
+    return `<button class="subtype-card ${subtypeTone(subtype)}" data-risk="${subtypeFilters[subtype]}">
+      <div class="subtype-head"><span>${subtype}</span><strong>${all}</strong></div>
+      <div class="subtype-metrics"><span>近期 ${recent}</span><span>最新 ${latest}</span><span>A ${mainA}</span></div>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('.subtype-card').forEach(btn => btn.addEventListener('click', () => {
+    document.getElementById('rangeFilter').value = 'all';
+    document.getElementById('riskFilter').value = btn.dataset.risk;
+    renderStockCards();
+    document.getElementById('stockCards').scrollIntoView({behavior:'smooth', block:'start'});
+  }));
 }
 
 function setupFilters(){
@@ -127,9 +165,12 @@ function matchRisk(r, risk){
   if(risk === 'chase') return isChase(r);
   if(risk === 'liquidity') return isLowLiquidity(r);
   if(risk === 'ret60hot') return isRet60Hot(r);
-  if(risk === 'volgap') return isVolumeGapWatch(r);
+  if(risk === 'volgapNormal') return String(r.volgap_subtype_zh || '') === '正常';
   if(risk === 'volgapRescue') return isVolgapRescue(r);
+  if(risk === 'volgapWatch') return String(r.volgap_subtype_zh || '') === '大量斷層觀察';
   if(risk === 'volgapDanger') return isVolgapDanger(r);
+  if(risk === 'volgapMissing') return String(r.volgap_subtype_zh || '待補') === '待補';
+  if(risk === 'volgap') return isVolumeGapWatch(r);
   if(risk === 'longma') return isLongMaBear(r);
   if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
   return true;
