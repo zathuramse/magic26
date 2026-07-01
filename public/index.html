@@ -4,32 +4,34 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 候選標的</title>
-  <link rel="stylesheet" href="./styles.css?v=20260701c" />
+  <link rel="stylesheet" href="./styles.css?v=20260701d" />
 </head>
 <body>
   <header class="topbar">
     <div>
       <p class="eyebrow">Magic26 研究看板</p>
       <h1>Magic26 候選標的</h1>
-      <p class="subtitle">手動更新的研究看板，只整理候選標的，不是買賣訊號。</p>
+      <p class="subtitle">這裡只幫你把可能值得看的股票先排出來；不是買賣訊號，也不會自動更新。</p>
     </div>
     <div class="status" id="status">載入中…</div>
   </header>
 
   <main>
+    <section class="freshness" id="freshnessNotice">檢查資料日期中…</section>
+
     <section class="grid cards" id="cards"></section>
 
     <section class="panel">
       <div class="section-head">
         <div>
-          <h2>規則分組</h2>
-          <p>先看 A 組重點候選；B 組用來看較寬的背景；C 組用來看條件更集中的候選。</p>
+          <h2>先看哪一組</h2>
+          <p>A 組是目前最主要的清單；B 組條件比較寬，用來補看漏網；C 組條件比較嚴，用來看更集中的候選。</p>
         </div>
         <div class="segmented" id="quickFilters">
           <button class="active" data-candidate="all">全部</button>
           <button data-candidate="A_repo50_c4_40_fixed20">只看 A 組</button>
-          <button data-candidate="B_magic_c4_40_fixed20">B 組</button>
-          <button data-candidate="C_c4_25_fixed20">C 組</button>
+          <button data-candidate="B_magic_c4_40_fixed20">B 組：放寬</button>
+          <button data-candidate="C_c4_25_fixed20">C 組：較嚴</button>
         </div>
       </div>
       <div class="candidate-summary" id="candidateSummary"></div>
@@ -38,8 +40,8 @@
     <section class="panel">
       <div class="section-head compact">
         <div>
-          <h2>量能落差分類</h2>
-          <p>依成交量落差分組。點一張卡，就會套用對應篩選；這只影響研究順序，不改主要規則。</p>
+          <h2>成交量有沒有怪怪的</h2>
+          <p>看成交量是不是集中在少數幾天。越集中越容易是假熱度，所以只用來調整查看順序，不代表買賣。</p>
         </div>
       </div>
       <div id="volgapSummary" class="subtype-summary"></div>
@@ -48,10 +50,10 @@
     <section class="panel">
       <div class="section-head compact">
         <div>
-          <h2>A 組量能落差優先清單</h2>
-          <p>A 組近期候選依量能落差分組；點分類標題可切到 2026 近期 + A 組 + 該分類。</p>
+          <h2>A 組先看清單</h2>
+          <p>把今年的 A 組依成交量風險分開。先看「正常」與「有落差但可看」；「先避開」要等看圖確認。</p>
         </div>
-        <button class="ghost" id="jumpMainA">切到 2026 近期 + A 組</button>
+        <button class="ghost" id="jumpMainA">看今年 A 組</button>
       </div>
       <div id="mainAList" class="main-a-groups"></div>
     </section>
@@ -60,8 +62,8 @@
     <section class="panel">
       <div class="section-head compact">
         <div>
-          <h2>Watch State｜B類二次觀察</h2>
-          <p id="watchStateHint">追蹤題材成立但追價風險高的候選：等待降溫、回測觀察、再啟動突破、降級。</p>
+          <h2>B 組追蹤</h2>
+          <p id="watchStateHint">這區放「題材可能還在，但現在不適合追」的股票：等拉回、等突破，或降級不看。</p>
         </div>
       </div>
       <div id="watchStateList" class="watch-grid"></div>
@@ -70,38 +72,38 @@
     <section class="panel">
       <div class="section-head">
         <div>
-          <h2>候選卡片</h2>
-          <p id="viewHint">預設顯示最新訊號日；如果最新日沒有 A，仍可切換近期候選檢查主規格。</p>
+          <h2>股票卡片</h2>
+          <p id="viewHint">預設只看最近一次有候選的那天；如果那天沒有 A 組，可以切到今年清單。</p>
         </div>
         <div class="controls">
           <select id="rangeFilter">
-            <option value="latest">最新訊號日</option>
-            <option value="recent">2026 近期</option>
+            <option value="latest">最近有候選那天</option>
+            <option value="recent">今年全部</option>
             <option value="all">全部歷史</option>
           </select>
-          <select id="candidateFilter"><option value="all">全部規格</option></select>
+          <select id="candidateFilter"><option value="all">全部分組</option></select>
           <select id="riskFilter">
-            <option value="all">全部風險</option>
-            <option value="clean">可研究</option>
-            <option value="weak">動能偏弱</option>
-            <option value="floor15">15%底線觀察</option>
-            <option value="chase">追高風險</option>
+            <option value="all">全部提醒</option>
+            <option value="clean">可以先看</option>
+            <option value="weak">漲勢偏弱</option>
+            <option value="floor15">漲幅有過15%</option>
+            <option value="chase">可能追高</option>
             <option value="liquidity">流動性不足</option>
-            <option value="ret60hot">60日漲幅過熱</option>
-            <option value="volgapNormal">量能正常</option>
-            <option value="volgapRescue">量能可再觀察</option>
-            <option value="volgapWatch">量能需留意</option>
-            <option value="volgapDanger">量能高風險</option>
-            <option value="volgapMissing">量能資料不足</option>
-            <option value="volgap">全部量能風險</option>
+            <option value="ret60hot">前面已漲很多</option>
+            <option value="volgapNormal">成交量正常</option>
+            <option value="volgapRescue">量有落差但可看</option>
+            <option value="volgapWatch">量集中，要小心</option>
+            <option value="volgapDanger">量太集中，先避開</option>
+            <option value="volgapMissing">量資料不夠</option>
+            <option value="volgap">全部成交量提醒</option>
             <option value="longma">長期均線偏空</option>
-            <option value="nonmain">非主要規則</option>
+            <option value="nonmain">不是 A 組</option>
           </select>
           <select id="sortFilter">
-            <option value="priority">研究優先</option>
+            <option value="priority">建議查看順序</option>
             <option value="date">日期新到舊</option>
-            <option value="repo">前5大成交量占比高</option>
-            <option value="amount">金額高</option>
+            <option value="repo">成交量越穩越前面</option>
+            <option value="amount">成交金額越大越前面</option>
           </select>
           <input id="search" placeholder="搜尋代號 / 名稱 / 產業" />
         </div>
@@ -113,8 +115,8 @@
     <section class="panel detail-panel" id="detailPanel">
       <div class="section-head compact">
         <div>
-          <h2 id="detailTitle">候選細節</h2>
-          <p id="detailSubtitle">點選卡片後顯示完整欄位。</p>
+          <h2 id="detailTitle">股票細節</h2>
+          <p id="detailSubtitle">點一張股票卡片，這裡會顯示為什麼它被排進來。</p>
         </div>
         <button id="clearDetail" class="ghost">清除</button>
       </div>
@@ -123,22 +125,20 @@
 
     <section class="grid two">
       <div class="panel">
-        <h2>主要規則</h2>
+        <h2>A 組怎麼挑</h2>
         <ul class="spec-list">
-          <li>三個市場狀態條件都要成立</li>
-          <li>同時通過 C1 / C2 / C3 三組條件</li>
-          <li>前 5 大成交量占比至少 50%</li>
-          <li>20 日漲幅介於 0% 到 40%</li>
-          <li>最大量出現後至少間隔 5 天</li>
-          <li>用隔日開盤作觀察起點，固定追蹤 20 個交易日</li>
+          <li>大盤背景不能太差。</li>
+          <li>股價要有轉強跡象，而且不是剛爆大量那一天。</li>
+          <li>近 20 天要有漲，但不能已經漲太誇張。</li>
+          <li>成交量要有熱度，但不能只靠單一天爆量撐起來。</li>
+          <li>這只是在排「先看誰」，不是自動買進。</li>
         </ul>
       </div>
       <div class="panel">
-        <h2>研究結論</h2>
-        <p>主要規則仍維持 A 組。20 日漲幅低於 15% 先標為動能偏弱，不直接排除。</p>
-        <p>60 日漲幅過熱、量能落差、長期均線偏空都先作為風險提示；它們會影響研究優先順序，不會自動刪除候選。</p>
-        <p>量能集中度目前用來分流：正常與可再觀察先看，高風險與資料不足要人工確認。</p>
-        <p>這裡定位為人工研究入口，仍需搭配逐檔圖形、產業脈絡與流動性檢查。</p>
+        <h2>怎麼使用</h2>
+        <p>先看 A 組，再看成交量是否正常。成交量太集中、流動性差、或前面已經漲很多的股票，先放後面。</p>
+        <p>卡片上的分數只是排序，幫你省時間；真正要不要研究，還是要打開圖形、看產業、看成交量。</p>
+        <p>如果資料日期落後，這個看板只能當舊資料回顧，不能當今天的候選清單。</p>
       </div>
     </section>
 
@@ -179,6 +179,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260701g"></script>
+  <script src="./app.js?v=20260701h"></script>
 </body>
 </html>
