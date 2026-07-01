@@ -104,9 +104,9 @@ async function load(){
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/latest_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
-    fetch('./data/recent_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
-    fetch('./data/all_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
@@ -151,14 +151,12 @@ function renderFreshness(s){
   }
 }
 function renderCards(s){
-  const main = (s.candidates || []).find(c=>c.candidate === s.main_spec) || {};
   const cards = [
-    ['最近有候選', s.latest_signal_date || '—', '這不是更新日，是最近一次有股票符合條件'],
-    ['那天有幾檔', s.latest_signal_groups ?? s.latest_candidate_rows, '同股同日已合併；原始 / 還原與 A/B 版本收在卡片裡'],
-    ['A 組歷史筆數', main.rows ?? '—', 'A 組是目前主要先看的清單'],
-    ['A 組平均勝出大盤', fmtPct(main.median_t1_open_excess_20d), `20 天後勝率 ${fmtPct(main.win_t1_open_excess_20d)}`]
+    ['資料算到', s.data_through || '—', '這是目前資料截止日'],
+    ['最近出訊號', s.latest_signal_date || '—', '這不是更新日，是最近一次有股票符合條件'],
+    ['今日主清單', `${s.latest_signal_groups ?? s.latest_candidate_rows ?? '—'} 檔`, '同股同日已合併；原始 / 還原與 A/B 版本收在卡片裡']
   ];
-  document.getElementById('cards').innerHTML = cards.map(c=>`<div class="card"><div class="label">${c[0]}</div><div class="value">${c[1]}</div><div class="hint">${c[2]}</div></div>`).join('');
+  document.getElementById('cards').innerHTML = cards.map(c=>`<div class="card compact-kpi"><div class="label">${c[0]}</div><div class="value">${c[1]}</div><div class="hint">${c[2]}</div></div>`).join('');
 }
 
 function renderCandidateSummary(s){
