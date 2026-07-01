@@ -91,27 +91,19 @@
       <div id="volgapSummary" class="subtype-summary"></div>
     </section>
 
-    <section class="panel">
-      <div class="section-head compact">
-        <div>
-          <h2>次要清單：今年 A 組</h2>
-          <p>這是今年 A 組的分流參考；今日要先看誰以上面的主清單為準。</p>
-        </div>
-        <button class="ghost" id="jumpMainA">看今年 A 組</button>
-      </div>
+    <details class="panel secondary-panel">
+      <summary><span>次要清單：今年 A 組</span><em>展開看今年分流</em></summary>
+      <p>這是今年 A 組的分流參考；今日要先看誰以上面的主清單為準。</p>
+      <button class="ghost" id="jumpMainA">看今年 A 組</button>
       <div id="mainAList" class="main-a-groups"></div>
-    </section>
+    </details>
 
 
-    <section class="panel">
-      <div class="section-head compact">
-        <div>
-          <h2>次要追蹤：B 組</h2>
-          <p id="watchStateHint">這區只放補看與追蹤，不是今日主訊號。</p>
-        </div>
-      </div>
+    <details class="panel secondary-panel">
+      <summary><span>次要追蹤：B 組</span><em>展開看補看名單</em></summary>
+      <p id="watchStateHint">這區只放補看與追蹤，不是今日主訊號。</p>
       <div id="watchStateList" class="watch-grid"></div>
-    </section>
+    </details>
 
     <section class="panel detail-panel" id="detailPanel">
       <div class="section-head compact">
@@ -181,6 +173,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
-  <script src="./app.js?v=20260701v"></script>
+  <script src="./app.js?v=20260701w"></script>
 </body>
 </html>

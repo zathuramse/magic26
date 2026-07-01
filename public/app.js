@@ -104,9 +104,9 @@ async function load(){
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/latest_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
-    fetch('./data/recent_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
-    fetch('./data/all_signal_groups.json?v=20260701v').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json?v=20260701w').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
@@ -163,14 +163,10 @@ function renderCards(s){
 
 function renderCandidateSummary(s){
   document.getElementById('candidateSummary').innerHTML = (s.candidates || []).map(c => `
-    <button class="spec-card ${specTone[c.candidate] || ''}" data-candidate="${c.candidate}">
-      <div class="spec-top"><span>${labelMap[c.candidate] || c.candidate}</span><strong>${c.rows}</strong></div>
-      <div class="spec-metrics">
-        <span>最近出現 ${c.latest_date}</span>
-        <span>原始價 ${c.raw_rows} / 還原價 ${c.adjusted_rows}</span>
-        <span>20 天平均勝大盤 ${fmtPct(c.median_t1_open_excess_20d)}</span>
-        <span>20 天勝率 ${fmtPct(c.win_t1_open_excess_20d)}</span>
-      </div>
+    <button class="spec-card compact-spec ${specTone[c.candidate] || ''}" data-candidate="${c.candidate}">
+      <span>${labelMap[c.candidate] || c.candidate}</span>
+      <strong>${c.rows}</strong>
+      <em>最近 ${c.latest_date}｜20天勝率 ${fmtPct(c.win_t1_open_excess_20d)}</em>
     </button>
   `).join('');
   document.querySelectorAll('.spec-card').forEach(btn => btn.addEventListener('click', () => setCandidate(btn.dataset.candidate)));
@@ -221,9 +217,8 @@ function renderVolgapSummary(){
     const recent = countSubtype(recentRows, subtype);
     const latest = countSubtype(latestRows, subtype);
     const mainA = allRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20' && String(r.volgap_subtype_zh || '待補') === subtype).length;
-    return `<button class="subtype-card ${subtypeTone(subtype)}" data-risk="${subtypeFilters[subtype]}" title="${subtypeHints[subtype] || ''}">
-      <div class="subtype-head"><span>${subtypeLabel(subtype)}</span><strong>${all}</strong></div>
-      <div class="subtype-metrics"><span>今年 ${recent}</span><span>最近日 ${latest}</span><span>A組 ${mainA}</span></div>
+    return `<button class="subtype-card compact-subtype ${subtypeTone(subtype)}" data-risk="${subtypeFilters[subtype]}" title="${subtypeHints[subtype] || ''}">
+      <span>${subtypeLabel(subtype)}</span><strong>${all}</strong><em>今年 ${recent}｜最近 ${latest}｜A ${mainA}</em>
     </button>`;
   }).join('');
   document.querySelectorAll('.subtype-card').forEach(btn => btn.addEventListener('click', () => {
