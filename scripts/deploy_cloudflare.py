@@ -16,6 +16,7 @@ LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
 ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
 ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260622.csv"
 ROUND19_VOLGAP_URL = "https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260622.csv"
+ROUND20_SUMMARY_URL = "https://magic26.pages.dev/data/magic26_round20_60d_validation_summary_20210101_20260622.csv"
 
 
 def run(cmd: list[str], *, timeout: int = 300) -> str:
@@ -65,6 +66,8 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production summary missing round14_decision")
     if "round19_decision" not in summary:
         raise RuntimeError("Production summary missing round19_decision")
+    if "round20_decision" not in summary:
+        raise RuntimeError("Production summary missing round20_decision")
     latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
     if latest:
         required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh"}
@@ -84,6 +87,9 @@ def verify_production(expected_data_through: str | None = None) -> None:
     volgap = fetch(ROUND19_VOLGAP_URL).decode("utf-8", errors="replace")
     if "volume_gap_top10" not in volgap:
         raise RuntimeError("Production Round19 volume-gap CSV missing expected group")
+    round20 = fetch(ROUND20_SUMMARY_URL).decode("utf-8", errors="replace")
+    if "top1/top10 < 2" not in round20 or "ret60 <= 150%" not in round20:
+        raise RuntimeError("Production Round20 summary missing expected validation rows")
     print(
         "PRODUCTION OK",
         json.dumps(

@@ -34,6 +34,8 @@ PROCESSED_NAMES = [
     "magic26_round19_ret60_cap_summary_20210101_20260622.csv",
     "magic26_round19_volume_gap_summary_20210101_20260622.csv",
     "magic26_round19_risk_badge_summary_20210101_20260622.csv",
+    "magic26_round20_60d_validation_summary_20210101_20260622.csv",
+    "magic26_round20_60d_flagged_cases_20210101_20260622.csv",
 ]
 
 WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260622.csv"
@@ -347,6 +349,13 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
             "volume_gap": "top1/top10大量斷層先做風險標籤；top3/top5/top10不可粗暴視為同一訊號",
             "long_ma_bear": "日/周長均空頭作為負分欄位；樣本少，不作硬排除",
             "source_type": "目前候選資料標記為 reconstructed，後續需區分 live_scan/backtest_export/reconstructed",
+        },
+        "round20_decision": {
+            "status": "60D validation；主規格不變",
+            "ret60_cap150": "只排除極少數過熱樣本，可保留過熱 risk badge，不升硬條件",
+            "volume_gap_top10": "top1/top10<2 的 60D 右尾率較佳，可作研究優先加分；top1/top10>=2 作大量斷層負分，但不作 veto",
+            "long_ma_bear": "長均空頭樣本太少，僅保留負分 badge",
+            "next_step": "逐檔檢查 top1/top10>=2 但 60D 仍大漲的反例，找可救脈絡",
         },
         "candidates": [],
     }

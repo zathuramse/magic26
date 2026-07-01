@@ -20,10 +20,12 @@
     "magic26_round19_author_absorption_detail_20210101_20260622.csv",
     "magic26_round19_ret60_cap_summary_20210101_20260622.csv",
     "magic26_round19_volume_gap_summary_20210101_20260622.csv",
-    "magic26_round19_risk_badge_summary_20210101_20260622.csv"
+    "magic26_round19_risk_badge_summary_20210101_20260622.csv",
+    "magic26_round20_60d_validation_summary_20210101_20260622.csv",
+    "magic26_round20_60d_flagged_cases_20210101_20260622.csv"
   ],
   "candidate_rows": 329,
   "watch_state_rows": 4,
   "latest_signal_date": "2026-06-10",
-  "generated_at": "2026-07-01T07:46:12"
+  "generated_at": "2026-07-01T08:01:22"
 }
