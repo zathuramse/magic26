@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[1]
-CANONICAL_URL = "https://magic26.pages.dev/?v=20260701i"
+CANONICAL_URL = "https://magic26.pages.dev/?v=20260701j"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
 LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
 ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
@@ -18,6 +18,7 @@ ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstra
 ROUND19_VOLGAP_URL = "https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260701.csv"
 ROUND20_SUMMARY_URL = "https://magic26.pages.dev/data/magic26_round20_60d_validation_summary_20210101_20260701.csv"
 ROUND21_SUMMARY_URL = "https://magic26.pages.dev/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv"
+KLINE_URL = "https://magic26.pages.dev/data/kline/raw_6213.json"
 
 
 def run(cmd: list[str], *, timeout: int = 300) -> str:
@@ -62,9 +63,11 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML still contains old Round25 first-screen copy")
     if "成交量有沒有怪怪的" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
         raise RuntimeError("Production HTML missing Round25 volume-gap plain-language UI")
+    if "K 線圖" not in html and "app.js?v=20260701j" not in html:
+        raise RuntimeError("Production HTML/cache missing kline-capable app")
     if "A 組先看清單" not in html:
         raise RuntimeError("Production HTML missing Round25 grouped main-A list copy")
-    if "app.js?v=20260701i" not in html or "styles.css?v=20260701e" not in html:
+    if "app.js?v=20260701j" not in html or "styles.css?v=20260701f" not in html:
         raise RuntimeError("Production HTML missing Round25 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":

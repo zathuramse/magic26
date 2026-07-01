@@ -333,6 +333,62 @@ def build_watch_states(out_dir: Path) -> list[dict[str, Any]]:
         out["stock_id"] = out["stock_id"].astype(str).str.replace(r"\.0$", "", regex=True)
     return out.to_dict(orient="records")
 
+
+def export_kline_files(candidates: pd.DataFrame, source_dir: Path, public_data: Path, processed: Path, data_through: str) -> list[str]:
+    """Export compact OHLC windows for candidate detail charts.
+
+    Static JSON keeps the dashboard self-contained on Cloudflare Pages and avoids
+    live market-data calls. One file is written per stock_id + price_mode.
+    """
+    if candidates.empty:
+        return []
+    cache_dir = source_dir / "cache"
+    public_kline = public_data / "kline"
+    processed_kline = processed / "kline"
+    public_kline.mkdir(parents=True, exist_ok=True)
+    processed_kline.mkdir(parents=True, exist_ok=True)
+    cutoff = pd.Timestamp(data_through)
+    written: list[str] = []
+    keys = candidates[["stock_id", "price_mode"]].drop_duplicates()
+    for _, row in keys.iterrows():
+        stock_id = str(row["stock_id"]).replace(".0", "")
+        mode = "adj" if str(row["price_mode"]) == "adjusted" else "raw"
+        src = cache_dir / f"{mode}_{stock_id}_20210101_20260701.parquet"
+        if not src.exists():
+            continue
+        df = pd.read_parquet(src)
+        if df.empty or "date" not in df.columns:
+            continue
+        df = df.copy()
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df = df[df["date"].notna() & df["date"].le(cutoff)].sort_values("date").tail(140)
+        if df.empty:
+            continue
+        rows = []
+        for col in ["open", "max", "min", "close", "Trading_Volume"]:
+            if col not in df.columns:
+                df[col] = pd.NA
+        for _, bar in df.iterrows():
+            rows.append({
+                "date": bar["date"].strftime("%Y-%m-%d"),
+                "open": float(bar["open"]) if pd.notna(bar["open"]) else None,
+                "high": float(bar["max"]) if pd.notna(bar["max"]) else None,
+                "low": float(bar["min"]) if pd.notna(bar["min"]) else None,
+                "close": float(bar["close"]) if pd.notna(bar["close"]) else None,
+                "volume": float(bar["Trading_Volume"]) if pd.notna(bar["Trading_Volume"]) else None,
+            })
+        payload = {
+            "stock_id": stock_id,
+            "price_mode": str(row["price_mode"]),
+            "data_through": data_through,
+            "rows": rows,
+        }
+        rel = f"kline/{mode}_{stock_id}.json"
+        write_json(public_data / rel, payload)
+        write_json(processed / rel, payload)
+        written.append(rel)
+    return sorted(written)
+
 def watch_state_summary(watch_states: list[dict[str, Any]]) -> dict[str, Any]:
     counts: dict[str, int] = {}
     for row in watch_states:
@@ -452,6 +508,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     candidates = load_candidates(out_dir)
     candidates.to_csv(processed / "magic26_candidates_history.csv", index=False, encoding="utf-8-sig")
     candidates.to_csv(public_data / "magic26_candidates_history.csv", index=False, encoding="utf-8-sig")
+    kline_files = export_kline_files(candidates, source_dir, public_data, processed, data_through)
 
     json_ready = candidates.copy()
     if not json_ready.empty:
@@ -475,6 +532,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
         "copied_csv": copied,
         "candidate_rows": int(len(candidates)),
         "watch_state_rows": int(len(watch_states)),
+        "kline_files": kline_files,
         "latest_signal_date": summary["latest_signal_date"],
         "generated_at": summary["generated_at"],
     }

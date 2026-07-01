@@ -13,6 +13,7 @@ let recentRows = [];
 let allRows = [];
 let watchRows = [];
 let selectedDetailKey = null;
+let currentKlineKey = null;
 
 async function load(){
   const [summary, latest, recent, all, watch] = await Promise.all([
@@ -351,6 +352,68 @@ function stockCardHtml(r, compact=false){
     <div class="stock-tags">${riskTags(r)}</div>
   </button>`;
 }
+
+function klineUrl(r){
+  const mode = r.price_mode === 'adjusted' ? 'adj' : 'raw';
+  return `./data/kline/${mode}_${r.stock_id}.json`;
+}
+function klinePanelHtml(r){
+  return `<section class="kline-panel" id="klinePanel" data-kline-key="${rowKey(r)}">
+    <div class="kline-head"><div><h3>K 線圖</h3><p>近 140 個交易日，資料到看板截止日；只是看圖，不是買賣訊號。</p></div><span id="klineStatus">載入中…</span></div>
+    <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
+  </section>`;
+}
+async function renderKline(r){
+  const key = rowKey(r);
+  currentKlineKey = key;
+  const status = document.getElementById('klineStatus');
+  const target = document.getElementById('klineChart');
+  if(!status || !target) return;
+  try{
+    const res = await fetch(klineUrl(r));
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+    if(currentKlineKey !== key) return;
+    const rows = (payload.rows || []).filter(x => x.open && x.high && x.low && x.close);
+    if(rows.length < 10) throw new Error('rows too few');
+    target.innerHTML = klineSvg(rows, r.date);
+    const last = rows[rows.length - 1];
+    status.textContent = `${priceModeLabel(r.price_mode)}｜${rows[0].date}～${last.date}｜收 ${fmtNum(last.close,2)}`;
+  }catch(err){
+    if(currentKlineKey !== key) return;
+    status.textContent = 'K 線資料讀取失敗';
+    target.innerHTML = '<div class="kline-empty">這檔暫時沒有可用 K 線資料。</div>';
+    console.warn('kline failed', err);
+  }
+}
+function klineSvg(rows, signalDate){
+  const w = 860, h = 320, pad = {l:48,r:16,t:18,b:54};
+  const chartH = 210, volTop = 244, volH = 48;
+  const highs = rows.map(r=>Number(r.high)), lows = rows.map(r=>Number(r.low));
+  const vols = rows.map(r=>Number(r.volume || 0));
+  const hi = Math.max(...highs), lo = Math.min(...lows);
+  const maxVol = Math.max(...vols, 1);
+  const xStep = (w-pad.l-pad.r) / rows.length;
+  const y = v => pad.t + (hi - v) / Math.max(hi - lo, 1e-9) * chartH;
+  const vy = v => volTop + volH - (v / maxVol) * volH;
+  const ticks = [lo, (lo+hi)/2, hi];
+  const grid = ticks.map(t => `<line x1="${pad.l}" x2="${w-pad.r}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}" class="k-grid"/><text x="8" y="${(y(t)+4).toFixed(1)}" class="k-axis">${fmtNum(t,1)}</text>`).join('');
+  const bars = rows.map((r,i)=>{
+    const x = pad.l + i*xStep + xStep/2;
+    const up = Number(r.close) >= Number(r.open);
+    const cls = up ? 'up' : 'down';
+    const top = y(Math.max(Number(r.open), Number(r.close)));
+    const bot = y(Math.min(Number(r.open), Number(r.close)));
+    const bodyH = Math.max(2, bot-top);
+    const bw = Math.max(3, Math.min(8, xStep*.62));
+    const volY = vy(Number(r.volume || 0));
+    const sig = r.date === signalDate ? `<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${pad.t}" y2="${volTop+volH}" class="k-signal"/><text x="${Math.min(w-70, x+5).toFixed(1)}" y="14" class="k-signal-text">候選日</text>` : '';
+    return `${sig}<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${y(Number(r.high)).toFixed(1)}" y2="${y(Number(r.low)).toFixed(1)}" class="wick ${cls}"/><rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${bodyH.toFixed(1)}" class="candle ${cls}"/><rect x="${(x-bw/2).toFixed(1)}" y="${volY.toFixed(1)}" width="${bw.toFixed(1)}" height="${(volTop+volH-volY).toFixed(1)}" class="volume ${cls}"/>`;
+  }).join('');
+  const first = rows[0], last = rows[rows.length-1];
+  return `<svg viewBox="0 0 ${w} ${h}" class="kline-svg" preserveAspectRatio="none">${grid}<line x1="${pad.l}" x2="${w-pad.r}" y1="${volTop}" y2="${volTop}" class="k-grid"/>${bars}<text x="${pad.l}" y="${h-18}" class="k-axis">${first.date}</text><text x="${w-pad.r-84}" y="${h-18}" class="k-axis">${last.date}</text><text x="${pad.l}" y="${h-36}" class="k-legend">紅漲｜綠跌｜直線＝候選日</text></svg>`;
+}
+
 function detailSectionHtml(title, items){
   return `<section class="detail-section"><h3>${title}</h3><div class="detail-grid">${items.map(([k,v,hint]) => `<div${hint ? ` title="${hint}"` : ''}><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div></section>`;
 }
@@ -380,7 +443,8 @@ function showDetail(r){
       ['查看分數', priorityScore(r)], ['目前判斷', classify(r)], ['漲幅區間', r.momentum_bucket_zh], ['原始分組', r.strategy_role_zh], ['查看順序', displayPriorityLabel(r)], ['原始標籤', r.research_tags]
     ]]
   ];
-  document.getElementById('detailBody').innerHTML = `<div class="detail-sections">${sections.map(([title, items]) => detailSectionHtml(title, items)).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
+  document.getElementById('detailBody').innerHTML = `${klinePanelHtml(r)}<div class="detail-sections">${sections.map(([title, items]) => detailSectionHtml(title, items)).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
+  renderKline(r);
   renderStockCards();
   renderMainAList();
   document.getElementById('detailPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
