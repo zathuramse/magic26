@@ -328,24 +328,36 @@ function stockCardHtml(r, compact=false){
     <div class="stock-tags">${riskTags(r)}</div>
   </button>`;
 }
+function detailSectionHtml(title, items){
+  return `<section class="detail-section"><h3>${title}</h3><div class="detail-grid">${items.map(([k,v,hint]) => `<div${hint ? ` title="${hint}"` : ''}><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div></section>`;
+}
 function showDetail(r){
   if(!r) return;
   selectedDetailKey = rowKey(r);
   document.getElementById('detailTitle').textContent = `${r.stock_id} ${r.stock_name || ''}`;
-  document.getElementById('detailSubtitle').textContent = `${labelMap[r.candidate] || r.candidate}｜${r.date}｜${classify(r)}｜${priorityLabel(r)} ${priorityScore(r)}`;
-  const items = [
-    ['產業', r.industry_category], ['價格模式', r.price_mode], ['收盤價', fmtNum(r.close,2)], ['20D金額', fmtMoney(r.avg_amount_20d)],
-    ['區間位置', fmtPct(r.range_pos)], ['gap1', fmtPct(r.gap1)], ['gap2', fmtPct(r.gap2)], ['20D漲幅', fmtPct(r.ret_20d)],
-    ['最大量距今', `${fmtNum(r.days_since_max_volume,0)}日`], ['repo量比', fmtPct(r.top5_volume_ratio_120)],
-    ['訊號日漲幅', fmtPct(r.signal_day_ret_1d)], ['隔日開盤', fmtPct(r.next_open_gap)],
-    ['20D excess', fmtPct(r.t1_open_excess_20d)], ['60D excess', fmtPct(r.t1_open_excess_60d)], ['研究分數', priorityScore(r)], ['分類', classify(r)],
-    ['動能桶', r.momentum_bucket_zh], ['策略角色', r.strategy_role_zh], ['研究優先', r.research_priority_zh || priorityLabel(r)], ['研究標籤', r.research_tags],
-    ['資料來源', r.source_type || '—'], ['60日漲幅', fmtPct(r.ret_60d_signal)], ['60日上限', isRet60Hot(r) ? '超過150%' : (r.ret_60d_signal == null ? '待補' : '通過')], ['Round19標籤', round19TagsText(r) || '—'],
-    ['top1/top3量', fmtNum(r.top1_to_top3_volume_ratio,2)], ['top1/top5量', fmtNum(r.top1_to_top5_volume_ratio,2)], ['top1/top10量', fmtNum(r.top1_to_top10_volume_ratio,2)], ['量能斷層', r.volume_gap_risk_zh || '—'],
-    ['斷層分類', r.volgap_subtype_zh || '—'], ['斷層分數影響', r.volgap_score_impact ?? '—'],
-    ['日長均空頭', isTrue(r.risk_daily_long_ma_bear) ? '是' : '否'], ['周長均空頭', isTrue(r.risk_weekly_long_ma_bear) ? '是' : '否'], ['長均分數', r.risk_long_ma_score ?? '—'],
+  document.getElementById('detailSubtitle').textContent = `${labelMap[r.candidate] || r.candidate}｜${r.date}｜${classify(r)}｜${displayPriorityLabel(r)} ${priorityScore(r)}`;
+  const sections = [
+    ['基本資料', [
+      ['產業', r.industry_category], ['資料模式', priceModeLabel(r.price_mode), `原始值：${r.price_mode || '—'}`], ['收盤價', fmtNum(r.close,2)], ['資料來源', r.source_type || '—']
+    ]],
+    ['價格與表現', [
+      ['20 日均額', fmtMoney(r.avg_amount_20d)], ['20 日漲幅', fmtPct(r.ret_20d)], ['訊號日漲幅', fmtPct(r.signal_day_ret_1d)], ['隔日開盤變化', fmtPct(r.next_open_gap)],
+      ['區間位置', fmtPct(r.range_pos)], ['第一段缺口', fmtPct(r.gap1), '原欄位：gap1'], ['第二段缺口', fmtPct(r.gap2), '原欄位：gap2'], ['20 日超額表現', fmtPct(r.t1_open_excess_20d), '原欄位：20D excess'], ['60 日超額表現', fmtPct(r.t1_open_excess_60d), '原欄位：60D excess']
+    ]],
+    ['量能集中度', [
+      ['最大量距今天數', `${fmtNum(r.days_since_max_volume,0)}日`], ['前5大成交量占比', fmtPct(r.top5_volume_ratio_120), '原欄位：repo量比'],
+      ['最大量 / 前3大', fmtNum(r.top1_to_top3_volume_ratio,2)], ['最大量 / 前5大', fmtNum(r.top1_to_top5_volume_ratio,2)], ['最大量 / 前10大', fmtNum(r.top1_to_top10_volume_ratio,2)],
+      ['量能落差判斷', r.volume_gap_risk_zh || '—'], ['量能分類', subtypeLabel(r.volgap_subtype_zh), `原研究名：${r.volgap_subtype_zh || '—'}`], ['量能分數影響', r.volgap_score_impact ?? '—']
+    ]],
+    ['風險檢查', [
+      ['60 日漲幅', fmtPct(r.ret_60d_signal)], ['60 日漲幅上限', isRet60Hot(r) ? '超過150%' : (r.ret_60d_signal == null ? '待補' : '通過')], ['60日/量能檢查標籤', round19TagsText(r) || '—', '原欄位：Round19標籤'],
+      ['日線長均偏空', isTrue(r.risk_daily_long_ma_bear) ? '是' : '否'], ['週線長均偏空', isTrue(r.risk_weekly_long_ma_bear) ? '是' : '否'], ['長均分數', r.risk_long_ma_score ?? '—']
+    ]],
+    ['研究狀態', [
+      ['研究分數', priorityScore(r)], ['分類', classify(r)], ['動能分組', r.momentum_bucket_zh], ['策略角色', r.strategy_role_zh], ['研究優先', displayPriorityLabel(r)], ['研究標籤', r.research_tags]
+    ]]
   ];
-  document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
+  document.getElementById('detailBody').innerHTML = `<div class="detail-sections">${sections.map(([title, items]) => detailSectionHtml(title, items)).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
   renderStockCards();
   renderMainAList();
   document.getElementById('detailPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
