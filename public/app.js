@@ -381,7 +381,10 @@ function klinePanelHtml(r){
       <label><input type="checkbox" data-kline-toggle="signal" ${currentKlineOptions.signal ? 'checked' : ''}> 候選日</label>
     </div>
     <div class="kline-legend" id="klineLegend">移到圖上看 OHLC / MA</div>
-    <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
+    <div class="kline-chart-wrap">
+      <div class="kline-chart" id="klineChart" role="img" aria-label="${r.stock_id} K 線圖"></div>
+      <div class="kline-tooltip" id="klineTooltip" hidden></div>
+    </div>
   </section>`;
 }
 function bindKlineToolbar(){
@@ -434,6 +437,8 @@ async function renderKline(r){
 }
 function destroyKlineChart(){
   if(currentKlineResizeObserver){ currentKlineResizeObserver.disconnect(); currentKlineResizeObserver = null; }
+  const tooltip = document.getElementById('klineTooltip');
+  if(tooltip){ tooltip.hidden = true; tooltip.innerHTML = ''; }
   if(currentKlineChart){ currentKlineChart.remove(); currentKlineChart = null; }
 }
 function rowsForRange(rows, range){
@@ -493,6 +498,7 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
   }
   if(opts.signal && rows.some(r => r.date === signalDate)) candle.setMarkers([{time:signalDate, position:'aboveBar', color:'#20e0ff', shape:'arrowDown', text:'候選'}]);
   const byDate = new Map(rows.map(r => [r.date, r]));
+  const tooltip = document.getElementById('klineTooltip');
   const maMap = new Map();
   for(const item of ma5Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma5:item.value});
   for(const item of ma20Data) maMap.set(item.time, {...(maMap.get(item.time)||{}), ma20:item.value});
@@ -503,12 +509,52 @@ function renderInteractiveKline(target, rows, signalDate, opts={}){
     const volumeText = opts.volume ? `｜量 ${(Number(bar.volume||0)/1000).toFixed(0)}張` : '';
     return `${bar.date}｜開 ${fmtNum(bar.open,2)} 高 ${fmtNum(bar.high,2)} 低 ${fmtNum(bar.low,2)} 收 ${fmtNum(bar.close,2)}${volumeText}${maText}`;
   }
+  function tooltipHtml(bar){
+    const m = maMap.get(bar.date) || {};
+    const change = Number(bar.close) - Number(bar.open);
+    const changeCls = change >= 0 ? 'up' : 'down';
+    const maHtml = opts.ma ? `<div><span>MA5</span><b>${fmtNum(m.ma5,2)}</b></div><div><span>MA20</span><b>${fmtNum(m.ma20,2)}</b></div><div><span>MA60</span><b>${fmtNum(m.ma60,2)}</b></div>` : '';
+    const volHtml = opts.volume ? `<div><span>量</span><b>${(Number(bar.volume||0)/1000).toFixed(0)} 張</b></div>` : '';
+    return `<strong>${bar.date}</strong><div><span>開</span><b>${fmtNum(bar.open,2)}</b></div><div><span>高</span><b>${fmtNum(bar.high,2)}</b></div><div><span>低</span><b>${fmtNum(bar.low,2)}</b></div><div><span>收</span><b>${fmtNum(bar.close,2)}</b></div><div><span>漲跌</span><b class="${changeCls}">${change >= 0 ? '+' : ''}${fmtNum(change,2)}</b></div>${volHtml}${maHtml}`;
+  }
+  function hideTooltip(){ if(tooltip) tooltip.hidden = true; }
+  function showTooltipAt(bar, point){
+    if(legend) legend.textContent = legendText(bar);
+    if(!tooltip || !point) return;
+    tooltip.innerHTML = tooltipHtml(bar);
+    tooltip.hidden = false;
+    const leftSide = point.x > target.clientWidth - 230;
+    tooltip.style.left = `${Math.max(8, leftSide ? point.x - 214 : point.x + 14)}px`;
+    tooltip.style.top = `${Math.max(8, Math.min(target.clientHeight - tooltip.offsetHeight - 8, point.y + 12))}px`;
+    tooltip.dataset.date = bar.date;
+    tooltip.dataset.close = String(bar.close);
+  }
+  target.onmousemove = ev => {
+    const rect = target.getBoundingClientRect();
+    const x = Math.max(0, Math.min(target.clientWidth - 1, ev.clientX - rect.left));
+    const y = Math.max(0, Math.min(target.clientHeight - 1, ev.clientY - rect.top));
+    const plotW = Math.max(1, target.clientWidth - 70);
+    const idx = Math.max(0, Math.min(rows.length - 1, Math.round((x / plotW) * (rows.length - 1))));
+    showTooltipAt(rows[idx], {x, y});
+  };
+  target.onmouseleave = hideTooltip;
   if(legend) legend.textContent = legendText(rows[rows.length-1]);
   chart.subscribeCrosshairMove(param => {
-    if(!legend) return;
     const time = typeof param.time === 'string' ? param.time : null;
     const bar = time ? byDate.get(time) : null;
-    legend.textContent = bar ? legendText(bar) : legendText(rows[rows.length-1]);
+    if(legend) legend.textContent = bar ? legendText(bar) : legendText(rows[rows.length-1]);
+    if(!tooltip) return;
+    if(!bar || !param.point || param.point.x < 0 || param.point.y < 0 || param.point.x > target.clientWidth || param.point.y > target.clientHeight){
+      hideTooltip();
+      return;
+    }
+    tooltip.innerHTML = tooltipHtml(bar);
+    tooltip.hidden = false;
+    const leftSide = param.point.x > target.clientWidth - 230;
+    tooltip.style.left = `${Math.max(8, leftSide ? param.point.x - 214 : param.point.x + 14)}px`;
+    tooltip.style.top = `${Math.max(8, Math.min(target.clientHeight - tooltip.offsetHeight - 8, param.point.y + 12))}px`;
+    tooltip.dataset.date = bar.date;
+    tooltip.dataset.close = String(bar.close);
   });
   chart.timeScale().fitContent();
   const ro = new ResizeObserver(entries => {
