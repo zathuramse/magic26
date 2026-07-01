@@ -71,15 +71,22 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production summary missing round20_decision")
     if "round21_decision" not in summary:
         raise RuntimeError("Production summary missing round21_decision")
+    if "round22_decision" not in summary:
+        raise RuntimeError("Production summary missing round22_decision")
     latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
     if latest:
-        required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh"}
+        required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh", "volgap_subtype_zh", "volgap_score_impact"}
         missing = required - set(latest[0])
         if missing:
             raise RuntimeError(f"Production latest candidates missing fields: {sorted(missing)}")
     all_candidates = json.loads(fetch(ALL_CANDIDATES_URL).decode("utf-8"))
     if not all_candidates:
-        raise RuntimeError("Production all_candidates.json is empty")
+        raise RuntimeError("Production all_candidates empty")
+    subtypes = {str(r.get("volgap_subtype_zh")) for r in all_candidates}
+    if not {"正常", "可救斷層", "危險斷層"}.issubset(subtypes):
+        raise RuntimeError(f"Production all_candidates missing Round22 subtypes: {sorted(subtypes)}")
+    if not any(str(r.get("volgap_score_impact")) == "-10" for r in all_candidates):
+        raise RuntimeError("Production all_candidates missing Round22 danger score impact")
     if not any(float(row.get("ret_60d_signal") or 0) > 1.5 for row in all_candidates):
         raise RuntimeError("Production all candidates missing ret60 hot rows")
     if not any("大量斷層" in str(row.get("volume_gap_risk_zh")) for row in all_candidates):

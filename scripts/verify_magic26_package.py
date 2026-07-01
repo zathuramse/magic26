@@ -74,6 +74,8 @@ required_columns = {
     "ret60_cap150_pass",
     "top1_to_top10_volume_ratio",
     "volume_gap_risk_zh",
+    "volgap_subtype_zh",
+    "volgap_score_impact",
     "risk_any_long_ma_bear",
     "risk_long_ma_score",
     "risk_badge_zh",
@@ -97,6 +99,9 @@ if "round20_decision" not in summary:
 if "round21_decision" not in summary:
     print("missing round21_decision in summary.json")
     sys.exit(1)
+if "round22_decision" not in summary:
+    print("missing round22_decision in summary.json")
+    sys.exit(1)
 round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv")
 if not round20["label"].astype(str).str.contains("top1/top10 < 2", regex=False).any():
     print("round20 summary missing top1/top10 validation row")
@@ -119,6 +124,21 @@ if candidates["risk_badge_zh"].astype(str).str.contains("研究中").sum() == 0:
     sys.exit(1)
 if candidates["volume_gap_risk_zh"].astype(str).str.contains("大量斷層").sum() == 0:
     print("no volume-gap watch rows found")
+    sys.exit(1)
+if not {"正常", "可救斷層", "危險斷層"}.issubset(set(candidates["volgap_subtype_zh"].astype(str))):
+    print("missing expected volgap subtypes", sorted(set(candidates["volgap_subtype_zh"].astype(str))))
+    sys.exit(1)
+impact = pd.to_numeric(candidates["volgap_score_impact"], errors="coerce")
+if impact.min() > -10 or impact.max() != 0:
+    print("unexpected volgap score impact range", impact.min(), impact.max())
+    sys.exit(1)
+html = (root / "public/index.html").read_text(encoding="utf-8")
+app = (root / "public/app.js").read_text(encoding="utf-8")
+if "Round 22 已產品化" not in html or "volgapRescue" not in html or "volgapDanger" not in html:
+    print("round22 UI filters/text missing from index.html")
+    sys.exit(1)
+if "斷層分類" not in app or "volgap_score_impact" not in app:
+    print("round22 detail/score logic missing from app.js")
     sys.exit(1)
 
 for p in root.rglob("*"):

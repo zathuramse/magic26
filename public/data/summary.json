@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T08:28:26",
+  "generated_at": "2026-07-01T09:01:47",
   "data_through": "2026-06-22",
   "latest_signal_date": "2026-06-10",
   "total_candidate_rows": 329,
@@ -33,6 +33,12 @@
     "danger_candidate": "top1/top10>=2.5 或 ret60_signal>80% 標危險斷層，排序應明顯下調",
     "next_step": "產品化 volgap_subtype_zh：正常 / 可救斷層 / 危險斷層 / 待補"
   },
+  "round22_decision": {
+    "status": "volgap subtype productized；主規格不變",
+    "field": "volgap_subtype_zh = 正常 / 可救斷層 / 危險斷層 / 大量斷層觀察 / 待補",
+    "score": "可救斷層 -2；大量斷層觀察 -5；危險斷層 -10；只影響研究排序，不排除候選",
+    "ui": "卡片、篩選、細節欄位顯示 subtype；可救斷層不是加分，只是避免誤殺"
+  },
   "candidates": [
     {
       "candidate": "A_repo50_c4_40_fixed20",
@@ -48,6 +54,8 @@
       "low_liquidity_risk_rows": 11,
       "ret60_over150_rows": 1,
       "volume_gap_watch_rows": 28,
+      "volgap_rescue_rows": 5,
+      "volgap_danger_rows": 15,
       "long_ma_bear_rows": 3
     },
     {
@@ -64,6 +72,8 @@
       "low_liquidity_risk_rows": 25,
       "ret60_over150_rows": 1,
       "volume_gap_watch_rows": 28,
+      "volgap_rescue_rows": 5,
+      "volgap_danger_rows": 15,
       "long_ma_bear_rows": 3
     },
     {
@@ -80,6 +90,8 @@
       "low_liquidity_risk_rows": 15,
       "ret60_over150_rows": 0,
       "volume_gap_watch_rows": 14,
+      "volgap_rescue_rows": 2,
+      "volgap_danger_rows": 8,
       "long_ma_bear_rows": 1
     }
   ],

@@ -174,7 +174,7 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
         "ret_60d_signal", "ret60_cap150_pass", "volume_gap_risk_zh",
         "top1_to_top3_volume_ratio", "top1_to_top5_volume_ratio", "top1_to_top10_volume_ratio",
         "risk_daily_long_ma_bear", "risk_weekly_long_ma_bear", "risk_any_long_ma_bear",
-        "risk_long_ma_score", "risk_badge_zh",
+        "risk_long_ma_score", "risk_badge_zh", "volgap_subtype_zh", "volgap_score_impact",
     ]
     if not path.exists() or out.empty:
         for col in default_cols:
@@ -196,9 +196,25 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
     out = out.merge(detail, on=["date", "stock_id", "price_mode"], how="left")
 
     ret60 = pd.to_numeric(out.get("ret_60d_signal"), errors="coerce")
+    vol3 = pd.to_numeric(out.get("top1_to_top3_volume_ratio"), errors="coerce")
     vol10 = pd.to_numeric(out.get("top1_to_top10_volume_ratio"), errors="coerce")
     score = pd.to_numeric(out.get("risk_long_ma_score"), errors="coerce").fillna(0)
     out["ret60_cap150_pass"] = ret60.le(1.5).where(ret60.notna(), None)
+
+    missing_volgap = vol10.isna() | ret60.isna()
+    normal_volgap = vol10.lt(2)
+    rescue_volgap = vol10.ge(2) & vol10.lt(2.2) & vol3.lt(1.5) & ret60.le(0.8)
+    danger_volgap = vol10.ge(2.5) | ret60.gt(0.8)
+    out["volgap_subtype_zh"] = "待補"
+    out.loc[normal_volgap, "volgap_subtype_zh"] = "正常"
+    out.loc[rescue_volgap, "volgap_subtype_zh"] = "可救斷層"
+    out.loc[danger_volgap & ~normal_volgap, "volgap_subtype_zh"] = "危險斷層"
+    out.loc[vol10.ge(2) & ~rescue_volgap & ~danger_volgap, "volgap_subtype_zh"] = "大量斷層觀察"
+    out.loc[missing_volgap, "volgap_subtype_zh"] = "待補"
+    out["volgap_score_impact"] = 0
+    out.loc[out["volgap_subtype_zh"].eq("可救斷層"), "volgap_score_impact"] = -2
+    out.loc[out["volgap_subtype_zh"].eq("大量斷層觀察"), "volgap_score_impact"] = -5
+    out.loc[out["volgap_subtype_zh"].eq("危險斷層"), "volgap_score_impact"] = -10
 
     def vol_label(v: Any) -> str:
         if pd.isna(v):
@@ -218,8 +234,8 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
         tags: list[str] = ["研究中"]
         if pd.notna(row.get("ret_60d_signal")) and float(row["ret_60d_signal"]) > 1.5:
             tags.append("60日漲幅>150%")
-        if row.get("volume_gap_risk_zh") in {"大量斷層觀察", "大量斷層高"}:
-            tags.append(str(row["volume_gap_risk_zh"]))
+        if row.get("volgap_subtype_zh") in {"可救斷層", "危險斷層", "大量斷層觀察"}:
+            tags.append(str(row["volgap_subtype_zh"]))
         if truthy(row.get("risk_daily_long_ma_bear")):
             tags.append("日長均空頭")
         if truthy(row.get("risk_weekly_long_ma_bear")):
@@ -285,6 +301,8 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
         "top1_to_top5_volume_ratio",
         "top1_to_top10_volume_ratio",
         "volume_gap_risk_zh",
+        "volgap_subtype_zh",
+        "volgap_score_impact",
         "risk_daily_long_ma_bear",
         "risk_weekly_long_ma_bear",
         "risk_any_long_ma_bear",
@@ -366,6 +384,12 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
             "danger_candidate": "top1/top10>=2.5 或 ret60_signal>80% 標危險斷層，排序應明顯下調",
             "next_step": "產品化 volgap_subtype_zh：正常 / 可救斷層 / 危險斷層 / 待補",
         },
+        "round22_decision": {
+            "status": "volgap subtype productized；主規格不變",
+            "field": "volgap_subtype_zh = 正常 / 可救斷層 / 危險斷層 / 大量斷層觀察 / 待補",
+            "score": "可救斷層 -2；大量斷層觀察 -5；危險斷層 -10；只影響研究排序，不排除候選",
+            "ui": "卡片、篩選、細節欄位顯示 subtype；可救斷層不是加分，只是避免誤殺",
+        },
         "candidates": [],
     }
     if not candidates.empty:
@@ -386,6 +410,8 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
                     "low_liquidity_risk_rows": int(part.get("is_low_liquidity_risk", pd.Series(dtype=bool)).sum()),
                     "ret60_over150_rows": int(pd.to_numeric(part.get("ret_60d_signal"), errors="coerce").gt(1.5).sum()),
                     "volume_gap_watch_rows": int(part.get("volume_gap_risk_zh", pd.Series(dtype=str)).astype(str).str.contains("大量斷層").sum()),
+                    "volgap_rescue_rows": int(part.get("volgap_subtype_zh", pd.Series(dtype=str)).astype(str).eq("可救斷層").sum()),
+                    "volgap_danger_rows": int(part.get("volgap_subtype_zh", pd.Series(dtype=str)).astype(str).eq("危險斷層").sum()),
                     "long_ma_bear_rows": int(part.get("risk_any_long_ma_bear", pd.Series(dtype=bool)).map(lambda v: v is True or str(v).lower() == "true").sum()),
                 }
             )

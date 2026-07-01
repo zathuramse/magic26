@@ -90,7 +90,9 @@ function isLowLiquidity(r){ return isTrue(r.risk_liquidity_lt100m); }
 function isWeakMomentum(r){ return isTrue(r.is_weak_momentum) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) < .15); }
 function isFloor15(r){ return isTrue(r.is_floor15_observation) || (r.candidate === 'A_repo50_c4_40_fixed20' && Number(r.ret_20d) >= .15 && Number(r.ret_20d) < .40); }
 function isRet60Hot(r){ return Number(r.ret_60d_signal) > 1.5; }
-function isVolumeGapWatch(r){ return String(r.volume_gap_risk_zh || '').includes('大量斷層'); }
+function isVolumeGapWatch(r){ return String(r.volume_gap_risk_zh || '').includes('大量斷層') || ['可救斷層','危險斷層','大量斷層觀察'].includes(String(r.volgap_subtype_zh || '')); }
+function isVolgapRescue(r){ return String(r.volgap_subtype_zh || '') === '可救斷層'; }
+function isVolgapDanger(r){ return String(r.volgap_subtype_zh || '') === '危險斷層'; }
 function isLongMaBear(r){ return isTrue(r.risk_any_long_ma_bear) || Number(r.risk_long_ma_score || 0) < 0; }
 function round19TagsText(r){ return String(r.risk_badge_zh || '').split(';').filter(Boolean).join(' / '); }
 function classify(r){
@@ -107,6 +109,7 @@ function priorityScore(r){
   if(!isLowLiquidity(r)) score += 15;
   score += Math.min(14, Math.max(0, Number(r.top5_volume_ratio_120 || 0) * 14));
   score += Math.min(8, Math.max(0, Number(r.avg_amount_20d || 0) / 1_000_000_000 * 2));
+  score += Number(r.volgap_score_impact || 0);
   return Math.round(score);
 }
 function priorityLabel(r){
@@ -125,6 +128,8 @@ function matchRisk(r, risk){
   if(risk === 'liquidity') return isLowLiquidity(r);
   if(risk === 'ret60hot') return isRet60Hot(r);
   if(risk === 'volgap') return isVolumeGapWatch(r);
+  if(risk === 'volgapRescue') return isVolgapRescue(r);
+  if(risk === 'volgapDanger') return isVolgapDanger(r);
   if(risk === 'longma') return isLongMaBear(r);
   if(risk === 'nonmain') return r.candidate !== 'A_repo50_c4_40_fixed20';
   return true;
@@ -146,7 +151,9 @@ function riskTags(r){
   else if(Number(r.next_open_gap) >= .03) tags.push('<span class="pill">高開>3%</span>');
   if(isLowLiquidity(r)) tags.push('<span class="pill bad">低流動</span>');
   if(isRet60Hot(r)) tags.push('<span class="pill research">60日>150%</span>');
-  if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">${r.volume_gap_risk_zh}</span>`);
+  if(isVolgapDanger(r)) tags.push('<span class="pill bad">危險斷層</span>');
+  else if(isVolgapRescue(r)) tags.push('<span class="pill research">可救斷層</span>');
+  else if(isVolumeGapWatch(r)) tags.push(`<span class="pill research">${r.volgap_subtype_zh || r.volume_gap_risk_zh}</span>`);
   if(isLongMaBear(r)) tags.push('<span class="pill bad">長均空頭</span>');
   if(r.risk_badge_zh) tags.push('<span class="pill muted">研究中</span>');
   if(r.candidate !== 'A_repo50_c4_40_fixed20') tags.push('<span class="pill muted">非主規格</span>');
@@ -245,6 +252,7 @@ function showDetail(r){
     ['動能桶', r.momentum_bucket_zh], ['策略角色', r.strategy_role_zh], ['研究優先', r.research_priority_zh || priorityLabel(r)], ['研究標籤', r.research_tags],
     ['資料來源', r.source_type || '—'], ['60日漲幅', fmtPct(r.ret_60d_signal)], ['60日上限', isRet60Hot(r) ? '超過150%' : (r.ret_60d_signal == null ? '待補' : '通過')], ['Round19標籤', round19TagsText(r) || '—'],
     ['top1/top3量', fmtNum(r.top1_to_top3_volume_ratio,2)], ['top1/top5量', fmtNum(r.top1_to_top5_volume_ratio,2)], ['top1/top10量', fmtNum(r.top1_to_top10_volume_ratio,2)], ['量能斷層', r.volume_gap_risk_zh || '—'],
+    ['斷層分類', r.volgap_subtype_zh || '—'], ['斷層分數影響', r.volgap_score_impact ?? '—'],
     ['日長均空頭', isTrue(r.risk_daily_long_ma_bear) ? '是' : '否'], ['周長均空頭', isTrue(r.risk_weekly_long_ma_bear) ? '是' : '否'], ['長均分數', r.risk_long_ma_score ?? '—'],
   ];
   document.getElementById('detailBody').innerHTML = `<div class="detail-grid">${items.map(([k,v]) => `<div><label>${k}</label><strong>${v ?? '—'}</strong></div>`).join('')}</div><div class="detail-tags">${riskTags(r)}</div>${externalLinksHtml(r)}`;
