@@ -79,6 +79,12 @@ function subtypeTone(subtype){
   if(subtype === '待補') return 'missing';
   return 'watch';
 }
+function applyCandidateFilter({range='all', candidate='all', risk='all'}={}){
+  document.getElementById('rangeFilter').value = range;
+  document.getElementById('candidateFilter').value = candidate;
+  document.getElementById('riskFilter').value = risk;
+  renderStockCards();
+}
 function renderVolgapSummary(){
   const target = document.getElementById('volgapSummary');
   if(!target) return;
@@ -93,9 +99,7 @@ function renderVolgapSummary(){
     </button>`;
   }).join('');
   document.querySelectorAll('.subtype-card').forEach(btn => btn.addEventListener('click', () => {
-    document.getElementById('rangeFilter').value = 'all';
-    document.getElementById('riskFilter').value = btn.dataset.risk;
-    renderStockCards();
+    applyCandidateFilter({range:'all', risk:btn.dataset.risk});
     document.getElementById('stockCards').scrollIntoView({behavior:'smooth', block:'start'});
   }));
 }
@@ -246,9 +250,25 @@ function renderWatchState(){
 }
 
 function renderMainAList(){
-  const rows = recentRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20').sort(compareRows('priority')).slice(0, 6);
-  document.getElementById('mainAList').innerHTML = rows.map(r => stockCardHtml(r, true)).join('') || '<div class="empty">近期沒有主規格 A 候選。</div>';
-  document.querySelectorAll('#mainAList .stock-card').forEach(card => card.addEventListener('click', () => showDetail(rows.find(r => rowKey(r) === card.dataset.key))));
+  const target = document.getElementById('mainAList');
+  const rows = recentRows.filter(r => r.candidate === 'A_repo50_c4_40_fixed20').sort(compareRows('priority'));
+  if(!rows.length){ target.innerHTML = '<div class="empty">近期沒有主規格 A 候選。</div>'; return; }
+  const byKey = new Map(rows.map(r => [rowKey(r), r]));
+  target.innerHTML = subtypeOrder.map(subtype => {
+    const part = rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).slice(0, 3);
+    const count = rows.filter(r => String(r.volgap_subtype_zh || '待補') === subtype).length;
+    return `<section class="main-a-group ${subtypeTone(subtype)}">
+      <button class="main-a-head" data-risk="${subtypeFilters[subtype]}">
+        <span>A｜${subtype}</span><strong>${count}</strong><em>看此分類</em>
+      </button>
+      <div class="main-a-cards">${part.length ? part.map(r => stockCardHtml(r, true)).join('') : '<div class="empty mini">近期無候選</div>'}</div>
+    </section>`;
+  }).join('');
+  document.querySelectorAll('#mainAList .stock-card').forEach(card => card.addEventListener('click', () => showDetail(byKey.get(card.dataset.key))));
+  document.querySelectorAll('#mainAList .main-a-head').forEach(btn => btn.addEventListener('click', () => {
+    applyCandidateFilter({range:'recent', candidate:'A_repo50_c4_40_fixed20', risk:btn.dataset.risk});
+    document.getElementById('stockCards').scrollIntoView({behavior:'smooth', block:'start'});
+  }));
 }
 
 function renderStockCards(){

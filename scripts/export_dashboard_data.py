@@ -395,6 +395,11 @@ def build_summary(candidates: pd.DataFrame, data_through: str) -> dict[str, Any]
             "ui": "新增斷層分類總覽卡，顯示全歷史/近期/最新/A類數量，點擊即套用全歷史分類篩選",
             "scope": "純 UI 研究入口；不新增交易訊號、不改候選資格",
         },
+        "round24_decision": {
+            "status": "main-A subtype grouped priority list；主規格不變",
+            "ui": "主規格 A 近期清單依斷層分類分組，每組顯示前三筆並可點標題套用 2026近期 + A + 分類篩選",
+            "scope": "只改善人工研究順序；不新增交易訊號、不改候選資格",
+        },
         "candidates": [],
     }
     if not candidates.empty:

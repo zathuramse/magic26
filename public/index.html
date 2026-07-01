@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 研究候選清單</title>
-  <link rel="stylesheet" href="./styles.css?v=20260630a" />
+  <link rel="stylesheet" href="./styles.css?v=20260701a" />
 </head>
 <body>
   <header class="topbar">
@@ -48,12 +48,12 @@
     <section class="panel">
       <div class="section-head compact">
         <div>
-          <h2>主規格 A 近期優先清單</h2>
-          <p>依研究優先分數排序：主規格、非追高、流動性足、repo 量比高者優先。</p>
+          <h2>主規格 A 斷層分組優先清單</h2>
+          <p>Round 24：A 類近期候選依斷層分類分組；點分類標題可切到 2026 近期 + A + 該分類。</p>
         </div>
         <button class="ghost" id="jumpMainA">切到 2026 近期 + A</button>
       </div>
-      <div id="mainAList" class="stock-grid compact-grid"></div>
+      <div id="mainAList" class="main-a-groups"></div>
     </section>
 
 
@@ -140,6 +140,7 @@
         <p>Round 20 用 60D 驗證後，top1/top10&lt;2 是目前最有用的研究優先加分；大量斷層仍只做負分，不做 veto。</p>
         <p>Round 21 檢查誤殺案例後，只有很窄的「可救斷層」條件；Round 22 已產品化為正常 / 可救斷層 / 危險斷層，主規格仍不變。</p>
         <p>Round 23 加入斷層分類總覽卡，可快速切換全歷史分類檢查，仍只作研究路由。</p>
+        <p>Round 24 將主規格 A 近期清單改成斷層分組，優先看正常 / 可救，再人工檢查危險 / 待補。</p>
         <p>這裡定位為人工研究入口，搭配逐檔圖形與產業脈絡檢查。</p>
       </div>
     </section>
@@ -163,6 +164,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=20260701b"></script>
+  <script src="./app.js?v=20260701c"></script>
 </body>
 </html>

@@ -105,6 +105,9 @@ if "round22_decision" not in summary:
 if "round23_decision" not in summary:
     print("missing round23_decision in summary.json")
     sys.exit(1)
+if "round24_decision" not in summary:
+    print("missing round24_decision in summary.json")
+    sys.exit(1)
 round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260622.csv")
 if not round20["label"].astype(str).str.contains("top1/top10 < 2", regex=False).any():
     print("round20 summary missing top1/top10 validation row")
@@ -143,15 +146,24 @@ if "Round 22 已產品化" not in html or "volgapRescue" not in html or "volgapD
 if "斷層分類總覽" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
+if "主規格 A 斷層分組優先清單" not in html or "app.js?v=20260701c" not in html or "styles.css?v=20260701a" not in html:
+    print("round24 grouped A list/cache-bust missing from index.html")
+    sys.exit(1)
 if "斷層分類" not in app or "volgap_score_impact" not in app:
     print("round22 detail/score logic missing from app.js")
     sys.exit(1)
 if "renderVolgapSummary" not in app or "subtype-card" not in app:
     print("round23 summary rendering missing from app.js")
     sys.exit(1)
+if "main-a-group" not in app or "applyCandidateFilter({range:'recent', candidate:'A_repo50_c4_40_fixed20'" not in app:
+    print("round24 main-A grouped rendering missing from app.js")
+    sys.exit(1)
 css = (root / "public/styles.css").read_text(encoding="utf-8")
 if "subtype-summary" not in css or "subtype-card" not in css:
     print("round23 summary styles missing from styles.css")
+    sys.exit(1)
+if "main-a-groups" not in css or "main-a-head" not in css:
+    print("round24 main-A group styles missing from styles.css")
     sys.exit(1)
 
 for p in root.rglob("*"):

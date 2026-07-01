@@ -60,8 +60,10 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML does not contain dashboard title")
     if "斷層分類總覽" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
         raise RuntimeError("Production HTML missing Round23 subtype summary/filter UI")
-    if "app.js?v=20260701b" not in html:
-        raise RuntimeError("Production HTML missing Round23 app cache-bust")
+    if "主規格 A 斷層分組優先清單" not in html:
+        raise RuntimeError("Production HTML missing Round24 grouped main-A list")
+    if "app.js?v=20260701c" not in html or "styles.css?v=20260701a" not in html:
+        raise RuntimeError("Production HTML missing Round24 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
         raise RuntimeError(f"Unexpected main_spec: {summary.get('main_spec')}")
@@ -79,6 +81,8 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production summary missing round22_decision")
     if "round23_decision" not in summary:
         raise RuntimeError("Production summary missing round23_decision")
+    if "round24_decision" not in summary:
+        raise RuntimeError("Production summary missing round24_decision")
     latest = json.loads(fetch(LATEST_URL).decode("utf-8"))
     if latest:
         required = {"research_tags", "research_priority_zh", "momentum_bucket_zh", "source_type", "risk_badge_zh", "volgap_subtype_zh", "volgap_score_impact"}
