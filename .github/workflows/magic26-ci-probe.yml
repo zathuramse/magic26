@@ -31,6 +31,11 @@ on:
         required: false
         type: boolean
         default: false
+      run_base_round4_sample_probe:
+        description: "Run sample 6213 base signal + round4 regeneration in CI staging"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -54,6 +59,7 @@ jobs:
       RUN_CACHE_EXTENSION_PROBE: ${{ inputs.run_cache_extension_probe }}
       RUN_CACHE_EXTENSION_DRY_RUN: ${{ inputs.run_cache_extension_dry_run }}
       RUN_ROUND_FEASIBILITY_PROBE: ${{ inputs.run_round_feasibility_probe }}
+      RUN_BASE_ROUND4_SAMPLE_PROBE: ${{ inputs.run_base_round4_sample_probe }}
       MAGIC26_RESEARCH_ROOT: ${{ github.workspace }}/.ci/research-brain
       MAGIC26_SOURCE_ROOT: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26
       MAGIC26_CACHE_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/cache
@@ -163,6 +169,10 @@ jobs:
         if: ${{ inputs.run_round_feasibility_probe }}
         run: python scripts/magic26_ci_round_feasibility_probe.py
 
+      - name: CI base signal and round4 sample probe only
+        if: ${{ inputs.run_base_round4_sample_probe }}
+        run: python scripts/magic26_ci_base_round4_sample_probe.py
+
       - name: Build CI probe artifact manifest
         shell: bash
         run: |
@@ -191,6 +201,7 @@ jobs:
               'run_cache_extension_probe': os.environ.get('RUN_CACHE_EXTENSION_PROBE', 'false'),
               'run_cache_extension_dry_run': os.environ.get('RUN_CACHE_EXTENSION_DRY_RUN', 'false'),
               'run_round_feasibility_probe': os.environ.get('RUN_ROUND_FEASIBILITY_PROBE', 'false'),
+              'run_base_round4_sample_probe': os.environ.get('RUN_BASE_ROUND4_SAMPLE_PROBE', 'false'),
               'finmind_token_present': bool(os.environ.get('FINMIND_TOKEN')),
               'paths': {
                   'dash_root': str(p.dash_root()),
@@ -227,6 +238,8 @@ jobs:
             ${{ env.MAGIC26_CACHE_DIR }}/adj_6213_20210101_20260702.parquet
             ${{ env.MAGIC26_CACHE_DIR }}/benchmark_TAIEX_20210101_20260701.parquet
             ${{ env.MAGIC26_CACHE_DIR }}/benchmark_TAIEX_20210101_20260702.parquet
+            ${{ env.MAGIC26_OUT_DIR }}/magic26_v0_*manual_*_20210101_20260702_1stocks.*
+            ${{ env.MAGIC26_OUT_DIR }}/magic26_round4_*sample6213*20210101_20260702.*
           if-no-files-found: error
           retention-days: 14
 
