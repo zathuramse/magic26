@@ -10,11 +10,11 @@ import urllib.request
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[1]
-CANONICAL_URL = "https://magic26.pages.dev/?v=20260701y"
+CANONICAL_URL = "https://magic26.pages.dev/?v=20260702riskv2"
 SUMMARY_URL = "https://magic26.pages.dev/data/summary.json"
-LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json"
-LATEST_GROUPS_URL = "https://magic26.pages.dev/data/latest_signal_groups.json?v=20260701y"
-ALL_GROUPS_URL = "https://magic26.pages.dev/data/all_signal_groups.json?v=20260701y"
+LATEST_URL = "https://magic26.pages.dev/data/latest_candidates.json?v=20260702riskv2"
+LATEST_GROUPS_URL = "https://magic26.pages.dev/data/latest_signal_groups.json?v=20260702riskv2"
+ALL_GROUPS_URL = "https://magic26.pages.dev/data/all_signal_groups.json?v=20260702riskv2"
 ALL_CANDIDATES_URL = "https://magic26.pages.dev/data/all_candidates.json"
 ROUND14_BOOTSTRAP_URL = "https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260701.csv"
 ROUND19_VOLGAP_URL = "https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260701.csv"
@@ -65,13 +65,13 @@ def verify_production(expected_data_through: str | None = None) -> None:
         raise RuntimeError("Production HTML still contains old Round25 first-screen copy")
     if "次要篩選：量能狀態" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
         raise RuntimeError("Production HTML missing Round25 volume-gap plain-language UI")
-    if "lightweight-charts.standalone.production.js" not in html or "app.js?v=20260701y" not in html or "styles.css?v=20260701q" not in html:
+    if "lightweight-charts.standalone.production.js" not in html or "app.js?v=20260702riskv2" not in html or "styles.css?v=20260701q" not in html:
         raise RuntimeError("Production HTML missing TradingView-style chart loader")
-    if "K 線圖" not in html and "app.js?v=20260701y" not in html:
+    if "K 線圖" not in html and "app.js?v=20260702riskv2" not in html:
         raise RuntimeError("Production HTML/cache missing kline-capable app")
     if "今日主清單" not in html or "次要清單：今年 A 組" not in html:
         raise RuntimeError("Production HTML missing Round25 grouped main-A list copy")
-    if "app.js?v=20260701y" not in html or "styles.css?v=20260701q" not in html:
+    if "app.js?v=20260702riskv2" not in html or "styles.css?v=20260701q" not in html:
         raise RuntimeError("Production HTML missing Round25 cache-bust")
     summary = json.loads(fetch(SUMMARY_URL).decode("utf-8"))
     if summary.get("main_spec") != "A_repo50_c4_40_fixed20":
@@ -101,10 +101,14 @@ def verify_production(expected_data_through: str | None = None) -> None:
     latest_groups = json.loads(fetch(LATEST_GROUPS_URL).decode("utf-8"))
     if len(latest_groups) != 1 or latest_groups[0].get("stock_id") != "6213" or latest_groups[0].get("alias_count") != 4:
         raise RuntimeError(f"Production latest signal groups not merged as expected: {latest_groups[:1]}")
-    required_group = {"signal_group_id", "signal_date", "data_through", "generated_at", "hit_candidates", "price_modes", "alias_rows", "primary_reason", "risk_reason"}
+    required_group = {"signal_group_id", "signal_date", "data_through", "generated_at", "hit_candidates", "price_modes", "alias_rows", "primary_reason", "risk_reason", "risk_v2_level", "risk_v2_label_zh", "risk_v2_primary_badge_zh", "risk_v2_action_hint_zh", "risk_v2_is_display_only"}
     missing_group = required_group - set(latest_groups[0])
     if missing_group:
         raise RuntimeError(f"Production latest signal group missing fields: {sorted(missing_group)}")
+    if latest_groups[0].get("risk_v2_level") != 2 or latest_groups[0].get("risk_v2_primary_badge_zh") != "只觀察" or latest_groups[0].get("risk_v2_label_zh") != "高追高 / 只觀察":
+        raise RuntimeError(f"Production latest signal group risk_v2 mismatch: {latest_groups[0]}")
+    if "不建議直接追價" not in str(latest_groups[0].get("risk_v2_action_hint_zh")) or latest_groups[0].get("risk_v2_is_display_only") is not True:
+        raise RuntimeError(f"Production latest signal group risk_v2 hint/display_only mismatch: {latest_groups[0]}")
     all_groups = json.loads(fetch(ALL_GROUPS_URL).decode("utf-8"))
     if len({(g.get("stock_id"), g.get("signal_date")) for g in all_groups}) != len(all_groups):
         raise RuntimeError("Production all_signal_groups still has duplicate stock/date groups")
