@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-07-02T17:42:58",
+  "dry_run": false,
+  "refresh_daily": true,
+  "overwrite": true,
+  "source_suffix": "20210101_20260701",
+  "target_suffix": "20210101_20260702",
+  "tail_start": "2026-07-01",
+  "target_date": "2026-07-02",
+  "trading_days": [
+    "2026-07-01",
+    "2026-07-02"
+  ],
+  "daily_feeds": {
+    "raw": {
+      "rows": 4672,
+      "date_min": "2026-07-01",
+      "date_max": "2026-07-02"
+    },
+    "adj": {
+      "rows": 4349,
+      "date_min": "2026-07-01",
+      "date_max": "2026-07-02"
+    }
+  },
+  "extensions": {
+    "raw": {
+      "source_files": 2144,
+      "planned_or_written": 2144,
+      "exists_skipped": 0,
+      "sample_outputs": {
+        "6213": {
+          "stock_id": "6213",
+          "old_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\raw_6213_20210101_20260701.parquet",
+          "new_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\raw_6213_20210101_20260702.parquet",
+          "status": "written",
+          "old": {
+            "rows": 1330,
+            "date_min": "2021-01-04",
+            "date_max": "2026-07-01"
+          },
+          "add": {
+            "rows": 2,
+            "date_min": "2026-07-01",
+            "date_max": "2026-07-02"
+          },
+          "out": {
+            "rows": 1331,
+            "date_min": "2021-01-04",
+            "date_max": "2026-07-02"
+          }
+        }
+      }
+    },
+    "adj": {
+      "source_files": 2130,
+      "planned_or_written": 2130,
+      "exists_skipped": 0,
+      "sample_outputs": {
+        "6213": {
+          "stock_id": "6213",
+          "old_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\adj_6213_20210101_20260701.parquet",
+          "new_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\adj_6213_20210101_20260702.parquet",
+          "status": "written",
+          "old": {
+            "rows": 1329,
+            "date_min": "2021-01-04",
+            "date_max": "2026-06-30"
+          },
+          "add": {
+            "rows": 2,
+            "date_min": "2026-07-01",
+            "date_max": "2026-07-02"
+          },
+          "out": {
+            "rows": 1331,
+            "date_min": "2021-01-04",
+            "date_max": "2026-07-02"
+          }
+        }
+      }
+    },
+    "benchmark_TAIEX": {
+      "source_exists": true,
+      "old_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\benchmark_TAIEX_20210101_20260701.parquet",
+      "new_path": "C:\\Users\\abckf\\research-brain\\sources\\strategy-checks\\magic26\\cache\\benchmark_TAIEX_20210101_20260702.parquet",
+      "status": "written",
+      "old": {
+        "rows": 1330,
+        "date_min": "2021-01-04",
+        "date_max": "2026-07-01"
+      },
+      "add": {
+        "rows": 2,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02"
+      },
+      "out": {
+        "rows": 1331,
+        "date_min": "2021-01-04",
+        "date_max": "2026-07-02"
+      }
+    }
+  },
+  "validation_notes": [
+    "raw sample 6213 extends to target date 2026-07-02.",
+    "adj sample 6213 extends to target date 2026-07-02.",
+    "benchmark_TAIEX extends to target date 2026-07-02."
+  ]
+}
