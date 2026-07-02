@@ -21,6 +21,11 @@ on:
         required: false
         type: boolean
         default: false
+      run_cache_extension_dry_run:
+        description: "Run sample-only extend_magic26_cache in CI staging; no production data is changed"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -42,6 +47,7 @@ jobs:
       CSS_CACHE_BUST: "20260701q"
       RUN_FINMIND_PROBE: ${{ inputs.run_finmind_probe }}
       RUN_CACHE_EXTENSION_PROBE: ${{ inputs.run_cache_extension_probe }}
+      RUN_CACHE_EXTENSION_DRY_RUN: ${{ inputs.run_cache_extension_dry_run }}
       MAGIC26_RESEARCH_ROOT: ${{ github.workspace }}/.ci/research-brain
       MAGIC26_SOURCE_ROOT: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26
       MAGIC26_CACHE_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/cache
@@ -131,6 +137,22 @@ jobs:
           --start-date 2026-07-01
           --end-date 2026-07-02
 
+      - name: CI sample-only cache extension dry-run
+        if: ${{ inputs.run_cache_extension_dry_run }}
+        run: >-
+          python scripts/extend_magic26_cache.py
+          --source-suffix 20210101_20260701
+          --target-suffix "$SNAPSHOT_SUFFIX"
+          --tail-start 2026-07-01
+          --target-date "$DATA_THROUGH"
+          --sample-only
+          --bootstrap-sample-source
+          --sample-source-start 2026-06-29
+          --sample-source-end 2026-07-01
+          --sample-stock-id 6213
+          --refresh-daily
+          --overwrite
+
       - name: Build CI probe artifact manifest
         shell: bash
         run: |
@@ -157,6 +179,7 @@ jobs:
               'data_through': os.environ.get('DATA_THROUGH'),
               'run_finmind_probe': os.environ.get('RUN_FINMIND_PROBE', 'false'),
               'run_cache_extension_probe': os.environ.get('RUN_CACHE_EXTENSION_PROBE', 'false'),
+              'run_cache_extension_dry_run': os.environ.get('RUN_CACHE_EXTENSION_DRY_RUN', 'false'),
               'finmind_token_present': bool(os.environ.get('FINMIND_TOKEN')),
               'paths': {
                   'dash_root': str(p.dash_root()),
@@ -187,6 +210,12 @@ jobs:
           path: |
             ${{ env.MAGIC26_ARTIFACT_DIR }}
             ${{ env.MAGIC26_CACHE_DIR }}/ci_probe_*.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/raw_6213_20210101_20260701.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/raw_6213_20210101_20260702.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/adj_6213_20210101_20260701.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/adj_6213_20210101_20260702.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/benchmark_TAIEX_20210101_20260701.parquet
+            ${{ env.MAGIC26_CACHE_DIR }}/benchmark_TAIEX_20210101_20260702.parquet
           if-no-files-found: error
           retention-days: 14
 

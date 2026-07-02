@@ -74,6 +74,119 @@ def fetch_daily(dataset: str, tag: str, days: list[str], sleep_s: float, *, refr
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
 
 
+def fetch_range(
+    dataset: str,
+    cache_name: str,
+    *,
+    data_id: str,
+    start_date: str,
+    end_date: str,
+    sleep_s: float,
+    refresh: bool,
+) -> pd.DataFrame:
+    cache_path = CACHE / cache_name
+    if refresh and cache_path.exists():
+        cache_path.unlink()
+    df = pilot.finmind_get(
+        dataset,
+        cache_name,
+        data_id=data_id,
+        start_date=start_date,
+        end_date=end_date,
+        sleep_s=sleep_s,
+    )
+    return normalized_price_frame(df)
+
+
+def fetch_sample_daily(
+    tag: str,
+    dataset: str,
+    days: list[str],
+    sample_stock_ids: set[str],
+    sleep_s: float,
+    *,
+    refresh_daily: bool,
+) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    safe_start = days[0].replace("-", "") if days else "none"
+    safe_end = days[-1].replace("-", "") if days else "none"
+    for stock_id in sorted(sample_stock_ids):
+        df = fetch_range(
+            dataset,
+            f"sample_daily_{tag}_{stock_id}_{safe_start}_{safe_end}.parquet",
+            data_id=stock_id,
+            start_date=days[0],
+            end_date=days[-1],
+            sleep_s=sleep_s,
+            refresh=refresh_daily,
+        )
+        frames.append(df)
+        print(f"sample daily {tag} {stock_id} rows={len(df)}")
+    if tag == "raw":
+        bench = fetch_range(
+            dataset,
+            f"sample_daily_benchmark_TAIEX_{safe_start}_{safe_end}.parquet",
+            data_id="TAIEX",
+            start_date=days[0],
+            end_date=days[-1],
+            sleep_s=sleep_s,
+            refresh=refresh_daily,
+        )
+        frames.append(bench)
+        print(f"sample daily benchmark_TAIEX rows={len(bench)}")
+    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+
+def bootstrap_sample_sources(
+    sample_stock_ids: set[str],
+    source_suffix: str,
+    source_start: str,
+    source_end: str,
+    *,
+    overwrite: bool,
+    sleep_s: float,
+) -> dict[str, Any]:
+    summary: dict[str, Any] = {"source_start": source_start, "source_end": source_end, "stocks": {}, "benchmark_TAIEX": {}}
+    for tag, dataset in PRICE_TYPES.items():
+        summary["stocks"][tag] = {}
+        for stock_id in sorted(sample_stock_ids):
+            path = CACHE / f"{tag}_{stock_id}_{source_suffix}.parquet"
+            status = "exists"
+            if overwrite or not path.exists():
+                df = fetch_range(
+                    dataset,
+                    f"bootstrap_{tag}_{stock_id}_{source_start.replace('-', '')}_{source_end.replace('-', '')}.parquet",
+                    data_id=stock_id,
+                    start_date=source_start,
+                    end_date=source_end,
+                    sleep_s=sleep_s,
+                    refresh=overwrite,
+                )
+                df.to_parquet(path, index=False)
+                status = "written"
+            else:
+                df = pd.read_parquet(path)
+            summary["stocks"][tag][stock_id] = {"path": str(path), "status": status, **frame_date_bounds(df)}
+    bench_path = CACHE / f"benchmark_TAIEX_{source_suffix}.parquet"
+    bench_status = "exists"
+    if overwrite or not bench_path.exists():
+        bench = fetch_range(
+            "TaiwanStockPrice",
+            f"bootstrap_benchmark_TAIEX_{source_start.replace('-', '')}_{source_end.replace('-', '')}.parquet",
+            data_id="TAIEX",
+            start_date=source_start,
+            end_date=source_end,
+            sleep_s=sleep_s,
+            refresh=overwrite,
+        )
+        bench.to_parquet(bench_path, index=False)
+        bench_status = "written"
+    else:
+        bench = pd.read_parquet(bench_path)
+    summary["benchmark_TAIEX"] = {"path": str(bench_path), "status": bench_status, **frame_date_bounds(bench)}
+    return summary
+
+
 def stock_id_from_cache(path: Path, tag: str, source_suffix: str) -> str:
     prefix = f"{tag}_"
     suffix = f"_{source_suffix}.parquet"
@@ -157,8 +270,11 @@ def extend_price_type(
     dry_run: bool,
     overwrite: bool,
     sample_stock_ids: set[str],
+    sample_only: bool,
 ) -> dict[str, Any]:
     paths = sorted(CACHE.glob(f"{tag}_*_{source_suffix}.parquet"))
+    if sample_only:
+        paths = [p for p in paths if stock_id_from_cache(p, tag, source_suffix) in sample_stock_ids]
     summary = {
         "source_files": len(paths),
         "planned_or_written": 0,
@@ -229,6 +345,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- mode: {'dry-run' if report['dry_run'] else 'local-write'}",
         f"- refresh_daily: `{report.get('refresh_daily', False)}`",
         f"- overwrite: `{report.get('overwrite', False)}`",
+        f"- sample_only: `{report.get('sample_only', False)}`",
+        f"- bootstrap_sample_source: `{report.get('bootstrap_sample_source', False)}`",
+        f"- sample_stock_ids: {', '.join(report.get('sample_stock_ids', []))}",
         f"- source_suffix: `{report['source_suffix']}`",
         f"- target_suffix: `{report['target_suffix']}`",
         f"- tail_start: `{report['tail_start']}`",
@@ -277,6 +396,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--refresh-daily", action="store_true", help="Ignore cached daily FinMind parquet inputs and re-fetch tail days.")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing target cache files. Default is skip existing.")
     parser.add_argument("--sample-stock-id", action="append", default=["6213"], help="Stock id to include in detailed report.")
+    parser.add_argument("--sample-only", action="store_true", help="Only extend sample stock ids plus benchmark_TAIEX.")
+    parser.add_argument(
+        "--bootstrap-sample-source",
+        action="store_true",
+        help="Create missing source-suffix sample stock and benchmark caches before extension.",
+    )
+    parser.add_argument("--sample-source-start", default="2026-06-29")
+    parser.add_argument("--sample-source-end", default=None, help="Defaults to source suffix end date.")
     parser.add_argument("--sleep-s", type=float, default=0.0)
     return parser
 
@@ -291,11 +418,30 @@ def main() -> None:
         raise SystemExit("source-suffix and target-suffix must differ")
 
     days = trading_days(tail_start, target_date)
-    daily: dict[str, pd.DataFrame] = {
-        tag: fetch_daily(dataset, tag, days, args.sleep_s, refresh_daily=args.refresh_daily)
-        for tag, dataset in PRICE_TYPES.items()
-    }
     sample_stock_ids = set(str(x) for x in args.sample_stock_id)
+    bootstrap_report = None
+    if args.bootstrap_sample_source:
+        source_end = args.sample_source_end or suffix_end_date(args.source_suffix).isoformat()
+        bootstrap_report = bootstrap_sample_sources(
+            sample_stock_ids,
+            args.source_suffix,
+            args.sample_source_start,
+            source_end,
+            overwrite=args.overwrite,
+            sleep_s=args.sleep_s,
+        )
+    if args.sample_only:
+        daily = {
+            tag: fetch_sample_daily(
+                tag, dataset, days, sample_stock_ids, args.sleep_s, refresh_daily=args.refresh_daily
+            )
+            for tag, dataset in PRICE_TYPES.items()
+        }
+    else:
+        daily = {
+            tag: fetch_daily(dataset, tag, days, args.sleep_s, refresh_daily=args.refresh_daily)
+            for tag, dataset in PRICE_TYPES.items()
+        }
     extensions = {
         tag: extend_price_type(
             tag,
@@ -305,6 +451,7 @@ def main() -> None:
             dry_run=args.dry_run,
             overwrite=args.overwrite,
             sample_stock_ids=sample_stock_ids,
+            sample_only=args.sample_only,
         )
         for tag, df in daily.items()
     }
@@ -334,6 +481,10 @@ def main() -> None:
         "dry_run": bool(args.dry_run),
         "refresh_daily": bool(args.refresh_daily),
         "overwrite": bool(args.overwrite),
+        "sample_only": bool(args.sample_only),
+        "bootstrap_sample_source": bool(args.bootstrap_sample_source),
+        "bootstrap_report": bootstrap_report,
+        "sample_stock_ids": sorted(sample_stock_ids),
         "source_suffix": args.source_suffix,
         "target_suffix": args.target_suffix,
         "tail_start": tail_start.isoformat(),
