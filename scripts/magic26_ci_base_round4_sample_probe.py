@@ -11,7 +11,7 @@ from typing import Any
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from magic26_paths import out_dir  # noqa: E402
+from magic26_paths import cache_dir, out_dir  # noqa: E402
 
 PROJECT = Path(__file__).resolve().parents[1]
 REPORT_DIR = Path(os.getenv("MAGIC26_REPORT_DIR", PROJECT / "reports" / "daily_refresh"))
@@ -87,6 +87,28 @@ def validate_round4(path: Path) -> dict[str, Any]:
     return info
 
 
+def remove_conflicting_sample_cache(mode: str) -> dict[str, Any]:
+    """Remove short P6-7 sample cache files that share full-range cache names.
+
+    P6-7 creates 4-row sample files named like the real per-stock cache, e.g.
+    raw_6213_20210101_20260702.parquet. magic26_signal_pilot uses the same
+    cache name for a full 2021-01-01..target-date fetch. In CI, the restored
+    P6-7 cache can therefore shadow the full-range fetch and produce zero
+    signals. This probe is CI-staging only, so removing the conflicting sample
+    cache is safer than silently using it.
+    """
+    removed: list[str] = []
+    tag = "adj" if mode == "adj" else "raw"
+    for path in [
+        cache_dir() / f"{tag}_{SAMPLE_STOCK}_{TARGET_SUFFIX}.parquet",
+        cache_dir() / f"benchmark_TAIEX_{TARGET_SUFFIX}.parquet",
+    ]:
+        if path.exists():
+            path.unlink()
+            removed.append(str(path))
+    return {"mode": mode, "removed": removed}
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     lines = [
         "# P6-9 Magic26 base signal + round4 sample probe",
@@ -121,6 +143,7 @@ def main() -> None:
     modes: dict[str, Any] = {}
 
     for mode, adjusted_flag in [("raw", False), ("adj", True)]:
+        cache_cleanup = remove_conflicting_sample_cache(mode)
         before_manifests = set(out_dir().glob("magic26_v0_manifest_*.json"))
         base_cmd = [
             sys.executable,
@@ -168,6 +191,7 @@ def main() -> None:
         round4_checked_path = out_dir() / f"magic26_round4_checked_signals_{run_label}.csv"
         round4_manifest_path = out_dir() / f"magic26_round4_manifest_{run_label}.json"
         modes[mode] = {
+            "cache_cleanup": cache_cleanup,
             "base_manifest_path": str(manifest_path),
             "signals_path": str(signals_path),
             "signals_info": signals_info,
