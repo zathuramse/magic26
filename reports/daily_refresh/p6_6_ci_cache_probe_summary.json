@@ -1,0 +1,60 @@
+{
+  "manifest": {
+    "github_run_id": "28598397004",
+    "github_sha": "921ea1bf076dad04610d428bf2b99d0063bf298c",
+    "run_finmind_probe": "true",
+    "run_cache_extension_probe": "true",
+    "finmind_token_present": true,
+    "counts": {
+      "cache_files": 3,
+      "out_files": 0,
+      "report_files": 4
+    }
+  },
+  "artifact_counts": {
+    "daily_report_json": 1,
+    "cache_report_json": 1,
+    "parquet_files": 0
+  },
+  "daily_probe": {
+    "complete_data_through": "2026-07-02",
+    "probe_error_count": 0,
+    "probe_count": 2
+  },
+  "cache_probe": {
+    "success": true,
+    "finmind_token_present": true,
+    "frames": {
+      "raw_sample": {
+        "rows": 2,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02",
+        "stock_ids": [
+          "6213"
+        ]
+      },
+      "adj_sample": {
+        "rows": 2,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02",
+        "stock_ids": [
+          "6213"
+        ]
+      },
+      "benchmark_TAIEX": {
+        "rows": 2,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02",
+        "stock_ids": [
+          "TAIEX"
+        ]
+      }
+    },
+    "validation": [
+      "OK raw_sample extends to 2026-07-02.",
+      "OK adj_sample extends to 2026-07-02.",
+      "OK benchmark_TAIEX extends to 2026-07-02."
+    ]
+  },
+  "parquet_names": []
+}

@@ -184,7 +184,9 @@ jobs:
         uses: actions/upload-artifact@v7.0.1
         with:
           name: magic26-ci-probe-${{ github.run_id }}
-          path: ${{ env.MAGIC26_ARTIFACT_DIR }}
+          path: |
+            ${{ env.MAGIC26_ARTIFACT_DIR }}
+            ${{ env.MAGIC26_CACHE_DIR }}/ci_probe_*.parquet
           if-no-files-found: error
           retention-days: 14
 
