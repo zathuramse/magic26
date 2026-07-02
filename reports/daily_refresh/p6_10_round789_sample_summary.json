@@ -1,0 +1,48 @@
+{
+  "run_id": "28602430848",
+  "head_sha": "cee2b6d37dc4799637bd54f9c382bbf5968632aa",
+  "manifest": {
+    "run_base_round4_sample_probe": "true",
+    "run_round789_sample_probe": "true",
+    "finmind_token_present": true,
+    "counts": {
+      "cache_files": 16,
+      "out_files": 32,
+      "report_files": 12
+    }
+  },
+  "p6_10_success": true,
+  "p6_10_failures": [],
+  "outputs": {
+    "round7_summary": {
+      "exists": true,
+      "rows": 80,
+      "size": 4399
+    },
+    "round7_top": {
+      "exists": true,
+      "rows": 40,
+      "size": 2721
+    },
+    "round8_summary": {
+      "exists": true,
+      "rows": 6,
+      "size": 270
+    },
+    "round8_detail": {
+      "exists": true,
+      "rows": 0,
+      "size": 4
+    },
+    "round9_summary": {
+      "exists": true,
+      "rows": 0,
+      "size": 4
+    },
+    "round9_detail": {
+      "exists": true,
+      "rows": 0,
+      "size": 4
+    }
+  }
+}
