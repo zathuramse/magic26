@@ -16,10 +16,10 @@ CACHE = cache_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
 
-def build_inputs(snapshot_suffix: str) -> dict[str, Path]:
+def build_inputs(snapshot_suffix: str, round4_raw: str | None = None, round4_adj: str | None = None) -> dict[str, Path]:
     return {
-        "raw": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
-        "adj": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
+        "raw": Path(round4_raw) if round4_raw else OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
+        "adj": Path(round4_adj) if round4_adj else OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
     }
 
 CANDIDATES = {
@@ -180,8 +180,10 @@ def summarize(df: pd.DataFrame) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX)
+    parser.add_argument("--round4-raw", default=None, help="Override raw round4 checked-signal CSV path. Keeps default full-run naming when omitted.")
+    parser.add_argument("--round4-adj", default=None, help="Override adjusted round4 checked-signal CSV path. Keeps default full-run naming when omitted.")
     args = parser.parse_args()
-    inputs = build_inputs(args.snapshot_suffix)
+    inputs = build_inputs(args.snapshot_suffix, args.round4_raw, args.round4_adj)
 
     bench = load_benchmark(args.snapshot_suffix)
     price_cache: dict[tuple[str, str], pd.DataFrame | None] = {}
@@ -223,14 +225,23 @@ def main() -> None:
                     detail_rows.append(row)
 
     detail = pd.DataFrame(detail_rows)
-    valid = detail[detail["path_error"] == ""].copy()
-    for (mode, cand, rule), part in valid.groupby(["price_mode", "candidate", "exit_rule"]):
-        summary_rows.append({"price_mode": mode, "candidate": cand, "exit_rule": rule, **summarize(part)})
-    for (mode, cand, rule, year), part in valid.groupby(["price_mode", "candidate", "exit_rule", "year"]):
-        year_rows.append({"price_mode": mode, "candidate": cand, "exit_rule": rule, "year": int(year), **summarize(part)})
+    if detail.empty or "path_error" not in detail.columns:
+        valid = pd.DataFrame()
+    else:
+        valid = detail[detail["path_error"] == ""].copy()
+    if not valid.empty and {"price_mode", "candidate", "exit_rule"}.issubset(valid.columns):
+        for (mode, cand, rule), part in valid.groupby(["price_mode", "candidate", "exit_rule"]):
+            summary_rows.append({"price_mode": mode, "candidate": cand, "exit_rule": rule, **summarize(part)})
+    if not valid.empty and {"price_mode", "candidate", "exit_rule", "year"}.issubset(valid.columns):
+        for (mode, cand, rule, year), part in valid.groupby(["price_mode", "candidate", "exit_rule", "year"]):
+            year_rows.append({"price_mode": mode, "candidate": cand, "exit_rule": rule, "year": int(year), **summarize(part)})
 
-    summary = pd.DataFrame(summary_rows).sort_values(["price_mode", "candidate", "median_excess"], ascending=[True, True, False])
-    yearly = pd.DataFrame(year_rows).sort_values(["price_mode", "candidate", "exit_rule", "year"])
+    summary = pd.DataFrame(summary_rows)
+    if not summary.empty:
+        summary = summary.sort_values(["price_mode", "candidate", "median_excess"], ascending=[True, True, False])
+    yearly = pd.DataFrame(year_rows)
+    if not yearly.empty:
+        yearly = yearly.sort_values(["price_mode", "candidate", "exit_rule", "year"])
 
     detail_path = OUT / f"magic26_round9_close_exit_detail_{args.snapshot_suffix}.csv"
     summary_path = OUT / f"magic26_round9_close_exit_summary_{args.snapshot_suffix}.csv"

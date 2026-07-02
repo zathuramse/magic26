@@ -14,10 +14,10 @@ OUT = out_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
 
-def build_inputs(snapshot_suffix: str) -> dict[str, Path]:
+def build_inputs(snapshot_suffix: str, round4_raw: str | None = None, round4_adj: str | None = None) -> dict[str, Path]:
     return {
-        "raw": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
-        "adj": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
+        "raw": Path(round4_raw) if round4_raw else OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
+        "adj": Path(round4_adj) if round4_adj else OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
     }
 
 REPO_THRESHOLDS = [0.40, 0.50, 0.60]
@@ -68,8 +68,10 @@ def make_signals(df: pd.DataFrame) -> dict[str, pd.Series]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX)
+    parser.add_argument("--round4-raw", default=None, help="Override raw round4 checked-signal CSV path. Keeps default full-run naming when omitted.")
+    parser.add_argument("--round4-adj", default=None, help="Override adjusted round4 checked-signal CSV path. Keeps default full-run naming when omitted.")
     args = parser.parse_args()
-    inputs = build_inputs(args.snapshot_suffix)
+    inputs = build_inputs(args.snapshot_suffix, args.round4_raw, args.round4_adj)
 
     all_summary = []
     all_yearly = []
