@@ -176,6 +176,29 @@ scripts/magic26_signal_pilot.py
 
 但已新增 `MAGIC26_ENV_FILE`，且 CI 優先使用 `FINMIND_TOKEN` env，因此不依賴 Hermes `.env`。
 
+## GitHub Actions 實跑結果
+
+P6-2 push 後手動觸發 `Magic26 CI probe`。
+
+最終通過 run：
+
+```text
+url: https://github.com/zathuramse/magic26/actions/runs/28591150149
+head_sha: 308f07275bdefd6d76cdfa085306aac8904f0b86
+status: completed
+conclusion: success
+started_at: 2026-07-02T12:47:24Z
+updated_at: 2026-07-02T12:47:53Z
+```
+
+Job 結果：
+
+```text
+Static package and refresh feasibility probe: success in 25s
+```
+
+新增的 `Verify repo-relative Magic26 path configuration` step 已通過，代表 GitHub Actions Linux runner 上的 env-driven `.ci` staging path 生效。
+
 ## 非目標
 
 這次沒有：
