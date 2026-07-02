@@ -152,7 +152,63 @@ ok magic26 package 2026-07-02 latest 2026-06-26
 
 ## GitHub Actions 實跑結果
 
-待 P6-3 workflow push 後補記。
+P6-3 workflow push 後，已手動觸發 baseline probe：
+
+```text
+url: https://github.com/zathuramse/magic26/actions/runs/28594409497
+head_sha: a986cde04080815856c55bebe6f24e35daca0c64
+status: completed
+conclusion: success
+created_at: 2026-07-02T13:37:54Z
+updated_at: 2026-07-02T13:38:28Z
+```
+
+Job 結果：
+
+```text
+Static package and refresh feasibility probe: success in 29s
+```
+
+本次 `run_finmind_probe=false`，所以 FinMind probe step 被 skip。這是刻意的 baseline：先確認 cache/artifact 基礎設施，不消耗 API quota。
+
+Artifact：
+
+```text
+name: magic26-ci-probe-28594409497
+size_in_bytes: 555
+expired: false
+```
+
+已下載 artifact 並讀取：
+
+```text
+magic26_ci_probe_manifest.json
+```
+
+Manifest 摘要：
+
+```json
+{
+  "github_run_id": "28594409497",
+  "github_sha": "a986cde04080815856c55bebe6f24e35daca0c64",
+  "snapshot_suffix": "20210101_20260702",
+  "data_through": "2026-07-02",
+  "counts": {
+    "cache_files": 0,
+    "out_files": 0,
+    "report_files": 0
+  },
+  "cache_dir_has_ci": true,
+  "report_dir_has_ci": true
+}
+```
+
+解讀：
+
+- artifact upload 成功。
+- manifest 可被下載與機器讀取。
+- cache/out/report 都走 `.ci` staging path。
+- `cache_files=0` 是預期結果，因 baseline probe 沒跑 FinMind/cache extension；cache step 有通過，但尚未有實質 parquet cache 可保存。
 
 ## 風險與下一步
 
