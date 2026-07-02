@@ -49,7 +49,7 @@ full refresh
 1. checkout repo
 2. setup Python 3.11
 3. install `requirements-ci.txt`
-4. setup Node 20
+4. setup Node 24
 5. compile Python scripts
 6. `node --check public/app.js`
 7. verify committed static dashboard package：
