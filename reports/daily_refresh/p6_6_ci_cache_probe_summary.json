@@ -1,7 +1,12 @@
 {
+  "run": {
+    "id": "28598605156",
+    "head_sha": "60f69159df3d87f2d77c272993bdadfd19676ce4",
+    "url": "https://github.com/zathuramse/magic26/actions/runs/28598605156"
+  },
   "manifest": {
-    "github_run_id": "28598397004",
-    "github_sha": "921ea1bf076dad04610d428bf2b99d0063bf298c",
+    "github_run_id": "28598605156",
+    "github_sha": "60f69159df3d87f2d77c272993bdadfd19676ce4",
     "run_finmind_probe": "true",
     "run_cache_extension_probe": "true",
     "finmind_token_present": true,
@@ -14,7 +19,7 @@
   "artifact_counts": {
     "daily_report_json": 1,
     "cache_report_json": 1,
-    "parquet_files": 0
+    "parquet_files": 3
   },
   "daily_probe": {
     "complete_data_through": "2026-07-02",
@@ -56,5 +61,9 @@
       "OK benchmark_TAIEX extends to 2026-07-02."
     ]
   },
-  "parquet_names": []
+  "parquet_names": [
+    "ci_probe_adj_6213_20260701_20260702.parquet",
+    "ci_probe_benchmark_TAIEX_20260701_20260702.parquet",
+    "ci_probe_raw_6213_20260701_20260702.parquet"
+  ]
 }
