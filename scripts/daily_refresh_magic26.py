@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 PROJECT = Path(__file__).resolve().parents[1]
-REPORT_DIR = PROJECT / "reports" / "daily_refresh"
+REPORT_DIR = Path(os.getenv("MAGIC26_REPORT_DIR", PROJECT / "reports" / "daily_refresh"))
 PUBLIC_SUMMARY = PROJECT / "public" / "data" / "summary.json"
 EXPORT_MANIFEST = PROJECT / "data" / "processed" / "export_manifest.json"
 FINMIND_BASE = "https://api.finmindtrade.com/api/v4/data"

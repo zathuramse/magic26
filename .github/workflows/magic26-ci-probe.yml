@@ -35,11 +35,14 @@ jobs:
       DATA_THROUGH: ${{ inputs.data_through }}
       APP_CACHE_BUST: "20260702riskv2"
       CSS_CACHE_BUST: "20260701q"
+      RUN_FINMIND_PROBE: ${{ inputs.run_finmind_probe }}
       MAGIC26_RESEARCH_ROOT: ${{ github.workspace }}/.ci/research-brain
       MAGIC26_SOURCE_ROOT: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26
       MAGIC26_CACHE_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/cache
       MAGIC26_OUT_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/out
       MAGIC26_DASH_ROOT: ${{ github.workspace }}
+      MAGIC26_REPORT_DIR: ${{ github.workspace }}/.ci/artifacts/reports/daily_refresh
+      MAGIC26_ARTIFACT_DIR: ${{ github.workspace }}/.ci/artifacts
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.0
@@ -53,6 +56,19 @@ jobs:
 
       - name: Install Python dependencies
         run: python -m pip install -r requirements-ci.txt
+
+      - name: Prepare CI staging directories
+        run: |
+          mkdir -p "$MAGIC26_CACHE_DIR" "$MAGIC26_OUT_DIR" "$MAGIC26_REPORT_DIR" "$MAGIC26_ARTIFACT_DIR"
+
+      - name: Restore Magic26 research cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: ${{ env.MAGIC26_CACHE_DIR }}
+          key: magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-${{ github.run_id }}
+          restore-keys: |
+            magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-
+            magic26-cache-${{ runner.os }}-
 
       - name: Set up Node
         uses: actions/setup-node@v6.4.0
@@ -100,6 +116,61 @@ jobs:
           --dry-run
           --lookback-days 10
           --stop-after-complete 2
+
+      - name: Build CI probe artifact manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          sys.path.insert(0, 'scripts')
+          import magic26_paths as p
+
+          artifact_dir = Path(os.environ['MAGIC26_ARTIFACT_DIR'])
+          artifact_dir.mkdir(parents=True, exist_ok=True)
+          cache_dir = p.cache_dir()
+          out_dir = p.out_dir()
+          report_dir = Path(os.environ['MAGIC26_REPORT_DIR'])
+          manifest = {
+              'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+              'github_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'github_sha': os.environ.get('GITHUB_SHA'),
+              'snapshot_suffix': os.environ.get('SNAPSHOT_SUFFIX'),
+              'data_through': os.environ.get('DATA_THROUGH'),
+              'run_finmind_probe': os.environ.get('RUN_FINMIND_PROBE', 'false'),
+              'paths': {
+                  'dash_root': str(p.dash_root()),
+                  'research_root': str(p.research_root()),
+                  'source_root': str(p.source_root()),
+                  'cache_dir': str(cache_dir),
+                  'out_dir': str(out_dir),
+                  'report_dir': str(report_dir),
+              },
+              'counts': {
+                  'cache_files': sum(1 for x in cache_dir.rglob('*') if x.is_file()) if cache_dir.exists() else 0,
+                  'out_files': sum(1 for x in out_dir.rglob('*') if x.is_file()) if out_dir.exists() else 0,
+                  'report_files': sum(1 for x in report_dir.rglob('*') if x.is_file()) if report_dir.exists() else 0,
+              },
+              'note': 'CI probe artifact only; no generated data commit, no deploy, no schedule.',
+          }
+          (artifact_dir / 'magic26_ci_probe_manifest.json').write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2),
+              encoding='utf-8',
+          )
+          print(json.dumps(manifest, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload CI probe artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: magic26-ci-probe-${{ github.run_id }}
+          path: ${{ env.MAGIC26_ARTIFACT_DIR }}
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Guardrail - no generated changes in probe
         shell: bash

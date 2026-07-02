@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -21,7 +22,7 @@ import magic26_signal_pilot as pilot  # noqa: E402
 from magic26_paths import cache_dir  # noqa: E402
 
 CACHE = cache_dir()
-REPORT_DIR = Path("reports/daily_refresh")
+REPORT_DIR = Path(os.getenv("MAGIC26_REPORT_DIR", "reports/daily_refresh"))
 DEFAULT_SOURCE_SUFFIX = "20210101_20260701"
 DEFAULT_TARGET_SUFFIX = "20210101_20260702"
 DEFAULT_TARGET_DATE = "2026-07-02"

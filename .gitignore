@@ -6,6 +6,7 @@ __pycache__/
 node_modules/
 .wrangler/
 .cache/
+.ci/
 cache/
 *.parquet
 reports/daily_refresh/runtime/
