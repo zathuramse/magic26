@@ -67,15 +67,6 @@ jobs:
         run: |
           mkdir -p "$MAGIC26_CACHE_DIR" "$MAGIC26_OUT_DIR" "$MAGIC26_REPORT_DIR" "$MAGIC26_ARTIFACT_DIR"
 
-      - name: Restore Magic26 research cache
-        uses: actions/cache@v6.1.0
-        with:
-          path: ${{ env.MAGIC26_CACHE_DIR }}
-          key: magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-${{ github.run_id }}
-          restore-keys: |
-            magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-
-            magic26-cache-${{ runner.os }}-
-
       - name: Set up Node
         uses: actions/setup-node@v6.4.0
         with:
@@ -114,6 +105,15 @@ jobs:
           --data-through "$DATA_THROUGH"
           --app-cache-bust "$APP_CACHE_BUST"
           --css-cache-bust "$CSS_CACHE_BUST"
+
+      - name: Restore Magic26 research cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: ${{ env.MAGIC26_CACHE_DIR }}
+          key: magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-${{ github.run_id }}
+          restore-keys: |
+            magic26-cache-${{ runner.os }}-${{ inputs.snapshot_suffix }}-
+            magic26-cache-${{ runner.os }}-
 
       - name: Refresh probe dry-run only
         if: ${{ inputs.run_finmind_probe }}
