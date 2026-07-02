@@ -1,0 +1,82 @@
+{
+  "run": {
+    "id": "28599749409",
+    "head_sha": "899720cdb5b1eff176bb38e45764e466b5413527",
+    "url": "https://github.com/zathuramse/magic26/actions/runs/28599749409"
+  },
+  "manifest": {
+    "github_run_id": "28599749409",
+    "github_sha": "899720cdb5b1eff176bb38e45764e466b5413527",
+    "run_finmind_probe": "true",
+    "run_cache_extension_probe": "true",
+    "run_cache_extension_dry_run": "true",
+    "finmind_token_present": true,
+    "counts": {
+      "cache_files": 15,
+      "out_files": 0,
+      "report_files": 6
+    }
+  },
+  "artifact_counts": {
+    "daily_report_json": 1,
+    "p6_6_probe_report_json": 1,
+    "p6_7_extend_report_json": 1,
+    "parquet_files": 9
+  },
+  "daily_probe": {
+    "complete_data_through": "2026-07-02",
+    "probe_error_count": 0
+  },
+  "extension": {
+    "dry_run": false,
+    "sample_only": true,
+    "bootstrap_sample_source": true,
+    "source_suffix": "20210101_20260701",
+    "target_suffix": "20210101_20260702",
+    "tail_start": "2026-07-01",
+    "target_date": "2026-07-02",
+    "daily_feeds": {
+      "raw": {
+        "rows": 4,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02"
+      },
+      "adj": {
+        "rows": 2,
+        "date_min": "2026-07-01",
+        "date_max": "2026-07-02"
+      }
+    },
+    "raw_6213_out": {
+      "rows": 4,
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "adj_6213_out": {
+      "rows": 4,
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "benchmark_out": {
+      "rows": 4,
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "validation_notes": [
+      "raw sample 6213 extends to target date 2026-07-02.",
+      "adj sample 6213 extends to target date 2026-07-02.",
+      "benchmark_TAIEX extends to target date 2026-07-02."
+    ]
+  },
+  "parquet_names": [
+    "adj_6213_20210101_20260701.parquet",
+    "adj_6213_20210101_20260702.parquet",
+    "benchmark_TAIEX_20210101_20260701.parquet",
+    "benchmark_TAIEX_20210101_20260702.parquet",
+    "ci_probe_adj_6213_20260701_20260702.parquet",
+    "ci_probe_benchmark_TAIEX_20260701_20260702.parquet",
+    "ci_probe_raw_6213_20260701_20260702.parquet",
+    "raw_6213_20210101_20260701.parquet",
+    "raw_6213_20210101_20260702.parquet"
+  ]
+}
