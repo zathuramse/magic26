@@ -1,0 +1,67 @@
+{
+  "run": {
+    "id": "28601453558",
+    "head_sha": "31abba85e4986bd468c41d713489b9a4ee753019",
+    "url": "https://github.com/zathuramse/magic26/actions/runs/28601453558"
+  },
+  "manifest": {
+    "github_run_id": "28601453558",
+    "github_sha": "31abba85e4986bd468c41d713489b9a4ee753019",
+    "run_base_round4_sample_probe": "true",
+    "finmind_token_present": true,
+    "counts": {
+      "cache_files": 16,
+      "out_files": 20,
+      "report_files": 10
+    }
+  },
+  "artifact_counts": {
+    "p6_9_report_json": 1,
+    "base_signal_csvs": 2,
+    "round4_checked_csvs": 2
+  },
+  "p6_9": {
+    "success": true,
+    "failures": [],
+    "raw": {
+      "cache_cleanup_removed_count": 2,
+      "signals_rows": 1,
+      "signals_date_max": "2026-02-24",
+      "round4_rows": 1,
+      "round4_checks": [
+        "OK column bench_close present",
+        "OK column risk_next_gap_gt3 present",
+        "OK column regime_all3 present",
+        "OK column excess_20d present",
+        "OK column t1_excess_20d present",
+        "OK bench_close_missing=0",
+        "OK sample stock 6213 present",
+        "OK rows > 0"
+      ]
+    },
+    "adj": {
+      "cache_cleanup_removed_count": 2,
+      "signals_rows": 1,
+      "signals_date_max": "2026-02-24",
+      "round4_rows": 1,
+      "round4_checks": [
+        "OK column bench_close present",
+        "OK column risk_next_gap_gt3 present",
+        "OK column regime_all3 present",
+        "OK column excess_20d present",
+        "OK column t1_excess_20d present",
+        "OK bench_close_missing=0",
+        "OK sample stock 6213 present",
+        "OK rows > 0"
+      ]
+    }
+  },
+  "base_signal_names": [
+    "magic26_v0_signals_manual_adj_20210101_20260702_1stocks.csv",
+    "magic26_v0_signals_manual_raw_20210101_20260702_1stocks.csv"
+  ],
+  "round4_checked_names": [
+    "magic26_round4_checked_signals_round6_regime_sample6213_adj_20210101_20260702.csv",
+    "magic26_round4_checked_signals_round6_regime_sample6213_raw_20210101_20260702.csv"
+  ]
+}
