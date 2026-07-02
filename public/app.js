@@ -104,9 +104,9 @@ async function load(){
     fetch('./data/latest_candidates.json').then(r=>r.json()),
     fetch('./data/recent_candidates.json').then(r=>r.json()),
     fetch('./data/all_candidates.json').then(r=>r.ok ? r.json() : []),
-    fetch('./data/latest_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
-    fetch('./data/recent_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
-    fetch('./data/all_signal_groups.json?v=20260701x').then(r=>r.ok ? r.json() : []),
+    fetch('./data/latest_signal_groups.json?v=20260701y').then(r=>r.ok ? r.json() : []),
+    fetch('./data/recent_signal_groups.json?v=20260701y').then(r=>r.ok ? r.json() : []),
+    fetch('./data/all_signal_groups.json?v=20260701y').then(r=>r.ok ? r.json() : []),
     fetch('./data/watch_states.json').then(r=>r.ok ? r.json() : [])
   ]);
   summaryData = summary;
@@ -287,6 +287,24 @@ function riskReasonText(r){
   if(isLongMaBear(r)) risks.push('長期均線偏空');
   if(isRet60Hot(r)) risks.push('前面60天已漲很多');
   return risks.length ? risks.join('；') : '主要風險不明顯，仍需看圖確認';
+}
+
+function cardWhyText(r){
+  const group = (r.hit_candidate_labels || []).includes('A組主清單') ? '進入 A 組主清單' : `${groupHitText(r)}命中`;
+  return `最近 20 天漲了 ${fmtPct(r.ret_20d)}，近20日均成交 ${fmtMoney(r.avg_amount_20d)}，所以${group}。`;
+}
+function cardCautionText(r){
+  const risk = riskReasonText(r);
+  if(String(risk).includes('追高') || String(risk).includes('隔日開盤')) return `隔天開盤高 ${fmtPct(r.next_open_gap)}，不要直接追價。`;
+  if(String(risk).includes('流動性') || isLowLiquidity(r)) return '流動性不足，先確認是否容易進出。';
+  if(String(risk).includes('太集中') || isVolgapDanger(r)) return '成交量太集中，先避開，除非看圖後確認不是假熱度。';
+  if(String(risk).includes('集中') || isVolumeGapWatch(r)) return '成交量集中在少數幾天，要看圖確認熱度是否可靠。';
+  if(String(risk).includes('長期均線') || isLongMaBear(r)) return '長期均線偏空，先看圖確認結構。';
+  if(String(risk).includes('60天') || isRet60Hot(r)) return '前面 60 天已漲很多，先等降溫或回測。';
+  return '沒有明顯紅旗，但仍要打開 K 線確認。';
+}
+function cardVersionText(r){
+  return `${groupHitText(r)}；${groupModeText(r)}都成立，${r.alias_count || 1} 筆版本已合併。`;
 }
 
 function activeRows(){
@@ -473,8 +491,9 @@ function stockCardHtml(r, compact=false){
       <em>${r.priority_reason || displayPriorityLabel(r)}｜${priorityScore(r)}分</em>
     </div>
     <div class="signal-line"><b>出訊號：${r.signal_date || r.date}</b><span>${groupHitText(r)}</span></div>
-    <div class="signal-reason"><label>理由</label><span>${primaryReason(r)}</span></div>
-    <div class="signal-reason risk"><label>風險</label><span>${riskReasonText(r)}</span></div>
+    <div class="signal-reason"><label>為什麼出現</label><span>${cardWhyText(r)}</span></div>
+    <div class="signal-reason risk"><label>要小心</label><span>${cardCautionText(r)}</span></div>
+    <div class="signal-reason version"><label>版本</label><span>${cardVersionText(r)}</span></div>
     <div class="stock-sub"><span>${r.industry_category || '—'}</span><span>${groupModeText(r)}</span><span>版本 ${r.alias_count || 1} 筆已合併</span></div>
     <div class="metric-row">
       <div><label>近20天漲幅</label><b>${fmtPct(r.ret_20d)}</b></div>
@@ -902,7 +921,7 @@ function showDetail(r){
   const sections = [
     ['訊號摘要', [
       ['出訊號日期', r.signal_date || r.date], ['資料算到', r.data_through || summaryData?.data_through || '—'], ['產生時間', r.generated_at || summaryData?.generated_at || '—'], ['合併版本', `${r.alias_count || aliasRows.length} 筆`],
-      ['命中分組', groupHitText(r)], ['價格版本', groupModeText(r)], ['主要理由', primaryReason(r)], ['主要風險', riskReasonText(r)]
+      ['命中分組', groupHitText(r)], ['價格版本', groupModeText(r)], ['為什麼出現', cardWhyText(r)], ['要小心', cardCautionText(r)]
     ]],
     ['基本資料', [
       ['產業', r.industry_category], ['股價版本', priceModeLabel(r.price_mode), `原始值：${r.price_mode || '—'}`], ['收盤價', fmtNum(r.close,2)], ['資料來源', r.source_type || '—']
