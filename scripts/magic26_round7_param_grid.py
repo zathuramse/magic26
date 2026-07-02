@@ -7,8 +7,10 @@ import json
 import numpy as np
 import pandas as pd
 
-ROOT = Path("C:/Users/abckf/research-brain")
-OUT = ROOT / "sources/strategy-checks/magic26/out"
+from magic26_paths import out_dir, research_root  # noqa: E402
+
+ROOT = research_root()
+OUT = out_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
 

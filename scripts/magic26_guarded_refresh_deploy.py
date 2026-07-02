@@ -28,6 +28,7 @@ DEFAULT_CSS_CACHE_BUST = "20260701q"
 # Import probe helpers from the sibling script.
 sys.path.insert(0, str(PROJECT / "scripts"))
 import daily_refresh_magic26 as probe  # noqa: E402
+from magic26_paths import out_dir  # noqa: E402
 
 
 @dataclass
@@ -63,8 +64,8 @@ def next_calendar_day(day_s: str) -> str:
 
 def find_signal_file(suffix: str, price_mode: str) -> Path:
     pattern = f"magic26_v0_signals_all_liquid30000000_{price_mode}_{suffix}_*stocks.csv"
-    out_dir = Path("C:/Users/abckf/research-brain/sources/strategy-checks/magic26/out")
-    matches = sorted(out_dir.glob(pattern), key=lambda p: p.stat().st_mtime, reverse=True)
+    outputs = out_dir()
+    matches = sorted(outputs.glob(pattern), key=lambda p: p.stat().st_mtime, reverse=True)
     if not matches:
         raise FileNotFoundError(f"Missing signal output matching {pattern}")
     return matches[0]

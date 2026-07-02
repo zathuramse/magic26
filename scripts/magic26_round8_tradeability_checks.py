@@ -7,10 +7,12 @@ import json
 import numpy as np
 import pandas as pd
 
-ROOT = Path("C:/Users/abckf/research-brain")
-BASE = ROOT / "sources/strategy-checks/magic26"
-OUT = BASE / "out"
-CACHE = BASE / "cache"
+from magic26_paths import cache_dir, out_dir, research_root, source_root  # noqa: E402
+
+ROOT = research_root()
+BASE = source_root()
+OUT = out_dir()
+CACHE = cache_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
 

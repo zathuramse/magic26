@@ -13,10 +13,12 @@ from typing import Any
 
 import pandas as pd
 
-ROOT = Path("C:/Users/abckf/research-brain")
-DASH = ROOT / "magic26"
-SOURCE = ROOT / "sources" / "strategy-checks" / "magic26"
-OUT = SOURCE / "out"
+from magic26_paths import dash_root, out_dir, research_root, source_root  # noqa: E402
+
+ROOT = research_root()
+DASH = dash_root()
+SOURCE = source_root()
+OUT = out_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 SNAPSHOT_SUFFIX = DEFAULT_SNAPSHOT_SUFFIX
 INPUT = DASH / "public" / "data" / "magic26_candidates_history.csv"

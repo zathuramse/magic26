@@ -18,8 +18,9 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import magic26_signal_pilot as pilot  # noqa: E402
+from magic26_paths import cache_dir  # noqa: E402
 
-CACHE = Path("C:/Users/abckf/research-brain/sources/strategy-checks/magic26/cache")
+CACHE = cache_dir()
 REPORT_DIR = Path("reports/daily_refresh")
 DEFAULT_SOURCE_SUFFIX = "20210101_20260701"
 DEFAULT_TARGET_SUFFIX = "20210101_20260702"

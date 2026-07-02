@@ -23,10 +23,13 @@ import pandas as pd
 import requests
 
 BASE = "https://api.finmindtrade.com/api/v4/data"
-ROOT = Path("C:/Users/abckf/research-brain/sources/strategy-checks/magic26")
-CACHE = ROOT / "cache"
-OUT = ROOT / "out"
+from magic26_paths import cache_dir, out_dir, source_root  # noqa: E402
+
+ROOT = source_root()
+CACHE = cache_dir()
+OUT = out_dir()
 ENV_CANDIDATES = [
+    *( [Path(os.getenv("MAGIC26_ENV_FILE", ""))] if os.getenv("MAGIC26_ENV_FILE") else [] ),
     Path("C:/Users/abckf/AppData/Local/hermes/profiles/jojo/.env"),
     Path("C:/Users/abckf/AppData/Local/hermes/.env"),
 ]

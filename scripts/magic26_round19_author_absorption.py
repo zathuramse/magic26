@@ -16,10 +16,12 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-ROOT = Path("C:/Users/abckf/research-brain")
-BASE = ROOT / "sources" / "strategy-checks" / "magic26"
-CACHE = BASE / "cache"
-OUT = BASE / "out"
+from magic26_paths import cache_dir, out_dir, research_root, source_root  # noqa: E402
+
+ROOT = research_root()
+BASE = source_root()
+CACHE = cache_dir()
+OUT = out_dir()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 SNAPSHOT_SUFFIX = DEFAULT_SNAPSHOT_SUFFIX
 DETAIL = OUT / f"magic26_round8_tradeability_detail_{SNAPSHOT_SUFFIX}.csv"

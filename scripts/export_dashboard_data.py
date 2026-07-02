@@ -10,11 +10,14 @@ from typing import Any
 
 import pandas as pd
 
+from magic26_paths import research_root, source_root  # noqa: E402
+
 PROJECT = Path(__file__).resolve().parents[1]
-DEFAULT_RESEARCH_ROOT = PROJECT.parent
-DEFAULT_MAGIC26_SOURCE = DEFAULT_RESEARCH_ROOT / "sources/strategy-checks/magic26"
+DEFAULT_RESEARCH_ROOT = research_root()
+DEFAULT_MAGIC26_SOURCE = source_root()
 DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 DEFAULT_DATA_THROUGH = "2026-06-30"
+
 
 PROCESSED_NAME_PATTERNS = [
     "magic26_round4_summary_round6_regime_all_liquid30000000_raw_{suffix}.csv",

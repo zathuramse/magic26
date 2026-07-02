@@ -20,6 +20,7 @@ EXPORT_MANIFEST = PROJECT / "data" / "processed" / "export_manifest.json"
 FINMIND_BASE = "https://api.finmindtrade.com/api/v4/data"
 SNAPSHOT_START = "20210101"
 ENV_CANDIDATES = [
+    *( [Path(os.getenv("MAGIC26_ENV_FILE", ""))] if os.getenv("MAGIC26_ENV_FILE") else [] ),
     Path("C:/Users/abckf/AppData/Local/hermes/profiles/jojo/.env"),
     Path("C:/Users/abckf/AppData/Local/hermes/.env"),
 ]

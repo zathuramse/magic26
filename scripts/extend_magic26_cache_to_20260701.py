@@ -8,8 +8,9 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import magic26_signal_pilot as pilot  # noqa: E402
+from magic26_paths import cache_dir  # noqa: E402
 
-CACHE = Path("C:/Users/abckf/research-brain/sources/strategy-checks/magic26/cache")
+CACHE = cache_dir()
 OLD_SUFFIX = "20210101_20260622"
 NEW_SUFFIX = "20210101_20260701"
 TAIL_START = date(2026, 6, 23)

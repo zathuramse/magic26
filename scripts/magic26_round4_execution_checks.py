@@ -21,9 +21,10 @@ import pandas as pd
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import magic26_signal_pilot as pilot  # noqa: E402
+from magic26_paths import out_dir, source_root  # noqa: E402
 
-ROOT = Path("C:/Users/abckf/research-brain/sources/strategy-checks/magic26")
-OUT = ROOT / "out"
+ROOT = source_root()
+OUT = out_dir()
 
 
 def load_benchmark(start_date: str, end_date: str) -> pd.DataFrame:

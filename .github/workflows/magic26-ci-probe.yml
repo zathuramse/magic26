@@ -35,6 +35,11 @@ jobs:
       DATA_THROUGH: ${{ inputs.data_through }}
       APP_CACHE_BUST: "20260702riskv2"
       CSS_CACHE_BUST: "20260701q"
+      MAGIC26_RESEARCH_ROOT: ${{ github.workspace }}/.ci/research-brain
+      MAGIC26_SOURCE_ROOT: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26
+      MAGIC26_CACHE_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/cache
+      MAGIC26_OUT_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/out
+      MAGIC26_DASH_ROOT: ${{ github.workspace }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.0
@@ -56,6 +61,26 @@ jobs:
 
       - name: Compile Python scripts
         run: python -m py_compile scripts/*.py
+
+      - name: Verify repo-relative Magic26 path configuration
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, 'scripts')
+          import magic26_paths as p
+          values = {
+              'dash_root': p.dash_root(),
+              'research_root': p.research_root(),
+              'source_root': p.source_root(),
+              'cache_dir': p.cache_dir(),
+              'out_dir': p.out_dir(),
+          }
+          for key, value in values.items():
+              print(key, value)
+          assert str(values['dash_root']).endswith('/magic26') or str(values['dash_root']).endswith('\\magic26')
+          assert '.ci' in str(values['cache_dir'])
+          assert '.ci' in str(values['out_dir'])
+          PY
 
       - name: Check frontend syntax
         run: node --check public/app.js
