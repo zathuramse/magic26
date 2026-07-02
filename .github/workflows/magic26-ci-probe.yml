@@ -142,6 +142,7 @@ jobs:
               'snapshot_suffix': os.environ.get('SNAPSHOT_SUFFIX'),
               'data_through': os.environ.get('DATA_THROUGH'),
               'run_finmind_probe': os.environ.get('RUN_FINMIND_PROBE', 'false'),
+              'finmind_token_present': bool(os.environ.get('FINMIND_TOKEN')),
               'paths': {
                   'dash_root': str(p.dash_root()),
                   'research_root': str(p.research_root()),

@@ -9,6 +9,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -48,8 +49,19 @@ def finmind_get_uncached(dataset: str, *, sleep_s: float = 0.15, **params: str) 
     headers = {"Authorization": f"Bearer {token}", "User-Agent": "Magic26DailyRefresh/1.0"} if token else {"User-Agent": "Magic26DailyRefresh/1.0"}
     query = urllib.parse.urlencode({"dataset": dataset, **params})
     req = urllib.request.Request(f"{FINMIND_BASE}?{query}", headers=headers)
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        payload = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            payload = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="ignore")
+        try:
+            payload = json.loads(body)
+            msg = payload.get("msg") or body[:300]
+            status = payload.get("status") or exc.code
+        except Exception:
+            msg = body[:300]
+            status = exc.code
+        raise RuntimeError(f"FinMind {dataset} HTTP {exc.code}: status={status} msg={msg}") from exc
     if payload.get("status") != 200:
         raise RuntimeError(f"FinMind {dataset} failed: status={payload.get('status')} msg={payload.get('msg')}")
     time.sleep(sleep_s)
