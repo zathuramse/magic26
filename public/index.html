@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magic26 候選標的</title>
-  <link rel="stylesheet" href="./styles.css?v=20260701p" />
+  <link rel="stylesheet" href="./styles.css?v=20260701q" />
 </head>
 <body>
   <header class="topbar">
@@ -116,27 +116,30 @@
       <div id="detailBody" class="detail-empty">尚未選取候選。</div>
     </section>
 
-    <section class="grid two">
-      <div class="panel">
-        <h2>A 組怎麼挑</h2>
-        <ul class="spec-list">
-          <li>大盤背景不能太差。</li>
-          <li>股價要有轉強跡象，而且不是剛爆大量那一天。</li>
-          <li>近 20 天要有漲，但不能已經漲太誇張。</li>
-          <li>成交量要有熱度，但不能只靠單一天爆量撐起來。</li>
-          <li>這只是在排「先看誰」，不是自動買進。</li>
-        </ul>
+    <details class="panel secondary-panel guide-panel">
+      <summary><span>使用說明</span><em>展開看規則與使用方式</em></summary>
+      <div class="guide-grid">
+        <section>
+          <h3>A 組怎麼挑</h3>
+          <ul class="spec-list">
+            <li>大盤背景不能太差。</li>
+            <li>股價要有轉強跡象，而且不是剛爆大量那一天。</li>
+            <li>近 20 天要有漲，但不能已經漲太誇張。</li>
+            <li>成交量要有熱度，但不能只靠單一天爆量撐起來。</li>
+            <li>這只是在排「先看誰」，不是自動買進。</li>
+          </ul>
+        </section>
+        <section>
+          <h3>怎麼使用</h3>
+          <p>先看 A 組，再看成交量是否正常。成交量太集中、流動性差、或前面已經漲很多的股票，先放後面。</p>
+          <p>卡片上的分數只是排序，幫你省時間；真正要不要研究，還是要打開圖形、看產業、看成交量。</p>
+          <p>如果資料日期落後，這個看板只能當舊資料回顧，不能當今天的候選清單。</p>
+        </section>
       </div>
-      <div class="panel">
-        <h2>怎麼使用</h2>
-        <p>先看 A 組，再看成交量是否正常。成交量太集中、流動性差、或前面已經漲很多的股票，先放後面。</p>
-        <p>卡片上的分數只是排序，幫你省時間；真正要不要研究，還是要打開圖形、看產業、看成交量。</p>
-        <p>如果資料日期落後，這個看板只能當舊資料回顧，不能當今天的候選清單。</p>
-      </div>
-    </section>
+    </details>
 
-    <section class="panel links">
-      <h2>資料下載</h2>
+    <details class="panel secondary-panel links">
+      <summary><span>研究資料 / 下載</span><em>展開下載完整研究檔</em></summary>
       <p>保留完整研究檔案；分類只為方便查找，不代表買賣訊號。</p>
       <div class="download-groups">
         <section>
@@ -169,7 +172,7 @@
           <a href="./data/magic26_round21_volgap_rescue_cases_20210101_20260701.csv">可再觀察案例</a>
         </section>
       </div>
-    </section>
+    </details>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
