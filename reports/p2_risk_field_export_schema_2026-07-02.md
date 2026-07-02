@@ -1,6 +1,6 @@
 # Magic26 P2-9 風險欄位資料輸出設計
 
-日期：2026-07-02  
+日期：2026-07-02
 狀態：schema 規格草案；未改 export、未改 dashboard、未部署。
 
 ## 一句話結論
@@ -66,8 +66,8 @@ risk_v2_*
 
 ### 1. `risk_v2_level`
 
-型別：integer  
-允許值：0 / 1 / 2 / 3  
+型別：integer
+允許值：0 / 1 / 2 / 3
 必填：是
 
 語意：
@@ -87,7 +87,7 @@ risk_v2_*
 
 ### 2. `risk_v2_label_zh`
 
-型別：string  
+型別：string
 必填：是
 
 允許值：
@@ -107,7 +107,7 @@ risk_v2_*
 
 ### 3. `risk_v2_primary_badge_zh`
 
-型別：string  
+型別：string
 必填：是
 
 允許值：
@@ -129,7 +129,7 @@ risk_v2_*
 
 ### 4. `risk_v2_badges_zh`
 
-型別：array of string in JSON；CSV 版本用 `;` 分隔  
+型別：array of string in JSON；CSV 版本用 `;` 分隔
 必填：是，可為空陣列
 
 用途：卡片或 detail 顯示的輔助 badge。
@@ -163,7 +163,7 @@ CSV 範例：
 
 ### 5. `risk_v2_reasons_zh`
 
-型別：array of string in JSON；CSV 版本用 `;` 分隔  
+型別：array of string in JSON；CSV 版本用 `;` 分隔
 必填：是，可為空陣列
 
 用途：可審計的觸發原因，不要只放一句概括。
@@ -185,7 +185,7 @@ CSV 範例：
 
 ### 6. `risk_v2_action_hint_zh`
 
-型別：string  
+型別：string
 必填：是
 
 允許值建議：
@@ -205,7 +205,7 @@ CSV 範例：
 
 ### 7. `risk_v2_sort_rank`
 
-型別：integer  
+型別：integer
 必填：是
 
 建議：
@@ -224,7 +224,7 @@ risk_v2_sort_rank = risk_v2_level
 
 ### 8. `risk_v2_rule_version`
 
-型別：string  
+型別：string
 必填：是
 
 建議值：
@@ -243,7 +243,7 @@ p2_2026_07_02
 
 ### 9. `risk_v2_is_display_only`
 
-型別：boolean  
+型別：boolean
 必填：是
 
 固定值：

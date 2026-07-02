@@ -1,7 +1,7 @@
 # Magic26 P2-1 訊號與策略可信度審計
 
-日期：2026-07-02  
-範圍：只讀審計；未修改 dashboard 訊號邏輯，未部署。  
+日期：2026-07-02
+範圍：只讀審計；未修改 dashboard 訊號邏輯，未部署。
 資料版本：`public/data`，dashboard `https://magic26.pages.dev/?v=20260701y`。
 
 ## 一句話結論
