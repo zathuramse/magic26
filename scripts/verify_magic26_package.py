@@ -136,12 +136,10 @@ if summary.get("all_signal_groups") != len(all_groups):
 if "round14_decision" not in summary:
     print("missing round14_decision in summary.json")
     sys.exit(1)
-if summary.get("watch_state", {}).get("rows") != 4:
-    print("bad watch_state summary", summary.get("watch_state"))
-    sys.exit(1)
 watch_states = json.loads((root / "public/data/watch_states.json").read_text(encoding="utf-8"))
-if len(watch_states) != 4:
-    print("bad watch_states rows", len(watch_states))
+watch_state_summary = summary.get("watch_state", {})
+if watch_state_summary.get("rows") != len(watch_states) or len(watch_states) <= 0:
+    print("bad watch_state summary", watch_state_summary, "watch_states_rows", len(watch_states))
     sys.exit(1)
 if not {"等待降溫", "中性等待"}.issubset({str(r.get("rearm_state")) for r in watch_states}):
     print("missing expected watch states")

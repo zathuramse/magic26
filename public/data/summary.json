@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-02T14:54:32",
-  "data_through": "2026-06-30",
+  "generated_at": "2026-07-02T18:51:35",
+  "data_through": "2026-07-02",
   "latest_signal_date": "2026-06-26",
-  "total_candidate_rows": 312,
+  "total_candidate_rows": 311,
   "latest_candidate_rows": 4,
-  "recent_2026_rows": 150,
+  "recent_2026_rows": 151,
   "main_spec": "A_repo50_c4_40_fixed20",
   "main_spec_zh": "Candidate A：regime_all3 + C1/C2/C3 + repo_vol5>=50% + 20D漲幅<40% + 最大量>5日前 + 固定20D出場",
   "round14_decision": {
@@ -56,8 +56,8 @@
       "latest_date": "2026-06-26",
       "raw_rows": 50,
       "adjusted_rows": 46,
-      "median_t1_open_excess_20d": 0.1044980811094051,
-      "win_t1_open_excess_20d": 0.6593406593406593,
+      "median_t1_open_excess_20d": 0.1061752333729501,
+      "win_t1_open_excess_20d": 0.6630434782608695,
       "weak_momentum_rows": 19,
       "floor15_observation_rows": 77,
       "high_open_risk_rows": 15,
@@ -72,13 +72,13 @@
       "candidate": "B_magic_c4_40_fixed20",
       "rows": 139,
       "latest_date": "2026-06-26",
-      "raw_rows": 70,
-      "adjusted_rows": 69,
+      "raw_rows": 71,
+      "adjusted_rows": 68,
       "median_t1_open_excess_20d": 0.0639338341271076,
       "win_t1_open_excess_20d": 0.5864661654135338,
       "weak_momentum_rows": 0,
       "floor15_observation_rows": 0,
-      "high_open_risk_rows": 24,
+      "high_open_risk_rows": 25,
       "low_liquidity_risk_rows": 21,
       "ret60_over150_rows": 0,
       "volume_gap_watch_rows": 26,
@@ -88,16 +88,16 @@
     },
     {
       "candidate": "C_c4_25_fixed20",
-      "rows": 77,
+      "rows": 76,
       "latest_date": "2026-06-05",
       "raw_rows": 39,
-      "adjusted_rows": 38,
-      "median_t1_open_excess_20d": 0.0639338341271076,
-      "win_t1_open_excess_20d": 0.6266666666666667,
+      "adjusted_rows": 37,
+      "median_t1_open_excess_20d": 0.061396070871456446,
+      "win_t1_open_excess_20d": 0.6216216216216216,
       "weak_momentum_rows": 0,
       "floor15_observation_rows": 0,
       "high_open_risk_rows": 4,
-      "low_liquidity_risk_rows": 12,
+      "low_liquidity_risk_rows": 11,
       "ret60_over150_rows": 0,
       "volume_gap_watch_rows": 13,
       "volgap_rescue_rows": 2,
@@ -106,15 +106,14 @@
     }
   ],
   "watch_state": {
-    "rows": 4,
+    "rows": 3,
     "state_counts": {
       "中性等待": 2,
-      "深回測但未破結構": 1,
       "等待降溫": 1
     },
     "decision": "Watch State 是二次觀察/再啟動條件，不是買進訊號"
   },
   "latest_signal_groups": 1,
   "recent_signal_groups": 34,
-  "all_signal_groups": 75
+  "all_signal_groups": 74
 }
