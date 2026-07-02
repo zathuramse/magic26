@@ -1,0 +1,114 @@
+{
+  "run": {
+    "id": "28600519677",
+    "head_sha": "9a42e5f726397cb66d007de4d86bfa397e2557eb",
+    "url": "https://github.com/zathuramse/magic26/actions/runs/28600519677"
+  },
+  "manifest": {
+    "github_run_id": "28600519677",
+    "github_sha": "9a42e5f726397cb66d007de4d86bfa397e2557eb",
+    "run_finmind_probe": "true",
+    "run_cache_extension_probe": "true",
+    "run_cache_extension_dry_run": "true",
+    "run_round_feasibility_probe": "true",
+    "finmind_token_present": true,
+    "counts": {
+      "cache_files": 15,
+      "out_files": 0,
+      "report_files": 8
+    }
+  },
+  "artifact_counts": {
+    "daily_report_json": 1,
+    "p6_7_extend_report_json": 1,
+    "p6_8_round_report_json": 1,
+    "parquet_files": 9
+  },
+  "round_feasibility": {
+    "target_suffix": "20210101_20260702",
+    "target_date": "2026-07-02",
+    "sample_cache_raw_target": {
+      "path": "/home/runner/work/magic26/magic26/.ci/research-brain/sources/strategy-checks/magic26/cache/raw_6213_20210101_20260702.parquet",
+      "exists": true,
+      "size_bytes": 6399,
+      "rows": 4,
+      "columns": [
+        "date",
+        "stock_id",
+        "Trading_Volume",
+        "Trading_money",
+        "open",
+        "max",
+        "min",
+        "close",
+        "spread",
+        "Trading_turnover"
+      ],
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "sample_cache_adj_target": {
+      "path": "/home/runner/work/magic26/magic26/.ci/research-brain/sources/strategy-checks/magic26/cache/adj_6213_20210101_20260702.parquet",
+      "exists": true,
+      "size_bytes": 6431,
+      "rows": 4,
+      "columns": [
+        "date",
+        "stock_id",
+        "Trading_Volume",
+        "Trading_money",
+        "open",
+        "max",
+        "min",
+        "close",
+        "spread",
+        "Trading_turnover"
+      ],
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "sample_cache_benchmark_target": {
+      "path": "/home/runner/work/magic26/magic26/.ci/research-brain/sources/strategy-checks/magic26/cache/benchmark_TAIEX_20210101_20260702.parquet",
+      "exists": true,
+      "size_bytes": 6440,
+      "rows": 4,
+      "columns": [
+        "date",
+        "stock_id",
+        "Trading_Volume",
+        "Trading_money",
+        "open",
+        "max",
+        "min",
+        "close",
+        "spread",
+        "Trading_turnover"
+      ],
+      "date_min": "2026-06-29",
+      "date_max": "2026-07-02"
+    },
+    "round4_raw_target_exists": false,
+    "round4_adj_target_exists": false,
+    "blockers": [
+      "base signal has sample controls (--stock-ids/--max-stocks), but output run_id uses selected stock count rather than dashboard 2130stocks naming.",
+      "round4 has no --snapshot-suffix; it needs explicit --signals and --run-label from a prior base-signal output.",
+      "magic26_round7_param_grid.py is suffix-parameterized, but still expects round4 checked-signal filenames for both raw/adj under OUT.",
+      "magic26_round8_tradeability_checks.py is suffix-parameterized, but still expects round4 checked-signal filenames for both raw/adj under OUT.",
+      "magic26_round9_close_exit_checks.py is suffix-parameterized, but still expects round4 checked-signal filenames for both raw/adj under OUT.",
+      "target round4 checked-signal inputs are missing in CI staging; round7/8/9 cannot run yet without base signal + round4 regeneration.",
+      "P6-8 is inventory-only: no heavy round scripts were executed, no public/data export, no deploy, no schedule."
+    ],
+    "recommended_next_step": "Parameterize and prove base signal + round4 sample regeneration before attempting round7/8/9 in CI."
+  },
+  "parquet_names": [
+    "adj_6213_20210101_20260701.parquet",
+    "adj_6213_20210101_20260702.parquet",
+    "benchmark_TAIEX_20210101_20260701.parquet",
+    "benchmark_TAIEX_20210101_20260702.parquet",
+    "ci_probe_adj_6213_20260701_20260702.parquet",
+    "ci_probe_benchmark_TAIEX_20260701_20260702.parquet",
+    "ci_probe_raw_6213_20260701_20260702.parquet",
+    "raw_6213_20210101_20260701.parquet",
+    "raw_6213_20210101_20260702.parquet"
+  ]
+}
