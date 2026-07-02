@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import argparse
 import json
 
 import numpy as np
@@ -8,11 +9,14 @@ import pandas as pd
 
 ROOT = Path("C:/Users/abckf/research-brain")
 OUT = ROOT / "sources/strategy-checks/magic26/out"
+DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
-INPUTS = {
-    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
-    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
-}
+
+def build_inputs(snapshot_suffix: str) -> dict[str, Path]:
+    return {
+        "raw": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
+        "adj": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
+    }
 
 REPO_THRESHOLDS = [0.40, 0.50, 0.60]
 C4_CAPS = [0.25, 0.40, 0.60]
@@ -60,9 +64,14 @@ def make_signals(df: pd.DataFrame) -> dict[str, pd.Series]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX)
+    args = parser.parse_args()
+    inputs = build_inputs(args.snapshot_suffix)
+
     all_summary = []
     all_yearly = []
-    for price_mode, path in INPUTS.items():
+    for price_mode, path in inputs.items():
         df = pd.read_csv(path)
         for col in ["date"]:
             df[col] = pd.to_datetime(df[col])
@@ -90,10 +99,10 @@ def main() -> None:
         + np.minimum(summary["signals"], 80) / 80 * 0.02
     )
 
-    summary_path = OUT / "magic26_round7_param_grid_summary_20210101_20260701.csv"
-    yearly_path = OUT / "magic26_round7_param_grid_yearly_20210101_20260701.csv"
-    top_path = OUT / "magic26_round7_param_grid_top_20210101_20260701.csv"
-    manifest_path = OUT / "magic26_round7_param_grid_manifest_20210101_20260701.json"
+    summary_path = OUT / f"magic26_round7_param_grid_summary_{args.snapshot_suffix}.csv"
+    yearly_path = OUT / f"magic26_round7_param_grid_yearly_{args.snapshot_suffix}.csv"
+    top_path = OUT / f"magic26_round7_param_grid_top_{args.snapshot_suffix}.csv"
+    manifest_path = OUT / f"magic26_round7_param_grid_manifest_{args.snapshot_suffix}.json"
 
     summary.to_csv(summary_path, index=False, encoding="utf-8-sig")
     yearly.to_csv(yearly_path, index=False, encoding="utf-8-sig")
@@ -115,7 +124,8 @@ def main() -> None:
     top.to_csv(top_path, index=False, encoding="utf-8-sig")
 
     manifest = {
-        "inputs": {k: str(v) for k, v in INPUTS.items()},
+        "snapshot_suffix": args.snapshot_suffix,
+        "inputs": {k: str(v) for k, v in inputs.items()},
         "assumptions": [
             "All variants require regime_all3=True.",
             "Entry metric is t+1 open excess vs TAIEX.",

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import argparse
 import json
 
 import numpy as np
@@ -10,11 +11,14 @@ ROOT = Path("C:/Users/abckf/research-brain")
 BASE = ROOT / "sources/strategy-checks/magic26"
 OUT = BASE / "out"
 CACHE = BASE / "cache"
+DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
 
-INPUTS = {
-    "raw": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
-    "adj": OUT / "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
-}
+
+def build_inputs(snapshot_suffix: str) -> dict[str, Path]:
+    return {
+        "raw": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv",
+        "adj": OUT / f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv",
+    }
 
 CANDIDATES = {
     "candidate_a_repo50_c440_c5gt5": {"repo_min": 0.50, "c4_cap": 0.40, "c5_days": 5},
@@ -50,8 +54,8 @@ def candidate_mask(df: pd.DataFrame, spec: dict) -> pd.Series:
     return core
 
 
-def load_price(mode: str, stock_id: str) -> pd.DataFrame | None:
-    path = CACHE / f"{mode}_{stock_id}_20210101_20260701.parquet"
+def load_price(mode: str, stock_id: str, snapshot_suffix: str) -> pd.DataFrame | None:
+    path = CACHE / f"{mode}_{stock_id}_{snapshot_suffix}.parquet"
     if not path.exists():
         return None
     p = pd.read_parquet(path)
@@ -64,8 +68,8 @@ def load_price(mode: str, stock_id: str) -> pd.DataFrame | None:
     return p
 
 
-def load_benchmark() -> pd.DataFrame:
-    path = CACHE / "benchmark_TAIEX_20210101_20260701.parquet"
+def load_benchmark(snapshot_suffix: str) -> pd.DataFrame:
+    path = CACHE / f"benchmark_TAIEX_{snapshot_suffix}.parquet"
     b = pd.read_parquet(path)
     b["date"] = pd.to_datetime(b["date"])
     for col in ["open", "close"]:
@@ -172,13 +176,18 @@ def summarize(df: pd.DataFrame) -> dict:
 
 
 def main() -> None:
-    bench = load_benchmark()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX)
+    args = parser.parse_args()
+    inputs = build_inputs(args.snapshot_suffix)
+
+    bench = load_benchmark(args.snapshot_suffix)
     price_cache: dict[tuple[str, str], pd.DataFrame | None] = {}
     detail_rows = []
     summary_rows = []
     year_rows = []
 
-    for mode, input_path in INPUTS.items():
+    for mode, input_path in inputs.items():
         df = pd.read_csv(input_path)
         df["date"] = pd.to_datetime(df["date"])
         df["stock_id"] = df["stock_id"].astype(str).str.replace(r"\.0$", "", regex=True)
@@ -188,7 +197,7 @@ def main() -> None:
                 stock_id = str(sig["stock_id"])
                 key = (mode, stock_id)
                 if key not in price_cache:
-                    price_cache[key] = load_price(mode, stock_id)
+                    price_cache[key] = load_price(mode, stock_id, args.snapshot_suffix)
                 price = price_cache[key]
                 for rule in EXIT_RULES:
                     row = {
@@ -221,15 +230,16 @@ def main() -> None:
     summary = pd.DataFrame(summary_rows).sort_values(["price_mode", "candidate", "median_excess"], ascending=[True, True, False])
     yearly = pd.DataFrame(year_rows).sort_values(["price_mode", "candidate", "exit_rule", "year"])
 
-    detail_path = OUT / "magic26_round9_close_exit_detail_20210101_20260701.csv"
-    summary_path = OUT / "magic26_round9_close_exit_summary_20210101_20260701.csv"
-    yearly_path = OUT / "magic26_round9_close_exit_yearly_20210101_20260701.csv"
-    manifest_path = OUT / "magic26_round9_close_exit_manifest_20210101_20260701.json"
+    detail_path = OUT / f"magic26_round9_close_exit_detail_{args.snapshot_suffix}.csv"
+    summary_path = OUT / f"magic26_round9_close_exit_summary_{args.snapshot_suffix}.csv"
+    yearly_path = OUT / f"magic26_round9_close_exit_yearly_{args.snapshot_suffix}.csv"
+    manifest_path = OUT / f"magic26_round9_close_exit_manifest_{args.snapshot_suffix}.json"
     detail.to_csv(detail_path, index=False, encoding="utf-8-sig")
     summary.to_csv(summary_path, index=False, encoding="utf-8-sig")
     yearly.to_csv(yearly_path, index=False, encoding="utf-8-sig")
     manifest = {
-        "inputs": {k: str(v) for k, v in INPUTS.items()},
+        "snapshot_suffix": args.snapshot_suffix,
+        "inputs": {k: str(v) for k, v in inputs.items()},
         "candidates": CANDIDATES,
         "exit_rules": EXIT_RULES,
         "assumptions": [
