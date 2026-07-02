@@ -247,6 +247,130 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
     return out
 
 
+RISK_V2_RULE_VERSION = "p2_2026_07_02"
+RISK_V2_LABELS = {
+    0: ("正常候選 / 可以研究", "可以研究", ["可以研究"], "可以研究；仍需看圖形與基本面"),
+    1: ("追高警戒 / 可看但不要追", "不要追價", ["不要追價", "追高警戒"], "可看，但不要追價；等回檔或整理後再研究"),
+    2: ("高追高 / 只觀察", "只觀察", ["只觀察", "高追高"], "只觀察；已偏追高，不建議直接追價"),
+    3: ("暫不追 / 風險 veto", "暫不追", ["暫不追", "風險 veto"], "暫不追；只保留研究紀錄"),
+}
+RISK_V2_FIELDS = [
+    "risk_v2_level",
+    "risk_v2_label_zh",
+    "risk_v2_primary_badge_zh",
+    "risk_v2_badges_zh",
+    "risk_v2_reasons_zh",
+    "risk_v2_action_hint_zh",
+    "risk_v2_sort_rank",
+    "risk_v2_rule_version",
+    "risk_v2_is_display_only",
+]
+
+
+def _safe_float(v: Any) -> float | None:
+    try:
+        if pd.isna(v):
+            return None
+        return float(v)
+    except Exception:
+        return None
+
+
+def _dedupe_text(items: list[str]) -> list[str]:
+    out: list[str] = []
+    for item in items:
+        if item and item not in out:
+            out.append(item)
+    return out
+
+
+def _risk_v2_payload(row: dict[str, Any] | pd.Series) -> dict[str, Any]:
+    ret20 = _safe_float(row.get("ret_20d"))
+    sig1 = _safe_float(row.get("signal_day_ret_1d"))
+    gap = _safe_float(row.get("next_open_gap"))
+    avg_amount = _safe_float(row.get("avg_amount_20d"))
+    low_liq = _truthy(row.get("risk_liquidity_lt100m")) or _truthy(row.get("is_low_liquidity_risk")) or (avg_amount is not None and avg_amount < 100_000_000)
+    reasons: list[str] = []
+    badges: list[str] = []
+
+    if gap is not None and gap > 0.05:
+        reasons.append(f"隔日開盤高 {_fmt_pct(gap)}，超過 5% 暫不追門檻")
+        badges.append("開高風險")
+    if ret20 is not None and ret20 > 0.40:
+        reasons.append(f"近 20 天已漲 {_fmt_pct(ret20)}，超過 40% 暫不追門檻")
+        badges.append("漲幅已大")
+    if sig1 is not None and sig1 > 0.09 and gap is not None and gap > 0.03:
+        reasons.append(f"訊號日漲 {_fmt_pct(sig1)} 且隔日開盤高 {_fmt_pct(gap)}，屬極端追高組合")
+        badges.extend(["高追高", "開高風險"])
+    if low_liq:
+        reasons.append("低流動性風險成立")
+        badges.append("低流動性")
+
+    if reasons:
+        level = 3
+    else:
+        level1: list[tuple[str, str]] = []
+        level2: list[str] = []
+        if gap is not None and gap > 0.01:
+            level1.append((f"隔日開盤高 {_fmt_pct(gap)}，超過 1% 追高警戒門檻", "開高風險"))
+        if sig1 is not None and sig1 > 0.04:
+            level1.append((f"訊號日漲 {_fmt_pct(sig1)}，超過 4% 追高警戒門檻", "追高警戒"))
+        if ret20 is not None and ret20 > 0.25:
+            level1.append((f"近 20 天已漲 {_fmt_pct(ret20)}，超過 25% 追高警戒門檻", "漲幅已大"))
+        if gap is not None and gap > 0.03:
+            level2.append(f"隔日開盤高 {_fmt_pct(gap)}，超過 3% 高追高門檻")
+        if sig1 is not None and sig1 > 0.09:
+            level2.append(f"訊號日漲 {_fmt_pct(sig1)}，超過 9% 高追高門檻")
+        if ret20 is not None and ret20 > 0.27:
+            level2.append(f"近 20 天已漲 {_fmt_pct(ret20)}，超過 27% 高追高門檻")
+        if len(level1) >= 2:
+            level2.append("同時觸發兩個以上追高警戒條件")
+        if level2:
+            level = 2
+            reasons.extend(level2)
+            badges.append("高追高")
+            for reason, badge in level1:
+                reasons.append(reason)
+                badges.append(badge)
+        elif level1:
+            level = 1
+            for reason, badge in level1:
+                reasons.append(reason)
+                badges.append(badge)
+        else:
+            level = 0
+            reasons.append("未觸發 P2 追高風險門檻")
+    label, primary_badge, base_badges, action_hint = RISK_V2_LABELS[level]
+    return {
+        "risk_v2_level": level,
+        "risk_v2_label_zh": label,
+        "risk_v2_primary_badge_zh": primary_badge,
+        "risk_v2_badges_zh": _dedupe_text(base_badges + badges),
+        "risk_v2_reasons_zh": _dedupe_text(reasons),
+        "risk_v2_action_hint_zh": action_hint,
+        "risk_v2_sort_rank": level,
+        "risk_v2_rule_version": RISK_V2_RULE_VERSION,
+        "risk_v2_is_display_only": True,
+    }
+
+
+def _risk_v2_payload_for_csv(row: dict[str, Any] | pd.Series) -> dict[str, Any]:
+    payload = _risk_v2_payload(row)
+    payload["risk_v2_badges_zh"] = ";".join(payload["risk_v2_badges_zh"])
+    payload["risk_v2_reasons_zh"] = ";".join(payload["risk_v2_reasons_zh"])
+    return payload
+
+
+def add_risk_v2_columns(candidates: pd.DataFrame) -> pd.DataFrame:
+    if candidates.empty:
+        return candidates
+    out = candidates.copy()
+    payloads = [_risk_v2_payload_for_csv(row) for _, row in out.iterrows()]
+    for field in RISK_V2_FIELDS:
+        out[field] = [payload[field] for payload in payloads]
+    return out
+
+
 def load_candidates(out_dir: Path) -> pd.DataFrame:
     all_candidates: list[pd.DataFrame] = []
     for mode, filename in [("raw", RAW_CHECKED), ("adjusted", ADJ_CHECKED)]:
@@ -263,6 +387,7 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
     candidates = pd.concat(all_candidates, ignore_index=True) if all_candidates else pd.DataFrame()
     candidates = research_labels(candidates)
     candidates = add_round19_author_badges(candidates, out_dir)
+    candidates = add_risk_v2_columns(candidates)
     keep_cols = [
         "date",
         "stock_id",
@@ -308,6 +433,15 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
         "risk_any_long_ma_bear",
         "risk_long_ma_score",
         "risk_badge_zh",
+        "risk_v2_level",
+        "risk_v2_label_zh",
+        "risk_v2_primary_badge_zh",
+        "risk_v2_badges_zh",
+        "risk_v2_reasons_zh",
+        "risk_v2_action_hint_zh",
+        "risk_v2_sort_rank",
+        "risk_v2_rule_version",
+        "risk_v2_is_display_only",
     ]
     keep_cols = [c for c in keep_cols if c in candidates.columns]
     return candidates[keep_cols].sort_values(["date", "candidate", "stock_id"], ascending=[False, True, True])
@@ -614,6 +748,7 @@ def build_signal_groups(rows: pd.DataFrame, data_through: str, generated_at: str
                 {"kind": "versions", "text": f"同日共 {len(records)} 筆版本：{', '.join(_plain_group_label(c) for c in hit_candidates)}；{', '.join('原始價' if m == 'raw' else '還原價' for m in price_modes)}"},
             ],
         })
+        canonical.update(_risk_v2_payload(canonical))
         groups.append(canonical)
     return sorted(groups, key=lambda r: (str(r.get("date")), -_candidate_rank(str(r.get("candidate"))), str(r.get("stock_id"))), reverse=True)
 

@@ -44,10 +44,29 @@
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
     "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": [
+      "只觀察",
+      "高追高",
+      "開高風險",
+      "漲幅已大"
+    ],
+    "risk_v2_reasons_zh": [
+      "隔日開盤高 3.8%，超過 3% 高追高門檻",
+      "同時觸發兩個以上追高警戒條件",
+      "隔日開盤高 3.8%，超過 1% 追高警戒門檻",
+      "近 20 天已漲 25.3%，超過 25% 追高警戒門檻"
+    ],
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true,
     "signal_group_id": "6213_2026-06-26",
     "signal_date": "2026-06-26",
     "data_through": "2026-06-30",
-    "generated_at": "2026-07-01T23:16:48",
+    "generated_at": "2026-07-02T14:54:32",
     "spec_version": "A_repo50_c4_40_fixed20",
     "canonical_candidate": "A_repo50_c4_40_fixed20",
     "canonical_price_mode": "raw",
@@ -113,7 +132,16 @@
         "risk_weekly_long_ma_bear": false,
         "risk_any_long_ma_bear": false,
         "risk_long_ma_score": 0,
-        "risk_badge_zh": "研究中"
+        "risk_badge_zh": "研究中",
+        "risk_v2_level": 2,
+        "risk_v2_label_zh": "高追高 / 只觀察",
+        "risk_v2_primary_badge_zh": "只觀察",
+        "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+        "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+        "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+        "risk_v2_sort_rank": 2,
+        "risk_v2_rule_version": "p2_2026_07_02",
+        "risk_v2_is_display_only": true
       },
       {
         "date": "2026-06-26",
@@ -159,7 +187,16 @@
         "risk_weekly_long_ma_bear": null,
         "risk_any_long_ma_bear": null,
         "risk_long_ma_score": 0,
-        "risk_badge_zh": "研究中"
+        "risk_badge_zh": "研究中",
+        "risk_v2_level": 2,
+        "risk_v2_label_zh": "高追高 / 只觀察",
+        "risk_v2_primary_badge_zh": "只觀察",
+        "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+        "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+        "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+        "risk_v2_sort_rank": 2,
+        "risk_v2_rule_version": "p2_2026_07_02",
+        "risk_v2_is_display_only": true
       },
       {
         "date": "2026-06-26",
@@ -205,7 +242,16 @@
         "risk_weekly_long_ma_bear": false,
         "risk_any_long_ma_bear": false,
         "risk_long_ma_score": 0,
-        "risk_badge_zh": "研究中"
+        "risk_badge_zh": "研究中",
+        "risk_v2_level": 2,
+        "risk_v2_label_zh": "高追高 / 只觀察",
+        "risk_v2_primary_badge_zh": "只觀察",
+        "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+        "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+        "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+        "risk_v2_sort_rank": 2,
+        "risk_v2_rule_version": "p2_2026_07_02",
+        "risk_v2_is_display_only": true
       },
       {
         "date": "2026-06-26",
@@ -251,7 +297,16 @@
         "risk_weekly_long_ma_bear": null,
         "risk_any_long_ma_bear": null,
         "risk_long_ma_score": 0,
-        "risk_badge_zh": "研究中"
+        "risk_badge_zh": "研究中",
+        "risk_v2_level": 2,
+        "risk_v2_label_zh": "高追高 / 只觀察",
+        "risk_v2_primary_badge_zh": "只觀察",
+        "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+        "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+        "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+        "risk_v2_sort_rank": 2,
+        "risk_v2_rule_version": "p2_2026_07_02",
+        "risk_v2_is_display_only": true
       }
     ],
     "primary_reason": "A組主清單命中；近20天漲幅 25.3%，近20日均成交 51.5億",

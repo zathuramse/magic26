@@ -70,10 +70,44 @@ if summary.get("latest_signal_groups") != len(latest_groups) or len(latest_group
 if latest_groups[0].get("stock_id") != "6213" or latest_groups[0].get("alias_count") != 4:
     print("latest 6213 group not merged as expected", latest_groups[0].get("stock_id"), latest_groups[0].get("alias_count"))
     sys.exit(1)
-required_group_fields = {"signal_group_id", "signal_date", "data_through", "generated_at", "hit_candidates", "price_modes", "alias_rows", "primary_reason", "risk_reason", "priority_reason"}
+risk_v2_fields = {
+    "risk_v2_level",
+    "risk_v2_label_zh",
+    "risk_v2_primary_badge_zh",
+    "risk_v2_badges_zh",
+    "risk_v2_reasons_zh",
+    "risk_v2_action_hint_zh",
+    "risk_v2_sort_rank",
+    "risk_v2_rule_version",
+    "risk_v2_is_display_only",
+}
+required_group_fields = {"signal_group_id", "signal_date", "data_through", "generated_at", "hit_candidates", "price_modes", "alias_rows", "primary_reason", "risk_reason", "priority_reason"} | risk_v2_fields
 missing_group_fields = sorted(required_group_fields - set(latest_groups[0]))
 if missing_group_fields:
     print("latest signal group missing fields", missing_group_fields)
+    sys.exit(1)
+for group in latest_groups + all_groups:
+    if not risk_v2_fields.issubset(group):
+        print("signal group missing risk_v2 fields", group.get("signal_group_id"))
+        sys.exit(1)
+    if group.get("risk_v2_level") not in {0, 1, 2, 3}:
+        print("bad risk_v2_level", group.get("signal_group_id"), group.get("risk_v2_level"))
+        sys.exit(1)
+    if group.get("risk_v2_sort_rank") != group.get("risk_v2_level"):
+        print("bad risk_v2_sort_rank", group.get("signal_group_id"), group.get("risk_v2_sort_rank"))
+        sys.exit(1)
+    if group.get("risk_v2_is_display_only") is not True:
+        print("risk_v2 must be display-only", group.get("signal_group_id"), group.get("risk_v2_is_display_only"))
+        sys.exit(1)
+    if not isinstance(group.get("risk_v2_badges_zh"), list) or not isinstance(group.get("risk_v2_reasons_zh"), list):
+        print("risk_v2 list fields must stay arrays in signal group JSON", group.get("signal_group_id"))
+        sys.exit(1)
+latest_6213 = latest_groups[0]
+if latest_6213.get("risk_v2_level") != 2 or latest_6213.get("risk_v2_primary_badge_zh") != "只觀察" or latest_6213.get("risk_v2_label_zh") != "高追高 / 只觀察":
+    print("latest 6213 risk_v2 classification mismatch", latest_6213.get("risk_v2_level"), latest_6213.get("risk_v2_primary_badge_zh"), latest_6213.get("risk_v2_label_zh"))
+    sys.exit(1)
+if "不建議直接追價" not in str(latest_6213.get("risk_v2_action_hint_zh")):
+    print("latest 6213 risk_v2 no-chase hint missing", latest_6213.get("risk_v2_action_hint_zh"))
     sys.exit(1)
 if len({(g.get("stock_id"), g.get("signal_date")) for g in all_groups}) != len(all_groups):
     print("duplicate stock/date groups remain in all_signal_groups")
@@ -113,7 +147,7 @@ required_columns = {
     "risk_any_long_ma_bear",
     "risk_long_ma_score",
     "risk_badge_zh",
-}
+} | risk_v2_fields
 missing_columns = sorted(required_columns - set(candidates.columns))
 if missing_columns:
     print("missing candidate label columns:", missing_columns)

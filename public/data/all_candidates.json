@@ -43,7 +43,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-26",
@@ -89,7 +98,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-26",
@@ -135,7 +153,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-26",
@@ -181,7 +208,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.8%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.8%，超過 1% 追高警戒門檻;近 20 天已漲 25.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-10",
@@ -227,7 +263,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高;低流動性",
+    "risk_v2_reasons_zh": "隔日開盤高 9.9%，超過 5% 暫不追門檻;訊號日漲 9.9% 且隔日開盤高 9.9%，屬極端追高組合;低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -273,7 +318,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -319,7 +373,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -365,7 +428,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -411,7 +483,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -457,7 +538,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-06-05",
@@ -503,7 +593,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-29",
@@ -549,7 +648,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;周長均空頭"
+    "risk_badge_zh": "研究中;周長均空頭",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 4.5%，超過 3% 高追高門檻;近 20 天已漲 32.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 4.5%，超過 1% 追高警戒門檻;近 20 天已漲 32.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-29",
@@ -595,7 +703,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 4.5%，超過 3% 高追高門檻;近 20 天已漲 32.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 4.5%，超過 1% 追高警戒門檻;近 20 天已漲 32.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-29",
@@ -641,7 +758,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;周長均空頭"
+    "risk_badge_zh": "研究中;周長均空頭",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 4.5%，超過 3% 高追高門檻;近 20 天已漲 32.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 4.5%，超過 1% 追高警戒門檻;近 20 天已漲 32.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-29",
@@ -687,7 +813,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 4.5%，超過 3% 高追高門檻;近 20 天已漲 32.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 4.5%，超過 1% 追高警戒門檻;近 20 天已漲 32.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-28",
@@ -733,7 +868,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-28",
@@ -779,7 +923,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -825,7 +978,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -871,7 +1033,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -917,7 +1088,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -963,7 +1143,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1009,7 +1198,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1055,7 +1253,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1101,7 +1308,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1147,7 +1363,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1193,7 +1418,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-14",
@@ -1239,7 +1473,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1285,7 +1528,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1331,7 +1583,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1377,7 +1638,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1423,7 +1693,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1469,7 +1748,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-13",
@@ -1515,7 +1803,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-08",
@@ -1561,7 +1858,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.3%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-08",
@@ -1607,7 +1913,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.3%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-08",
@@ -1653,7 +1968,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.3%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-05-08",
@@ -1699,7 +2023,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.3%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-20",
@@ -1745,7 +2078,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-20",
@@ -1791,7 +2133,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-20",
@@ -1837,7 +2188,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-20",
@@ -1883,7 +2243,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -1929,7 +2298,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -1975,7 +2353,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2021,7 +2408,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2067,7 +2463,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2113,7 +2518,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2159,7 +2573,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2205,7 +2628,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2251,7 +2683,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2297,7 +2738,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2343,7 +2793,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2389,7 +2848,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2435,7 +2903,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2481,7 +2958,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.2%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.2%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2527,7 +3013,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.2%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.2%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2573,7 +3068,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2619,7 +3123,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.8%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2665,7 +3178,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2711,7 +3233,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 2.2%，超過 1% 追高警戒門檻;訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2757,7 +3288,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.2%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.2%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-17",
@@ -2803,7 +3343,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.2%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.2%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -2849,7 +3398,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -2895,7 +3453,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -2941,7 +3508,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;周長均空頭"
+    "risk_badge_zh": "研究中;周長均空頭",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -2987,7 +3563,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3033,7 +3618,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3079,7 +3673,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3125,7 +3728,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;周長均空頭"
+    "risk_badge_zh": "研究中;周長均空頭",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3171,7 +3783,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3217,7 +3838,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3263,7 +3893,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;訊號日漲 10.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3309,7 +3948,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;周長均空頭"
+    "risk_badge_zh": "研究中;周長均空頭",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-16",
@@ -3355,7 +4003,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3401,7 +4058,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3447,7 +4113,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3493,7 +4168,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3539,7 +4223,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3585,7 +4278,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3631,7 +4333,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3677,7 +4388,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3723,7 +4443,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3769,7 +4498,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3815,7 +4553,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3861,7 +4608,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3907,7 +4663,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3953,7 +4718,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -3999,7 +4773,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-15",
@@ -4045,7 +4828,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4091,7 +4883,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 33.7%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.5%，超過 4% 追高警戒門檻;近 20 天已漲 33.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4137,7 +4938,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.9% 且隔日開盤高 3.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4183,7 +4993,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.9% 且隔日開盤高 3.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4229,7 +5048,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 34.4%，超過 27% 高追高門檻;近 20 天已漲 34.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4275,7 +5103,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 34.4%，超過 27% 高追高門檻;近 20 天已漲 34.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4321,7 +5158,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4367,7 +5213,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4413,7 +5268,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 33.7%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.5%，超過 4% 追高警戒門檻;近 20 天已漲 33.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4459,7 +5323,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.9% 且隔日開盤高 3.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4505,7 +5378,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.9% 且隔日開盤高 3.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4551,7 +5433,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 34.4%，超過 27% 高追高門檻;近 20 天已漲 34.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4597,7 +5488,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 34.4%，超過 27% 高追高門檻;近 20 天已漲 34.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4643,7 +5543,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4689,7 +5598,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4735,7 +5653,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-14",
@@ -4781,7 +5708,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-02",
@@ -4827,7 +5763,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.5%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.5%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻;近 20 天已漲 25.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-04-02",
@@ -4873,7 +5818,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "隔日開盤高 3.5%，超過 3% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 3.5%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻;近 20 天已漲 25.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -4919,7 +5873,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -4965,7 +5928,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -5011,7 +5983,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -5057,7 +6038,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -5103,7 +6093,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-24",
@@ -5149,7 +6148,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 5.3%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5195,7 +6203,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5241,7 +6258,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5287,7 +6313,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5333,7 +6368,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5379,7 +6423,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-19",
@@ -5425,7 +6478,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.6%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 5.6%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-17",
@@ -5471,7 +6533,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;危險斷層;周長均空頭"
+    "risk_badge_zh": "研究中;危險斷層;周長均空頭",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 8.0%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 8.0%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-17",
@@ -5517,7 +6588,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 8.0%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 8.0%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-17",
@@ -5563,7 +6643,16 @@
     "risk_weekly_long_ma_bear": true,
     "risk_any_long_ma_bear": true,
     "risk_long_ma_score": -1,
-    "risk_badge_zh": "研究中;危險斷層;周長均空頭"
+    "risk_badge_zh": "研究中;危險斷層;周長均空頭",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 8.0%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 8.0%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-17",
@@ -5609,7 +6698,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 8.0%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 8.0%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-02",
@@ -5655,7 +6753,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.3%，超過 5% 暫不追門檻;訊號日漲 9.9% 且隔日開盤高 5.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-03-02",
@@ -5701,7 +6808,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 5.3%，超過 5% 暫不追門檻;訊號日漲 9.9% 且隔日開盤高 5.3%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-26",
@@ -5747,7 +6863,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.3%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-26",
@@ -5793,7 +6918,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.3%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-25",
@@ -5839,7 +6973,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 3.1%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-25",
@@ -5885,7 +7028,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 3.1%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-25",
@@ -5931,7 +7083,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 3.1%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-02-25",
@@ -5977,7 +7138,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 3.1%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6023,7 +7193,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6069,7 +7248,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6115,7 +7303,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 25.1%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6161,7 +7358,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 25.1%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6207,7 +7413,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6253,7 +7468,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6299,7 +7523,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 25.1%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6345,7 +7578,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 25.1%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6391,7 +7633,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-29",
@@ -6437,7 +7688,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 2.0%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-27",
@@ -6483,7 +7743,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 32.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 32.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-27",
@@ -6529,7 +7798,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 32.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 32.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-27",
@@ -6575,7 +7853,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 32.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 32.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-27",
@@ -6621,7 +7908,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 32.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 32.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6667,7 +7963,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6713,7 +8018,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6759,7 +8073,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6805,7 +8128,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6851,7 +8183,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2026-01-22",
@@ -6897,7 +8238,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -6943,7 +8293,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -6989,7 +8348,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7035,7 +8403,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 1.1%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7081,7 +8458,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 1.1%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7127,7 +8513,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7173,7 +8568,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7219,7 +8623,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 1.1%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7265,7 +8678,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "同時觸發兩個以上追高警戒條件;隔日開盤高 1.1%，超過 1% 追高警戒門檻;訊號日漲 5.4%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7311,7 +8733,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-12-01",
@@ -7357,7 +8788,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-28",
@@ -7403,7 +8843,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 4.7%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-28",
@@ -7449,7 +8898,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 4.7%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-28",
@@ -7495,7 +8953,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 4.7%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-28",
@@ -7541,7 +9008,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;高追高;開高風險",
+    "risk_v2_reasons_zh": "訊號日漲 9.8% 且隔日開盤高 4.7%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-17",
@@ -7587,7 +9063,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 25.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-11-17",
@@ -7633,7 +9118,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 25.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7679,7 +9173,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7725,7 +9228,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7771,7 +9283,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 10.0%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7817,7 +9338,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 10.0%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7863,7 +9393,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7909,7 +9448,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -7955,7 +9503,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 10.0%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -8001,7 +9558,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 10.0%，超過 9% 高追高門檻;近 20 天已漲 39.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 10.0%，超過 4% 追高警戒門檻;近 20 天已漲 39.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -8047,7 +9613,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-28",
@@ -8093,7 +9668,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.4%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8139,7 +9723,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8185,7 +9778,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8231,7 +9833,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8277,7 +9888,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8323,7 +9943,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-19",
@@ -8369,7 +9998,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-13",
@@ -8415,7 +10053,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.3%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.2%，超過 4% 追高警戒門檻;近 20 天已漲 27.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-13",
@@ -8461,7 +10108,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.3%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.2%，超過 4% 追高警戒門檻;近 20 天已漲 27.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-13",
@@ -8507,7 +10163,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.3%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.2%，超過 4% 追高警戒門檻;近 20 天已漲 27.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-13",
@@ -8553,7 +10218,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.3%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 4.2%，超過 4% 追高警戒門檻;近 20 天已漲 27.3%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-04",
@@ -8599,7 +10273,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 38.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 38.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-04",
@@ -8645,7 +10328,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 38.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 38.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-04",
@@ -8691,7 +10383,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 38.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 38.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-08-04",
@@ -8737,7 +10438,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 38.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 38.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-06-10",
@@ -8783,7 +10493,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 29.9%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.1%，超過 4% 追高警戒門檻;近 20 天已漲 29.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-06-10",
@@ -8829,7 +10548,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 29.9%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.1%，超過 4% 追高警戒門檻;近 20 天已漲 29.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-06-10",
@@ -8875,7 +10603,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 29.9%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.1%，超過 4% 追高警戒門檻;近 20 天已漲 29.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-06-10",
@@ -8921,7 +10658,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 29.9%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 6.1%，超過 4% 追高警戒門檻;近 20 天已漲 29.9%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-17",
@@ -8967,7 +10713,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 27.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 27.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-17",
@@ -9013,7 +10768,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;近 20 天已漲 27.8%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻;近 20 天已漲 27.8%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-13",
@@ -9059,7 +10823,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-13",
@@ -9105,7 +10878,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-13",
@@ -9151,7 +10933,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-13",
@@ -9197,7 +10988,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-12",
@@ -9243,7 +11043,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-12",
@@ -9289,7 +11098,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-12",
@@ -9335,7 +11153,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2025-02-12",
@@ -9381,7 +11208,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-12-09",
@@ -9427,7 +11263,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-12-09",
@@ -9473,7 +11318,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-12-06",
@@ -9519,7 +11373,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-12-06",
@@ -9565,7 +11428,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9611,7 +11483,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9657,7 +11538,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9703,7 +11593,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9749,7 +11648,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9795,7 +11703,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-10-22",
@@ -9841,7 +11758,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -9887,7 +11813,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -9933,7 +11868,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -9979,7 +11923,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -10025,7 +11978,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -10071,7 +12033,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-07-15",
@@ -10117,7 +12088,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-06-04",
@@ -10163,7 +12143,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-06-04",
@@ -10209,7 +12198,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-06-04",
@@ -10255,7 +12253,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-06-04",
@@ -10301,7 +12308,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.0%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-10",
@@ -10347,7 +12363,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-10",
@@ -10393,7 +12418,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-03",
@@ -10439,7 +12473,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-03",
@@ -10485,7 +12528,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-03",
@@ -10531,7 +12583,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;可救斷層"
+    "risk_badge_zh": "研究中;可救斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-03",
@@ -10577,7 +12638,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-02",
@@ -10623,7 +12693,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 30.7%，超過 27% 高追高門檻;近 20 天已漲 30.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-02",
@@ -10669,7 +12748,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 30.7%，超過 27% 高追高門檻;近 20 天已漲 30.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-02",
@@ -10715,7 +12803,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 30.7%，超過 27% 高追高門檻;近 20 天已漲 30.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-05-02",
@@ -10761,7 +12858,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 30.7%，超過 27% 高追高門檻;近 20 天已漲 30.7%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-03-08",
@@ -10807,7 +12913,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-03-08",
@@ -10853,7 +12968,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-03-08",
@@ -10899,7 +13023,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-03-08",
@@ -10945,7 +13078,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-01-04",
@@ -10991,7 +13133,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-01-04",
@@ -11037,7 +13188,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-01-04",
@@ -11083,7 +13243,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2024-01-04",
@@ -11129,7 +13298,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11175,7 +13353,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11221,7 +13408,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11267,7 +13463,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11313,7 +13518,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11359,7 +13573,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-08-01",
@@ -11405,7 +13628,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 0,
+    "risk_v2_label_zh": "正常候選 / 可以研究",
+    "risk_v2_primary_badge_zh": "可以研究",
+    "risk_v2_badges_zh": "可以研究",
+    "risk_v2_reasons_zh": "未觸發 P2 追高風險門檻",
+    "risk_v2_action_hint_zh": "可以研究；仍需看圖形與基本面",
+    "risk_v2_sort_rank": 0,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-19",
@@ -11451,7 +13683,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 5.3%，超過 5% 暫不追門檻",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-19",
@@ -11497,7 +13738,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 5.3%，超過 5% 暫不追門檻",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-17",
@@ -11543,7 +13793,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 8.7%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-17",
@@ -11589,7 +13848,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 8.7%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-17",
@@ -11635,7 +13903,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 8.7%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-17",
@@ -11681,7 +13958,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 38.5%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 8.7%，超過 4% 追高警戒門檻;近 20 天已漲 38.5%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-05",
@@ -11727,7 +14013,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.0%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-05",
@@ -11773,7 +14068,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.0%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-05",
@@ -11819,7 +14123,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.0%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-07-05",
@@ -11865,7 +14178,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 26.0%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-06",
@@ -11911,7 +14233,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-06",
@@ -11957,7 +14288,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-06",
@@ -12003,7 +14343,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12049,7 +14398,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12095,7 +14453,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12141,7 +14508,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12187,7 +14563,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12233,7 +14618,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12279,7 +14673,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12325,7 +14728,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12371,7 +14783,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-02",
@@ -12417,7 +14838,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12463,7 +14893,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12509,7 +14948,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12555,7 +15003,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12601,7 +15058,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12647,7 +15113,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-06-01",
@@ -12693,7 +15168,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 9.9%，超過 9% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 1.4%，超過 1% 追高警戒門檻;訊號日漲 9.9%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-31",
@@ -12739,7 +15223,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-31",
@@ -12785,7 +15278,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-29",
@@ -12831,7 +15333,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.2%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-29",
@@ -12877,7 +15388,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.2%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-29",
@@ -12923,7 +15443,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.2%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-29",
@@ -12969,7 +15498,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.2%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13015,7 +15553,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13061,7 +15608,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13107,7 +15663,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13153,7 +15718,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13199,7 +15773,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;大量斷層觀察"
+    "risk_badge_zh": "研究中;大量斷層觀察",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-05-24",
@@ -13245,7 +15828,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.3%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13291,7 +15883,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13337,7 +15938,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13383,7 +15993,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13429,7 +16048,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13475,7 +16103,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中;危險斷層"
+    "risk_badge_zh": "研究中;危險斷層",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-13",
@@ -13521,7 +16158,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-10",
@@ -13567,7 +16213,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.2%，超過 9% 高追高門檻;近 20 天已漲 28.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.2%，超過 4% 追高警戒門檻;近 20 天已漲 28.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-04-10",
@@ -13613,7 +16268,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;追高警戒;漲幅已大",
+    "risk_v2_reasons_zh": "訊號日漲 9.2%，超過 9% 高追高門檻;近 20 天已漲 28.2%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;訊號日漲 9.2%，超過 4% 追高警戒門檻;近 20 天已漲 28.2%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-29",
@@ -13659,7 +16323,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-29",
@@ -13705,7 +16378,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-29",
@@ -13751,7 +16433,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-29",
@@ -13797,7 +16488,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒",
+    "risk_v2_reasons_zh": "訊號日漲 4.7%，超過 4% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-27",
@@ -13843,7 +16543,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 7.8%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 7.8%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-03-27",
@@ -13889,7 +16598,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;開高風險;高追高",
+    "risk_v2_reasons_zh": "隔日開盤高 7.8%，超過 5% 暫不追門檻;訊號日漲 10.0% 且隔日開盤高 7.8%，屬極端追高組合",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-09",
@@ -13935,7 +16653,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.7%，超過 1% 追高警戒門檻;近 20 天已漲 27.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-09",
@@ -13981,7 +16708,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.7%，超過 1% 追高警戒門檻;近 20 天已漲 27.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-09",
@@ -14027,7 +16763,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.7%，超過 1% 追高警戒門檻;近 20 天已漲 27.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-09",
@@ -14073,7 +16818,16 @@
     "risk_weekly_long_ma_bear": null,
     "risk_any_long_ma_bear": null,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 2,
+    "risk_v2_label_zh": "高追高 / 只觀察",
+    "risk_v2_primary_badge_zh": "只觀察",
+    "risk_v2_badges_zh": "只觀察;高追高;開高風險;漲幅已大",
+    "risk_v2_reasons_zh": "近 20 天已漲 27.4%，超過 27% 高追高門檻;同時觸發兩個以上追高警戒條件;隔日開盤高 2.7%，超過 1% 追高警戒門檻;近 20 天已漲 27.4%，超過 25% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "只觀察；已偏追高，不建議直接追價",
+    "risk_v2_sort_rank": 2,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-06",
@@ -14119,7 +16873,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-06",
@@ -14165,7 +16928,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-06",
@@ -14211,7 +16983,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 3,
+    "risk_v2_label_zh": "暫不追 / 風險 veto",
+    "risk_v2_primary_badge_zh": "暫不追",
+    "risk_v2_badges_zh": "暫不追;風險 veto;低流動性",
+    "risk_v2_reasons_zh": "低流動性風險成立",
+    "risk_v2_action_hint_zh": "暫不追；只保留研究紀錄",
+    "risk_v2_sort_rank": 3,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-01",
@@ -14257,7 +17038,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.5%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-01",
@@ -14303,7 +17093,16 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.5%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   },
   {
     "date": "2023-02-01",
@@ -14349,6 +17148,15 @@
     "risk_weekly_long_ma_bear": false,
     "risk_any_long_ma_bear": false,
     "risk_long_ma_score": 0,
-    "risk_badge_zh": "研究中"
+    "risk_badge_zh": "研究中",
+    "risk_v2_level": 1,
+    "risk_v2_label_zh": "追高警戒 / 可看但不要追",
+    "risk_v2_primary_badge_zh": "不要追價",
+    "risk_v2_badges_zh": "不要追價;追高警戒;開高風險",
+    "risk_v2_reasons_zh": "隔日開盤高 1.5%，超過 1% 追高警戒門檻",
+    "risk_v2_action_hint_zh": "可看，但不要追價；等回檔或整理後再研究",
+    "risk_v2_sort_rank": 1,
+    "risk_v2_rule_version": "p2_2026_07_02",
+    "risk_v2_is_display_only": true
   }
 ]
