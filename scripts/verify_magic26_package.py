@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -7,6 +8,23 @@ from pathlib import Path
 import pandas as pd
 
 root = Path(__file__).resolve().parents[1]
+DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
+DEFAULT_DATA_THROUGH = "2026-06-30"
+DEFAULT_APP_CACHE_BUST = "20260702riskv2"
+DEFAULT_CSS_CACHE_BUST = "20260701q"
+
+
+def data_file(name: str, snapshot_suffix: str) -> Path:
+    return root / "public/data" / name.format(suffix=snapshot_suffix)
+
+
+parser = argparse.ArgumentParser(description="Verify Magic26 static package.")
+parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX)
+parser.add_argument("--data-through", default=DEFAULT_DATA_THROUGH)
+parser.add_argument("--app-cache-bust", default=DEFAULT_APP_CACHE_BUST)
+parser.add_argument("--css-cache-bust", default=DEFAULT_CSS_CACHE_BUST)
+args = parser.parse_args()
+
 required = [
     root / "public/index.html",
     root / "public/app.js",
@@ -22,14 +40,14 @@ required = [
     root / "public/data/kline/raw_6213.json",
     root / "public/data/kline/adj_6213.json",
     root / "public/data/magic26_candidates_history.csv",
-    root / "public/data/magic26_round14_bootstrap_summary_20210101_20260701.csv",
-    root / "public/data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv",
-    root / "public/data/magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv",
-    root / "public/data/magic26_round17_b_retest_rearm_watch_20210101_20260701.csv",
-    root / "public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv",
-    root / "public/data/magic26_round20_60d_flagged_cases_20210101_20260701.csv",
-    root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv",
-    root / "public/data/magic26_round21_volgap_rescue_cases_20210101_20260701.csv",
+    data_file("magic26_round14_bootstrap_summary_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round14_excluded_weak_momentum_path_review_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round14_baseline_vs_floor15_yearly_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round17_b_retest_rearm_watch_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round20_60d_validation_summary_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round20_60d_flagged_cases_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round21_volgap_rescue_summary_{suffix}.csv", args.snapshot_suffix),
+    data_file("magic26_round21_volgap_rescue_cases_{suffix}.csv", args.snapshot_suffix),
     root / "scripts/export_dashboard_data.py",
     root / "scripts/deploy_cloudflare.py",
 ]
@@ -176,14 +194,14 @@ if "round23_decision" not in summary:
 if "round24_decision" not in summary:
     print("missing round24_decision in summary.json")
     sys.exit(1)
-round20 = pd.read_csv(root / "public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv")
+round20 = pd.read_csv(data_file("magic26_round20_60d_validation_summary_{suffix}.csv", args.snapshot_suffix))
 if not round20["label"].astype(str).str.contains("top1/top10 < 2", regex=False).any():
     print("round20 summary missing top1/top10 validation row")
     sys.exit(1)
 if not round20["label"].astype(str).str.contains("ret60 <= 150%", regex=False).any():
     print("round20 summary missing ret60 cap row")
     sys.exit(1)
-round21 = pd.read_csv(root / "public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv")
+round21 = pd.read_csv(data_file("magic26_round21_volgap_rescue_summary_{suffix}.csv", args.snapshot_suffix))
 if not round21["label"].astype(str).str.contains("rescue candidate", regex=False).any():
     print("round21 summary missing rescue candidate row")
     sys.exit(1)
@@ -223,7 +241,9 @@ if "Magic26 Research Dashboard" in html or "魔26 候選清單" in html or "拉�
 if "次要篩選：量能狀態" not in html or "volgapNormal" not in html or "volgapMissing" not in html:
     print("round23 summary panel/filters missing from index.html")
     sys.exit(1)
-if "今日主清單" not in html or "次要清單：今年 A 組" not in html or "app.js?v=20260702riskv2" not in html or "styles.css?v=20260701q" not in html:
+expected_app_ref = f"app.js?v={args.app_cache_bust}"
+expected_css_ref = f"styles.css?v={args.css_cache_bust}"
+if "今日主清單" not in html or "次要清單：今年 A 組" not in html or expected_app_ref not in html or expected_css_ref not in html:
     print("round24 grouped A list/cache-bust missing from index.html")
     sys.exit(1)
 if "使用說明" not in html or "展開看規則與使用方式" not in html or "A 組怎麼挑" not in html or "大盤背景不能太差" not in html or "怎麼使用" not in html:
@@ -268,7 +288,7 @@ if not kline_path.exists():
     sys.exit(1)
 kline = json.loads(kline_path.read_text(encoding="utf-8"))
 krows = kline.get("rows") or []
-if not krows or krows[0].get("date") > "2025-07-01" or krows[-1].get("date") < "2026-06-30":
+if not krows or krows[0].get("date") > "2025-07-01" or krows[-1].get("date") < args.data_through:
     print("kline rows do not cover required one-year minimum from 2025-07-01")
     sys.exit(1)
 if "range:'1Y'" not in app or "'3M':66" in app or "'6M':132" in app or "data-kline-range=\"3M\"" in app or "data-kline-range=\"6M\"" in app:

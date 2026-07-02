@@ -13,37 +13,50 @@ import pandas as pd
 PROJECT = Path(__file__).resolve().parents[1]
 DEFAULT_RESEARCH_ROOT = PROJECT.parent
 DEFAULT_MAGIC26_SOURCE = DEFAULT_RESEARCH_ROOT / "sources/strategy-checks/magic26"
+DEFAULT_SNAPSHOT_SUFFIX = "20210101_20260701"
+DEFAULT_DATA_THROUGH = "2026-06-30"
 
-PROCESSED_NAMES = [
-    "magic26_round4_summary_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
-    "magic26_round4_summary_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
-    "magic26_round4_regime_round6_regime_all_liquid30000000_raw_20210101_20260701.csv",
-    "magic26_round4_regime_round6_regime_all_liquid30000000_adj_20210101_20260701.csv",
-    "magic26_round7_param_grid_summary_20210101_20260701.csv",
-    "magic26_round7_param_grid_top_20210101_20260701.csv",
-    "magic26_round7_param_grid_yearly_20210101_20260701.csv",
-    "magic26_round8_tradeability_summary_20210101_20260701.csv",
-    "magic26_round8_tradeability_2024_failures_by_industry_20210101_20260701.csv",
-    "magic26_round9_close_exit_summary_20210101_20260701.csv",
-    "magic26_round9_close_exit_yearly_20210101_20260701.csv",
-    "magic26_round14_bootstrap_summary_20210101_20260701.csv",
-    "magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv",
-    "magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv",
-    "magic26_round17_b_retest_rearm_watch_20210101_20260701.csv",
-    "magic26_round19_author_absorption_detail_20210101_20260701.csv",
-    "magic26_round19_ret60_cap_summary_20210101_20260701.csv",
-    "magic26_round19_volume_gap_summary_20210101_20260701.csv",
-    "magic26_round19_risk_badge_summary_20210101_20260701.csv",
-    "magic26_round20_60d_validation_summary_20210101_20260701.csv",
-    "magic26_round20_60d_flagged_cases_20210101_20260701.csv",
-    "magic26_round21_volgap_rescue_summary_20210101_20260701.csv",
-    "magic26_round21_volgap_rescue_cases_20210101_20260701.csv",
+PROCESSED_NAME_PATTERNS = [
+    "magic26_round4_summary_round6_regime_all_liquid30000000_raw_{suffix}.csv",
+    "magic26_round4_summary_round6_regime_all_liquid30000000_adj_{suffix}.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_raw_{suffix}.csv",
+    "magic26_round4_regime_round6_regime_all_liquid30000000_adj_{suffix}.csv",
+    "magic26_round7_param_grid_summary_{suffix}.csv",
+    "magic26_round7_param_grid_top_{suffix}.csv",
+    "magic26_round7_param_grid_yearly_{suffix}.csv",
+    "magic26_round8_tradeability_summary_{suffix}.csv",
+    "magic26_round8_tradeability_2024_failures_by_industry_{suffix}.csv",
+    "magic26_round9_close_exit_summary_{suffix}.csv",
+    "magic26_round9_close_exit_yearly_{suffix}.csv",
+    "magic26_round14_bootstrap_summary_{suffix}.csv",
+    "magic26_round14_excluded_weak_momentum_path_review_{suffix}.csv",
+    "magic26_round14_baseline_vs_floor15_yearly_{suffix}.csv",
+    "magic26_round17_b_retest_rearm_watch_{suffix}.csv",
+    "magic26_round19_author_absorption_detail_{suffix}.csv",
+    "magic26_round19_ret60_cap_summary_{suffix}.csv",
+    "magic26_round19_volume_gap_summary_{suffix}.csv",
+    "magic26_round19_risk_badge_summary_{suffix}.csv",
+    "magic26_round20_60d_validation_summary_{suffix}.csv",
+    "magic26_round20_60d_flagged_cases_{suffix}.csv",
+    "magic26_round21_volgap_rescue_summary_{suffix}.csv",
+    "magic26_round21_volgap_rescue_cases_{suffix}.csv",
 ]
 
-WATCH_STATE_FILE = "magic26_round17_b_retest_rearm_watch_20210101_20260701.csv"
 
-RAW_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv"
-ADJ_CHECKED = "magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv"
+def processed_names(snapshot_suffix: str) -> list[str]:
+    return [name.format(suffix=snapshot_suffix) for name in PROCESSED_NAME_PATTERNS]
+
+
+def watch_state_file(snapshot_suffix: str) -> str:
+    return f"magic26_round17_b_retest_rearm_watch_{snapshot_suffix}.csv"
+
+
+def raw_checked_file(snapshot_suffix: str) -> str:
+    return f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_{snapshot_suffix}.csv"
+
+
+def adj_checked_file(snapshot_suffix: str) -> str:
+    return f"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_{snapshot_suffix}.csv"
 
 
 def clean_json(value: Any) -> Any:
@@ -159,7 +172,7 @@ def research_labels(candidates: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.DataFrame:
+def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path, snapshot_suffix: str) -> pd.DataFrame:
     """Merge Round 19 source-derived research badges into candidate rows.
 
     These are research labels only. They must not alter Candidate A/B/C membership.
@@ -169,7 +182,7 @@ def add_round19_author_badges(candidates: pd.DataFrame, out_dir: Path) -> pd.Dat
     """
     out = candidates.copy()
     out["source_type"] = "reconstructed"
-    path = out_dir / "magic26_round19_author_absorption_detail_20210101_20260701.csv"
+    path = out_dir / f"magic26_round19_author_absorption_detail_{snapshot_suffix}.csv"
     default_cols = [
         "ret_60d_signal", "ret60_cap150_pass", "volume_gap_risk_zh",
         "top1_to_top3_volume_ratio", "top1_to_top5_volume_ratio", "top1_to_top10_volume_ratio",
@@ -371,9 +384,9 @@ def add_risk_v2_columns(candidates: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def load_candidates(out_dir: Path) -> pd.DataFrame:
+def load_candidates(out_dir: Path, snapshot_suffix: str) -> pd.DataFrame:
     all_candidates: list[pd.DataFrame] = []
-    for mode, filename in [("raw", RAW_CHECKED), ("adjusted", ADJ_CHECKED)]:
+    for mode, filename in [("raw", raw_checked_file(snapshot_suffix)), ("adjusted", adj_checked_file(snapshot_suffix))]:
         path = out_dir / filename
         if not path.exists():
             raise FileNotFoundError(f"Missing checked-signal input: {path}")
@@ -386,7 +399,7 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
             all_candidates.append(part)
     candidates = pd.concat(all_candidates, ignore_index=True) if all_candidates else pd.DataFrame()
     candidates = research_labels(candidates)
-    candidates = add_round19_author_badges(candidates, out_dir)
+    candidates = add_round19_author_badges(candidates, out_dir, snapshot_suffix)
     candidates = add_risk_v2_columns(candidates)
     keep_cols = [
         "date",
@@ -447,8 +460,8 @@ def load_candidates(out_dir: Path) -> pd.DataFrame:
     return candidates[keep_cols].sort_values(["date", "candidate", "stock_id"], ascending=[False, True, True])
 
 
-def build_watch_states(out_dir: Path) -> list[dict[str, Any]]:
-    path = out_dir / WATCH_STATE_FILE
+def build_watch_states(out_dir: Path, snapshot_suffix: str) -> list[dict[str, Any]]:
+    path = out_dir / watch_state_file(snapshot_suffix)
     if not path.exists():
         return []
     df = pd.read_csv(path)
@@ -468,7 +481,7 @@ def build_watch_states(out_dir: Path) -> list[dict[str, Any]]:
     return out.to_dict(orient="records")
 
 
-def export_kline_files(candidates: pd.DataFrame, source_dir: Path, public_data: Path, processed: Path, data_through: str) -> list[str]:
+def export_kline_files(candidates: pd.DataFrame, source_dir: Path, public_data: Path, processed: Path, data_through: str, snapshot_suffix: str) -> list[str]:
     """Export compact OHLC windows for candidate detail charts.
 
     Static JSON keeps the dashboard self-contained on Cloudflare Pages and avoids
@@ -487,7 +500,7 @@ def export_kline_files(candidates: pd.DataFrame, source_dir: Path, public_data: 
     for _, row in keys.iterrows():
         stock_id = str(row["stock_id"]).replace(".0", "")
         mode = "adj" if str(row["price_mode"]) == "adjusted" else "raw"
-        src = cache_dir / f"{mode}_{stock_id}_20210101_20260701.parquet"
+        src = cache_dir / f"{mode}_{stock_id}_{snapshot_suffix}.parquet"
         if not src.exists():
             continue
         df = pd.read_parquet(src)
@@ -752,7 +765,7 @@ def build_signal_groups(rows: pd.DataFrame, data_through: str, generated_at: str
         groups.append(canonical)
     return sorted(groups, key=lambda r: (str(r.get("date")), -_candidate_rank(str(r.get("candidate"))), str(r.get("stock_id"))), reverse=True)
 
-def export(source_dir: Path, data_through: str) -> dict[str, Any]:
+def export(source_dir: Path, data_through: str, snapshot_suffix: str = DEFAULT_SNAPSHOT_SUFFIX) -> dict[str, Any]:
     out_dir = source_dir / "out"
     if not out_dir.exists():
         raise FileNotFoundError(f"Missing source out dir: {out_dir}")
@@ -762,7 +775,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     processed.mkdir(parents=True, exist_ok=True)
 
     copied: list[str] = []
-    for name in PROCESSED_NAMES:
+    for name in processed_names(snapshot_suffix):
         src = out_dir / name
         if not src.exists():
             # Round17 is generated after an initial export builds the candidate history
@@ -773,10 +786,10 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
             shutil.copy2(src, dest_dir / name)
         copied.append(name)
 
-    candidates = load_candidates(out_dir)
+    candidates = load_candidates(out_dir, snapshot_suffix)
     candidates.to_csv(processed / "magic26_candidates_history.csv", index=False, encoding="utf-8-sig")
     candidates.to_csv(public_data / "magic26_candidates_history.csv", index=False, encoding="utf-8-sig")
-    kline_files = export_kline_files(candidates, source_dir, public_data, processed, data_through)
+    kline_files = export_kline_files(candidates, source_dir, public_data, processed, data_through, snapshot_suffix)
 
     json_ready = candidates.copy()
     if not json_ready.empty:
@@ -785,7 +798,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
     latest = json_ready[json_ready["date"] == latest_date].copy() if latest_date else json_ready.copy()
     recent = json_ready[json_ready["date"] >= "2026-01-01"].copy() if not json_ready.empty else json_ready.copy()
 
-    watch_states = build_watch_states(out_dir)
+    watch_states = build_watch_states(out_dir, snapshot_suffix)
     summary = build_summary(candidates, data_through)
     summary["watch_state"] = watch_state_summary(watch_states)
     latest_groups = build_signal_groups(latest, data_through, summary.get("generated_at"))
@@ -805,6 +818,7 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
 
     manifest = {
         "source_dir": str(source_dir),
+        "snapshot_suffix": snapshot_suffix,
         "data_through": data_through,
         "copied_csv": copied,
         "candidate_rows": int(len(candidates)),
@@ -823,9 +837,10 @@ def export(source_dir: Path, data_through: str) -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export Magic26 dashboard data bundle.")
     parser.add_argument("--source-dir", default=str(DEFAULT_MAGIC26_SOURCE), help="Magic26 research source directory")
-    parser.add_argument("--data-through", default="2026-06-30", help="Latest complete data date displayed in dashboard")
+    parser.add_argument("--data-through", default=DEFAULT_DATA_THROUGH, help="Latest complete data date displayed in dashboard")
+    parser.add_argument("--snapshot-suffix", default=DEFAULT_SNAPSHOT_SUFFIX, help="Input/output snapshot suffix, e.g. 20210101_20260702")
     args = parser.parse_args()
-    manifest = export(Path(args.source_dir), args.data_through)
+    manifest = export(Path(args.source_dir), args.data_through, args.snapshot_suffix)
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
 
 

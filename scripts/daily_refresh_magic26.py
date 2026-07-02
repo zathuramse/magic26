@@ -16,7 +16,9 @@ from typing import Any
 PROJECT = Path(__file__).resolve().parents[1]
 REPORT_DIR = PROJECT / "reports" / "daily_refresh"
 PUBLIC_SUMMARY = PROJECT / "public" / "data" / "summary.json"
+EXPORT_MANIFEST = PROJECT / "data" / "processed" / "export_manifest.json"
 FINMIND_BASE = "https://api.finmindtrade.com/api/v4/data"
+SNAPSHOT_START = "20210101"
 ENV_CANDIDATES = [
     Path("C:/Users/abckf/AppData/Local/hermes/profiles/jojo/.env"),
     Path("C:/Users/abckf/AppData/Local/hermes/.env"),
@@ -101,13 +103,49 @@ def current_dashboard_summary() -> dict[str, Any]:
     return json.loads(PUBLIC_SUMMARY.read_text(encoding="utf-8"))
 
 
+def infer_current_snapshot_suffix() -> str | None:
+    if EXPORT_MANIFEST.exists():
+        manifest = json.loads(EXPORT_MANIFEST.read_text(encoding="utf-8"))
+        if manifest.get("snapshot_suffix"):
+            return str(manifest["snapshot_suffix"])
+        for name in manifest.get("copied_csv") or []:
+            m = re.search(r"(20\d{6}_20\d{6})", str(name))
+            if m:
+                return m.group(1)
+    for path in (PROJECT / "public" / "data").glob("magic26_*_20*.csv"):
+        m = re.search(r"(20\d{6}_20\d{6})", path.name)
+        if m:
+            return m.group(1)
+    return None
+
+
+def target_snapshot_suffix(complete_data_through: str | None) -> str | None:
+    if not complete_data_through:
+        return None
+    return f"{SNAPSHOT_START}_{complete_data_through.replace('-', '')}"
+
+
 def hardcoded_snapshot_refs() -> dict[str, Any]:
+    # P5-2 intentionally parameterizes export/verify/deploy first. Remaining refs
+    # are blockers only when they live in round/cache regeneration scripts or when
+    # non-default call sites still hard-code dates instead of CLI args.
     refs: dict[str, list[dict[str, Any]]] = {}
+    ignored_default_lines = (
+        "DEFAULT_SNAPSHOT_SUFFIX",
+        "DEFAULT_DATA_THROUGH",
+        "DEFAULT_APP_CACHE_BUST",
+        "DEFAULT_CSS_CACHE_BUST",
+        "SNAPSHOT_START",
+        "hardcoded_snapshot_refs",
+        "any(token in line for token",
+    )
     for path in sorted((PROJECT / "scripts").glob("*.py")):
         text = path.read_text(encoding="utf-8", errors="ignore")
         matches = []
         for i, line in enumerate(text.splitlines(), 1):
-            if "20210101_20260701" in line or "2026-06-30" in line or "20260702riskv2" in line:
+            if any(token in line for token in ["20210101_20260701", "2026-06-30", "20260702riskv2"]):
+                if any(marker in line for marker in ignored_default_lines):
+                    continue
                 matches.append({"line": i, "text": line.strip()[:220]})
         if matches:
             refs[path.relative_to(PROJECT).as_posix()] = matches
@@ -124,17 +162,19 @@ def run(cmd: list[str], *, timeout: int = 300) -> str:
 def write_report(report: dict[str, Any]) -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    json_path = REPORT_DIR / f"p5_1_daily_refresh_probe_{stamp}.json"
-    md_path = REPORT_DIR / f"p5_1_daily_refresh_probe_{stamp}.md"
+    json_path = REPORT_DIR / f"p5_daily_refresh_probe_{stamp}.json"
+    md_path = REPORT_DIR / f"p5_daily_refresh_probe_{stamp}.md"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     lines = [
-        "# Magic26 P5-1 daily refresh probe",
+        "# Magic26 daily refresh probe",
         "",
         f"run_at: {report['run_at']}",
         f"mode: {report['mode']}",
         "",
         "## Decision",
         "",
+        f"- current_snapshot_suffix: `{report['current_snapshot_suffix']}`",
+        f"- target_snapshot_suffix: `{report['target_snapshot_suffix']}`",
         f"- current_dashboard_data_through: `{report['current_dashboard_data_through']}`",
         f"- complete_data_through: `{report['complete_data_through']}`",
         f"- should_refresh: `{report['should_refresh']}`",
@@ -180,6 +220,8 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
     complete_data_through = max(complete_dates) if complete_dates else None
     summary = current_dashboard_summary()
     current_data_through = summary.get("data_through")
+    current_suffix = infer_current_snapshot_suffix()
+    target_suffix = target_snapshot_suffix(complete_data_through)
     should_refresh = bool(complete_data_through and current_data_through and complete_data_through > str(current_data_through))
     refs = hardcoded_snapshot_refs()
     blockers = []
@@ -187,14 +229,18 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
     if not complete_data_through:
         blockers.append("No complete raw+adjusted+benchmark trading day found in probe window.")
     if should_refresh:
-        blockers.append("Refresh needed, but full automatic regeneration is not enabled yet because scripts still contain hard-coded snapshot suffix/date refs.")
+        blockers.append("Refresh needed, but full automatic regeneration is not enabled yet because round/cache regeneration scripts still contain snapshot-specific refs.")
+    if not current_suffix:
+        blockers.append("Could not infer current snapshot suffix from export manifest or public data filenames.")
+    if target_suffix and current_suffix == target_suffix:
+        blockers.append("Target snapshot suffix equals current suffix; no new suffix transition is needed.")
     if refs["count"]:
-        blockers.append(f"Found {refs['count']} hard-coded snapshot/date refs in scripts; parameterize before unattended refresh.")
+        blockers.append(f"Found {refs['count']} remaining snapshot/date refs in round/cache scripts; parameterize before unattended refresh.")
     if args.dry_run:
         blockers.append("Dry-run mode: no cache/export/deploy side effects were executed.")
     next_steps = [
-        "Parameterize snapshot suffix/date in export, verifier, deploy, kline cache paths, and round scripts.",
-        "Replace one-off extend_magic26_cache_to_20260701.py with generic cache extension from current suffix to complete_data_through.",
+        "Parameterize round/cache regeneration scripts that still contain snapshot-specific refs.",
+        "Replace one-off extend_magic26_cache_to_20260701.py with generic cache extension from current_snapshot_suffix to target_snapshot_suffix.",
         "Add guarded full-run mode: regenerate raw/adjusted base outputs, dependent rounds, export, verifier, commit/push/deploy only when complete_data_through advances.",
         "Only after a successful full-run manual test, schedule 08:00 and 16:00 weekday cron jobs.",
     ]
@@ -204,6 +250,8 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
         "as_of": today.isoformat(),
         "lookback_days": args.lookback_days,
         "thresholds": {"min_raw_rows": MIN_RAW_ROWS, "min_adj_rows": MIN_ADJ_ROWS, "min_bench_rows": MIN_BENCH_ROWS},
+        "current_snapshot_suffix": current_suffix,
+        "target_snapshot_suffix": target_suffix,
         "current_dashboard_data_through": current_data_through,
         "current_latest_signal_date": summary.get("latest_signal_date"),
         "complete_data_through": complete_data_through,
