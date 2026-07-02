@@ -181,6 +181,51 @@ Hermes cron 不是終局，但目前它已經具備：
 
 GitHub Actions 還沒有這些完整條件，所以不能直接停掉 Hermes cron。
 
+## GitHub Actions 實跑結果
+
+P6-1 workflow push 後已手動觸發 GitHub Actions probe。
+
+最終通過 run：
+
+```text
+url: https://github.com/zathuramse/magic26/actions/runs/28590544136
+head_sha: c41cf8b60f67fea7f1b7663bf9bdddd22d47b658
+status: completed
+conclusion: success
+started_at: 2026-07-02T12:37:35Z
+updated_at: 2026-07-02T12:38:01Z
+```
+
+Job 結果：
+
+```text
+Static package and refresh feasibility probe: success in 21s
+```
+
+通過步驟：
+
+```text
+Checkout
+Set up Python
+Install Python dependencies
+Set up Node
+Compile Python scripts
+Check frontend syntax
+Verify committed static dashboard package
+Guardrail - no generated changes in probe
+```
+
+`Refresh probe dry-run only` 在本次 run 被略過，因為 `run_finmind_probe=false`。這是刻意的：P6-1 先驗證 committed package 與 Linux runner 基礎環境，不消耗 FinMind quota，也不要求 CI 具備完整 secrets。
+
+Action versions 已更新為：
+
+```text
+actions/checkout@v7.0.0
+actions/setup-python@v6.3.0
+actions/setup-node@v6.4.0
+node-version: 24
+```
+
 ## 本地驗證結果
 
 執行：
