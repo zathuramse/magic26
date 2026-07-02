@@ -250,6 +250,9 @@ if "資料算到" not in app or "最近出訊號" not in app or "今日主清單
 if "displayPriorityLabel" not in app or "出訊號：" not in app or "為什麼出現" not in app or "要小心" not in app or "cardVersionText" not in app or "今日主清單" not in app or "signal_group_id" not in app:
     print("round25 batch3 candidate-card metric copy missing from app.js")
     sys.exit(1)
+if "riskV2Headline" not in app or "risk_v2_primary_badge_zh" not in app or "risk_v2_action_hint_zh" not in app or "追高分級" not in app or "只作研究顯示，不是買賣訊號" not in app:
+    print("risk_v2 UI display copy missing from app.js")
+    sys.exit(1)
 if "原始股價" not in app or "還原股價" not in app or "同股同日已合併" not in app or "流動性不足" not in app:
     print("round25 batch3 candidate-card tag/status copy missing from app.js")
     sys.exit(1)

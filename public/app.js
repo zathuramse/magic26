@@ -293,7 +293,28 @@ function cardWhyText(r){
   const group = (r.hit_candidate_labels || []).includes('A組主清單') ? '進入 A 組主清單' : `${groupHitText(r)}命中`;
   return `最近 20 天漲了 ${fmtPct(r.ret_20d)}，近20日均成交 ${fmtMoney(r.avg_amount_20d)}，所以${group}。`;
 }
+function riskV2ShortHint(r){
+  const hint = String(r.risk_v2_action_hint_zh || '').trim();
+  if(!hint) return '';
+  return hint
+    .replace('；仍需看圖形與基本面', '')
+    .replace('；等回檔或整理後再研究', '')
+    .replace('；已偏追高，不建議直接追價', '｜已偏追高')
+    .replace('；只保留研究紀錄', '');
+}
+function riskV2Headline(r){
+  const badge = String(r.risk_v2_primary_badge_zh || '').trim();
+  const hint = riskV2ShortHint(r);
+  if(badge && hint && hint !== badge) return `${badge}｜${hint.replace(`${badge}｜`, '')}`;
+  return badge || displayPriorityLabel(r);
+}
+function riskV2ListText(value){
+  if(Array.isArray(value)) return value.filter(Boolean).join('；');
+  return String(value || '').split(';').filter(Boolean).join('；');
+}
+function riskV2DisplayOnlyText(r){ return isTrue(r.risk_v2_is_display_only) ? '只作研究顯示，不是買賣訊號' : '—'; }
 function cardCautionText(r){
+  if(r.risk_v2_action_hint_zh) return r.risk_v2_action_hint_zh;
   const risk = riskReasonText(r);
   if(String(risk).includes('追高') || String(risk).includes('隔日開盤')) return `隔天開盤高 ${fmtPct(r.next_open_gap)}，不要直接追價。`;
   if(String(risk).includes('流動性') || isLowLiquidity(r)) return '流動性不足，先確認是否容易進出。';
@@ -488,7 +509,7 @@ function stockCardHtml(r, compact=false){
   return `<button class="stock-card signal-card ${compact ? 'compact-card' : ''} ${selectedDetailKey === key ? 'selected' : ''}" data-key="${key}">
     <div class="stock-head">
       <div><strong>${r.stock_id}</strong><span>${r.stock_name || ''}</span></div>
-      <em>${r.priority_reason || displayPriorityLabel(r)}｜${priorityScore(r)}分</em>
+      <em>${riskV2Headline(r)}｜${priorityScore(r)}分</em>
     </div>
     <div class="signal-line"><b>出訊號：${r.signal_date || r.date}</b><span>${groupHitText(r)}</span></div>
     <div class="signal-reason"><label>為什麼出現</label><span>${cardWhyText(r)}</span></div>
@@ -936,6 +957,8 @@ function showDetail(r){
       ['成交量是否太集中', r.volume_gap_risk_zh || '—'], ['白話分類', subtypeLabel(r.volgap_subtype_zh), `原研究名：${r.volgap_subtype_zh || '—'}`], ['排序扣分', r.volgap_score_impact ?? '—']
     ]],
     ['風險檢查', [
+      ['追高分級', r.risk_v2_label_zh || '—'], ['主提醒', r.risk_v2_primary_badge_zh || '—'], ['操作提示', r.risk_v2_action_hint_zh || '—'],
+      ['觸發原因', riskV2ListText(r.risk_v2_reasons_zh) || '—'], ['規則版本', r.risk_v2_rule_version || '—'], ['用途', riskV2DisplayOnlyText(r)],
       ['後來60天漲幅', fmtPct(r.ret_60d_signal)], ['是否已漲太多', isRet60Hot(r) ? '超過150%' : (r.ret_60d_signal == null ? '待補' : '未超過')], ['其他提醒', round19TagsText(r) || '—', '原欄位：Round19標籤'],
       ['日線長均偏空', isTrue(r.risk_daily_long_ma_bear) ? '是' : '否'], ['週線長均偏空', isTrue(r.risk_weekly_long_ma_bear) ? '是' : '否'], ['長均分數', r.risk_long_ma_score ?? '—']
     ]],
