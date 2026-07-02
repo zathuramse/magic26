@@ -1,0 +1,403 @@
+{
+  "run_at": "2026-07-02T16:44:33",
+  "mode": "dry-run",
+  "as_of": "2026-07-02",
+  "lookback_days": 10,
+  "thresholds": {
+    "min_raw_rows": 900,
+    "min_adj_rows": 900,
+    "min_bench_rows": 1
+  },
+  "current_dashboard_data_through": "2026-06-30",
+  "current_latest_signal_date": "2026-06-26",
+  "complete_data_through": "2026-07-02",
+  "should_refresh": true,
+  "can_auto_refresh_now": false,
+  "probes": [
+    {
+      "date": "2026-07-02",
+      "raw": {
+        "rows": 40874,
+        "stock_count": 2334,
+        "dates": [
+          "2026-07-02"
+        ]
+      },
+      "adjusted": {
+        "rows": 1818,
+        "stock_count": 1498,
+        "dates": [
+          "2026-07-02"
+        ]
+      },
+      "benchmark_TAIEX": {
+        "rows": 1,
+        "dates": [
+          "2026-07-02"
+        ]
+      },
+      "complete": true
+    },
+    {
+      "date": "2026-07-01",
+      "raw": {
+        "rows": 40779,
+        "stock_count": 2334,
+        "dates": [
+          "2026-07-01"
+        ]
+      },
+      "adjusted": {
+        "rows": 2768,
+        "stock_count": 2332,
+        "dates": [
+          "2026-07-01"
+        ]
+      },
+      "benchmark_TAIEX": {
+        "rows": 1,
+        "dates": [
+          "2026-07-01"
+        ]
+      },
+      "complete": true
+    }
+  ],
+  "probe_errors": [],
+  "hardcoded_snapshot_refs": {
+    "files": {
+      "scripts/daily_refresh_magic26.py": [
+        {
+          "line": 110,
+          "text": "if \"20210101_20260701\" in line or \"2026-06-30\" in line or \"20260702riskv2\" in line:"
+        }
+      ],
+      "scripts/deploy_cloudflare.py": [
+        {
+          "line": 13,
+          "text": "CANONICAL_URL = \"https://magic26.pages.dev/?v=20260702riskv2\""
+        },
+        {
+          "line": 15,
+          "text": "LATEST_URL = \"https://magic26.pages.dev/data/latest_candidates.json?v=20260702riskv2\""
+        },
+        {
+          "line": 16,
+          "text": "LATEST_GROUPS_URL = \"https://magic26.pages.dev/data/latest_signal_groups.json?v=20260702riskv2\""
+        },
+        {
+          "line": 17,
+          "text": "ALL_GROUPS_URL = \"https://magic26.pages.dev/data/all_signal_groups.json?v=20260702riskv2\""
+        },
+        {
+          "line": 19,
+          "text": "ROUND14_BOOTSTRAP_URL = \"https://magic26.pages.dev/data/magic26_round14_bootstrap_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 20,
+          "text": "ROUND19_VOLGAP_URL = \"https://magic26.pages.dev/data/magic26_round19_volume_gap_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 21,
+          "text": "ROUND20_SUMMARY_URL = \"https://magic26.pages.dev/data/magic26_round20_60d_validation_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 22,
+          "text": "ROUND21_SUMMARY_URL = \"https://magic26.pages.dev/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 68,
+          "text": "if \"lightweight-charts.standalone.production.js\" not in html or \"app.js?v=20260702riskv2\" not in html or \"styles.css?v=20260701q\" not in html:"
+        },
+        {
+          "line": 70,
+          "text": "if \"K 線圖\" not in html and \"app.js?v=20260702riskv2\" not in html:"
+        },
+        {
+          "line": 74,
+          "text": "if \"app.js?v=20260702riskv2\" not in html or \"styles.css?v=20260701q\" not in html:"
+        }
+      ],
+      "scripts/export_dashboard_data.py": [
+        {
+          "line": 18,
+          "text": "\"magic26_round4_summary_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\","
+        },
+        {
+          "line": 19,
+          "text": "\"magic26_round4_summary_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\","
+        },
+        {
+          "line": 20,
+          "text": "\"magic26_round4_regime_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\","
+        },
+        {
+          "line": 21,
+          "text": "\"magic26_round4_regime_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\","
+        },
+        {
+          "line": 22,
+          "text": "\"magic26_round7_param_grid_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 23,
+          "text": "\"magic26_round7_param_grid_top_20210101_20260701.csv\","
+        },
+        {
+          "line": 24,
+          "text": "\"magic26_round7_param_grid_yearly_20210101_20260701.csv\","
+        },
+        {
+          "line": 25,
+          "text": "\"magic26_round8_tradeability_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 26,
+          "text": "\"magic26_round8_tradeability_2024_failures_by_industry_20210101_20260701.csv\","
+        },
+        {
+          "line": 27,
+          "text": "\"magic26_round9_close_exit_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 28,
+          "text": "\"magic26_round9_close_exit_yearly_20210101_20260701.csv\","
+        },
+        {
+          "line": 29,
+          "text": "\"magic26_round14_bootstrap_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 30,
+          "text": "\"magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv\","
+        },
+        {
+          "line": 31,
+          "text": "\"magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv\","
+        },
+        {
+          "line": 32,
+          "text": "\"magic26_round17_b_retest_rearm_watch_20210101_20260701.csv\","
+        },
+        {
+          "line": 33,
+          "text": "\"magic26_round19_author_absorption_detail_20210101_20260701.csv\","
+        },
+        {
+          "line": 34,
+          "text": "\"magic26_round19_ret60_cap_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 35,
+          "text": "\"magic26_round19_volume_gap_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 36,
+          "text": "\"magic26_round19_risk_badge_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 37,
+          "text": "\"magic26_round20_60d_validation_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 38,
+          "text": "\"magic26_round20_60d_flagged_cases_20210101_20260701.csv\","
+        },
+        {
+          "line": 39,
+          "text": "\"magic26_round21_volgap_rescue_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 40,
+          "text": "\"magic26_round21_volgap_rescue_cases_20210101_20260701.csv\","
+        },
+        {
+          "line": 43,
+          "text": "WATCH_STATE_FILE = \"magic26_round17_b_retest_rearm_watch_20210101_20260701.csv\""
+        },
+        {
+          "line": 45,
+          "text": "RAW_CHECKED = \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\""
+        },
+        {
+          "line": 46,
+          "text": "ADJ_CHECKED = \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\""
+        },
+        {
+          "line": 172,
+          "text": "path = out_dir / \"magic26_round19_author_absorption_detail_20210101_20260701.csv\""
+        },
+        {
+          "line": 490,
+          "text": "src = cache_dir / f\"{mode}_{stock_id}_20210101_20260701.parquet\""
+        },
+        {
+          "line": 826,
+          "text": "parser.add_argument(\"--data-through\", default=\"2026-06-30\", help=\"Latest complete data date displayed in dashboard\")"
+        }
+      ],
+      "scripts/extend_magic26_cache_to_20260701.py": [
+        {
+          "line": 14,
+          "text": "NEW_SUFFIX = \"20210101_20260701\""
+        }
+      ],
+      "scripts/magic26_round7_param_grid.py": [
+        {
+          "line": 13,
+          "text": "\"raw\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\","
+        },
+        {
+          "line": 14,
+          "text": "\"adj\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\","
+        },
+        {
+          "line": 93,
+          "text": "summary_path = OUT / \"magic26_round7_param_grid_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 94,
+          "text": "yearly_path = OUT / \"magic26_round7_param_grid_yearly_20210101_20260701.csv\""
+        },
+        {
+          "line": 95,
+          "text": "top_path = OUT / \"magic26_round7_param_grid_top_20210101_20260701.csv\""
+        },
+        {
+          "line": 96,
+          "text": "manifest_path = OUT / \"magic26_round7_param_grid_manifest_20210101_20260701.json\""
+        }
+      ],
+      "scripts/magic26_round8_tradeability_checks.py": [
+        {
+          "line": 15,
+          "text": "\"raw\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\","
+        },
+        {
+          "line": 16,
+          "text": "\"adj\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\","
+        },
+        {
+          "line": 55,
+          "text": "path = CACHE / f\"{mode}_{stock_id}_20210101_20260701.parquet\""
+        },
+        {
+          "line": 205,
+          "text": "detail_path = OUT / \"magic26_round8_tradeability_detail_20210101_20260701.csv\""
+        },
+        {
+          "line": 206,
+          "text": "summary_path = OUT / \"magic26_round8_tradeability_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 207,
+          "text": "failures_path = OUT / \"magic26_round8_tradeability_2024_failures_by_industry_20210101_20260701.csv\""
+        },
+        {
+          "line": 208,
+          "text": "manifest_path = OUT / \"magic26_round8_tradeability_manifest_20210101_20260701.json\""
+        }
+      ],
+      "scripts/magic26_round9_close_exit_checks.py": [
+        {
+          "line": 15,
+          "text": "\"raw\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_raw_20210101_20260701.csv\","
+        },
+        {
+          "line": 16,
+          "text": "\"adj\": OUT / \"magic26_round4_checked_signals_round6_regime_all_liquid30000000_adj_20210101_20260701.csv\","
+        },
+        {
+          "line": 54,
+          "text": "path = CACHE / f\"{mode}_{stock_id}_20210101_20260701.parquet\""
+        },
+        {
+          "line": 68,
+          "text": "path = CACHE / \"benchmark_TAIEX_20210101_20260701.parquet\""
+        },
+        {
+          "line": 224,
+          "text": "detail_path = OUT / \"magic26_round9_close_exit_detail_20210101_20260701.csv\""
+        },
+        {
+          "line": 225,
+          "text": "summary_path = OUT / \"magic26_round9_close_exit_summary_20210101_20260701.csv\""
+        },
+        {
+          "line": 226,
+          "text": "yearly_path = OUT / \"magic26_round9_close_exit_yearly_20210101_20260701.csv\""
+        },
+        {
+          "line": 227,
+          "text": "manifest_path = OUT / \"magic26_round9_close_exit_manifest_20210101_20260701.json\""
+        }
+      ],
+      "scripts/verify_magic26_package.py": [
+        {
+          "line": 25,
+          "text": "root / \"public/data/magic26_round14_bootstrap_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 26,
+          "text": "root / \"public/data/magic26_round14_excluded_weak_momentum_path_review_20210101_20260701.csv\","
+        },
+        {
+          "line": 27,
+          "text": "root / \"public/data/magic26_round14_baseline_vs_floor15_yearly_20210101_20260701.csv\","
+        },
+        {
+          "line": 28,
+          "text": "root / \"public/data/magic26_round17_b_retest_rearm_watch_20210101_20260701.csv\","
+        },
+        {
+          "line": 29,
+          "text": "root / \"public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 30,
+          "text": "root / \"public/data/magic26_round20_60d_flagged_cases_20210101_20260701.csv\","
+        },
+        {
+          "line": 31,
+          "text": "root / \"public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv\","
+        },
+        {
+          "line": 32,
+          "text": "root / \"public/data/magic26_round21_volgap_rescue_cases_20210101_20260701.csv\","
+        },
+        {
+          "line": 179,
+          "text": "round20 = pd.read_csv(root / \"public/data/magic26_round20_60d_validation_summary_20210101_20260701.csv\")"
+        },
+        {
+          "line": 186,
+          "text": "round21 = pd.read_csv(root / \"public/data/magic26_round21_volgap_rescue_summary_20210101_20260701.csv\")"
+        },
+        {
+          "line": 226,
+          "text": "if \"今日主清單\" not in html or \"次要清單：今年 A 組\" not in html or \"app.js?v=20260702riskv2\" not in html or \"styles.css?v=20260701q\" not in html:"
+        },
+        {
+          "line": 271,
+          "text": "if not krows or krows[0].get(\"date\") > \"2025-07-01\" or krows[-1].get(\"date\") < \"2026-06-30\":"
+        }
+      ]
+    },
+    "count": 75
+  },
+  "blockers": [
+    "Refresh needed, but full automatic regeneration is not enabled yet because scripts still contain hard-coded snapshot suffix/date refs.",
+    "Found 75 hard-coded snapshot/date refs in scripts; parameterize before unattended refresh.",
+    "Dry-run mode: no cache/export/deploy side effects were executed."
+  ],
+  "next_steps": [
+    "Parameterize snapshot suffix/date in export, verifier, deploy, kline cache paths, and round scripts.",
+    "Replace one-off extend_magic26_cache_to_20260701.py with generic cache extension from current suffix to complete_data_through.",
+    "Add guarded full-run mode: regenerate raw/adjusted base outputs, dependent rounds, export, verifier, commit/push/deploy only when complete_data_through advances.",
+    "Only after a successful full-run manual test, schedule 08:00 and 16:00 weekday cron jobs."
+  ],
+  "local_checks": {
+    "py_compile": "",
+    "package_verifier": "ok magic26 package 2026-06-30 latest 2026-06-26\n"
+  }
+}
