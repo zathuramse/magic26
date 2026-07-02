@@ -26,6 +26,11 @@ on:
         required: false
         type: boolean
         default: false
+      run_round_feasibility_probe:
+        description: "Inventory Magic26 round pipeline CI feasibility; no heavy rounds are executed"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -48,6 +53,7 @@ jobs:
       RUN_FINMIND_PROBE: ${{ inputs.run_finmind_probe }}
       RUN_CACHE_EXTENSION_PROBE: ${{ inputs.run_cache_extension_probe }}
       RUN_CACHE_EXTENSION_DRY_RUN: ${{ inputs.run_cache_extension_dry_run }}
+      RUN_ROUND_FEASIBILITY_PROBE: ${{ inputs.run_round_feasibility_probe }}
       MAGIC26_RESEARCH_ROOT: ${{ github.workspace }}/.ci/research-brain
       MAGIC26_SOURCE_ROOT: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26
       MAGIC26_CACHE_DIR: ${{ github.workspace }}/.ci/research-brain/sources/strategy-checks/magic26/cache
@@ -153,6 +159,10 @@ jobs:
           --refresh-daily
           --overwrite
 
+      - name: CI round pipeline feasibility probe only
+        if: ${{ inputs.run_round_feasibility_probe }}
+        run: python scripts/magic26_ci_round_feasibility_probe.py
+
       - name: Build CI probe artifact manifest
         shell: bash
         run: |
@@ -180,6 +190,7 @@ jobs:
               'run_finmind_probe': os.environ.get('RUN_FINMIND_PROBE', 'false'),
               'run_cache_extension_probe': os.environ.get('RUN_CACHE_EXTENSION_PROBE', 'false'),
               'run_cache_extension_dry_run': os.environ.get('RUN_CACHE_EXTENSION_DRY_RUN', 'false'),
+              'run_round_feasibility_probe': os.environ.get('RUN_ROUND_FEASIBILITY_PROBE', 'false'),
               'finmind_token_present': bool(os.environ.get('FINMIND_TOKEN')),
               'paths': {
                   'dash_root': str(p.dash_root()),
